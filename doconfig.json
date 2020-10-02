@@ -1,5 +1,4 @@
 {
-	"extends":"../../doconfig.json",
     "compilerOptions": {
       "baseUrl": "./src/",
       "paths": {
