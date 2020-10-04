@@ -1,6 +1,6 @@
-class EmployeeIdIsEmptyError extends Error {
+export default class EmployeeIdIsEmptyError extends Error {
     constructor(e?:string){
-        super(e);
+    super(e);
         this.name = new.target.name;
     }
 }

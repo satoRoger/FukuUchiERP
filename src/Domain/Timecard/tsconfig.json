@@ -1,7 +1,0 @@
-{
-  "extends": "../../../doconfig.json",
-
-  "compilerOptions": {
-    "baseUrl": "./"
-  }
-}

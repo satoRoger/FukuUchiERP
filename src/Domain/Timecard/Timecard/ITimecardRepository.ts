@@ -1,5 +1,8 @@
-class ITimecardRepository{
-	public save(timecard:Timecard);
-	public findAll(employee:Employee);
-	public findWithDuration(employee:Employee,from:Date,to:Date)
+import Timecard from "./Timecard";
+import Employee from "../Employee/Employee";
+
+interface ITimecardRepository {
+  save(timecard: Timecard);
+  findAll(employee: Employee);
+  findWithDuration(employee: Employee, from: Date, to: Date);
 }
