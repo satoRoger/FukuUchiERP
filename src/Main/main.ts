@@ -1,5 +1,5 @@
-import Employee from "../Domain/Timecard/Employee/Employee";
-import OutputConsole from "../Infrastructure/Console/OutputConsole";
-
-const output = new OutputConsole();
-output.output("test");
+//import { SearchTimecard } from "usecase/timecard/searchTimecard";
+import add from "usecase/timecard/searchTimecard";
+//const searchTimecard: SearchTimecard = new SearchTimecard();
+console.log(add(3, 4));
+//searchTimecard.tess();

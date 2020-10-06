@@ -86,18 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/Infrastructure/Console/OutputConsole.ts":
-/*!*****************************************************!*\
-  !*** ./src/Infrastructure/Console/OutputConsole.ts ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\r\nexports.__esModule = true;\r\nvar OutputConsole = /** @class */ (function () {\r\n    function OutputConsole() {\r\n    }\r\n    OutputConsole.prototype.output = function (message) {\r\n        console.log(message);\r\n    };\r\n    return OutputConsole;\r\n}());\r\nexports[\"default\"] = OutputConsole;\r\n\n\n//# sourceURL=webpack:///./src/Infrastructure/Console/OutputConsole.ts?");
-
-/***/ }),
-
 /***/ "./src/Main/main.ts":
 /*!**************************!*\
   !*** ./src/Main/main.ts ***!
@@ -106,7 +94,7 @@ eval("\r\nexports.__esModule = true;\r\nvar OutputConsole = /** @class */ (funct
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nexports.__esModule = true;\r\nvar OutputConsole_1 = __webpack_require__(/*! ../Infrastructure/Console/OutputConsole */ \"./src/Infrastructure/Console/OutputConsole.ts\");\r\nvar output = new OutputConsole_1[\"default\"]();\r\noutput.output(\"test\");\r\n\n\n//# sourceURL=webpack:///./src/Main/main.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n//import { SearchTimecard } from \"usecase/timecard/searchTimecard\";\r\nvar searchTimecard_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error(\"Cannot find module 'usecase/timecard/searchTimecard'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));\r\n//const searchTimecard: SearchTimecard = new SearchTimecard();\r\nconsole.log(searchTimecard_1.default(3, 4));\r\n//searchTimecard.tess();\r\n\n\n//# sourceURL=webpack:///./src/Main/main.ts?");
 
 /***/ })
 
