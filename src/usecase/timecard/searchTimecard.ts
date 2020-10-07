@@ -1,5 +1,7 @@
+import { ErrorMessage } from "@/common/message";
+import { Result } from "@/common/result";
 import { inject, injectable } from "inversify";
-import DiTypes from "../../di/types";
+import Types from "../../di/types";
 import TimecardDTO from "../../domain/attendanceManagement/dto/timecardDto";
 import Employee from "../../domain/attendanceManagement/employee/employee";
 import TimecardRepository from "../../domain/attendanceManagement/timecard/timecardRepository";
@@ -14,23 +16,16 @@ class TimecardSearchResult implements TimecardSearchResult {
   }
 }
 
-export default interface SearchTimecard {
-  search: (employee: Employee) => Promise<TimecardSearchResult>;
-  tess: () => void;
-}
-
 @injectable()
 export default class SearchTimecard implements SearchTimecard {
-  @inject(DiTypes.TimecardRepository) private repository: TimecardRepository;
+  @inject(Types.TimecardRepository) private repository: TimecardRepository;
 
-  search: (employee: Employee) => Promise<TimecardSearchResult> = async (
+  search: (
+    employee: Employee
+  ) => Promise<Result<TimecardSearchResult, ErrorMessage>> = async (
     employee
   ) => {
     const result = await this.repository.findAll(employee);
     return result;
-  };
-  tess = () => {
-    console.log(this.repository);
-    this.repository.tes();
   };
 }

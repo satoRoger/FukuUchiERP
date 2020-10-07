@@ -1,13 +1,17 @@
-import { Container } from 'inversify';
-import 'reflect-metadata';
-import  TimecardRepository  from '../domain/attendanceManagement/timecard/timecardRepository';
-import RepositoryOnMemory from '../infrastructure/repository/repositoryOnMemory';
-import SearchTimecard from '../usecase/timecard/searchTimecard';
-import Types from './types';
+import { Container } from "inversify";
+import DiOnDevelop from "./inversifyDevelop.config";
+import DiOnTest from "./inversifyTest.config";
+let container: Container = undefined;
 
-
-const container = new Container();
-container.bind<TimecardRepository>(Types.TimecardRepository).to(RepositoryOnMemory);
-container.bind<SearchTimecard>(Types.SearchTimecard).to(SearchTimecard);
+switch (process.env.NODE_ENV) {
+  case "development":
+    container = DiOnDevelop();
+    break;
+  case "test":
+    container = DiOnTest();
+    break;
+  default:
+  //エラー処理
+}
 
 export default container;

@@ -1,12 +1,13 @@
-import  {Coordinate}  from "../timecard/valueObjects";
+import Timecard from "../timecard/timecard";
+import { Coordinate } from "../timecard/valueObjects";
 
-export default interface TimecardDTO {
-  readonly attendanceDate?: Date;
-  readonly leaveWorkDate?: Date;
-  readonly takeBreakDate?: Date;
-  readonly endBreakDate?: Date;
-  readonly attendanceCoodinate?: Coordinate;
-  readonly leaveWorkCoordinate?: Coordinate;
-  readonly takeBreakCoordinate?: Coordinate;
-  readonly endBreakCoordinate?: Coordinate;
+export default class TimecardDTO {
+  public attendanceDate?: Date;
+  public leaveWorkDate?: Date;
+  public takeBreakDate?: Date;
+  public endBreakDate?: Date;
+  public attendanceCoodinate?: Coordinate;
+  public leaveWorkCoordinate?: Coordinate;
+  public takeBreakCoordinate?: Coordinate;
+  public endBreakCoordinate?: Coordinate;
 }

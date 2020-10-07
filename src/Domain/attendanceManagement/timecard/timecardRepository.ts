@@ -1,15 +1,19 @@
-import  Employee  from "../employee/employee";
+import { SuccessMessage, ErrorMessage } from "@/common/message";
+import { Result } from "@/common/result";
+import Employee from "../employee/employee";
 import Timecard from "./timecard";
-import { TimecardSearchResult } from "./timecardSearchResult";
+import TimecardSearchResult from "./timecardSearchResult";
 
 export default interface TimecardRepository {
-  save: (timecard: Timecard) => Promise<common.Result>;
-  findAll: (employee: Employee) => Promise<TimecardSearchResult>;
+  save: (
+    timecard: Timecard
+  ) => Promise<Result<SuccessMessage, ErrorMessage>>;
+  findAll: (
+    employee: Employee
+  ) => Promise<Result<TimecardSearchResult, ErrorMessage>>;
   findWithDuration: (
     employee: Employee,
     from: Date,
     to: Date
-  ) => Promise<TimecardSearchResult>;
-
-  tes: () => void;
+  ) => Promise<Result<TimecardSearchResult, ErrorMessage>>;
 }

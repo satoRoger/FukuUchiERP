@@ -1,4 +1,4 @@
-import Timecard from "./timecard";
+import Timecard from "./Timecard";
 
 export default interface TimecardFactory {
   create: () => Timecard;

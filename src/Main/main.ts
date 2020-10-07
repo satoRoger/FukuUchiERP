@@ -1,8 +1,8 @@
+import "reflect-metadata";
+import SearchTimecard from "@/usecase/timecard/searchTimecard";
+import Types from "../di/types";
+import container from "../di/inversify.config";
 
-import 'reflect-metadata';
-import container from '../di/inversify.config';
-import types from '../di/types';
-import SearchTimecard from '../usecase/timecard/searchTimecard';
-
-const searchTimecard: SearchTimecard =container.get<SearchTimecard>(types.SearchTimecard);
-searchTimecard.tess();
+const searchTimecard: SearchTimecard = container.get<SearchTimecard>(
+  Types.SearchTimecard
+);

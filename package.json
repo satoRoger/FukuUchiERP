@@ -4,12 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --mode development && node ./dist/",
-    "watch": "webpack --mode development --watch",
-    "build": "webpack --mode production",
-    "server": "webpack-dev-server --open",
-    "test": "jest --coverage",
-    "test:w": "jest --watchAll"
+    "start": "cross-env NODE_ENV=development && webpack --mode development && node ./dist/",
+    "watch": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode development --watch",
+    "build": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode production",
+    "server": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack-dev-server --open",
+    "test": "cross-env NODE_ENV=$npm_package_config_dev_test && jest --coverage",
+    "test:w": "cross-env NODE_ENV=$npm_package_config_dev_test && jest --watchAll"
+  },
+  "config":{
+    "development":{
+      "mode":"development"
+    },
+    "test":{
+      "mode":"test"
+    }
   },
   "repository": {
     "type": "git",
@@ -23,7 +31,8 @@
   "homepage": "https://github.com/satoRoger/timecard#readme",
   "devDependencies": {
     "@types/jest": "^26.0.14",
-    "@types/node": "^14.11.2",
+    "@types/node": "^14.11.5",
+    "cross-env": "^7.0.2",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "ts-jest": "^26.4.1",
