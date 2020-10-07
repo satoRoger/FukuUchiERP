@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    //"baseUrl": "./",
     "target": "es5",
-    "lib": ["es6","dom"],
+    "lib": ["es6", "dom"],
     "types": ["reflect-metadata"],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "paths": {
-      "#/*": ["*"]
-    }
+    //"paths": { "@/*": ["src/*"] }
   }
 }
