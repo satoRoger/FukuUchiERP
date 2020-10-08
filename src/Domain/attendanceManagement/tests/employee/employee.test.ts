@@ -1,3 +1,6 @@
+import Employee from "../../employee/employee";
+import { EmployeeId } from "../../timecard/valueObjects";
+
 describe("employee", (): void => {
   test("EmployeIdが正しく取得できるか", () => {
     const employeeId = "test01";
