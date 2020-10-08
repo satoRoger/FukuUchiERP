@@ -22,10 +22,11 @@ export default class Employee {
   attendance: (
     punchDate: Date,
     coordinate: Coordinate
-  ) => Promise<Result<Timecard, ErrorMessage>> = (
+  ) => Promise<Result<Timecard, ErrorMessage>> /*= (
     punchDate: Date,
     coordinate: Coordinate
   ) => {
+    
     const tiemcardFactory: TimecardFactory = container<>;
     const punchRepository: TimecardRepository;
 
@@ -34,7 +35,8 @@ export default class Employee {
       .save(timecard)
       .then((_) => {})
       .catch((errorMessage) => {});
-  };
+    };
+     */
 
   leaveWork: (
     punchDate: Date,

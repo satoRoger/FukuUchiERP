@@ -1,8 +1,4 @@
 import "reflect-metadata";
-import SearchTimecard from "@/usecase/timecard/searchTimecard";
-import Types from "../di/types";
-import container from "../di/inversify.config";
-
-const searchTimecard: SearchTimecard = container.get<SearchTimecard>(
-  Types.SearchTimecard
-);
+import Employee from "@/domain/attendanceManagement/employee/employee";
+import { EmployeeId } from "@/domain/attendanceManagement/timecard/valueObjects";
+const employee: Employee = new Employee(new EmployeeId("ee"));

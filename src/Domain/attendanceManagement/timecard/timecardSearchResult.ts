@@ -8,9 +8,10 @@ export default class TimecardSearchResult {
     this.employeeId = employeeId;
     this.searchResult = searchResult;
   };
+  /*
   public *[Symbol.iterator]() {
     this.searchResult.forEach((t) => yield t);
-  }
+  }*/
 
   public getEmployeeId: () => string = () => {
     return this.employeeId;
