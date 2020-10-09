@@ -9,7 +9,6 @@ describe("employeeIdのテスト", (): void => {
   
   test("空文字idは拒否するか", () => {
     const id = "";
-    const employeeId = new EmployeeId(id);
-    expect(employeeId.getId()).toThrow(id);
+    expect(new EmployeeId(id)).toThrow(Error("長さ0のidは作成することができません。"));
   });
 });
