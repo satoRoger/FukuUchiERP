@@ -2,7 +2,7 @@ import Timecard from "../../timecard/timecard";
 import TimecardDto from "../dataStructure/timecardDto";
 import TransferToDto from "./transferToDto";
 import TimecardDTO from "@/domain/attendanceManagement/dto/dataStructure/timecardDto";
-import { isEmployee } from "../../service/utility/typeGuard";
+import { isEmployee, isCardType } from '../../service/utility/typeGuard';
 import { stringify } from "querystring";
 import { Coordinate } from "../../timecard/valueObjects";
 import { TimecardDtoBuilder } from "../dataStructure/timecardDto";
@@ -16,7 +16,8 @@ export default class TransferToTimecardDto implements TransferToDto {
       if (isEmployee(data.val)) {
         builder.setEmployeeId(data.val.getId().id());
       }
-      if (data.id === "cardType") {
+      if (isCardType(data.val)) {
+        builder.setCardType(data.val); 
       }
       if (data.id === "punchDate") {
       }

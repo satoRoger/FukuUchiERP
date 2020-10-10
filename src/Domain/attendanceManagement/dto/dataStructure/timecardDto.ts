@@ -1,5 +1,5 @@
 import Timecard from "../../timecard/timecard";
-import { Coordinate } from "../../timecard/valueObjects";
+import { Coordinate, CardType } from "../../timecard/valueObjects";
 import BaseDto from "./baseDto";
 
 export default class TimecardDto implements BaseDto {
@@ -38,26 +38,38 @@ export default class TimecardDto implements BaseDto {
 
 export class TimecardDtoBuilder {
   private employeeId?: string;
-  private attendanceDate?: Date;
-  private leaveWorkDate?: Date;
-  private takeBreakDate?: Date;
-  private endBreakDate?: Date;
-  private attendanceCoodinate?: Coordinate;
-  private leaveWorkCoordinate?: Coordinate;
-  private takeBreakCoordinate?: Coordinate;
-  private endBreakCoordinate?: Coordinate;
+  private cardType: CardType;
+  private coordinate: Coordinate;
+  private punchDate: Date;
 
   build: () => TimecardDto = () => {
+    const [attendanceDate, attendanceCoorinate] =
+      this.cardType === CardType.Attendance
+        ? [this.punchDate, this.coordinate]
+        : [undefined, undefined];
+    const [leaveWorkDate, leaveWorkCoorinate] =
+      this.cardType === CardType.LeaveWork
+        ? [this.punchDate, this.coordinate]
+        : [undefined, undefined];
+    const [takeBreakDate, tankeBreakCoorinate] =
+      this.cardType === CardType.TakeBreak
+        ? [this.punchDate, this.coordinate]
+        : [undefined, undefined];
+    const [endBreakDate, endBreakCoorinate] =
+      this.cardType === CardType.EndBreak
+        ? [this.punchDate, this.coordinate]
+        : [undefined, undefined];
+
     return new TimecardDto(
       this.employeeId,
-      this.attendanceDate,
-      this.leaveWorkDate,
-      this.takeBreakDate,
-      this.endBreakDate,
-      this.attendanceCoodinate,
-      this.leaveWorkCoordinate,
-      this.takeBreakCoordinate,
-      this.endBreakCoordinate
+      attendanceDate,
+      leaveWorkDate,
+      takeBreakDate,
+      endBreakDate,
+      attendanceCoorinate,
+      leaveWorkCoorinate,
+      tankeBreakCoorinate,
+      endBreakCoorinate
     );
   };
 
@@ -65,51 +77,18 @@ export class TimecardDtoBuilder {
     this.employeeId = employeeId;
     return this;
   };
-  setAttendanceDate: (date: Date) => this = (date: Date) => {
-    this.attendanceDate = date;
+  setCardType: (cardType: CardType) => this = (cardType: CardType) => {
+    this.cardType = cardType;
     return this;
   };
-  setLeaveWorkDate: (date: Date) => this = (date: Date) => {
-    this.leaveWorkDate = date;
-
-    return this;
-  };
-  setTakeBreakDate: (date: Date) => this = (date: Date) => {
-    this.takeBreakDate = date;
-
-    return this;
-  };
-  setEndBreakDate: (date: Date) => this = (date: Date) => {
-    this.endBreakDate = date;
-
-    return this;
-  };
-  setAttendanceCoodinate: (coodinate: Coordinate) => this = (
-    coodinate: Coordinate
+  setCoordinate: (coordinate: Coordinate) => this = (
+    coordinate: Coordinate
   ) => {
-    this.attendanceCoodinate = coodinate;
-
+    this.coordinate = coordinate;
     return this;
   };
-  setLeaveWorkCoodinate: (coodinate: Coordinate) => this = (
-    coodinate: Coordinate
-  ) => {
-    this.leaveWorkCoordinate = coodinate;
-
-    return this;
-  };
-  setTakeBreakCoodinate: (coodinate: Coordinate) => this = (
-    coodinate: Coordinate
-  ) => {
-    this.takeBreakCoordinate = coodinate;
-
-    return this;
-  };
-  setEndBreakCoordinate: (coodinate: Coordinate) => this = (
-    coodinate: Coordinate
-  ) => {
-    this.endBreakCoordinate = coodinate;
-
+  setPunchDate: (punchDate: Date) => this = (punchDate: Date) => {
+    this.punchDate = punchDate;
     return this;
   };
 }

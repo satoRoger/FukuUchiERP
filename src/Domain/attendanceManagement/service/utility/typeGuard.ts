@@ -17,3 +17,7 @@ export function isCardType(v: any): v is CardType {
     return false;
   }
 }
+
+export function isDate(v: any): v is Date {
+  return v instanceof Date;
+}
