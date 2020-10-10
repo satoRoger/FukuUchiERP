@@ -6,7 +6,7 @@ import TimecardRepository from "../timecard/timecardRepository";
 import Types from "@/di/types";
 import { inject } from "inversify";
 import TimecardFactory from "../timecard/timecardFactory";
-import container from '../../../di/inversifyDevelop.config';
+import container from "../../../di/inversifyDevelop.config";
 
 export default class Employee {
   private id: EmployeeId;
@@ -21,23 +21,9 @@ export default class Employee {
 
   attendance: (
     punchDate: Date,
-    coordinate: Coordinate
-  ) => Promise<Result<Timecard, ErrorMessage>> /*= (
-    punchDate: Date,
-    coordinate: Coordinate
-  ) => {
-    
-    const tiemcardFactory: TimecardFactory = container<>;
-    const punchRepository: TimecardRepository;
-
-    const timecard = tiemcardFactory.create();
-    punchRepository
-      .save(timecard)
-      .then((_) => {})
-      .catch((errorMessage) => {});
-    };
-     */
-
+    coordinate: Coordinate,
+    punchRepository: TimecardRepository
+  ) => Promise<Result<Timecard, ErrorMessage>>;
   leaveWork: (
     punchDate: Date,
     coordinate: Coordinate

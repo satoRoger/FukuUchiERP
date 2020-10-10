@@ -2,7 +2,7 @@ import { ErrorMessage } from "@/common/message";
 import { Result } from "@/common/result";
 import { inject, injectable } from "inversify";
 import Types from "../../di/types";
-import TimecardDTO from "../../domain/attendanceManagement/dto/timecardDto";
+import TimecardDTO from "../../domain/attendanceManagement/dto/dataStructure/timecardDto";
 import Employee from "../../domain/attendanceManagement/employee/employee";
 import TimecardRepository from "../../domain/attendanceManagement/timecard/timecardRepository";
 

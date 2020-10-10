@@ -1,44 +1,52 @@
-export const enum CardType {
-  Attendance = "attendance",
-  LeaveWork = "leaveWork",
-  TakeBreak = "takeBreak",
-  EndBreak = "endBreak",
-}
+export const CardType = {
+  Attendance: "attendance",
+  LeaveWork: "leaveWork",
+  TakeBreak: "takeBreak",
+  EndBreak: "endBreak",
+} as const;
+export type CardType = typeof CardType[keyof typeof CardType];
 
 export class Coordinate {
-  private latitude: number;
-  private longitude: number;
+  private latitudeValue: number;
+  private longitudeValue: number;
 
   constructor(latitude: number, longitude: number) {
-    this.latitude = latitude;
-    this.longitude = longitude;
+    this.latitudeValue = latitude;
+    this.longitudeValue = longitude;
   }
 
-  public getLatitude() {
-    return this.latitude;
-  }
+  latitude: () => number = () => {
+    return this.latitudeValue;
+  };
 
-  public getLongitude() {
-    return this.longitude;
-  }
+  longitude: () => number = () => {
+    return this.longitudeValue;
+  };
+
+  coodinate: () => { latitude: number; longitude: number } = () => {
+    return { latitude: this.latitudeValue, longitude: this.longitudeValue };
+  };
 }
 
 export class TimecardId {
-  private id: string;
+  private value: string;
 
   constructor(id: string) {
-    this.id = id;
+    this.value = id;
   }
+  id: () => string = () => {
+    return this.value;
+  };
 }
 
 export class EmployeeId {
-  private id: string;
+  private value: string;
 
   constructor(id: string) {
-    this.id = id;
+    this.value = id;
   }
 
-  public getId: () => string = () => {
-    return this.id;
+  id: () => string = () => {
+    return this.value;
   };
 }
