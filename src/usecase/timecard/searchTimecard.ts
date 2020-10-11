@@ -17,15 +17,6 @@ class TimecardSearchResult implements TimecardSearchResult {
 }
 
 @injectable()
-export default class SearchTimecard implements SearchTimecard {
+export default class SearchTimecard {
   @inject(Types.TimecardRepository) private repository: TimecardRepository;
-
-  search: (
-    employee: Employee
-  ) => Promise<Result<TimecardSearchResult, ErrorMessage>> = async (
-    employee
-  ) => {
-    const result = await this.repository.findAll(employee);
-    return result;
-  };
 }

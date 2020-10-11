@@ -1,6 +1,7 @@
 import { Container } from "inversify";
 import DiOnDevelop from "./inversifyDevelop.config";
 import DiOnTest from "./inversifyTest.config";
+
 let container: Container = undefined;
 
 switch (process.env.NODE_ENV) {

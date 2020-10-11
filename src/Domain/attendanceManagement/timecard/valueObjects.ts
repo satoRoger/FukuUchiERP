@@ -1,3 +1,4 @@
+import { errorMessageList } from "../../../common/message";
 export const CardType = {
   Attendance: "attendance",
   LeaveWork: "leaveWork",
@@ -23,8 +24,15 @@ export class Coordinate {
     return this.longitudeValue;
   };
 
-  coodinate: () => { latitude: number; longitude: number } = () => {
+  coordinate: () => { latitude: number; longitude: number } = () => {
     return { latitude: this.latitudeValue, longitude: this.longitudeValue };
+  };
+
+  equal: (coordinate: Coordinate) => boolean = (coordinate) => {
+    return (
+      this.latitudeValue === coordinate.latitude() &&
+      this.longitudeValue === coordinate.longitude()
+    );
   };
 }
 
@@ -43,6 +51,9 @@ export class EmployeeId {
   private value: string;
 
   constructor(id: string) {
+    if (id.length === 0) {
+      throw new Error(errorMessageList.LengthZeroIdIsProhivited);
+    }
     this.value = id;
   }
 

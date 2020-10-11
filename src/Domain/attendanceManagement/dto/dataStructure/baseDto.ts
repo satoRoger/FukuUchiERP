@@ -1,1 +1,3 @@
-export default interface BaseDto {}
+export default interface BaseDto {
+  equal: (dto: BaseDto) => boolean;
+}

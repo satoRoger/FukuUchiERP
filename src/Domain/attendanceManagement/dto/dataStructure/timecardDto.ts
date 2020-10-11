@@ -34,6 +34,19 @@ export default class TimecardDto implements BaseDto {
     this.takeBreakCoordinate = takeBreakCoordinate;
     this.endBreakCoordinate = endBreakCoordinate;
   }
+
+  equal: (dto: TimecardDto) => boolean = (dto: TimecardDto) => {
+    let isEqual = true;
+    isEqual &&= this.attendanceDate.getTime() == dto.attendanceDate.getTime();
+    isEqual &&= this.leaveWorkDate.getTime() == dto.leaveWorkDate.getTime();
+    isEqual &&= this.takeBreakDate.getTime() == dto.takeBreakDate.getTime();
+    isEqual &&= this.endBreakDate.getTime() == dto.endBreakDate.getTime();
+    isEqual &&= this.attendanceCoodinate.equal(dto.attendanceCoodinate);
+    isEqual &&= this.leaveWorkCoordinate.equal(dto.leaveWorkCoordinate);
+    isEqual &&= this.takeBreakCoordinate.equal(dto.takeBreakCoordinate);
+    isEqual &&= this.endBreakCoordinate.equal(dto.endBreakCoordinate);
+    return isEqual;
+  };
 }
 
 export class TimecardDtoBuilder {

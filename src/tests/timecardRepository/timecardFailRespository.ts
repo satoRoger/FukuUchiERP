@@ -3,14 +3,11 @@ import Employee from "@/domain/attendanceManagement/employee/employee";
 import Timecard from "@/domain/attendanceManagement/timecard/timecard";
 import TimecardSearchResult from "@/domain/attendanceManagement/timecard/timecardSearchResult";
 import { injectable } from "inversify";
-import TimecardRepository from "../../src/domain/attendanceManagement/timecard/timecardRepository";
-
+import TimecardRepository from "@/domain/attendanceManagement/timecard/timecardRepository";
 
 @injectable()
 export default class TimecardFailRepository implements TimecardRepository {
-  save: (timecard: Timecard) => Promise<Timecard> = (
-    timecard
-  ) => {
+  save: (timecard: Timecard) => Promise<Timecard> = (timecard) => {
     return new Promise((_, reject) => {
       reject(errorMessageList.FailedSaveToRepository);
     });

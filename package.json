@@ -4,19 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development && webpack --mode development && node ./dist/",
+    "start": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode development && node ./dist/",
     "watch": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode development --watch",
     "build": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode production",
-    "server": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack-dev-server --open",
-    "test": "cross-env NODE_ENV=$npm_package_config_dev_test && jest --coverage",
-    "test:w": "cross-env NODE_ENV=$npm_package_config_dev_test && jest --watchAll"
+    "server": "cross-env NODE_ENV=$npm_package_config_test_mode && webpack-dev-server --open",
+    "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest -o",
+    "test:w": "cross-env NODE_ENV=$npm_package_config_test_mode && jest --watchAll"
   },
-  "config":{
-    "development":{
-      "mode":"development"
+  "config": {
+    "dev": {
+      "mode": "development"
     },
-    "test":{
-      "mode":"test"
+    "test": {
+      "mode": "test"
     }
   },
   "repository": {

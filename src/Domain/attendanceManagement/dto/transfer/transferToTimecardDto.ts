@@ -1,11 +1,12 @@
-import Timecard from "../../timecard/timecard";
 import TimecardDto from "../dataStructure/timecardDto";
 import TransferToDto from "./transferToDto";
-import TimecardDTO from "@/domain/attendanceManagement/dto/dataStructure/timecardDto";
-import { isEmployee, isCardType } from '../../service/utility/typeGuard';
-import { stringify } from "querystring";
-import { Coordinate } from "../../timecard/valueObjects";
+import {
+  isEmployee,
+  isCardType,
+  isDate,
+} from "../../service/utility/typeGuard";
 import { TimecardDtoBuilder } from "../dataStructure/timecardDto";
+import { isCoordinate } from "../../service/utility/typeGuard";
 
 export default class TransferToTimecardDto implements TransferToDto {
   transfer: (...parameter: { id: string; val: unknown }[]) => TimecardDto = (
@@ -13,15 +14,17 @@ export default class TransferToTimecardDto implements TransferToDto {
   ) => {
     const builder = new TimecardDtoBuilder();
     parameter.forEach((data) => {
-      if (isEmployee(data.val)) {
+      if (data.id === "employee" && isEmployee(data.val)) {
         builder.setEmployeeId(data.val.getId().id());
       }
-      if (isCardType(data.val)) {
-        builder.setCardType(data.val); 
+      if (data.id === "cardType" && isCardType(data.val)) {
+        builder.setCardType(data.val);
       }
-      if (data.id === "punchDate") {
+      if (data.id === "punchDate" && isDate(data.val)) {
+        builder.setPunchDate(data.val);
       }
-      if (data.id === "coodinate") {
+      if (data.id === "coodinate" && isCoordinate(data.val)) {
+        builder.setCoordinate(data.val);
       }
     });
     return builder.build();

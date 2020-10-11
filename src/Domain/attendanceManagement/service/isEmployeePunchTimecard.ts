@@ -1,6 +1,6 @@
 import Employee from "../employee/employee";
 import Timecard from "../timecard/timecard";
-import IsSameEmployee from "./isSameEmployee";
+import IsEqualEmployee from "./isEqualEmployee";
 
 export default class IsEmployeePunchTimecard {
   private employee: Employee;
@@ -12,9 +12,9 @@ export default class IsEmployeePunchTimecard {
   }
 
   isPunch: () => boolean = () => {
-    return new IsSameEmployee(
+    return new IsEqualEmployee(
       this.employee,
       this.timecard.punchEmployee()
-    ).same();
+    ).equal();
   };
 }
