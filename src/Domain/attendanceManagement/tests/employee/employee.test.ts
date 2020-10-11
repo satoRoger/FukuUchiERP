@@ -10,7 +10,7 @@ describe("employee", (): void => {
   test("EmployeIdが正しく取得できるか", () => {
     const employeeId = "test01";
     const employee = new Employee(new EmployeeId(employeeId));
-    expect(employee.getId()).toBe(employeeId);
+    expect(employee.getId().id()).toBe(employeeId);
   });
 
   test("正しく出勤できるか:座標付き", () => {
