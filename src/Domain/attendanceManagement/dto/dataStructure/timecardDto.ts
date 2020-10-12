@@ -1,5 +1,5 @@
-import Timecard from "../../timecard/timecard";
-import { Coordinate, CardType } from "../../timecard/valueObjects";
+import CardType from "../../valueObject/cardtype";
+import { Coordinate } from "../../valueObject/coordinate";
 import BaseDto from "./baseDto";
 
 export default class TimecardDto implements BaseDto {

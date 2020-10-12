@@ -1,5 +1,5 @@
 import Timecard from "./Timecard";
 
-export default interface TimecardFactory {
+export default class TimecardFactory {
   create: () => Timecard;
 }
