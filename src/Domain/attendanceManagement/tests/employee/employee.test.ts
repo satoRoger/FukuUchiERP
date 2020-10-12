@@ -130,7 +130,6 @@ describe("employee", (): void => {
           });
       });
   });
-
   test("正しく休憩の開始をできるか:座標付き", () => {
     const employeeId = "test01";
     const attendancePunchDate = new Date(2020, 10, 2, 11, 12, 13);
