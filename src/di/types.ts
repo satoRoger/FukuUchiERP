@@ -1,10 +1,17 @@
-import "reflect-metadata";
+import TestTypes from "./testTypes";
+import DevelopTypes from "./developTypes";
 
-const Types = {
-  TimecardRepository: Symbol.for("TimecardRepository"),
-  TimecardFactory: Symbol.for("TimecardFactory"),
-  SearchTimecard: Symbol.for("SearchTimecard"),
-  TransferToTimecardDTO: Symbol.for("TransferToTimecardDTO"),
-} as const;
+let Types = undefined;
+
+switch (process.env.NODE_ENV) {
+  case "development":
+    Types = DevelopTypes;
+    break;
+  case "test":
+    Types = TestTypes;
+    break;
+  default:
+  //エラー処理
+}
 
 export default Types;

@@ -1,3 +1,4 @@
+import EntityFactory from "../../entity/entityFactory";
 import { Coordinate } from "../../valueObject/coordinate";
 
 describe("punchCommand", (): void => {
@@ -12,6 +13,7 @@ describe("punchCommand", (): void => {
 		coodinate = new Coordinate(20, 20);
 		repository = new EntityRepository().getTimecardRepository();
 		specification = new PunchSpecification().getAttendance();
+		employee = new EntityFactory().createEmployee("test01");
 	}
   test("", () => {
     const command = new PunchCommand().createAttendance(
@@ -21,7 +23,6 @@ describe("punchCommand", (): void => {
       coodinate
     );
 
-    const employee = new EntityFactory().createEmployee("test01");
     employee.punchTimecard(command).then((timecard) => {
       repository.searchByEmployee(employee).then((result) => {
         expect(

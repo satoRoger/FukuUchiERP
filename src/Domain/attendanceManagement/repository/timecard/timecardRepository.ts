@@ -1,12 +1,10 @@
-import { ErrorMessage } from "@/common/message";
-import { Result } from "@/common/result";
-import Employee from "../employee/employee";
-import TimecardSearchResult from "./timecardSearchResult";
-import Timecard from "@/domain/attendanceManagement/timecard/timecard";
+import Employee from "../../entity/employee/employee";
+import Timecard from "../../entity/timecard/Timecard";
+
 
 export default interface TimecardRepository {
   save: (timecard: Timecard) => Promise<Timecard>;
-  findAll: (employee: Employee) => Promise<TimecardSearchResult>;
+  searchByEmployee: (employee: Employee) => Promise<TimecardSearchResult>;
   findWithDuration: (
     employee: Employee,
     from: Date,
