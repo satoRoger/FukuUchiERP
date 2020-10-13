@@ -13,7 +13,7 @@ describe("searchTimecardByEmployee", () => {
     employee = new EntityFactory.createEmployee("test01");
     coordinate = new Coordinate(20, 20);
     punchDate = new Date(2020, 10, 10, 5, 5, 5);
-    const specification = new PunchSpecification().getAttendance();
+    const specification = new PunchSpecification().getAttendance(repository);
 
     const action = new PunchTimecardFactory().createAttendance(
       punchDate,
@@ -22,11 +22,7 @@ describe("searchTimecardByEmployee", () => {
     );
     createdTimecard = employee.punchAction(action);
 
-    const command = new RepositoryCommandFactory().saveTimecard(
-      createdTimecard
-    );
-
-    repository.save(command);
+    repository.save(createdTimecard);
   });
 
   test("search", () => {
