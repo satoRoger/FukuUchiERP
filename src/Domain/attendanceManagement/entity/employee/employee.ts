@@ -11,6 +11,6 @@ export default class Employee {
   getId: () => EmployeeId = () => {
     return this.id;
   };
-
-  punchTimecard: (command: PunchCommand) => Promise<Timecard>;
+  
+  punchTimecard: (action:PunchAction) => Promise<Timecard>;
 }
