@@ -2,6 +2,8 @@ describe('searchTimecardByEmployee', () => {
 	let seachTimecard ;
 	let employee1;
 	let employee2;
+	
+	
 	beforeAll(()=>{
 		const repository = new EntityRepository().getTimecardRepository();
 		seachTimecard = new SearchTimecardByEmployee(repository);
@@ -27,6 +29,7 @@ describe('searchTimecardByEmployee', () => {
 	})
 	
 	test('search', () => {
-		seachTimecard.search(employee1)
+		const timecardCollection = seachTimecard.search(employee1);
+		
 	})
 })
