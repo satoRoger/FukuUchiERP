@@ -1,11 +1,13 @@
-import Employee from "./employee/employee";
 import EmployeeFactory from "./employee/employeeFactory";
-import Timecard from "./timecard/Timecard";
+import TimecardFactory from './timecard/timecardFactory';
 
 export default class EntityFactory {
-  createEmployee: (id: string) => Employee = (id) => {
-    return new EmployeeFactory().create(id);
+  employee: () => EmployeeFactory = () => {
+    return new EmployeeFactory();
   };
 
-  createTimecard: () => Timecard;
+  timecard: (
+  ) => TimecardFactory = () => {
+    return new TimecardFactory();
+  };
 }

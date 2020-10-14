@@ -8,7 +8,7 @@
     "watch": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode development --watch",
     "build": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode production",
     "server": "cross-env NODE_ENV=$npm_package_config_test_mode && webpack-dev-server --open",
-    "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest -o",
+    "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest ",
     "test:w": "cross-env NODE_ENV=$npm_package_config_test_mode && jest --watchAll"
   },
   "config": {

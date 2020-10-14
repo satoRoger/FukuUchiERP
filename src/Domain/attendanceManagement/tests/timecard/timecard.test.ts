@@ -1,35 +1,35 @@
+import EntityFactory from "../../entity/entityFactory";
 import Timecard from "../../entity/timecard/Timecard";
 import CardType from "../../valueObject/cardtype";
 import { Coordinate } from "../../valueObject/coordinate";
-import EmployeeId from "../../valueObject/employeeId";
+import EntityEquivalent from "../../service/entityEquivalent";
 
 describe("timecard", () => {
   let punchDate;
-  let employeeId;
+  let employee;
   let coordinate;
   let cardType;
   let timecard;
 
   beforeEach(() => {
-    employeeId = new EmployeeId("test01");
+    employee = new EntityFactory().createEmployee("test01");
     punchDate = new Date(2020, 10, 10, 5, 5, 5);
     coordinate = new Coordinate(20, 20);
     cardType = CardType.Attendance;
-    timecard = new Timecard(employeeId, punchDate, cardType, coordinate);
-    timecardWithoutCoordinate = new Timecard(employeeId, punchDate, cardType);
+    timecard = new Timecard(employee, cardType, punchDate, coordinate);
   });
 
   test("getCoordinate", () => {
     expect(timecard.getCoordinate().equal(coordinate)).toBe(true);
   });
   test("getEmployeeId", () => {
-    expect(timecard.getEmployeeId().equal(employeeId)).toBe(true);
+    expect(timecard.punchEmployeeId().equal(employee.getId())).toBe(true);
   });
-	test("isAttendance", () => {
-		expect(timecard.isAttendance()).toBe(true);
-		expect(timecard.isLeavework()).toBe(false);
-		expect(timecard.isTakebreak()).toBe(false);
-		expect(timecard.isEndbreak()).toBe(false);
+  test("isAttendance", () => {
+    expect(timecard.isAttendance()).toBe(true);
+    expect(timecard.isLeavework()).toBe(false);
+    expect(timecard.isTakebreak()).toBe(false);
+    expect(timecard.isEndbreak()).toBe(false);
   });
   test("isPunchAfter", () => {
     expect(timecard.isPunchAfter(new Date(2020, 10, 10, 4, 5, 5))).toBe(true);

@@ -1,5 +1,6 @@
-import { EmployeeId } from "../../timecard/valueObjects";
+
 import { errorMessageList } from "../../../../common/message";
+import EmployeeId from "../../valueObject/employeeId";
 
 describe("employeeIdのテスト", (): void => {
   test("idが正しく取得できるか", () => {

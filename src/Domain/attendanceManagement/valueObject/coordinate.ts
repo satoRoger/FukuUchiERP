@@ -1,5 +1,6 @@
+import { defaultCipherList } from "constants";
 import { errorMessageList } from "../../../common/message";
-export class Coordinate {
+export default class Coordinate {
   private latitudeValue: number;
   private longitudeValue: number;
 

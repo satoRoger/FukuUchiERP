@@ -1,7 +1,7 @@
+import RepositoryOnMemory from "@/adapter/repository/repositoryOnMemory";
+import TimecardRepository from "@/domain/attendanceManagement/repository/timecard/timecardRepository";
 import { Container } from "inversify";
 import "reflect-metadata";
-import TimecardRepository from "../domain/attendanceManagement/timecard/timecardRepository";
-import RepositoryOnMemory from "../adapter/repository/repositoryOnMemory";
 import SearchTimecard from "../usecase/timecard/searchTimecard";
 import Types from "./types";
 
