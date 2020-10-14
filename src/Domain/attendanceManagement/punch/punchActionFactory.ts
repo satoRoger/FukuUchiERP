@@ -9,20 +9,26 @@ export default class PunchActionFactory {
     coordinate?: Coordinate
   ) => PunchAction = (specification, punchDate, coordinate) => {
     return new PunchAction();
-  }
+  };
   actionLeavework: (
     specification: PunchSpecification,
     punchDate: Date,
     coordinate?: Coordinate
-  ) => PunchAction;
+  ) => PunchAction = (specification, punchDate, coordinate) => {
+    return new PunchAction();
+  };
   actionTakebreak: (
     specification: PunchSpecification,
     punchDate: Date,
     coordinate?: Coordinate
-  ) => PunchAction;
+  ) => PunchAction = (specification, punchDate, coordinate) => {
+    return new PunchAction();
+  };
   actionEndbreak: (
     specification: PunchSpecification,
     punchDate: Date,
     coordinate?: Coordinate
-  ) => PunchAction;
+  ) => PunchAction = (specification, punchDate, coordinate) => {
+    return new PunchAction();
+  };
 }
