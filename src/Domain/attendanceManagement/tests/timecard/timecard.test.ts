@@ -1,18 +1,19 @@
-import EntityFactory from "../../entity/entityFactory";
-import Timecard from "../../entity/timecard/Timecard";
-import CardType from "../../valueObject/cardtype";
-import { Coordinate } from "../../valueObject/coordinate";
-import EntityEquivalent from "../../service/entityEquivalent";
+import EntityFactory from "../../src/entity/entityFactory";
+import Timecard from "../../src/entity/timecard/Timecard";
+import CardType from "../../src/valueObject/cardtype";
+import Coordinate from "../../src/valueObject/coordinate";
+import Employee from '../../src/entity/employee/employee';
+
 
 describe("timecard", () => {
-  let punchDate;
-  let employee;
-  let coordinate;
-  let cardType;
-  let timecard;
+  let punchDate:Date;
+  let employee:Employee;
+  let coordinate:Coordinate;
+  let cardType:CardType;
+  let timecard:Timecard;
 
   beforeEach(() => {
-    employee = new EntityFactory().createEmployee("test01");
+    employee = new EntityFactory().employee().createByRowId("test01");
     punchDate = new Date(2020, 10, 10, 5, 5, 5);
     coordinate = new Coordinate(20, 20);
     cardType = CardType.Attendance;
@@ -31,16 +32,16 @@ describe("timecard", () => {
     expect(timecard.isTakebreak()).toBe(false);
     expect(timecard.isEndbreak()).toBe(false);
   });
-  test("isPunchAfter", () => {
-    expect(timecard.isPunchAfter(new Date(2020, 10, 10, 4, 5, 5))).toBe(true);
-    expect(timecard.isPunchAfter(new Date(2020, 10, 6, 5, 5, 5))).toBe(true);
-    expect(timecard.isPunchAfter(new Date(2020, 10, 14, 4, 5, 5))).toBe(false);
-    expect(timecard.isPunchAfter(new Date(2020, 10, 10, 5, 5, 5))).toBe(true);
+  test("isPunchedAfter", () => {
+    expect(timecard.isPunchedAfter(new Date(2020, 10, 10, 4, 5, 5))).toBe(true);
+    expect(timecard.isPunchedAfter(new Date(2020, 10, 6, 5, 5, 5))).toBe(true);
+    expect(timecard.isPunchedAfter(new Date(2020, 10, 14, 4, 5, 5))).toBe(false);
+    expect(timecard.isPunchedAfter(new Date(2020, 10, 10, 5, 5, 5))).toBe(true);
   });
-  test("isPunchBefore", () => {
-    expect(timecard.isPunchBefore(new Date(2020, 10, 10, 4, 5, 5))).toBe(false);
-    expect(timecard.isPunchBefore(new Date(2020, 10, 6, 5, 5, 5))).toBe(false);
-    expect(timecard.isPunchBefore(new Date(2020, 10, 14, 4, 5, 5))).toBe(true);
-    expect(timecard.isPunchBefore(new Date(2020, 10, 10, 5, 5, 5))).toBe(true);
+  test("isPunchedBefore", () => {
+    expect(timecard.isPunchedBefore(new Date(2020, 10, 10, 4, 5, 5))).toBe(false);
+    expect(timecard.isPunchedBefore(new Date(2020, 10, 6, 5, 5, 5))).toBe(false);
+    expect(timecard.isPunchedBefore(new Date(2020, 10, 14, 4, 5, 5))).toBe(true);
+    expect(timecard.isPunchedBefore(new Date(2020, 10, 10, 5, 5, 5))).toBe(true);
   });
 });

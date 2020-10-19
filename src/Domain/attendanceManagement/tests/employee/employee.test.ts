@@ -1,11 +1,14 @@
 import "reflect-metadata";
-import Employee from "../../entity/employee/employee";
-import EntityEquivalent from "../../service/entityEquivalent";
-import EmployeeId from "../../valueObject/employeeId";
-import EntityFactory from "../../entity/entityFactory";
-import Coordinate from "../../valueObject/coordinate";
-import PunchActionFactory from "../../punch/punchActionFactory";
-import PunchSpecificationFactory from "../../punch/punchSpecificationFactory";
+import Employee from "../../src/entity/employee/employee";
+import EntityFactory from "../../src/entity/entityFactory";
+import PunchActionFactory from "../../src/punch/punchActionFactory";
+import PunchSpecificationFactory from "../../src/punch/punchSpecification";
+import EntityEquivalent from "../../src/service/entityEquivalent";
+import Coordinate from "../../src/valueObject/coordinate";
+import EmployeeId from "../../src/valueObject/employeeId";
+import TimecardRepository from "../../src/repository/timecard/timecardRepository";
+import container from "@/di/inversify.config";
+import TestTypes from "@/di/testTypes";
 
 describe("従業員", (): void => {
   const id = "test01";
@@ -13,12 +16,16 @@ describe("従業員", (): void => {
   let employee: Employee;
   let coordinate: Coordinate;
   let punchDate: Date;
+  let repository: TimecardRepository;
 
   beforeEach(() => {
     employeeId = new EmployeeId(id);
     employee = new Employee(employeeId);
     coordinate = new Coordinate(20, 20);
     punchDate = new Date(2020, 10, 10, 5, 5, 5);
+    repository = container.get<TimecardRepository>(
+      TestTypes.TimecardRepository
+    );
   });
 
   test("従業員IDを取得", () => {
@@ -26,14 +33,16 @@ describe("従業員", (): void => {
     expect(id.equal(employeeId)).toBe(true);
   });
   test("出勤を行う", async () => {
-    const specification = new PunchSpecificationFactory().getAttendance();
+    const specification = new PunchSpecificationFactory().getAttendance(
+      repository
+    );
 
     const action = new PunchActionFactory().actionAttendance(
-      specification,
+      repository,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(action);
+    const timecard = await employee.punchTimecard(specification, action);
 
     expect(
       new EntityEquivalent().equalTimecard(
@@ -46,13 +55,15 @@ describe("従業員", (): void => {
   });
 
   test("退勤を行う", async () => {
-    const specification = new PunchSpecificationFactory().getLeavework();
+    const specification = new PunchSpecificationFactory().getLeavework(
+      repository
+    );
     const action = new PunchActionFactory().actionLeavework(
-      specification,
+      repository,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(action);
+    const timecard = await employee.punchTimecard(specification, action);
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,
@@ -64,13 +75,15 @@ describe("従業員", (): void => {
   });
 
   test("休憩を開始する", async () => {
-    const specification = new PunchSpecificationFactory().getTakebreak();
+    const specification = new PunchSpecificationFactory().getTakebreak(
+      repository
+    );
     const action = new PunchActionFactory().actionTakebreak(
-      specification,
+      repository,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(action);
+    const timecard = await employee.punchTimecard(specification, action);
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,
@@ -82,13 +95,15 @@ describe("従業員", (): void => {
   });
 
   test("休憩を終了する", async () => {
-    const specification = new PunchSpecificationFactory().getEndbreak();
+    const specification = new PunchSpecificationFactory().getEndbreak(
+      repository
+    );
     const action = new PunchActionFactory().actionEndbreak(
-      specification,
+      repository,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(action);
+    const timecard = await employee.punchTimecard(specification, action);
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,

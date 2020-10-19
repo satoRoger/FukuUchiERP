@@ -1,9 +1,9 @@
-import RepositoryOnMemory from "@/adapter/repository/repositoryOnMemory";
-import TimecardRepository from "@/domain/attendanceManagement/repository/timecard/timecardRepository";
+import RepositoryOnMemory from "@/adapter/src/repository/repositoryOnMemory/repositoryOnMemory";
+import TimecardRepository from "@/domain/attendanceManagement/src/repository/timecard/timecardRepository";
+import SearchTimecard from "@/usecase/timecard/searchTimecard.test";
 import { Container } from "inversify";
-import "reflect-metadata";
-import SearchTimecard from "../usecase/timecard/searchTimecard";
 import Types from "./types";
+
 
 export default function DiOnDevelop(): Container {
   const container = new Container();

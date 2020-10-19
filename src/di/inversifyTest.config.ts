@@ -1,7 +1,7 @@
+import TimecardRepository from "@/domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import { Container } from "inversify";
 import "reflect-metadata";
-import TimecardRepository from "../domain/attendanceManagement/timecard/timecardRepository";
-import RepositoryOnMemory from "../adapter/repository/repositoryOnMemory";
+import RepositoryOnMemory from "../adapter/src/repository/repositoryOnMemory/repositoryOnMemory";
 import TestTypes from "./testTypes";
 
 export default function DiOnTest(): Container {
@@ -9,8 +9,5 @@ export default function DiOnTest(): Container {
   container
     .bind<TimecardRepository>(TestTypes.TimecardRepository)
     .to(RepositoryOnMemory);
-
-    
-
   return container;
 }

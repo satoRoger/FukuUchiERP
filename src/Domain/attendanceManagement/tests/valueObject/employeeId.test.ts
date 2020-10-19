@@ -1,8 +1,7 @@
+import { errorMessageList } from "../../src/common/message";
+import EmployeeId from "../../src/valueObject/employeeId";
 
-import { errorMessageList } from "../../../../common/message";
-import EmployeeId from "../../valueObject/employeeId";
-
-describe("employeeIdのテスト", (): void => {
+describe("employeeIdのテスト", () => {
   test("idが正しく取得できるか", () => {
     const id = "test01";
     const employeeId = new EmployeeId(id);
