@@ -2,7 +2,7 @@ import "reflect-metadata";
 import Employee from "../../src/entity/employee/employee";
 import EntityFactory from "../../src/entity/entityFactory";
 import PunchActionFactory from "../../src/punch/punchActionFactory";
-import PunchSpecificationFactory from "../../src/punch/punchSpecification";
+import PunchSpecificationFactory from "../../src/punch/punchSpecificationFactory";
 import EntityEquivalent from "../../src/service/entityEquivalent";
 import Coordinate from "../../src/valueObject/coordinate";
 import EmployeeId from "../../src/valueObject/employeeId";

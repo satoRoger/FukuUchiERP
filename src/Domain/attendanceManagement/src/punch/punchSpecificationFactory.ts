@@ -1,16 +1,27 @@
-import PunchSpecification from "./punchSpecification";
+import PunchSpecification from "./specification/punchSpecification";
+import TimecardRepository from "../repository/timecard/timecardRepository";
+import AttendanceSpecification from "./specification/attendanceSpecification";
+import LeaveworkSpecification from './specification/leaveworkSpecification';
 
 export default class PunchSpecificationFactory {
-  getAttendance: () => PunchSpecification = () => {
-    return new PunchSpecification();
+  getAttendance: (repository: TimecardRepository) => PunchSpecification = (
+    repository
+  ) => {
+    return new AttendanceSpecification(repository);
   };
-  getLeavework: () => PunchSpecification = () => {
-    return new PunchSpecification();
+  getLeavework: (repository: TimecardRepository) => PunchSpecification = (
+    repository
+  ) => {
+    return new LeaveworkSpecification(repository);
   };
-  getTakebreak: () => PunchSpecification = () => {
-    return new PunchSpecification();
+  getTakebreak: (repository: TimecardRepository) => PunchSpecification = (
+    repository
+  ) => {
+    return new AttendanceSpecification(repository);
   };
-  getEndbreak: () => PunchSpecification = () => {
-    return new PunchSpecification();
+  getEndbreak: (repository: TimecardRepository) => PunchSpecification = (
+    repository
+  ) => {
+    return new AttendanceSpecification(repository);
   };
 }

@@ -5,7 +5,7 @@ import Employee from "@/domain/attendanceManagement/src/entity/employee/employee
 import EntityFactory from "@/domain/attendanceManagement/src/entity/entityFactory";
 import Timecard from "@/domain/attendanceManagement/src/entity/timecard/Timecard";
 import PunchActionFactory from "@/domain/attendanceManagement/src/punch/punchActionFactory";
-import PunchSpecificationFactory from "@/domain/attendanceManagement/src/punch/punchSpecification";
+import PunchSpecificationFactory from "@/domain/attendanceManagement/src/punch/punchSpecificationFactory";
 import TimecardRepository from "@/domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import EntityEquivalent from "@/domain/attendanceManagement/src/service/entityEquivalent";
 import Coordinate from "@/domain/attendanceManagement/src/valueObject/coordinate";

@@ -5,10 +5,10 @@ import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
 import Types from "@/di/types";
 import { DateTime, Duration } from "luxon";
-import { resolve } from "path";
-import { rejects } from "assert";
-import { ErrorMessage, errorMessageList } from '@/domain/attendanceManagement/src/common/message';
-import { dayStart } from '../../common/utility';
+import {
+  errorMessageList,
+} from "@/domain/attendanceManagement/src/common/message";
+import { dayStart } from "../../common/utility";
 
 export default class LeaveworkSpecification implements PunchSpecification {
   constructor(
@@ -23,17 +23,21 @@ export default class LeaveworkSpecification implements PunchSpecification {
     punchDate: DateTime,
     coordinate?: Coordinate
   ) => {
-    return new Promise(async (resolve,reject) => {
+    return new Promise(async (resolve, reject) => {
       const timecardCollection = await this.repository.searchByEmployee(
         employee,
         dayStart(punchDate),
         punchDate
       );
+
+      if (
+        0 <
+        timecardCollection.filter((timecard) => timecard.isAttendance()).size()
+      ) {
+        resolve(true);
+      } else {
+        reject(errorMessageList.ProhiviteLeaveworkBeforeAttend);
+      }
     });
-    if (0 < timecardCollection.filter(timecard => timecard.isAttendance()).size()) {
-      resolve(true);
-    } else {
-      rejects(errorMessageList.ProhiviteLeaveworkBeforeAttend);
-    }
   };
 }
