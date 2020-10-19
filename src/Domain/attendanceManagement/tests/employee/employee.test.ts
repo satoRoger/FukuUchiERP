@@ -8,24 +8,22 @@ import Coordinate from "../../src/valueObject/coordinate";
 import EmployeeId from "../../src/valueObject/employeeId";
 import TimecardRepository from "../../src/repository/timecard/timecardRepository";
 import container from "@/di/inversify.config";
-import TestTypes from "@/di/testTypes";
+import Types from "@/di/types";
+import { DateTime } from 'luxon';
 
 describe("従業員", (): void => {
   const id = "test01";
   let employeeId: EmployeeId;
   let employee: Employee;
   let coordinate: Coordinate;
-  let punchDate: Date;
+  let punchDate: DateTime;
   let repository: TimecardRepository;
-
   beforeEach(() => {
+    repository = container.get<TimecardRepository>(Types.TimecardRepository);
     employeeId = new EmployeeId(id);
     employee = new Employee(employeeId);
     coordinate = new Coordinate(20, 20);
-    punchDate = new Date(2020, 10, 10, 5, 5, 5);
-    repository = container.get<TimecardRepository>(
-      TestTypes.TimecardRepository
-    );
+    punchDate = DateTime.fromISO("2020-10-10");
   });
 
   test("従業員IDを取得", () => {
@@ -38,11 +36,11 @@ describe("従業員", (): void => {
     );
 
     const action = new PunchActionFactory().actionAttendance(
-      repository,
+      specification,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(specification, action);
+    const timecard = await employee.punchTimecard(action);
 
     expect(
       new EntityEquivalent().equalTimecard(
@@ -55,15 +53,15 @@ describe("従業員", (): void => {
   });
 
   test("退勤を行う", async () => {
-    const specification = new PunchSpecificationFactory().getLeavework(
+    const specification = new PunchSpecificationFactory().getAttendance(
       repository
     );
     const action = new PunchActionFactory().actionLeavework(
-      repository,
+      specification,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(specification, action);
+    const timecard = await employee.punchTimecard(action);
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,
@@ -79,11 +77,11 @@ describe("従業員", (): void => {
       repository
     );
     const action = new PunchActionFactory().actionTakebreak(
-      repository,
+      specification,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(specification, action);
+    const timecard = await employee.punchTimecard(action);
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,
@@ -99,11 +97,11 @@ describe("従業員", (): void => {
       repository
     );
     const action = new PunchActionFactory().actionEndbreak(
-      repository,
+      specification,
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(specification, action);
+    const timecard = await employee.punchTimecard(action);
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,

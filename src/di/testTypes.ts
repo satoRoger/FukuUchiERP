@@ -4,4 +4,6 @@ const TestTypes = {
   InvalidTimecardRepository: Symbol.for("InvalidTimecardRepository"),
 } as const;
 
+type TestTypes = typeof TestTypes;
+
 export default TestTypes;

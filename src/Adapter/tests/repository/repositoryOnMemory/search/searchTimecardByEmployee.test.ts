@@ -10,37 +10,41 @@ import TimecardRepository from "@/domain/attendanceManagement/src/repository/tim
 import EntityEquivalent from "@/domain/attendanceManagement/src/service/entityEquivalent";
 import Coordinate from "@/domain/attendanceManagement/src/valueObject/coordinate";
 import "reflect-metadata";
+import testContainer from "@/di/inversifyTest.config";
+import { DateTime } from "luxon";
 
+const repository = testContainer.get<TimecardRepository>(
+  TestTypes.TimecardRepository
+);
 
 describe("searchTimecardByEmployee", () => {
-  let seachTimecard:SearchTimecardByEmployee;
-  let createdTimecard:Timecard;
-  let employee:Employee;
-  let coordinate:Coordinate;
-  let punchDate:Date;
+  let seachTimecard: SearchTimecardByEmployee;
+  let createdTimecard: Timecard;
+  let employee: Employee;
+  let coordinate: Coordinate;
+  let punchDate: DateTime;
 
   beforeAll(async () => {
-    const repository = container.get<TimecardRepository>(
-      TestTypes.TimecardRepository
-    );
     seachTimecard = new SearchTimecardByEmployee(repository);
 
     employee = new EntityFactory().employee().createByRowId("test01");
     coordinate = new Coordinate(20, 20);
-    punchDate = new Date(2020, 10, 10, 5, 5, 5);
-    const specification = new PunchSpecificationFactory().getAttendance(repository);
+    punchDate = DateTime.fromISO("2020-10-10T05:05:05");
+    const specification = new PunchSpecificationFactory().getAttendance(
+      repository
+    );
 
     const action = new PunchActionFactory().actionAttendance(
-      repository,
+      specification,
       punchDate,
       coordinate
     );
-    createdTimecard = await employee.punchTimecard(specification,action);
+    createdTimecard = await employee.punchTimecard(action);
 
     repository.save(createdTimecard);
   });
 
-  test("search", async() => {
+  test("search", async () => {
     const timecardCollection = await seachTimecard.search(employee);
     const timecard = timecardCollection.latestTimecard();
     expect(

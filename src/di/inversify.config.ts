@@ -1,15 +1,15 @@
 import { Container } from "inversify";
-import DiOnDevelop from "./inversifyDevelop.config";
-import DiOnTest from "./inversifyTest.config";
+import dcontainer from "./inversifyDevelop.config";
+import tContainer from './inversifyTest.config';
 
-let container: Container = undefined;
+let container: Container = new Container();
 
 switch (process.env.NODE_ENV) {
   case "development":
-    container = DiOnDevelop();
+    container = dcontainer;
     break;
   case "test":
-    container = DiOnTest();
+    container = tContainer;
     break;
   default:
   //エラー処理

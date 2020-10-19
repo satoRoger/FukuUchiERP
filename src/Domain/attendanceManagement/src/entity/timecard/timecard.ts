@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import CardType from "../../valueObject/cardtype";
 import Coordinate from "../../valueObject/coordinate";
 import EmployeeId from "../../valueObject/employeeId";
@@ -7,7 +8,7 @@ export default class Timecard {
   constructor(
     private employee: Employee,
     private cardType: CardType,
-    private punchDate: Date,
+    private punchDate: DateTime,
     private coordinate?: Coordinate
   ) {}
 
@@ -15,21 +16,25 @@ export default class Timecard {
     return this.employee.getId();
   };
 
-  isPunchedAfter: (date: Date) => boolean = (date) => {
+  isPunchedAfter: (date: DateTime) => boolean = (date) => {
     return date <= this.punchDate;
   };
-  isPunchedBefore: (date: Date) => boolean = (date) => {
+  isPunchedBefore: (date: DateTime) => boolean = (date) => {
     return this.punchDate <= date;
   };
 
   hasCoordinate: () => boolean = () => {
     return this.coordinate != undefined;
   };
-  getCoordinate: () => Coordinate = () => {
-    return this.coordinate;
+  getCoordinate: () => Coordinate | undefined = () => {
+    if (this.hasCoordinate()) {
+      return this.coordinate as Coordinate;
+    } else {
+      return undefined;
+    }
   };
 
-  getPunchDate: () => Date = () => {
+  getPunchDate: () => DateTime = () => {
     return this.punchDate;
   };
 

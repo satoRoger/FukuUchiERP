@@ -3,6 +3,7 @@ import Coordinate from "@/domain/attendanceManagement/src/valueObject/coordinate
 import EntityFactory from "../../../src/entity/entityFactory";
 import CardType from "../../../src/valueObject/cardtype";
 import TimecardEquivalent from "../../../src/service/equivalent/timecardEquivalent";
+import { DateTime } from 'luxon';
 describe("タイムカード等価比較ロジック", () => {
   let timecardA: Timecard;
   let timecardB: Timecard;
@@ -23,8 +24,8 @@ describe("タイムカード等価比較ロジック", () => {
     const cardtypeA = CardType.Attendance;
     const cardtypeB = CardType.Leavework;
 
-    const punchDateA = new Date(2020, 10, 10, 5, 5, 5);
-    const punchDateB = new Date(2020, 10, 10, 5, 5, 5);
+    const punchDateA = DateTime.fromISO("2020-10-10T05:05:05");
+    const punchDateB = DateTime.fromISO("2020-10-10T05:05:05");
 
     timecardA = new Timecard(employeeA, cardtypeA, punchDateA, coordinateA);
     timecardB = new Timecard(employeeA, cardtypeA, punchDateA, coordinateB);

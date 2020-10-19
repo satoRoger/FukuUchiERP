@@ -61,7 +61,9 @@
     ]
   },
   "dependencies": {
-    "inversify": "^5.0.1",
+    "@types/luxon": "^1.25.0",
+    "inversify": "4.13.x",
+    "luxon": "^1.25.0",
     "reflect-metadata": "^0.1.13"
   }
 }

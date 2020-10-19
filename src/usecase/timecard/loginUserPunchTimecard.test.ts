@@ -1,3 +1,5 @@
-export default class LoginUserPunchTimecard{
-	punch:(userId,punchType,date,coordinate?)=>PunchResult;
-}
+describe('ログインユーザの勤怠登録', () => {
+	test('should ', () => {
+		
+	});
+});

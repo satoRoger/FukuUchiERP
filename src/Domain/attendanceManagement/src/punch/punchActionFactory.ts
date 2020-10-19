@@ -2,34 +2,36 @@ import PunchAction from "./action/punchAction";
 import Coordinate from "../valueObject/coordinate";
 import PunchAttendanceAction from "./action/punchAttendanceAction";
 import TimecardRepository from "../repository/timecard/timecardRepository";
+import PunchSpecification from './specification/punchSpecification';
+import { DateTime } from "luxon";
 
 export default class PunchActionFactory {
   actionAttendance: (
-    repository: TimecardRepository,
-    punchDate: Date,
+    specification:PunchSpecification,
+    punchDate: DateTime,
     coordinate?: Coordinate
   ) => PunchAction = (repository, punchDate, coordinate) => {
-    return new PunchAttendanceAction();
+    return new PunchAttendanceAction(repository, punchDate, coordinate);
   };
   actionLeavework: (
-    repository: TimecardRepository,
-    punchDate: Date,
+    specification:PunchSpecification,
+    punchDate: DateTime,
     coordinate?: Coordinate
   ) => PunchAction = (repository, punchDate, coordinate) => {
-    return new PunchAttendanceAction();
+    return new PunchAttendanceAction(repository, punchDate, coordinate);
   };
   actionTakebreak: (
-    repository: TimecardRepository,
-    punchDate: Date,
+    specification:PunchSpecification,
+    punchDate: DateTime,
     coordinate?: Coordinate
   ) => PunchAction = (repository, punchDate, coordinate) => {
-    return new PunchAttendanceAction();
+    return new PunchAttendanceAction(repository, punchDate, coordinate);
   };
   actionEndbreak: (
-    repository: TimecardRepository,
-    punchDate: Date,
+    specification:PunchSpecification,
+    punchDate: DateTime,
     coordinate?: Coordinate
   ) => PunchAction = (repository, punchDate, coordinate) => {
-    return new PunchAttendanceAction();
+    return new PunchAttendanceAction(repository, punchDate, coordinate);
   };
 }

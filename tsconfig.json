@@ -3,11 +3,12 @@
     "baseUrl": "./",
     "target": "es5",
     "lib": ["es6", "dom"],
-    "types": ["reflect-metadata","jest","node"],
+    "types": ["reflect-metadata", "jest", "node"],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "paths": { "@/*": ["src/*"] }
+    "paths": { "@/*": ["src/*"] },
+    "strict": true
   }
 }
