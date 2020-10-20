@@ -9,7 +9,7 @@ import EntityFactory from "../../entity/entityFactory";
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
 
-export default class PunchAttendanceAction implements PunchAction {
+export default class PunchLeaveworkAction implements PunchAction {
   constructor(
     private specification: PunchSpecification,
     private punchDate: DateTime,

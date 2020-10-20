@@ -9,7 +9,8 @@ import EmployeeId from "../../src/valueObject/employeeId";
 import TimecardRepository from "../../src/repository/timecard/timecardRepository";
 import container from "@/di/inversify.config";
 import Types from "@/di/types";
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
+import Timecard from "../../src/entity/timecard/Timecard";
 
 describe("従業員", (): void => {
   const id = "test01";
@@ -17,9 +18,7 @@ describe("従業員", (): void => {
   let employee: Employee;
   let coordinate: Coordinate;
   let punchDate: DateTime;
-  let repository: TimecardRepository;
   beforeEach(() => {
-    repository = container.get<TimecardRepository>(Types.TimecardRepository);
     employeeId = new EmployeeId(id);
     employee = new Employee(employeeId);
     coordinate = new Coordinate(20, 20);
@@ -31,6 +30,7 @@ describe("従業員", (): void => {
     expect(id.equal(employeeId)).toBe(true);
   });
   test("出勤を行う", async () => {
+    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
     const specification = new PunchSpecificationFactory().getAttendance(
       repository
     );
@@ -53,7 +53,8 @@ describe("従業員", (): void => {
   });
 
   test("退勤を行う", async () => {
-    const specification = new PunchSpecificationFactory().getAttendance(
+    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
+    const specification = new PunchSpecificationFactory().getLeavework(
       repository
     );
     const action = new PunchActionFactory().actionLeavework(
@@ -61,18 +62,25 @@ describe("従業員", (): void => {
       punchDate,
       coordinate
     );
-    const timecard = await employee.punchTimecard(action);
-    expect(
-      new EntityEquivalent().equalTimecard(
-        timecard,
-        new EntityFactory()
-          .timecard()
-          .createLeavework(employee, punchDate, coordinate)
-      )
-    ).toBe(true);
+    employee
+      .punchTimecard(action)
+      .then((timecard) => {
+        expect(
+          new EntityEquivalent().equalTimecard(
+            timecard,
+            new EntityFactory()
+              .timecard()
+              .createLeavework(employee, punchDate, coordinate)
+          )
+        ).toBe(true);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   });
 
   test("休憩を開始する", async () => {
+    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
     const specification = new PunchSpecificationFactory().getTakebreak(
       repository
     );
@@ -93,6 +101,7 @@ describe("従業員", (): void => {
   });
 
   test("休憩を終了する", async () => {
+    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
     const specification = new PunchSpecificationFactory().getEndbreak(
       repository
     );
