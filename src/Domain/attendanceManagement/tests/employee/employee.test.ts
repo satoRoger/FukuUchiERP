@@ -12,6 +12,22 @@ import Types from "@/di/types";
 import { DateTime } from "luxon";
 import Timecard from "../../src/entity/timecard/Timecard";
 
+function EmployeeAttend(employee:Employee,punchDate:DateTime,coordinate:Coordinate):Promise<Timecard> {
+  const repository = container.get<TimecardRepository>(
+    Types.TimecardRepository
+  );
+  const specification = new PunchSpecificationFactory().getAttendance(
+    repository
+  );
+
+  const action = new PunchActionFactory().actionAttendance(
+    specification,
+    punchDate,
+    coordinate
+  );
+  return employee.punchTimecard(action);
+}
+
 describe("従業員", (): void => {
   const id = "test01";
   let employeeId: EmployeeId;
@@ -30,17 +46,8 @@ describe("従業員", (): void => {
     expect(id.equal(employeeId)).toBe(true);
   });
   test("出勤を行う", async () => {
-    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
-    const specification = new PunchSpecificationFactory().getAttendance(
-      repository
-    );
 
-    const action = new PunchActionFactory().actionAttendance(
-      specification,
-      punchDate,
-      coordinate
-    );
-    const timecard = await employee.punchTimecard(action);
+    const timecard = await EmployeeAttend(employee, punchDate, coordinate);
 
     expect(
       new EntityEquivalent().equalTimecard(
@@ -53,7 +60,8 @@ describe("従業員", (): void => {
   });
 
   test("退勤を行う", async () => {
-    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
+    const EmployeeAttend();
+
     const specification = new PunchSpecificationFactory().getLeavework(
       repository
     );
@@ -80,7 +88,9 @@ describe("従業員", (): void => {
   });
 
   test("休憩を開始する", async () => {
-    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
+    const repository = container.get<TimecardRepository>(
+      Types.TimecardRepository
+    );
     const specification = new PunchSpecificationFactory().getTakebreak(
       repository
     );
@@ -101,7 +111,9 @@ describe("従業員", (): void => {
   });
 
   test("休憩を終了する", async () => {
-    const repository = container.get<TimecardRepository>(Types.TimecardRepository);
+    const repository = container.get<TimecardRepository>(
+      Types.TimecardRepository
+    );
     const specification = new PunchSpecificationFactory().getEndbreak(
       repository
     );

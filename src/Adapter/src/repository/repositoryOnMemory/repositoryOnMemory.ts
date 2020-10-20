@@ -6,27 +6,22 @@ import TimecardCollection from "@/domain/attendanceManagement/src/entity/timecar
 import TimecardRepository from "@/domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import IsEmployeePunchTimecard from "@/domain/attendanceManagement/src/service/isEmployeePunchTimecard";
 
-
 @injectable()
 export default class RepositoryOnMemory implements TimecardRepository {
   private timecardArray: Array<Timecard> = new Array<Timecard>();
 
-  save: (timecard: Timecard) => Promise<Timecard> = (timecard) => {
-    return new Promise((resolve, reject) => {
-      this.timecardArray.push(timecard);
-      return timecard;
-    });
+  save: (timecard: Timecard) => Promise<Timecard> = async (timecard) => {
+    this.timecardArray.push(timecard);
+    return timecard;
   };
 
-  searchByEmployee: (employee: Employee) => Promise<TimecardCollection> = (
-    employee
-  ) => {
-    return new Promise((resolve, reject) => {
+  searchByEmployee: (
+    employee: Employee
+  ) => Promise<TimecardCollection> = async (employee) => {
+    return new TimecardCollection(
       this.timecardArray.filter((timecard) => {
         return new IsEmployeePunchTimecard(employee, timecard).isPunch();
-      }).map(timecard=>{
-
-      });
-    });
+      })
+    );
   };
 }

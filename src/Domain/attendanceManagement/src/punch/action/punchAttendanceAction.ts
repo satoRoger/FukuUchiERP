@@ -16,17 +16,15 @@ export default class PunchAttendanceAction implements PunchAction {
     private coordinate?: Coordinate
   ) {}
 
-  punched: (employee: Employee) => Promise<Timecard> = (employee) => {
-    return new Promise((resolve, reject) => {
-      this.specification
-        .punchable(employee, this.punchDate, this.coordinate)
-        .catch((error) => reject(error));
+  punched: (employee: Employee) => Promise<Timecard> = async (employee) => {
+    this.specification
+      .punchable(employee, this.punchDate, this.coordinate)
+      .catch((error) => {
+        throw error;
+      });
 
-      resolve(
-        new EntityFactory()
-          .timecard()
-          .createAttendance(employee, this.punchDate, this.coordinate)
-      );
-    });
+    return new EntityFactory()
+      .timecard()
+      .createAttendance(employee, this.punchDate, this.coordinate);
   };
 }

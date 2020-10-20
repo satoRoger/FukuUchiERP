@@ -16,12 +16,13 @@ export default class Employee {
     return this.id;
   };
 
-  punchTimecard: (action: PunchAction) => Promise<Timecard> = (action) => {
-    return new Promise<Timecard>((resolve, reject) => {
-      action
-        .punched(this)
-        .then((timecard) => resolve(timecard))
-        .catch((error) => reject(error));
-    });
+  punchTimecard: (action: PunchAction) => Promise<Timecard> = async (
+    action
+  ) => {
+    try {
+      return await action.punched(this);
+    } catch(error) {
+      throw error;
+    }
   };
 }
