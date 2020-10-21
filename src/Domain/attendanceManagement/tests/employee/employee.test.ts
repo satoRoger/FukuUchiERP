@@ -11,8 +11,13 @@ import container from "@/di/inversify.config";
 import Types from "@/di/types";
 import { DateTime } from "luxon";
 import Timecard from "../../src/entity/timecard/Timecard";
+import logger from '../../../../util/logger/logger';
 
-function EmployeeAttend(employee:Employee,punchDate:DateTime,coordinate:Coordinate):Promise<Timecard> {
+function EmployeeAttend(
+  employee: Employee,
+  punchDate: DateTime,
+  coordinate: Coordinate
+): Promise<Timecard> {
   const repository = container.get<TimecardRepository>(
     Types.TimecardRepository
   );
@@ -21,6 +26,64 @@ function EmployeeAttend(employee:Employee,punchDate:DateTime,coordinate:Coordina
   );
 
   const action = new PunchActionFactory().actionAttendance(
+    specification,
+    punchDate,
+    coordinate
+  );
+  return employee.punchTimecard(action);
+}
+
+function EmployeeLeavework(
+  employee: Employee,
+  punchDate: DateTime,
+  coordinate: Coordinate
+): Promise<Timecard> {
+  const repository = container.get<TimecardRepository>(
+    Types.TimecardRepository
+  );
+  const specification = new PunchSpecificationFactory().getLeavework(
+    repository
+  );
+
+  const action = new PunchActionFactory().actionLeavework(
+    specification,
+    punchDate,
+    coordinate
+  );
+  return employee.punchTimecard(action);
+}
+
+function EmployeeTakebreak(
+  employee: Employee,
+  punchDate: DateTime,
+  coordinate: Coordinate
+): Promise<Timecard> {
+  const repository = container.get<TimecardRepository>(
+    Types.TimecardRepository
+  );
+  const specification = new PunchSpecificationFactory().getTakebreak(
+    repository
+  );
+
+  const action = new PunchActionFactory().actionTakebreak(
+    specification,
+    punchDate,
+    coordinate
+  );
+  return employee.punchTimecard(action);
+}
+
+function EmployeeEndbreak(
+  employee: Employee,
+  punchDate: DateTime,
+  coordinate: Coordinate
+): Promise<Timecard> {
+  const repository = container.get<TimecardRepository>(
+    Types.TimecardRepository
+  );
+  const specification = new PunchSpecificationFactory().getEndbreak(repository);
+
+  const action = new PunchActionFactory().actionEndbreak(
     specification,
     punchDate,
     coordinate
@@ -46,7 +109,6 @@ describe("従業員", (): void => {
     expect(id.equal(employeeId)).toBe(true);
   });
   test("出勤を行う", async () => {
-
     const timecard = await EmployeeAttend(employee, punchDate, coordinate);
 
     expect(
@@ -60,31 +122,29 @@ describe("従業員", (): void => {
   });
 
   test("退勤を行う", async () => {
-    const EmployeeAttend();
+    try {
+      const attendTimecard = await EmployeeAttend(
+        employee,
+        punchDate,
+        coordinate
+      );
+      const leaveworkTimecard = await EmployeeLeavework(
+        employee,
+        punchDate.plus({ hour: 1 }),
+        coordinate
+      );
 
-    const specification = new PunchSpecificationFactory().getLeavework(
-      repository
-    );
-    const action = new PunchActionFactory().actionLeavework(
-      specification,
-      punchDate,
-      coordinate
-    );
-    employee
-      .punchTimecard(action)
-      .then((timecard) => {
-        expect(
-          new EntityEquivalent().equalTimecard(
-            timecard,
-            new EntityFactory()
-              .timecard()
-              .createLeavework(employee, punchDate, coordinate)
-          )
-        ).toBe(true);
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+      expect(
+        new EntityEquivalent().equalTimecard(
+          leaveworkTimecard,
+          new EntityFactory()
+            .timecard()
+            .createLeavework(employee, punchDate.plus({ hour: 1 }), coordinate)
+        )
+      ).toBe(true);
+    } catch (error) {
+      throw new Error(error);
+    }
   });
 
   test("休憩を開始する", async () => {

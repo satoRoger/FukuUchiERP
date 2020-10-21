@@ -4,6 +4,7 @@ import CardType from "../../valueObject/cardtype";
 import Coordinate from "../../valueObject/coordinate";
 import EmployeeId from "../../valueObject/employeeId";
 import Timecard from "../timecard/Timecard";
+import logger from '../../../../../util/logger/logger';
 
 export default class Employee {
   private id: EmployeeId;
@@ -13,6 +14,8 @@ export default class Employee {
   }
 
   getId: () => EmployeeId = () => {
+    logger.initialize();
+    logger.LogError("test");
     return this.id;
   };
 

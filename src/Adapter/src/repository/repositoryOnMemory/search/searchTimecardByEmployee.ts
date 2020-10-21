@@ -5,9 +5,9 @@ import TimecardRepository from "@/domain/attendanceManagement/src/repository/tim
 
 export default class SearchTimecardByEmployee {
   constructor(private repository: TimecardRepository) {}
-  search: (employee: Employee) => Promise<TimecardCollection> = (employee) => {
-    return new Promise((resolve, reject) => {
-      resolve(new TimecardCollection())
-    })
+  search: (employee: Employee) => Promise<TimecardCollection> = async (
+    employee
+  ) => {
+    return new TimecardCollection();
   };
 }

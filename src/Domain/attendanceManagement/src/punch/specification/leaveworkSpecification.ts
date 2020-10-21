@@ -5,10 +5,9 @@ import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
 import Types from "@/di/types";
 import { DateTime, Duration } from "luxon";
-import {
-  errorMessageList,
-} from "@/domain/attendanceManagement/src/common/message";
+import { errorMessageList } from "@/domain/attendanceManagement/src/common/message";
 import { dayStart } from "../../common/utility";
+import logger from "../../../../../util/logger/logger";
 
 export default class LeaveworkSpecification implements PunchSpecification {
   constructor(
@@ -18,26 +17,26 @@ export default class LeaveworkSpecification implements PunchSpecification {
     employee: Employee,
     punchDate: DateTime,
     coordinate?: Coordinate
-  ) => Promise<boolean> = (
+  ) => Promise<boolean> = async (
     employee: Employee,
     punchDate: DateTime,
     coordinate?: Coordinate
   ) => {
-    return new Promise(async (resolve, reject) => {
-      const timecardCollection = await this.repository.searchByEmployee(
-        employee,
-        dayStart(punchDate),
-        punchDate
-      );
+    const timecardCollection = await this.repository.searchByEmployee(
+      employee,
+      dayStart(punchDate),
+      punchDate
+    );
 
-      if (
-        0 <
-        timecardCollection.filter((timecard) => timecard.isAttendance()).size()
-      ) {
-        resolve(true);
-      } else {
-        reject(errorMessageList.ProhiviteLeaveworkBeforeAttend);
-      }
-    });
+    if (
+      0 <
+      timecardCollection.filter((timecard) => timecard.isAttendance()).size()
+    ) {
+      return true;
+    } else {
+      logger.initialize();
+      logger.LogAccessWarning(errorMessageList.ProhiviteLeaveworkBeforeAttend);
+      throw errorMessageList.ProhiviteLeaveworkBeforeAttend;
+    }
   };
 }
