@@ -48,7 +48,7 @@ describe("timecard", () => {
     ).toBe(true);
     expect(
       timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T06:05:05"))
-    ).toBe(true);
+    ).toBe(false);
     expect(
       timecard.isPunchedAfter(DateTime.fromISO("2020-10-14T06:05:05"))
     ).toBe(false);
@@ -64,10 +64,10 @@ describe("timecard", () => {
       timecard.isPunchedBefore(DateTime.fromISO("2020-10-06T04:05:05"))
     ).toBe(false);
     expect(
-      timecard.isPunchedBefore(DateTime.fromISO("2020-10-14T04:05:05"))
+      timecard.isPunchedBefore(DateTime.fromISO("2020-10-14T06:05:05"))
     ).toBe(true);
     expect(
-      timecard.isPunchedBefore(DateTime.fromISO("2020-10-05T04:05:05"))
+      timecard.isPunchedBefore(DateTime.fromISO("2020-10-10T05:05:05"))
     ).toBe(true);
   });
 });

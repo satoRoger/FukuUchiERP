@@ -75,8 +75,12 @@ export default {
       },
       debug: {
         appenders: ["stdout", "debug"],
-        level: "trace",
+        level: "debug",
       },
+      traceFile: {
+        appenders: ["debug"],
+        level:"trace"
+      }
     },
   },
 };

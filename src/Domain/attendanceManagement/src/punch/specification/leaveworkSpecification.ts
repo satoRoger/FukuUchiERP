@@ -6,14 +6,14 @@ import { inject } from "inversify";
 import Types from "@/di/types";
 import { DateTime, Duration } from "luxon";
 import { errorMessageList } from "@/domain/attendanceManagement/src/common/message";
-import { dayStart } from "../../common/utility";
+import { dayStart, isString } from "../../common/utility";
 import logger from "../../../../../util/logger/logger";
 
 export default class LeaveworkSpecification implements PunchSpecification {
   constructor(
     @inject(Types.TimecardRepository) private repository: TimecardRepository
-  ) { }
-  
+  ) {}
+
   @logger.debug.traceMethodCall
   async punchable(
     employee: Employee,
@@ -26,15 +26,26 @@ export default class LeaveworkSpecification implements PunchSpecification {
       punchDate
     );
 
+    let error: string | undefined = undefined;
+
     if (
-      0 <
-      timecardCollection.filter((timecard) => timecard.isAttendance()).size()
+      timecardCollection.filter((timecard) => timecard.isAttendance()).size() <=
+      0
     ) {
-      return true;
-    } else {
-      const error = errorMessageList.ProhiviteLeaveworkBeforeAttend;
+      error = errorMessageList.ProhiviteLeaveworkBeforeAttend;
+    } else if (
+      timecardCollection
+        .filter((timecard) => timecard.isTakebreak() && !timecard.isEndbreak())
+        .size() <= 0
+    ) {
+      error = errorMessageList.ProhiviteLeaveworkNeedToEndbreak;
+    }
+
+    if (isString(error)) {
       logger.app.warn(`${error}`);
       throw error;
+    } else {
+      return true;
     }
   }
 }

@@ -52,15 +52,15 @@ describe("タイムカード等価比較ロジック", () => {
     expect(new TimecardEquivalent(timecardCNoC, timecardCNoC).equal()).toBe(true);
     expect(new TimecardEquivalent(timecardDNoC, timecardDNoC).equal()).toBe(true);
   });
-  test("異なる値を評価", () => {
+  test("異なるオブジェクトを評価", () => {
     expect(new TimecardEquivalent(timecardA, timecardB).equal()).toBe(false);
-    expect(new TimecardEquivalent(timecardA, timecardC).equal()).toBe(false);
+    expect(new TimecardEquivalent(timecardA, timecardC).equal()).toBe(true);
     expect(new TimecardEquivalent(timecardA, timecardD).equal()).toBe(false);
     expect(new TimecardEquivalent(timecardA, timecardE).equal()).toBe(false);
   });
 
   test('座標なしを比較', () => {
-    expect(new TimecardEquivalent(timecardANoC, timecardBNoC).equal()).toBe(false);
+    expect(new TimecardEquivalent(timecardANoC, timecardBNoC).equal()).toBe(true);
     expect(new TimecardEquivalent(timecardANoC, timecardCNoC).equal()).toBe(false);
     expect(new TimecardEquivalent(timecardANoC, timecardDNoC).equal()).toBe(false);
   });

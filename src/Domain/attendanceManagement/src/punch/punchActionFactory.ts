@@ -5,6 +5,8 @@ import PunchSpecification from "./specification/punchSpecification";
 import { DateTime } from "luxon";
 import PunchLeaveworkAction from "./action/punchLeaveworkAction";
 import logger from "@/util/logger/logger";
+import PunchTakebreakAction from './action/punchTakebreakAction';
+import PunchEndbreakAction from './action/punchEndbreakAction';
 
 export default class PunchActionFactory {
   @logger.debug.traceMethodCall
@@ -29,7 +31,7 @@ export default class PunchActionFactory {
     punchDate: DateTime,
     coordinate?: Coordinate
   ): PunchAction {
-    return new PunchAttendanceAction(specification, punchDate, coordinate);
+    return new PunchTakebreakAction(specification, punchDate, coordinate);
   }
   @logger.debug.traceMethodCall
   actionEndbreak(
@@ -37,6 +39,6 @@ export default class PunchActionFactory {
     punchDate: DateTime,
     coordinate?: Coordinate
   ): PunchAction {
-    return new PunchAttendanceAction(specification, punchDate, coordinate);
+    return new PunchEndbreakAction(specification, punchDate, coordinate);
   }
 }

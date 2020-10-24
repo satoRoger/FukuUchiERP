@@ -192,7 +192,7 @@ describe("従業員", (): void => {
           endbreakTimecard,
           new EntityFactory()
             .timecard()
-            .createTakebreak(employee, punchDate.plus({ hour: 2 }), coordinate)
+            .createEndbreak(employee, punchDate.plus({ hour: 2 }), coordinate)
         )
       ).toBe(true);
     } catch (error) {
