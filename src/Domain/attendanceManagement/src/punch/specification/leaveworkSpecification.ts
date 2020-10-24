@@ -12,16 +12,14 @@ import logger from "../../../../../util/logger/logger";
 export default class LeaveworkSpecification implements PunchSpecification {
   constructor(
     @inject(Types.TimecardRepository) private repository: TimecardRepository
-  ) {}
-  punchable: (
+  ) { }
+  
+  @logger.debug.traceMethodCall
+  async punchable(
     employee: Employee,
     punchDate: DateTime,
     coordinate?: Coordinate
-  ) => Promise<boolean> = async (
-    employee: Employee,
-    punchDate: DateTime,
-    coordinate?: Coordinate
-  ) => {
+  ): Promise<boolean> {
     const timecardCollection = await this.repository.searchByEmployee(
       employee,
       dayStart(punchDate),
@@ -34,9 +32,9 @@ export default class LeaveworkSpecification implements PunchSpecification {
     ) {
       return true;
     } else {
-      logger.initialize();
-      logger.LogAccessWarning(errorMessageList.ProhiviteLeaveworkBeforeAttend);
-      throw errorMessageList.ProhiviteLeaveworkBeforeAttend;
+      const error = errorMessageList.ProhiviteLeaveworkBeforeAttend;
+      logger.app.warn(`${error}`);
+      throw error;
     }
-  };
+  }
 }

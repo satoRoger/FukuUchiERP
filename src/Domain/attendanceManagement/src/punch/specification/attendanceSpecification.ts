@@ -5,18 +5,19 @@ import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
 import Types from "@/di/types";
 import { DateTime } from "luxon";
+import logger from "../../../../../util/logger/logger";
 
 export default class AttendanceSpecification implements PunchSpecification {
   constructor(
     @inject(Types.TimecardRepository) private repository: TimecardRepository
-  ) {}
-  punchable: (
+  ) { }
+  
+  @logger.debug.traceMethodCall
+  async punchable(
     employee: Employee,
     punchDate: DateTime,
     coordinate?: Coordinate
-  ) => Promise<boolean> = () => {
-    return new Promise((resolve) => {
-      resolve(true);
-    });
-  };
+  ): Promise<boolean> {
+    return true;
+  }
 }

@@ -23,18 +23,18 @@ describe("timecard", () => {
 
   test("getCoordinate", () => {
     if (!timecard.hasCoordinate()) {
-      expect(timecard.getCoordinate()).toBe(undefined);
+      expect(timecard.coordinate).toBe(undefined);
     }
     if (timecard.hasCoordinate()) {
       expect(
-        (timecard.getCoordinate() as Coordinate).equal(
-          timecard.getCoordinate() as Coordinate
+        (timecard.coordinate as Coordinate).equal(
+          timecard.coordinate as Coordinate
         )
       ).toBe(true);
     }
   });
   test("getEmployeeId", () => {
-    expect(timecard.punchEmployeeId().equal(employee.getId())).toBe(true);
+    expect(timecard.punchEmployeeId().equal(employee.id)).toBe(true);
   });
   test("isAttendance", () => {
     expect(timecard.isAttendance()).toBe(true);
@@ -43,25 +43,31 @@ describe("timecard", () => {
     expect(timecard.isEndbreak()).toBe(false);
   });
   test("isPunchedAfter", () => {
-    expect(timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T04:05:05"))).toBe(true);
-    expect(timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T06:05:05"))).toBe(true);
-    expect(timecard.isPunchedAfter(DateTime.fromISO("2020-10-14T06:05:05"))).toBe(
-      false
-    );
-    expect(timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T05:05:05"))).toBe(true);
+    expect(
+      timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T04:05:05"))
+    ).toBe(true);
+    expect(
+      timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T06:05:05"))
+    ).toBe(true);
+    expect(
+      timecard.isPunchedAfter(DateTime.fromISO("2020-10-14T06:05:05"))
+    ).toBe(false);
+    expect(
+      timecard.isPunchedAfter(DateTime.fromISO("2020-10-10T05:05:05"))
+    ).toBe(true);
   });
   test("isPunchedBefore", () => {
-    expect(timecard.isPunchedBefore(DateTime.fromISO("2020-10-10T04:05:05"))).toBe(
-      false
-    );
-    expect(timecard.isPunchedBefore(DateTime.fromISO("2020-10-06T04:05:05"))).toBe(
-      false
-    );
-    expect(timecard.isPunchedBefore(DateTime.fromISO("2020-10-14T04:05:05"))).toBe(
-      true
-    );
-    expect(timecard.isPunchedBefore(DateTime.fromISO("2020-10-05T04:05:05"))).toBe(
-      true
-    );
+    expect(
+      timecard.isPunchedBefore(DateTime.fromISO("2020-10-10T04:05:05"))
+    ).toBe(false);
+    expect(
+      timecard.isPunchedBefore(DateTime.fromISO("2020-10-06T04:05:05"))
+    ).toBe(false);
+    expect(
+      timecard.isPunchedBefore(DateTime.fromISO("2020-10-14T04:05:05"))
+    ).toBe(true);
+    expect(
+      timecard.isPunchedBefore(DateTime.fromISO("2020-10-05T04:05:05"))
+    ).toBe(true);
   });
 });

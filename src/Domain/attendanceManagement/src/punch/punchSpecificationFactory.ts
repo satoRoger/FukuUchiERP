@@ -1,27 +1,27 @@
 import PunchSpecification from "./specification/punchSpecification";
 import TimecardRepository from "../repository/timecard/timecardRepository";
 import AttendanceSpecification from "./specification/attendanceSpecification";
-import LeaveworkSpecification from './specification/leaveworkSpecification';
+import LeaveworkSpecification from "./specification/leaveworkSpecification";
+import logger from "@/util/logger/logger";
 
 export default class PunchSpecificationFactory {
-  getAttendance: (repository: TimecardRepository) => PunchSpecification = (
-    repository
-  ) => {
+  @logger.debug.traceMethodCall
+  getAttendance(repository: TimecardRepository): PunchSpecification {
     return new AttendanceSpecification(repository);
-  };
-  getLeavework: (repository: TimecardRepository) => PunchSpecification = (
-    repository
-  ) => {
+  }
+
+  @logger.debug.traceMethodCall
+  getLeavework(repository: TimecardRepository): PunchSpecification {
     return new LeaveworkSpecification(repository);
-  };
-  getTakebreak: (repository: TimecardRepository) => PunchSpecification = (
-    repository
-  ) => {
+  }
+
+  @logger.debug.traceMethodCall
+  getTakebreak(repository: TimecardRepository): PunchSpecification {
     return new AttendanceSpecification(repository);
-  };
-  getEndbreak: (repository: TimecardRepository) => PunchSpecification = (
-    repository
-  ) => {
+  }
+
+  @logger.debug.traceMethodCall
+  getEndbreak(repository: TimecardRepository): PunchSpecification {
     return new AttendanceSpecification(repository);
-  };
+  }
 }

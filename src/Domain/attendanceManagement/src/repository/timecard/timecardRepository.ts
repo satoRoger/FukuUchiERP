@@ -1,7 +1,7 @@
 import Employee from "../../entity/employee/employee";
 import Timecard from "../../entity/timecard/Timecard";
 import TimecardCollection from "../../entity/timecard/timecardCollection";
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
 
 export default interface TimecardRepository {
   save: (timecard: Timecard) => Promise<Timecard>;

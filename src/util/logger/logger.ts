@@ -1,48 +1,48 @@
 import * as Path from "path";
-import * as Config from "config";
+import config = require("config");
 import * as Log4js from "log4js";
+import AccessLogger from "./accessLogger";
+import SystemLogger from "./systemLogger";
+import DebugLogger from "./debugLogger";
+import ErrorLogger from "./errorLogger";
+import AppLogger from "./appLogger";
 
-const logger = new (class Logger {
-  initialize() {
-    let configure = Config.util.loadFileConfigs(Path.join(__dirname, "config"))
-      .log4js;
+class Logger {
+  private accessLogger: AccessLogger;
+  private systemLogger: SystemLogger;
+  private debugLogger: DebugLogger;
+  private errorLogger: ErrorLogger;
+  private appLogger: AppLogger;
+
+  constructor() {
+    let configure = config.get("log4js");
     Log4js.configure(configure as Log4js.Configuration);
+
+    this.accessLogger = new AccessLogger();
+    this.systemLogger = new SystemLogger();
+    this.debugLogger = new DebugLogger();
+    this.errorLogger = new ErrorLogger();
+    this.appLogger = new AppLogger();
   }
 
-  public LogAccessInfo(message: string): void {
-    let logger = Log4js.getLogger("access");
-    logger.info(message);
+  get access(): AccessLogger {
+    return this.accessLogger;
+  }
+  get system(): SystemLogger {
+    return this.systemLogger;
+  }
+  get debug(): DebugLogger {
+    return this.debugLogger;
+  }
+  get error(): ErrorLogger {
+    return this.errorLogger;
   }
 
-  public LogAccessWarning(message: string): void {
-    let logger = Log4js.getLogger("access");
-    logger.warn(message);
+  get app(): AppLogger {
+    return this.appLogger;
   }
+}
 
-  public LogAccessError(message: string): void {
-    let logger = Log4js.getLogger("access");
-    logger.error(message);
-  }
-
-  public LogSystemInfo(message: string): void {
-    let logger = Log4js.getLogger("system");
-    logger.info(message);
-  }
-
-  public LogSystemWarning(message: string): void {
-    let logger = Log4js.getLogger("system");
-    logger.warn(message);
-  }
-
-  public LogSystemError(message: string): void {
-    let logger = Log4js.getLogger("system");
-    logger.error(message);
-  }
-
-  public LogError(message: string): void {
-    let logger = Log4js.getLogger("error");
-    logger.error(message);
-  }
-})();
+const logger = new Logger();
 
 export default logger;

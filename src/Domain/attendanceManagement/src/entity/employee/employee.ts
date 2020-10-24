@@ -4,28 +4,24 @@ import CardType from "../../valueObject/cardtype";
 import Coordinate from "../../valueObject/coordinate";
 import EmployeeId from "../../valueObject/employeeId";
 import Timecard from "../timecard/Timecard";
-import logger from '../../../../../util/logger/logger';
+import logger from "../../../../../util/logger/logger";
 
 export default class Employee {
-  private id: EmployeeId;
-
-  constructor(id: EmployeeId) {
-    this.id = id;
+  constructor(private employeeId: EmployeeId) { }
+  
+  get id(): EmployeeId {
+    return this.employeeId;
   }
 
-  getId: () => EmployeeId = () => {
-    logger.initialize();
-    logger.LogError("test");
-    return this.id;
-  };
+  @logger.debug.traceMethodCall
+  async punchTimecard(action: PunchAction): Promise<Timecard> {
+    logger.app.info(`「${this.employeeId}」が勤怠を行いました`);
 
-  punchTimecard: (action: PunchAction) => Promise<Timecard> = async (
-    action
-  ) => {
     try {
       return await action.punched(this);
-    } catch(error) {
+    } catch (error) {
+      logger.app.warn(`「${this.employeeId}」が勤怠を失敗しました。理由:「${error}」`);
       throw error;
     }
-  };
+  }
 }

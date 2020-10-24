@@ -5,7 +5,7 @@ describe("employeeIdのテスト", () => {
   test("idが正しく取得できるか", () => {
     const id = "test01";
     const employeeId = new EmployeeId(id);
-    expect(employeeId.id()).toBe(id);
+    expect(employeeId.value).toBe(id);
   });
 
   test("空文字idは拒否するか", () => {

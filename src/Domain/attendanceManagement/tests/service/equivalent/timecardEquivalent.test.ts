@@ -41,6 +41,7 @@ describe("タイムカード等価比較ロジック", () => {
 
   test("同じオブジェクトを評価", () => {
     expect(new TimecardEquivalent(timecardA, timecardA).equal()).toBe(true);
+    expect(new TimecardEquivalent(timecardA, timecardC).equal()).toBe(true);
     expect(new TimecardEquivalent(timecardB, timecardB).equal()).toBe(true);
     expect(new TimecardEquivalent(timecardC, timecardC).equal()).toBe(true);
     expect(new TimecardEquivalent(timecardD, timecardD).equal()).toBe(true);

@@ -1,6 +1,6 @@
 import Employee from "../entity/employee/employee";
 import Timecard from "../entity/timecard/Timecard";
-import EntityEquivalent from './entityEquivalent';
+import EntityEquivalent from "./entityEquivalent";
 
 export default class IsEmployeePunchTimecard {
   private employee: Employee;
@@ -11,7 +11,7 @@ export default class IsEmployeePunchTimecard {
     this.timecard = timecard;
   }
 
-  isPunch: () => boolean = () => {
-    return this.employee.getId().equal(this.timecard.punchEmployeeId());
-  };
+  isPunch(): boolean {
+    return this.employee.id.equal(this.timecard.punchEmployeeId());
+  }
 }

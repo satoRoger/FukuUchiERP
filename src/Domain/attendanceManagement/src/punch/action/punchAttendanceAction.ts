@@ -8,6 +8,7 @@ import Coordinate from "../../valueObject/coordinate";
 import EntityFactory from "../../entity/entityFactory";
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
+import logger from "@/util/logger/logger";
 
 export default class PunchAttendanceAction implements PunchAction {
   constructor(
@@ -16,15 +17,17 @@ export default class PunchAttendanceAction implements PunchAction {
     private coordinate?: Coordinate
   ) {}
 
-  punched: (employee: Employee) => Promise<Timecard> = async (employee) => {
+  @logger.debug.traceMethodCall
+  async punched(employee: Employee): Promise<Timecard> {
     this.specification
       .punchable(employee, this.punchDate, this.coordinate)
       .catch((error) => {
+        logger.app.warn(`${error}`);
         throw error;
       });
 
     return new EntityFactory()
       .timecard()
       .createAttendance(employee, this.punchDate, this.coordinate);
-  };
+  }
 }

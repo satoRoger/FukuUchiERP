@@ -1,22 +1,18 @@
 import { errorMessageList } from "../common/message";
 
-
-
 export default class EmployeeId {
-  private value: string;
-
-  constructor(id: string) {
+  constructor(private id: string) {
     if (id.length === 0) {
       throw new Error(errorMessageList.LengthZeroIdIsProhivited);
     }
-    this.value = id;
+    this.id = id;
   }
 
-  id: () => string = () => {
-    return this.value;
-  };
+  get value() {
+    return this.id;
+  }
 
   equal: (object: EmployeeId) => boolean = (object) => {
-    return this.value === object.id();
+    return this.id === object.value;
   };
 }
