@@ -1,7 +1,10 @@
-import TimecardRepository from "../domain/attendanceManagement/src/repository/timecard/timecardRepository";
-import TestTypes from "../di/testTypes";
-import container from "@/di/inversify.config";
+import Express from "express";
+const app = Express();
 
-const timecard: TimecardRepository = container.get<TimecardRepository>(
-  TestTypes.TimecardRepository
-);
+app.get("/", (req, res) => {
+  res.send({ message: "pong" });
+})
+
+app.listen(8888, "localhost", () => {
+  console.log("Runnig");
+})

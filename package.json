@@ -7,9 +7,8 @@
     "start": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode development && node ./dist/",
     "watch": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode development --watch",
     "build": "cross-env NODE_ENV=$npm_package_config_dev_mode && webpack --mode production",
-    "server": "cross-env NODE_ENV=$npm_package_config_test_mode && webpack-dev-server --open",
-    "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest --silent",
-    "test:w": "cross-env NODE_ENV=$npm_package_config_test_mode && jest --watchAll"
+    "server": "cross-env NODE_ENV=$npm_package_config_dev_mode && ts-node-dev src/main/main.ts",
+    "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest --silent"
   },
   "config": {
     "dev": {
@@ -32,6 +31,11 @@
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.5",
+    "@types/axios": "0.14.0",
+    "@types/cors": "2.8.6",
+    "@types/express": "4.16.1",
+    "parcel-bundler": "^1.12.4",
+    "ts-node-dev": "^1.0.0-pre.63",
     "cross-env": "^7.0.2",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
@@ -64,6 +68,9 @@
     "@types/config": "0.0.36",
     "@types/log4js": "^2.3.5",
     "@types/luxon": "^1.25.0",
+    "axios": "^0.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "config": "^3.3.2",
     "inversify": "4.13.x",
     "log4js": "^6.3.0",
