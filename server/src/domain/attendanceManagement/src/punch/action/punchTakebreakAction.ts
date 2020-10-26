@@ -9,13 +9,16 @@ import EntityFactory from "../../entity/entityFactory";
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
 import logger from "@/util/logger/logger";
+import TakebreakSpecification from '../specification/takebreakSpecification';
 
 export default class PunchTakebreakAction implements PunchAction {
   constructor(
     private specification: PunchSpecification,
     private punchDate: DateTime,
     private coordinate?: Coordinate
-  ) {}
+  ) {if (!(specification instanceof TakebreakSpecification)) {
+    logger.system.warn(`specificationが想定したものと異なります。`)
+  }}
 
   @logger.debug.traceMethodCall
   async punched(employee: Employee): Promise<Timecard> {
