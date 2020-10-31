@@ -6,23 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -s ./public -p 6006"
+    "storybook": "start-storybook -s ./public -p 6006",
+    "clean": "rm -rf node_modules/ && npm cache clean -f"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "next": "9.5.5",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react": "16.x.x",
+    "react-dom": "16.x.x"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.0.27",
     "@storybook/addon-essentials": "^6.0.27",
-    "@storybook/node-logger": "^6.0.27",
     "@storybook/addon-links": "^6.0.27",
+    "@storybook/node-logger": "^6.0.27",
     "@storybook/react": "^6.0.27",
     "@types/node": "^14.14.3",
     "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.9",
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^10.0.0",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "ts-loader": "^8.0.7",
     "typescript": "^4.0.3"
   }
 }
