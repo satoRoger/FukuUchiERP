@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/index.js",
-    "stories/helloWorld.stories.js", "src/stories/sidebar.stories.js", "src/components/sidebar.js", "stories/sidebar.stories.js"
+    "stories/helloWorld.stories.js", "src/stories/sidebar.stories.js", "src/components/sidebar.js", "stories/sidebar.stories.js", "src/components/sidebar/basicSidebar.css.ts"
   ],
   "exclude": ["node_modules"]
 }
