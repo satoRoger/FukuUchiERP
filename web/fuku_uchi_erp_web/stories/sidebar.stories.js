@@ -30,6 +30,6 @@ export const basicSidebar = ((args) => (
     <Sidebar.body>
       list1
     </Sidebar.body>
-  </Sidebar.container></>)).bind({});
+  </Sidebar.container></>));
 
   basicSidebar.args={...containerProps}

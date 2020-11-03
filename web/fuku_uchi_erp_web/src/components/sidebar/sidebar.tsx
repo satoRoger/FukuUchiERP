@@ -2,6 +2,7 @@ import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import style from "./sidebar.css";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles(style);
 
@@ -40,16 +41,8 @@ function SidebarContaniner(props: containerProps = containerProps) {
   return (
     <>
       <Drawer
-        variant={props.variant}
-        anchor={props.anchor}
-        open={props.open}
-        ModalProps={{
-          keepMounted: true,
-        }}
-        classes={{ paper: classes.drawerPaper }}
-        onClose={props.onClose}
+      open={props.open}
       >
-        aaaaa
         {props.children}
         <div className={classes.background} />
       </Drawer>
