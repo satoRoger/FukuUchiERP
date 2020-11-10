@@ -1,1 +1,0 @@
-export const sideBarWidth = 260;
