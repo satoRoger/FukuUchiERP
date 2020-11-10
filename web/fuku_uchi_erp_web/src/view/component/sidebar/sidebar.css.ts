@@ -4,10 +4,6 @@ const drawerWidth = 260;
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
-    username: {
-      fontSize: 20,
-      color: "red",
-    },
     drawerPaper: {
       border: "none",
       position: "fixed",
@@ -56,8 +52,8 @@ const useStyle = makeStyles((theme: Theme) =>
       backgroundColor: "transparent",
     },
     activeLink: {
-      backgroundColor: "#03080a",
-      color: "#FFFFF",
+      backgroundColor: theme.palette.main.darker,
+      color: theme.palette.color.white,
     },
   })
 );
