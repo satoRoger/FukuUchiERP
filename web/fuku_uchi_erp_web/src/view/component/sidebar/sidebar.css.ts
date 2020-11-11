@@ -10,14 +10,14 @@ const useStyle = makeStyles((theme: Theme) =>
       top: "0",
       bottom: "0",
       left: "0",
-      width: drawerWidth,
+      width: theme.layout.sidebar.width,
       [theme.breakpoints.up("md")]: {
-        width: drawerWidth,
+        width: theme.layout.sidebar.width,
         position: "fixed",
         height: "100%",
       },
       [theme.breakpoints.down("sm")]: {
-        width: drawerWidth,
+        width: theme.layout.sidebar.width,
         position: "fixed",
         display: "block",
         top: "0",
@@ -31,7 +31,7 @@ const useStyle = makeStyles((theme: Theme) =>
         textAlign: "left",
         paddingRight: "0px",
         paddingLeft: "0",
-        transform: `translate3d(${drawerWidth}px, 0, 0)`,
+        transform: `translate3d(${theme.layout.sidebar.width}px, 0, 0)`,
       },
     },
     list: {
@@ -42,6 +42,7 @@ const useStyle = makeStyles((theme: Theme) =>
       marginBottom: "0",
       listStyle: "none",
       position: "unset",
+	  overflow:"hidden"
     },
     link: {
       width: "auto",

@@ -12,6 +12,7 @@ export default {
 		backgroundColor: { control: 'color' },
 		activeTextColor: { control: 'color' },
 		activeBackgroundColor: { control: 'color' },
+		sidebarWidth:{control:"number"}
 	},
 };
 
@@ -25,6 +26,11 @@ const template = (args) => {
 				darker: args.activeBackgroundColor,
 			},
 		},
+		layout:{
+			sidebar:{
+				width:args.sidebarWidth
+			}
+		}
 	};
 
 	return (
