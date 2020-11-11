@@ -2,22 +2,25 @@ import { Theme, makeStyles, createStyles, StyleRules } from "@material-ui/core";
 
 const drawerWidth = 260;
 
-const useStyle = makeStyles((theme: Theme) =>
+interface ExtendTheme extends Theme {
+  layout: { sidebar: { width: number } };
+}
+
+const useStyle = makeStyles((theme: ExtendTheme) =>
   createStyles({
-    drawerPaper: {
+    container: {
       border: "none",
       position: "fixed",
       top: "0",
       bottom: "0",
       left: "0",
       width: theme.layout.sidebar.width,
+      backgroundColor:theme.palette.primary.light,
       [theme.breakpoints.up("md")]: {
-        width: theme.layout.sidebar.width,
         position: "fixed",
         height: "100%",
       },
       [theme.breakpoints.down("sm")]: {
-        width: theme.layout.sidebar.width,
         position: "fixed",
         display: "block",
         top: "0",
@@ -31,7 +34,6 @@ const useStyle = makeStyles((theme: Theme) =>
         textAlign: "left",
         paddingRight: "0px",
         paddingLeft: "0",
-        transform: `translate3d(${theme.layout.sidebar.width}px, 0, 0)`,
       },
     },
     list: {
@@ -42,7 +44,7 @@ const useStyle = makeStyles((theme: Theme) =>
       marginBottom: "0",
       listStyle: "none",
       position: "unset",
-	  overflow:"hidden"
+      overflow: "hidden",
     },
     link: {
       width: "auto",
@@ -53,8 +55,8 @@ const useStyle = makeStyles((theme: Theme) =>
       backgroundColor: "transparent",
     },
     activeLink: {
-      backgroundColor: theme.palette.main.darker,
-      color: theme.palette.color.white,
+      backgroundColor: theme.palette.primary.dark,
+      color: theme.palette.common.white,
     },
   })
 );

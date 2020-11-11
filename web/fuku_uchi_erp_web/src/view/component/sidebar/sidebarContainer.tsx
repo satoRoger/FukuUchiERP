@@ -25,7 +25,7 @@ export default function SidebarContaniner(props: Props) {
         open={props.open}
         variant={props.variant}
         anchor={props.anchor}
-        classes={{ paper: classes.drawerPaper }}
+        classes={{ paper: classes.container }}
         ModalProps={{ keepMounted: true }}
       >
         {props.children}

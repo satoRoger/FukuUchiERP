@@ -12,6 +12,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@storybook/addon-controls": "^6.0.28",
     "@types/classnames": "^2.2.11",
     "classnames": "^2.2.6",
     "next": "9.5.5",
