@@ -1,13 +1,13 @@
 import SidebarContaniner from "./sidebarContainer";
-import SidebarHead from "./sidebarHead";
-import SidebarBody from "./sidebarBody";
 import SidebarLink from "./sidebarLink";
 import SidebarLinkList from "./sidebarLinkList";
+import SidebarHead from './sidebarHead';
+import SidebarUserDisplay from './sidebarUserDisplay';
 
 const Sidebar = {
+  head:SidebarHead,
+  userDisplay:SidebarUserDisplay,
   container: SidebarContaniner,
-  head: SidebarHead,
-  body: SidebarBody,
   link: SidebarLink,
   list: SidebarLinkList,
 };

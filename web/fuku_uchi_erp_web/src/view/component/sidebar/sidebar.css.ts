@@ -14,8 +14,9 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       top: "0",
       bottom: "0",
       left: "0",
-      width: theme.layout.sidebar.width,
+      minWidth: theme.layout.sidebar.width,
       backgroundColor:theme.palette.primary.light,
+      overflowY:"visible",
       [theme.breakpoints.up("md")]: {
         position: "fixed",
         height: "100%",
@@ -37,26 +38,44 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       },
     },
     list: {
-      marginTop: "20px",
       paddingLeft: "0",
       paddingTop: "0",
       paddingBottom: "0",
       marginBottom: "0",
       listStyle: "none",
       position: "unset",
-      overflow: "hidden",
+      overflow: "auto",
+      
     },
     link: {
       width: "auto",
-      margin: "10px 0px 0px 0px",
+      margin: "0px 0px 0px 0px",
       position: "relative",
       display: "block",
       padding: "10px -10px 0px 10px",
       backgroundColor: "transparent",
     },
+    linkIcon: {
+      height: "30px",
+      fontSize: "24px",
+      lineHeight: "30px",
+      float: "left",
+      marginRight: "15px",
+      textAlign: "center",
+      verticalAlign: "middle",
+      color: theme.palette.common.white,
+      display:"inline-block"
+    },
+    linkText:{
+      display:"inline-block",
+      color: theme.palette.common.white,
+    },
     activeLink: {
       backgroundColor: theme.palette.primary.dark,
       color: theme.palette.common.white,
+    },
+    activeLinkIcon: {
+      color: theme.palette.secondary.light,
     },
   })
 );
