@@ -1,4 +1,3 @@
-import classes from "*.module.css";
 import List from "@material-ui/core/List";
 import React from "react";
 
@@ -11,7 +10,7 @@ export default function SidebarUserDisplay(props: Props) {
   const classes = useStyles();
   return (
     <>
-    <div>{props.name}</div>
+    <div className={classes.userDisplayText}>{props.name}</div>
     </>
   );
 }

@@ -1,4 +1,3 @@
-import classes from "*.module.css";
 import List from "@material-ui/core/List";
 import React from "react";
 

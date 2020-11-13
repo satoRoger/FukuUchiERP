@@ -6,12 +6,14 @@ export const containerProps: {
   open: boolean;
   variant: "permanent" | "temporary";
   anchor: "left" | "right" | "top" | "bottom";
+  hide:boolean,
   children?: React.ReactNode;
   onClose?: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
 } = {
   open: true,
   variant: "permanent",
   anchor: "left",
+  hide:false
 };
 
 type Props = typeof containerProps;
