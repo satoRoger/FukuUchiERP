@@ -4,8 +4,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import React from "react";
 import classNames from "classnames";
 import useStyles from "./sidebar.css";
+import Link from 'next/link'
 
-const defaultProps: { text: string; active: boolean ;icon?:any} = {
+const defaultProps: { text: string; active: boolean ;onClick?:any,icon?:any} = {
   text: "",
   active: false,
 };
@@ -17,10 +18,12 @@ export default function SidebarLink(props: Props) {
   const activeLink = classNames({ [" " + classes["activeLink"]]: props.active });
   return (
     <>
+	  <a onClick={props.onClick}>
       <ListItem button className={classNames(classes.link, activeLink)}>
         {props.icon&&<props.icon className={classNames(classes.linkIcon,activeLinkIcon)}/>}
         <ListItemText className={classes.linkText} primary={props.text} />
       </ListItem>
+	  </a>
     </>
   );
 }

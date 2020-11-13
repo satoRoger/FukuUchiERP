@@ -12,7 +12,8 @@ export default {
 		primaryColor: { control: 'color' },
 		secondaryColor: { control: 'color' },
     sidebarWidth: { control: { type: 'range', min: 50, max: 1000, step: 10 } },
-    links:{control:{type:"array",separator:","}}
+    links:{control:{type:"array",separator:","}},
+	onClick:{action:"clicked"}
 	},
 };
 
@@ -38,7 +39,7 @@ const template = (args) => {
           </Sidebar.head>
 					<Sidebar.list>
             {args.links.map((link)=>{
-              return (<Sidebar.link text={link.text} icon={link.icon} active={link.active}/>)
+              return (<Sidebar.link text={link.text} icon={link.icon} active={link.active} onClick={args.onClick}/>)
             })}
 					</Sidebar.list>
 				</Sidebar.container>
