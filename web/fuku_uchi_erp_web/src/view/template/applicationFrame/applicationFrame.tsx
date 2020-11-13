@@ -22,7 +22,7 @@ type Props = typeof applicationFrameProps;
 export default function ApplicationFrame(props: Props) {
 	return (
 		<>
-			<Navbar.container></Navbar.container>
+		<div className={classes.}>
 			<Sidebar.container>
 				<Sidebar.head>
 					<Sidebar.userDisplay name={props.username} />
@@ -33,6 +33,11 @@ export default function ApplicationFrame(props: Props) {
 					})}
 				</Sidebar.list>
 			</Sidebar.container>
+			<div className={classes.}>
+				<Navbar.container></Navbar.container>
+				<ApplicationPage/>
+			</div>
+		</div>
 		</>
 	);
 }

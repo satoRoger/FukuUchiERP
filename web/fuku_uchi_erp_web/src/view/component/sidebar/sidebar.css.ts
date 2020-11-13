@@ -17,15 +17,10 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
 			minWidth: theme.layout.sidebar.width,
 			backgroundColor: theme.palette.primary.light,
 			overflowY: 'visible',
-			[theme.breakpoints.up('md')]: {
-				position: 'fixed',
 				height: '100vh',
-			},
 			[theme.breakpoints.down('sm')]: {
 				position: 'fixed',
 				display: 'block',
-				top: '0',
-				height: '100vh',
 				right: 'auto',
 				left: '0',
 				zIndex: '1032',
