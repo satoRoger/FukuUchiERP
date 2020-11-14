@@ -15,6 +15,7 @@
     "@storybook/addon-controls": "^6.0.28",
     "@types/classnames": "^2.2.11",
     "classnames": "^2.2.6",
+    "clsx": "^1.1.1",
     "next": "9.5.5",
     "react": "16.x.x",
     "react-dom": "16.x.x"
