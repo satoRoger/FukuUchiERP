@@ -7,6 +7,9 @@ const theme = {
     sidebar: {
       width: 260,
     },
+    navbar: {
+      height: 36,
+    },
   },
 };
 

@@ -1,12 +1,13 @@
 import { makeStyles, createStyles } from "@material-ui/core";
 import ExtendTheme from "../../theme/extendTheme";
 
-
 const useStyle = makeStyles((theme: ExtendTheme) =>
   createStyles({
     container: {
       border: "none",
-      position: "relative",
+      top: 0,
+      left: 0,
+      position: "fixed",
       width: theme.layout.sidebar.width,
       backgroundColor: theme.palette.primary.light,
       overflowY: "visible",
@@ -16,7 +17,7 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       position: "relative",
       width: "100%",
       height: "70px",
-      backgroundColor: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.primary.main,
       color: theme.palette.common.white,
     },
     userDisplayText: {

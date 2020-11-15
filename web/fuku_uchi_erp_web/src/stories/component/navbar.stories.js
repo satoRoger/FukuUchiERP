@@ -1,7 +1,7 @@
 import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Navbar from "../view/component/navbar/navbar";
-import defaultTheme from "../view/theme/applicationTheme";
+import Navbar from "../../view/component/navbar/navbar";
+import defaultTheme from "../../view/theme/applicationTheme";
 
 export default {
   title: "WIP/component/navbar",
@@ -14,22 +14,14 @@ export default {
 };
 
 const template = (args) => {
-  const theme = {
-    ...defaultTheme,
-    palette: {
-      primary: { main: args.primaryColor },
-      secondary: { main: args.secondaryColor },
-    },
-    layout: {
-      sidebar: {
-        width: args.sidebarWidth,
-      },
-    },
-  };
+  defaultTheme.palette.primary.main = args.primaryColor;
+  defaultTheme.palette.secondary.main = args.secondaryColor;
+  defaultTheme.layout.sidebar.width = args.sidebarWidth;
+
 
   return (
     <>
-      <ThemeProvider theme={createMuiTheme(theme)}>
+      <ThemeProvider theme={createMuiTheme(defaultTheme)}>
         <Navbar.container sidebarOpen={args.sidebarOpen}></Navbar.container>
       </ThemeProvider>
     </>

@@ -3,7 +3,6 @@ import SidebarLink from "./sidebarLink";
 import SidebarLinkList from "./sidebarLinkList";
 import SidebarHead from './sidebarHead';
 import SidebarUserDisplay from './sidebarUserDisplay';
-
 const Sidebar = {
   head:SidebarHead,
   userDisplay:SidebarUserDisplay,
