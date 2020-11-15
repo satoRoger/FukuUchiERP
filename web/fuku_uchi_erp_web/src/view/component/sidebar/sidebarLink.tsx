@@ -2,41 +2,51 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import React from "react";
-import classNames from "classnames";
 import useStyles from "./sidebar.css";
 import Link from "next/link";
+import clsx from "clsx";
 
 const defaultProps: {
+  id: any;
+  value: any;
   text: string;
-  active: boolean;
-  onClick?: any;
+  onClick?: (event: React.ChangeEvent<{}>, value: any) => void;
   icon?: any;
 } = {
+  id: undefined,
+  value: undefined,
   text: "",
-  active: false,
 };
 type Props = typeof defaultProps;
 
 export default function SidebarLink(props: Props) {
+  const active = props.id === props.value;
   const classes = useStyles();
-  const activeLinkIcon = classNames({
-    [" " + classes["activeLinkIcon"]]: props.active,
-  });
-  const activeLink = classNames({
-    [" " + classes["activeLink"]]: props.active,
-  });
   return (
     <>
-      <a onClick={props.onClick}>
-        <ListItem button className={classNames(classes.link, activeLink)}>
-          {props.icon && (
-            <props.icon
-              className={classNames(classes.linkIcon, activeLinkIcon)}
-            />
-          )}
-          <ListItemText className={classes.linkText} primary={props.text} />
-        </ListItem>
-      </a>
+      <ListItem
+        onClick={(e) => {
+          if (props.onClick) {
+            props.onClick(e, props.id);
+          }
+        }}
+        button
+        className={clsx(classes.link, { [classes.activeLink]: active })}
+      >
+        {props.icon && (
+          <props.icon
+            className={clsx(classes.linkIcon, {
+              [classes.activeLinkIcon]: active,
+            })}
+          />
+        )}
+        <ListItemText
+          className={clsx(classes.linkText, {
+            [classes.activeLinkText]: active,
+          })}
+          primary={props.text}
+        />
+      </ListItem>
     </>
   );
 }

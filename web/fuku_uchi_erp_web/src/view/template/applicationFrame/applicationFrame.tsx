@@ -5,11 +5,11 @@ import Sidebar from "../../component/sidebar/sidebar";
 import useStyles from "./applicationFrame.css";
 
 type Link = {
-  id: "string";
+  id: any;
+  value: any;
   text: "string";
   to: "string";
   icon: any;
-  active: boolean;
 };
 
 export const applicationFrameProps: {
@@ -43,9 +43,10 @@ export default function ApplicationFrame(props: Props) {
             props.links.map((link) => {
               return (
                 <Sidebar.link
+                  id={link.id}
+                  value={link.value}
                   text={link.text}
                   icon={link.icon}
-                  active={link.active}
                 />
               );
             })}

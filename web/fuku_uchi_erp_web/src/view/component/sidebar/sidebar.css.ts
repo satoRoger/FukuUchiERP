@@ -9,15 +9,16 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       left: 0,
       position: "fixed",
       width: theme.layout.sidebar.width,
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.common.white,
       overflowY: "visible",
       height: "100vh",
+      boxShadow:`2px 2px 5px rgba(0, 0, 0, 0.2)`
     },
     head: {
       position: "relative",
       width: "100%",
       height: "70px",
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.dark,
       color: theme.palette.common.white,
     },
     userDisplayText: {
@@ -31,6 +32,7 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       letterSpacing: theme.spacing(1),
     },
     list: {
+      height:"100vh",
       paddingLeft: "0",
       paddingTop: "0",
       paddingBottom: "0",
@@ -41,10 +43,10 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
     },
     link: {
       width: "auto",
-      margin: "0",
       position: "relative",
       display: "block",
       backgroundColor: "transparent",
+      margin: "5px 0",
     },
     linkIcon: {
       height: "30px",
@@ -54,21 +56,23 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       marginRight: "15px",
       textAlign: "center",
       verticalAlign: "middle",
-      color: theme.palette.common.white,
+      color: theme.palette.common.black,
       display: "inline-block",
     },
     linkText: {
       display: "inline-block",
-      color: theme.palette.common.white,
+      color: theme.palette.common.black,
     },
     activeLink: {
-      backgroundColor: theme.palette.primary.dark,
-      color: theme.palette.common.white,
+      borderRight: `solid 5px ${theme.palette.secondary.light}`,
       pointerEvents: "none",
     },
     activeLinkIcon: {
-      color: theme.palette.common.white,
+      color: theme.palette.primary.dark,
       pointerEvents: "none",
+    },
+    activeLinkText: {
+      color: theme.palette.primary.dark,
     },
   })
 );

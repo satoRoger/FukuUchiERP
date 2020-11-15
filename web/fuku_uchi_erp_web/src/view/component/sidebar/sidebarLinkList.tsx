@@ -3,7 +3,9 @@ import React from "react";
 
 import useStyles from "./sidebar.css";
 
-const defaultProps: { children?: React.ReactNode } = {};
+const defaultProps: { tabStyle: boolean; children?: React.ReactNode } = {
+  tabStyle: false,
+};
 type Props = typeof defaultProps;
 
 export default function SidebarLinkList(props: Props) {

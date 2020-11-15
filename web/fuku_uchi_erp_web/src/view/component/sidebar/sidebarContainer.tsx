@@ -2,7 +2,7 @@ import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import useStyles from "./sidebar.css";
 
-export const containerProps: {
+const defaultProps: {
   open: boolean;
   variant: "permanent" | "temporary";
   anchor: "left" | "right" | "top" | "bottom";
@@ -14,10 +14,9 @@ export const containerProps: {
   anchor: "left",
 };
 
-type Props = typeof containerProps;
+type Props = typeof defaultProps;
 
 export default function SidebarContaniner(props: Props) {
-  console.log(props.open);
   const classes = useStyles();
   return (
     <>
@@ -33,4 +32,4 @@ export default function SidebarContaniner(props: Props) {
     </>
   );
 }
-SidebarContaniner.defaultProps = containerProps;
+SidebarContaniner.defaultProps = defaultProps;
