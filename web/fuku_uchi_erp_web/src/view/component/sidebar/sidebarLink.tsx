@@ -7,14 +7,14 @@ import Link from "next/link";
 import clsx from "clsx";
 
 const defaultProps: {
-  id: any;
-  value: any;
+  id: number;
+  value: number;
   text: string;
   onClick?: (event: React.ChangeEvent<{}>, value: any) => void;
   icon?: any;
 } = {
-  id: undefined,
-  value: undefined,
+  id: 0,
+  value: 0,
   text: "",
 };
 type Props = typeof defaultProps;

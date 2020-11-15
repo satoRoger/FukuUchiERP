@@ -20,7 +20,7 @@ const linkList = (args) => {
   defaultTheme.palette.secondary.main = args.secondaryColor;
   defaultTheme.layout.sidebar.width = args.sidebarWidth;
 
-  const [value, setValue] = useState("dashboard");
+  const [value, setValue] = useState(0);
 
   const handleLinkClick = (e, newValue) => {
     setValue(newValue);
@@ -33,7 +33,7 @@ const linkList = (args) => {
           <Sidebar.head>
             <Sidebar.userDisplay name={"佐藤伸明"} />
           </Sidebar.head>
-          <Sidebar.list>
+          <Sidebar.list value={value}>
             {args.links.map((link) => {
               return (
                 <Sidebar.link

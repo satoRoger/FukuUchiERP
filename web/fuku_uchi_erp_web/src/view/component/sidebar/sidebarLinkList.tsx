@@ -3,16 +3,19 @@ import React from "react";
 
 import useStyles from "./sidebar.css";
 
-const defaultProps: { tabStyle: boolean; children?: React.ReactNode } = {
-  tabStyle: false,
+const defaultProps: { value: number; children?: React.ReactNode } = {
+  value: 0,
 };
 type Props = typeof defaultProps;
 
 export default function SidebarLinkList(props: Props) {
-  const classes = useStyles();
+  const classes = useStyles({ value: props.value });
   return (
     <>
-      <List className={classes.list}>{props.children}</List>
+      <List className={classes.list}>
+        <div className={classes.activeLine}></div>
+        {props.children}
+      </List>
     </>
   );
 }

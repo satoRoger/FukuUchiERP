@@ -1,6 +1,9 @@
 import { makeStyles, createStyles } from "@material-ui/core";
 import ExtendTheme from "../../theme/extendTheme";
 
+const linkHeight = 60;
+const linkMargin = 5;
+
 const useStyle = makeStyles((theme: ExtendTheme) =>
   createStyles({
     container: {
@@ -12,7 +15,7 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       backgroundColor: theme.palette.common.white,
       overflowY: "visible",
       height: "100vh",
-      boxShadow:`2px 2px 5px rgba(0, 0, 0, 0.2)`
+      boxShadow: `2px 2px 5px rgba(0, 0, 0, 0.2)`,
     },
     head: {
       position: "relative",
@@ -32,17 +35,18 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       letterSpacing: theme.spacing(1),
     },
     list: {
-      height:"100vh",
+      height: "100vh",
       paddingLeft: "0",
       paddingTop: "0",
       paddingBottom: "0",
       marginBottom: "0",
       listStyle: "none",
-      position: "unset",
+      position: "relative",
       overflow: "hidden",
     },
     link: {
       width: "auto",
+      height: linkHeight,
       position: "relative",
       display: "block",
       backgroundColor: "transparent",
@@ -64,7 +68,6 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       color: theme.palette.common.black,
     },
     activeLink: {
-      borderRight: `solid 5px ${theme.palette.secondary.light}`,
       pointerEvents: "none",
     },
     activeLinkIcon: {
@@ -73,6 +76,15 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
     },
     activeLinkText: {
       color: theme.palette.primary.dark,
+    },
+    activeLine: {
+      position: "absolute",
+      height: linkHeight,
+      top: (props: { value: number }) => linkMargin + (linkMargin + linkHeight) * props.value,
+      left: theme.layout.sidebar.width - 5,
+      width: "5px",
+      backgroundColor: theme.palette.secondary.light,
+      transition: `all 0.2s 0s`,
     },
   })
 );

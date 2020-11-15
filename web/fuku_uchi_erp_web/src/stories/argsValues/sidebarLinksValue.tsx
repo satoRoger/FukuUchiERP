@@ -2,39 +2,34 @@ import Dashboard from "@material-ui/icons/Dashboard";
 
 const sidebarLinks = [
   {
-    id: "dashboard",
+    id: 0,
     url: "url",
     text: "ダッシュボード",
     icon: Dashboard,
-    value: "dashboard",
   },
   {
-    id: "timecard",
+    id: 1,
     url: "url",
     text: "タイムカード",
     icon: Dashboard,
-    value: "dashboard",
   },
   {
-    id: "calendar",
+    id: 2,
     url: "url",
     text: "社内カレンダー",
     icon: Dashboard,
-    value: "dashboard",
   },
   {
-    id: "resource",
+    id: 3,
     url: "url",
     text: "資源管理",
     icon: Dashboard,
-    value: "dashboard",
   },
   {
-    id: "workflow",
+    id: 4,
     url: "url",
     text: "申請",
     icon: Dashboard,
-    value: "dashboard",
   },
 ];
 
