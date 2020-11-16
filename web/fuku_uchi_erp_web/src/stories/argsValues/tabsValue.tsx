@@ -1,22 +1,25 @@
+import React from "react";
 import Dashboard from "@material-ui/icons/Dashboard";
+import { TabType } from "../../view/component/tabbar/tabbarComponent";
 
-const tabs = [
+const tabs: TabType[] = [
   {
     label: "タブ１",
-    disabled: false,
-    value: 0,
+    id: 1,
     icon: Dashboard,
+    component: <div>タブ1</div>,
   },
   {
     label: "タブ２",
-    disabled: false,
-    value: 1,
+    id: 2,
     icon: Dashboard,
-  },{
+    component: <div>タブ2</div>,
+  },
+  {
     label: "タブ３",
-    disabled: true,
-    value: 2,
+    id: 3,
     icon: Dashboard,
+    component: <div>タブ3</div>,
   },
 ];
 

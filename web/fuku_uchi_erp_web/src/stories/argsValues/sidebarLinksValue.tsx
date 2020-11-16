@@ -1,35 +1,41 @@
 import Dashboard from "@material-ui/icons/Dashboard";
+import { LinkParameter } from "../../view/component/sidebar/sidebarLink";
 
-const sidebarLinks = [
+const sidebarLinks: LinkParameter[] = [
   {
     id: 0,
-    url: "url",
+    href: "href",
     text: "ダッシュボード",
     icon: Dashboard,
+    value: 0,
   },
   {
     id: 1,
-    url: "url",
+    href: "href",
     text: "タイムカード",
     icon: Dashboard,
+    value: 0,
   },
   {
     id: 2,
-    url: "url",
+    href: "href",
     text: "社内カレンダー",
     icon: Dashboard,
+    value: 0,
   },
   {
     id: 3,
-    url: "url",
+    href: "href",
     text: "資源管理",
     icon: Dashboard,
+    value: 0,
   },
   {
     id: 4,
-    url: "url",
+    href: "href",
     text: "申請",
     icon: Dashboard,
+    value: 0,
   },
 ];
 

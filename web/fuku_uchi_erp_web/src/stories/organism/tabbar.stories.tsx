@@ -1,37 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Navbar from "../../view/component/navbar/navbar";
 import defaultTheme from "../../view/theme/applicationTheme";
+import Tabbar from "../../view/organism/tabbar/tabbar";
+import tabs from "../argsValues/tabsValue";
 
 export default {
-  title: "WIP/component/navbar",
+  title: "WIP/organism/tabbar",
   argTypes: {
-    sidebarOpen: { control: "boolean" },
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },
-    sidebarWidth: { control: { type: "range", min: 50, max: 1000, step: 10 } },
+    value: { control: "number" },
   },
 };
 
-const template = (args) => {
+const template = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
-  defaultTheme.layout.sidebar.width = args.sidebarWidth;
-
-
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <Navbar.container sidebarOpen={args.sidebarOpen}></Navbar.container>
+        <Tabbar tabs={args.tabs} />
       </ThemeProvider>
     </>
   );
 };
 
-export const basicNavbar = template.bind({});
+export const basicTabbar = template.bind({});
 
-basicNavbar.args = {
+basicTabbar.args = {
   primaryColor: defaultTheme.palette.primary.main,
   secondaryColor: defaultTheme.palette.secondary.main,
-  sidebarWidth: defaultTheme.layout.sidebar.width,
+  tabs: tabs,
+  value: 0,
 };

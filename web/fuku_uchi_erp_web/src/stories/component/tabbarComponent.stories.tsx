@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import defaultTheme from "../../view/theme/applicationTheme";
-import Tabbar from "../../view/component/tabbar/tabbar";
 import TabPanel from "../../view/component/tabbar/tabPanel";
 import tabs from "../argsValues/tabsValue";
+import TabbarComponent from '../../view/component/tabbar/tabbarComponent';
 
 export default {
   title: "WIP/component/tabbar",
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const template = (args) => {
+const template = (args:any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
   const [value, setValue] = useState(args.value);
@@ -22,13 +22,13 @@ const template = (args) => {
     setValue(args.value);
   }, [args.value]);
 
-  const handleTabChange = (e, newValue) => {
+  const handleTabChange = (_: React.ChangeEvent<{}>, newValue: any) => {
     setValue(newValue);
   };
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <Tabbar tabs={args.tabs} value={value} onChange={handleTabChange}>
+        <TabbarComponent tabs={args.tabs} value={value} onChange={handleTabChange}>
           <TabPanel value={value} id={0}>
             タブ1
           </TabPanel>
@@ -38,7 +38,7 @@ const template = (args) => {
           <TabPanel value={value} id={2}>
             タブ3
           </TabPanel>
-        </Tabbar>
+        </TabbarComponent>
       </ThemeProvider>
     </>
   );

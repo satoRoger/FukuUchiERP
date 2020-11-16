@@ -1,8 +1,9 @@
-import React,{useState} from "react";
-import Sidebar from "../../view/component/sidebar/sidebar";
+import React, { useState } from "react";
+import SidebarComponent from "../../view/component/sidebar/sidebarComponent";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
+import { LinkParameter } from "../../view/component/sidebar/sidebarLink";
 
 export default {
   title: "WIP/component/sidebar",
@@ -15,38 +16,31 @@ export default {
   },
 };
 
-const linkList = (args) => {
+const linkList = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
   defaultTheme.layout.sidebar.width = args.sidebarWidth;
 
-  const [value, setValue] = useState(0);
-
-  const handleLinkClick = (e, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <Sidebar.container open={args.open}>
-          <Sidebar.head>
-            <Sidebar.userDisplay name={"佐藤伸明"} />
-          </Sidebar.head>
-          <Sidebar.list value={value}>
-            {args.links.map((link) => {
+        <SidebarComponent.container open={args.open}>
+          <SidebarComponent.head>
+            <SidebarComponent.userDisplay name={"佐藤伸明"} />
+          </SidebarComponent.head>
+          <SidebarComponent.list value={0}>
+            {args.links.map((link: LinkParameter) => {
               return (
-                <Sidebar.link
+                <SidebarComponent.link
                   id={link.id}
-                  value={value}
+                  value={0}
                   text={link.text}
                   icon={link.icon}
-                  onClick={handleLinkClick}
                 />
               );
             })}
-          </Sidebar.list>
-        </Sidebar.container>
+          </SidebarComponent.list>
+        </SidebarComponent.container>
       </ThemeProvider>
     </>
   );

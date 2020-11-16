@@ -1,25 +1,19 @@
 import React from "react";
 import ApplicationPageContainer from "../../component/applicationPageContainer/applicationPageContainer";
 import Navbar from "../../component/navbar/navbar";
-import Sidebar from "../../component/sidebar/sidebar";
 import useStyles from "./applicationFrame.css";
-
-type Link = {
-  id: any;
-  value: any;
-  text: "string";
-  to: "string";
-  icon: any;
-};
+import { LinkParameter } from "../../component/sidebar/sidebarLink";
+import Sidebar from "../../organism/sidebar/sidebar";
 
 export const applicationFrameProps: {
   username: string;
   sidebarState: "permanent" | "open" | "close";
-  links?: Link[];
+  links: LinkParameter[];
   children?: React.ReactNode;
 } = {
   username: "ゲスト",
   sidebarState: "permanent",
+  links: [],
 };
 
 type Props = typeof applicationFrameProps;
@@ -31,29 +25,14 @@ export default function ApplicationFrame(props: Props) {
   return (
     <>
       <div className={classes.background}></div>
-      <Sidebar.container
-        variant={ispermanent ? "permanent" : "temporary"}
+      <Sidebar
+        links={props.links}
+        username={props.username}
         open={isOpen}
-      >
-        <Sidebar.head>
-          <Sidebar.userDisplay name={props.username} />
-        </Sidebar.head>
-        <Sidebar.list>
-          {props.links &&
-            props.links.map((link) => {
-              return (
-                <Sidebar.link
-                  id={link.id}
-                  value={link.value}
-                  text={link.text}
-                  icon={link.icon}
-                />
-              );
-            })}
-        </Sidebar.list>
-      </Sidebar.container>
-      <Navbar.container sidebarOpen={ispermanent || isOpen}></Navbar.container>
-      <ApplicationPageContainer sidebarOpen={ispermanent || isOpen}>
+        variant={ispermanent ? "permanent" : "temporary"}
+      />
+      <Navbar.container sidebarOpen={ispermanent}></Navbar.container>
+      <ApplicationPageContainer sidebarOpen={ispermanent }>
         {props.children}
       </ApplicationPageContainer>
     </>

@@ -6,6 +6,15 @@ import useStyles from "./sidebar.css";
 import Link from "next/link";
 import clsx from "clsx";
 
+export type LinkParameter = {
+  id: number;
+  value: number;
+  text: string;
+  href: string;
+  onClick?: (event: React.ChangeEvent<{}>, value: any) => void;
+  icon?: any;
+};
+
 const defaultProps: {
   id: number;
   value: number;
@@ -15,7 +24,7 @@ const defaultProps: {
 } = {
   id: 0,
   value: 0,
-  text: "",
+  text: "no value",
 };
 type Props = typeof defaultProps;
 

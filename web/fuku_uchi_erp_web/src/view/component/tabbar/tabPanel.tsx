@@ -4,10 +4,10 @@ import useState from "react";
 import useStyles from "./tabbar.css";
 
 const defaultProps: {
-  id?: any;
-  value?: any;
+  id: number;
+  value: number;
   children?: React.ReactNode;
-} = {};
+} = { id: 0, value: 0 };
 
 type Props = typeof defaultProps;
 

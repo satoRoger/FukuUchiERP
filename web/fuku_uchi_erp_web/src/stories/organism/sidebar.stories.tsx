@@ -1,23 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import ApplicationFrame from "../../view/template/applicationFrame/applicationFrame";
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
-import { Button } from "@material-ui/core";
-import Tabbar from "../../view/component/tabbar/tabbar";
+import { LinkParameter } from "../../view/component/sidebar/sidebarLink";
+import Sidebar from "../../view/organism/sidebar/sidebar";
 
 export default {
-  title: "WIP/template/applicationPage/timecard",
+  title: "WIP/organism/sidebar",
   argTypes: {
-    sidebarState: {
-      control: { type: "select", options: ["permanent", "open", "close"] },
-    },
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },
+    sidebarWidth: { control: { type: "range", min: 50, max: 1000, step: 10 } },
+    links: { control: { type: "array", separator: "," } },
+    onClick: { action: "clicked" },
   },
 };
 
-const template = (args) => {
+const linkList = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
   defaultTheme.layout.sidebar.width = args.sidebarWidth;
@@ -25,24 +24,18 @@ const template = (args) => {
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <ApplicationFrame
-          username="佐藤伸明"
-          links={args.links}
-          sidebarState={args.sidebarState}
-        >
-          <Tabbar></Tabbar>
-        </ApplicationFrame>
+        <Sidebar open links={args.links}></Sidebar>
       </ThemeProvider>
     </>
   );
 };
 
-export const draft = template.bind({});
+export const basicSidebar = linkList.bind({});
 
-draft.args = {
+basicSidebar.args = {
+  open: false,
+  links: sidebarLinks,
   primaryColor: defaultTheme.palette.primary.main,
   secondaryColor: defaultTheme.palette.secondary.main,
   sidebarWidth: defaultTheme.layout.sidebar.width,
-  links: sidebarLinks,
-  sidebarState: "permanent",
 };

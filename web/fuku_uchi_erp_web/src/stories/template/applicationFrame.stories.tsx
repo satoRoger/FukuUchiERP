@@ -15,7 +15,7 @@ export default {
   },
 };
 
-const template = (args) => {
+const template = (args:any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
   defaultTheme.layout.sidebar.width = args.sidebarWidth;

@@ -4,7 +4,12 @@
     "noImplicitThis": true,
     "strictNullChecks": true,
     "target": "es5",
-    "lib": ["es6","dom", "dom.iterable", "esnext"],
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -15,8 +20,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react",
-    "rootDir": "src",
+    "jsx": "preserve",
+    //"rootDir": "src",
     "outDir": "build"
   },
   "include": [
@@ -24,7 +29,15 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/index.js",
-    "stories/helloWorld.stories.js", "src/stories/component/sidebar.stories.js", "src/components/sidebar.js", "stories/sidebar.stories.js", "src/components/sidebar/sidebar.css.ts", "src/components/sidebar/sidebar.tsx", "src/view/component/sidebar/sidebar.css.ts"
+    "stories/helloWorld.stories.js",
+    "src/stories/component/sidebar.stories.js",
+    "src/components/sidebar.js",
+    "stories/sidebar.stories.js",
+    "src/components/sidebar/sidebar.css.ts",
+    "src/components/sidebar/sidebar.tsx",
+    "src/view/component/sidebar/sidebar.css.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
