@@ -45,21 +45,29 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       overflow: "hidden",
     },
     link: {
-      width: "auto",
+      width: "100%",
       height: linkHeight,
       position: "relative",
       display: "block",
-      backgroundColor: "transparent",
       margin: "5px 0",
+      padding:0
     },
+
+    linkContent: {
+      display:"inline-block",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      width:"60%",
+      transform: "translateY(-50%) translateX(-60%)",
+    },
+
     linkIcon: {
       height: "30px",
       fontSize: "24px",
       lineHeight: "30px",
       float: "left",
-      marginRight: "15px",
-      textAlign: "center",
-      verticalAlign: "middle",
+      marginRight: "7px",
       color: theme.palette.common.black,
       display: "inline-block",
     },
@@ -71,16 +79,17 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       pointerEvents: "none",
     },
     activeLinkIcon: {
-      color: theme.palette.primary.dark,
+      color: theme.palette.secondary.dark,
       pointerEvents: "none",
     },
     activeLinkText: {
-      color: theme.palette.primary.dark,
+      color: theme.palette.secondary.dark,
     },
     activeLine: {
       position: "absolute",
       height: linkHeight,
-      top: (props: { value: number }) => linkMargin + (linkMargin + linkHeight) * props.value,
+      top: (props: { value: number }) =>
+        linkMargin + (linkMargin + linkHeight) * props.value,
       left: theme.layout.sidebar.width - 5,
       width: "5px",
       backgroundColor: theme.palette.secondary.light,

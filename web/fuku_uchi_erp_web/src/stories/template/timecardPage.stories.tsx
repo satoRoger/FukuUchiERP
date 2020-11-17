@@ -3,11 +3,10 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import ApplicationFrame from "../../view/template/applicationFrame/applicationFrame";
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
-import { Button } from "@material-ui/core";
-import Tabbar, { TabType } from "../../view/component/tabbar/tabbarComponent";
+import Tabbar from "../../view/organism/tabbar/tabbar";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import tabs from "../argsValues/tabsValue";
+import { TabType } from "../../view/component/tabbar/tabbarComponent";
 
 export default {
   title: "WIP/template/applicationPage/timecard",

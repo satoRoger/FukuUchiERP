@@ -42,19 +42,21 @@ export default function SidebarLink(props: Props) {
         button
         className={clsx(classes.link, { [classes.activeLink]: active })}
       >
-        {props.icon && (
-          <props.icon
-            className={clsx(classes.linkIcon, {
-              [classes.activeLinkIcon]: active,
+        <div className={classes.linkContent}>
+          {props.icon && (
+            <props.icon
+              className={clsx(classes.linkIcon, {
+                [classes.activeLinkIcon]: active,
+              })}
+            />
+          )}
+          <ListItemText
+            className={clsx(classes.linkText, {
+              [classes.activeLinkText]: active,
             })}
+            primary={props.text}
           />
-        )}
-        <ListItemText
-          className={clsx(classes.linkText, {
-            [classes.activeLinkText]: active,
-          })}
-          primary={props.text}
-        />
+        </div>
       </ListItem>
     </>
   );

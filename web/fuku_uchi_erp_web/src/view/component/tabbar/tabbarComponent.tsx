@@ -30,7 +30,12 @@ export default function TabbarComponent(props: Props) {
   const classes = useStyles();
   return (
     <>
-      <Tabs value={props.value} onChange={props.onChange}>
+      <Tabs
+        value={props.value}
+        onChange={props.onChange}
+        indicatorColor="secondary"
+        textColor="secondary"
+      >
         {props.tabs.map((tab) => {
           return (
             <Tab
