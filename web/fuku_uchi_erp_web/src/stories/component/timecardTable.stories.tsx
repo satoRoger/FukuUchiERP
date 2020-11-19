@@ -22,6 +22,36 @@ const template = (args: any) => {
       inTime: DateTime.local(),
       outTime: DateTime.local(),
     },
+    {
+      date: DateTime.local(),
+      inTime: DateTime.local(),
+      outTime: DateTime.local(),
+    },
+    {
+      date: DateTime.local(),
+      inTime: DateTime.local(),
+      outTime: DateTime.local(),
+    },
+    {
+      date: DateTime.local(),
+      inTime: DateTime.local(),
+      outTime: DateTime.local(),
+    },
+    {
+      date: DateTime.local(),
+      inTime: DateTime.local(),
+      outTime: DateTime.local(),
+    },
+    {
+      date: DateTime.local(),
+      inTime: DateTime.local(),
+      outTime: DateTime.local(),
+    },
+    {
+      date: DateTime.local(),
+      inTime: DateTime.local(),
+      outTime: DateTime.local(),
+    },
   ];
 
   return (

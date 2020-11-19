@@ -1,4 +1,5 @@
 import { AppBar, Tab, Tabs } from "@material-ui/core";
+import { Container } from "next/app";
 import React from "react";
 import useState from "react";
 import useStyles from "./tabbar.css";
@@ -30,23 +31,26 @@ export default function TabbarComponent(props: Props) {
   const classes = useStyles();
   return (
     <>
-      <Tabs
-        value={props.value}
-        onChange={props.onChange}
-        indicatorColor="secondary"
-        textColor="secondary"
-      >
-        {props.tabs.map((tab) => {
-          return (
-            <Tab
-              label={tab.label}
-              icon={<tab.icon />}
-              value={tab.id}
-              {...a11yProps(tab.id)}
-            />
-          );
-        })}
-      </Tabs>
+      <div className={classes.tabsContainer}>
+        <Tabs
+          value={props.value}
+          onChange={props.onChange}
+          indicatorColor="secondary"
+          textColor="secondary"
+          className={classes.tabs}
+        >
+          {props.tabs.map((tab) => {
+            return (
+              <Tab
+                label={tab.label}
+                icon={<tab.icon />}
+                value={tab.id}
+                {...a11yProps(tab.id)}
+              />
+            );
+          })}
+        </Tabs>
+      </div>
       <div>{props.children}</div>
     </>
   );

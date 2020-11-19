@@ -7,6 +7,7 @@ import Tabbar from "../../view/organism/tabbar/tabbar";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import { TabType } from "../../view/component/tabbar/tabbarComponent";
+import TimecardSimpleTable from "../../view/component/dataTable/timecardSimpleTable";
 
 export default {
   title: "WIP/template/applicationPage/timecard",
@@ -30,7 +31,11 @@ const timecardTab: TabType[] = [
     id: 2,
     label: "出退勤履歴",
     icon: AccountTreeIcon,
-    component: <div>出退勤履歴</div>,
+    component: (
+      <div>
+        <TimecardSimpleTable />
+      </div>
+    ),
   },
 ];
 

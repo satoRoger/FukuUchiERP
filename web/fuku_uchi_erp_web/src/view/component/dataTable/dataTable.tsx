@@ -5,6 +5,7 @@ import { TableContainer } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper/Paper";
 import TableCell from "@material-ui/core/TableCell/TableCell";
 import { isObject } from "util";
+import TableRow from "@material-ui/core/TableRow/TableRow";
 
 function defaultProps<T>() {
   return {};
@@ -14,6 +15,8 @@ function defaultProps<T>() {
 export type CulumnDefine<T> = {
   text: string;
   field: keyof T;
+  align?: "left" | "right" | "inherit" | "center" | "justify";
+  dataAlign?: "left" | "right" | "inherit" | "center" | "justify";
 };
 type Row<T> = { [key in keyof T]: string };
 type DataTableProps<T> = {
@@ -25,14 +28,24 @@ export default function DataTable<T>(props: DataTableProps<T>) {
   const classes = useStyles();
   return (
     <>
-      <TableContainer component={Paper}>
-        {props.culumns.map((cell: CulumnDefine<T>) => {
-          return <TableCell>{cell.text}</TableCell>;
-        })}
+      <TableContainer component={"div"}>
+        <TableRow>
+          {props.culumns.map((cell: CulumnDefine<T>) => {
+            return <TableCell align={cell.align}>{cell.text}</TableCell>;
+          })}
+        </TableRow>
         {props.data.map((row: Row<T>) => {
-          return props.culumns.map((culumn: CulumnDefine<T>) => {
-            return <TableCell>{row[culumn.field]}</TableCell>;
-          });
+          return (
+            <TableRow>
+              {props.culumns.map((culumn: CulumnDefine<T>) => {
+                return (
+                  <TableCell align={culumn.dataAlign}>
+                    {row[culumn.field]}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          );
         })}
       </TableContainer>
     </>
