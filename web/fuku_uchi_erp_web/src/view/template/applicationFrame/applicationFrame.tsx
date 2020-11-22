@@ -3,8 +3,7 @@ import ApplicationPageContainer from "../../component/applicationPageContainer/a
 import Navbar from "../../component/navbar/navbar";
 import useStyles from "./applicationFrame.css";
 import { LinkParameter } from "../../component/sidebar/sidebarLink";
-import Sidebar from "../../organism/sidebar/sidebar";
-
+import Sidebar from "../../component/sidebar/sidebar";
 export const applicationFrameProps: {
   username: string;
   sidebarState: "permanent" | "open" | "close";
@@ -22,9 +21,10 @@ export default function ApplicationFrame(props: Props) {
   const classes = useStyles();
   const ispermanent = props.sidebarState === "permanent";
   const isOpen = props.sidebarState === "open";
+
   return (
     <>
-      <div className={classes.background}></div>
+      <div className={classes.background}></div>{" "}
       <Sidebar
         links={props.links}
         username={props.username}
@@ -32,7 +32,7 @@ export default function ApplicationFrame(props: Props) {
         variant={ispermanent ? "permanent" : "temporary"}
       />
       <Navbar.container sidebarOpen={ispermanent}></Navbar.container>
-      <ApplicationPageContainer sidebarOpen={ispermanent }>
+      <ApplicationPageContainer sidebarOpen={ispermanent}>
         {props.children}
       </ApplicationPageContainer>
     </>

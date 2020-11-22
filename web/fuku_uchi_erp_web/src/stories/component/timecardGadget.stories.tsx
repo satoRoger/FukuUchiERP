@@ -3,10 +3,13 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import defaultTheme from "../../view/theme/applicationTheme";
 import TabPanel from "../../view/component/tabbar/tabPanel";
 import tabs from "../argsValues/tabsValue";
-import TabbarComponent from '../../view/component/tabbar/tabbarComponent';
+import TabbarComponent from "../../view/component/tabbar/tabbar";
+import TimecardGadget from "../../view/component/timecardGadget/timecardGadget";
+import { TimecardAction } from "../../view/component/timecardGadget/timecardGadget";
+import actions from "../argsValues/timecardActionValue";
 
 export default {
-  title: "WIP/component/tabbar",
+  title: "WIP/component/timecardGadget",
   argTypes: {
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },
@@ -14,39 +17,22 @@ export default {
   },
 };
 
-const template = (args:any) => {
+const template = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
-  const [value, setValue] = useState(args.value);
-  useEffect(() => {
-    setValue(args.value);
-  }, [args.value]);
 
-  const handleTabChange = (_: React.ChangeEvent<{}>, newValue: any) => {
-    setValue(newValue);
-  };
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <TabbarComponent tabs={args.tabs} value={value} onChange={handleTabChange}>
-          <TabPanel value={value} id={0}>
-            タブ1
-          </TabPanel>
-          <TabPanel value={value} id={1}>
-            タブ2
-          </TabPanel>
-          <TabPanel value={value} id={2}>
-            タブ3
-          </TabPanel>
-        </TabbarComponent>
+        <TimecardGadget actions={actions}></TimecardGadget>
       </ThemeProvider>
     </>
   );
 };
 
-export const basicTabbar = template.bind({});
+export const draft = template.bind({});
 
-basicTabbar.args = {
+draft.args = {
   primaryColor: defaultTheme.palette.primary.main,
   secondaryColor: defaultTheme.palette.secondary.main,
   tabs: tabs,

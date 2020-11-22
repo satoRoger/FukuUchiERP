@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useStyles from "./clock.css";
 import clsx from "clsx";
-import { Paper, Container } from "@material-ui/core";
+import { Paper, Container, Typography } from "@material-ui/core";
 import { DateTime } from "luxon";
 
-export const defaultProps: {} = {};
+export const defaultProps: { className?: any } = {};
 
 type Props = typeof defaultProps;
 
@@ -26,7 +26,9 @@ export default function Clock(props: Props) {
 
   return (
     <>
-      <div className={classes.clock}>{time.toFormat(`HH:mm:ss`)}</div>
+      <div className={clsx(classes.clock,props.className)}>
+        <Typography variant="h5" >{time.toFormat(`HH:mm:ss`)}</Typography>
+      </div>
     </>
   );
 }

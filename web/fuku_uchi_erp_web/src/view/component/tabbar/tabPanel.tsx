@@ -9,6 +9,7 @@ const defaultProps: {
   children?: React.ReactNode;
 } = { id: 0, value: 0 };
 
+
 type Props = typeof defaultProps;
 
 export default function TabPanel(props: Props) {

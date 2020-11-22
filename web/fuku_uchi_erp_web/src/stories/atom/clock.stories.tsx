@@ -10,7 +10,7 @@ export default {
   },
 };
 
-const template = (args) => {
+const template = (args:any) => {
 
   return (
     <>

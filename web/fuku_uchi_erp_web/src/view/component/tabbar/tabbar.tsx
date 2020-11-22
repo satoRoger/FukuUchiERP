@@ -1,8 +1,7 @@
-import { AppBar, Tab, Tabs } from "@material-ui/core";
-import { Container } from "next/app";
-import React from "react";
-import useState from "react";
+import { Tab, Tabs } from "@material-ui/core";
+import React, { useState } from "react";
 import useStyles from "./tabbar.css";
+import TabPanel from "./tabPanel";
 
 export type TabType = {
   id: number;
@@ -13,10 +12,7 @@ export type TabType = {
 
 const defaultProps: {
   tabs: TabType[];
-  value: number;
-  children?: React.ReactNode;
-  onChange?: (event: React.ChangeEvent<{}>, value: number) => void;
-} = { tabs: [], value: 1 };
+} = { tabs: [] };
 
 type Props = typeof defaultProps;
 
@@ -27,14 +23,18 @@ function a11yProps(index: number) {
   };
 }
 
-export default function TabbarComponent(props: Props) {
+export default function Tabbar(props: Props) {
+  const [value, setValue] = useState(1);
+  const handleTabChange = (_: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
   const classes = useStyles();
   return (
     <>
       <div className={classes.tabsContainer}>
         <Tabs
-          value={props.value}
-          onChange={props.onChange}
+          value={value}
+          onChange={handleTabChange}
           indicatorColor="secondary"
           textColor="secondary"
           className={classes.tabs}
@@ -51,8 +51,16 @@ export default function TabbarComponent(props: Props) {
           })}
         </Tabs>
       </div>
-      <div>{props.children}</div>
+      <div>
+        {props.tabs.map((panel) => {
+          return (
+            <TabPanel value={value} id={panel.id}>
+              {panel.component}
+            </TabPanel>
+          );
+        })}
+      </div>
     </>
   );
 }
-TabbarComponent.defaultProps = defaultProps;
+Tabbar.defaultProps = defaultProps;

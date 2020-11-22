@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       left: 0,
       width: "100vw",
       height: "100vh",
-      backgroundColor: theme.palette.grey[50],
+      backgroundColor: theme.palette.common.white,
     },
   })
 );

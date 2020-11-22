@@ -1,13 +1,15 @@
-import { AppBar, Tab, Tabs } from "@material-ui/core";
+import SidebarContaniner from "./sidebarContainer";
+import SidebarLink, { LinkParameter } from "./sidebarLink";
+import SidebarLinkList from "./sidebarLinkList";
+import SidebarHead from "./sidebarHead";
+import SidebarUserDisplay from "./sidebarUserDisplay";
 import React, { useState } from "react";
-import SidebarComponent from "../../component/sidebar/sidebarComponent";
-import { LinkParameter } from "../../component/sidebar/sidebarLink";
 
 const defaultProps: {
   open: boolean;
   links: LinkParameter[];
-  variant: "permanent" | "temporary";
-  username: string;
+  variant?: "permanent" | "temporary";
+  username?: string;
 } = { open: true, links: [], variant: "permanent", username: "ゲスト" };
 
 type Props = typeof defaultProps;
@@ -21,14 +23,14 @@ export default function Sidebar(props: Props) {
 
   return (
     <>
-      <SidebarComponent.container open={props.open} variant={props.variant}>
-        <SidebarComponent.head>
-          <SidebarComponent.userDisplay name={props.username} />
-        </SidebarComponent.head>
-        <SidebarComponent.list value={value}>
+      <SidebarContaniner open={props.open} variant={props.variant}>
+        <SidebarHead>
+          <SidebarUserDisplay name={props.username} />
+        </SidebarHead>
+        <SidebarLinkList value={value}>
           {props.links.map((link: LinkParameter) => {
             return (
-              <SidebarComponent.link
+              <SidebarLink
                 id={link.id}
                 value={value}
                 text={link.text}
@@ -37,9 +39,8 @@ export default function Sidebar(props: Props) {
               />
             );
           })}
-        </SidebarComponent.list>
-      </SidebarComponent.container>
+        </SidebarLinkList>
+      </SidebarContaniner>
     </>
   );
 }
-Sidebar.defaultProps = defaultProps;

@@ -5,6 +5,7 @@ import React from "react";
 import useStyles from "./sidebar.css";
 import Link from "next/link";
 import clsx from "clsx";
+import { Typography } from "@material-ui/core";
 
 export type LinkParameter = {
   id: number;
@@ -54,8 +55,9 @@ export default function SidebarLink(props: Props) {
             className={clsx(classes.linkText, {
               [classes.activeLinkText]: active,
             })}
-            primary={props.text}
-          />
+          >
+            <Typography>{props.text}</Typography>
+          </ListItemText>
         </div>
       </ListItem>
     </>

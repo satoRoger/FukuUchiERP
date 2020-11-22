@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import defaultTheme from "../../view/theme/applicationTheme";
-import Tabbar from "../../view/organism/tabbar/tabbar";
+import TabPanel from "../../view/component/tabbar/tabPanel";
 import tabs from "../argsValues/tabsValue";
+import Tabbar, { TabType } from "../../view/component/tabbar/tabbar";
 
 export default {
-  title: "WIP/organism/tabbar",
+  title: "WIP/component/tabbar",
   argTypes: {
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import SidebarComponent from "../../view/component/sidebar/sidebarComponent";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
 import { LinkParameter } from "../../view/component/sidebar/sidebarLink";
-
+import Sidebar from "../../view/component/sidebar/sidebar";
 export default {
   title: "WIP/component/sidebar",
   argTypes: {
@@ -24,23 +23,7 @@ const linkList = (args: any) => {
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <SidebarComponent.container open={args.open}>
-          <SidebarComponent.head>
-            <SidebarComponent.userDisplay name={"佐藤伸明"} />
-          </SidebarComponent.head>
-          <SidebarComponent.list value={0}>
-            {args.links.map((link: LinkParameter) => {
-              return (
-                <SidebarComponent.link
-                  id={link.id}
-                  value={0}
-                  text={link.text}
-                  icon={link.icon}
-                />
-              );
-            })}
-          </SidebarComponent.list>
-        </SidebarComponent.container>
+        <Sidebar open links={args.links}></Sidebar>
       </ThemeProvider>
     </>
   );

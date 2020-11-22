@@ -3,11 +3,14 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import ApplicationFrame from "../../view/template/applicationFrame/applicationFrame";
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
-import Tabbar from "../../view/organism/tabbar/tabbar";
+import Tabbar from "../../view/component/tabbar/tabbar";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import { TabType } from "../../view/component/tabbar/tabbarComponent";
+import { TabType } from "../../view/component/tabbar/tabbar";
 import TimecardSimpleTable from "../../view/component/dataTable/timecardSimpleTable";
+import { DateTime } from "luxon";
+import TimecardGadget from "../../view/component/timecardGadget/timecardGadget";
+import actions from "../argsValues/timecardActionValue";
 
 export default {
   title: "WIP/template/applicationPage/timecard",
@@ -20,12 +23,54 @@ export default {
   },
 };
 
+const data = [
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+  {
+    date: DateTime.local(),
+    inTime: DateTime.local(),
+    outTime: DateTime.local(),
+  },
+];
+
 const timecardTab: TabType[] = [
   {
     id: 1,
     label: "出退勤",
     icon: AddToHomeScreenIcon,
-    component: <div>出退勤</div>,
+    component: (
+      <div>
+        <TimecardGadget actions={actions} />
+      </div>
+    ),
   },
   {
     id: 2,
@@ -33,7 +78,7 @@ const timecardTab: TabType[] = [
     icon: AccountTreeIcon,
     component: (
       <div>
-        <TimecardSimpleTable />
+        <TimecardSimpleTable data={data} />
       </div>
     ),
   },
