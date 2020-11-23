@@ -18,7 +18,6 @@ const template = (args:any) => {
   defaultTheme.palette.secondary.main = args.secondaryColor;
   defaultTheme.layout.sidebar.width = args.sidebarWidth;
 
-
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
