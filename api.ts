@@ -1,5 +1,57 @@
-//ユーザが打刻する
-//request
+/*
+*APIリファレンス*
+*/
+
+/*
+ユーザのタイムカードリスト
+GET /users/:userId/timecards
+*/
+type parameter1 = {
+	since:string,//ISO 8601 format
+	until:string//ISO 8601 format
+}
+
+/*
+全ユーザのタイムカードを取得
+マネージャのみ
+GET /timecards
+*/
+type parameter2 = {
+	since:string,//ISO 8601 format
+	until:string//ISO 8601 format
+}
+
+/*
+全ユーザの{出勤,退勤,休憩入り,休憩終わり}タイムカードのみを取得
+マネージャのみ
+GET /timecards/{workin,workout,breakin,breakout}
+*/
+
+type parameter3 = {
+	since:string,//ISO 8601 format
+	until:string//ISO 8601 format
+}
+
+/*
+特定のタイムカードを取得
+GET /timecards/:timecard_id
+*/
+
+
+/*
+今日付けの全員のタイムカードを取得
+マネージャのみ
+GET /timecards/today
+*/
+
+/*
+昨日付けの全員のタイムカードを取得
+マネージャのみ
+GET /timecards/yesterday
+*/
+
+
+
 type requestUserPunch = {
 	request: {
 		id: 'string';
@@ -82,3 +134,6 @@ type responseGetUserTimecard = {
 		}[];
 	};
 };
+
+
+//
