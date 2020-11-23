@@ -5,8 +5,8 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
   createStyles({
     gridName: {},
     container: {
-      marginLeft: theme.spacing(3),
-      width: `calc(100%-${theme.spacing(3)}px)`,
+      marginLeft: theme.spacing(2),
+      width: `calc(100%-${theme.spacing(2)}px)`,
     },
     attribute: {
       backgroundColor: theme.palette.primary.dark,

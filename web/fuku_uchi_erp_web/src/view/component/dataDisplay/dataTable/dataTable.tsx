@@ -9,7 +9,6 @@ import TableRow from "@material-ui/core/TableRow/TableRow";
 function defaultProps<T>() {
   return {};
 }
-//const defaultProps: { culumns: Row; data: Data } = { culumns: [], data: [] };
 
 export type CulumnDefine<Culumns> = {
   text: string;
