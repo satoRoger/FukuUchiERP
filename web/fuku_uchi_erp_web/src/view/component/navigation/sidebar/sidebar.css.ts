@@ -1,5 +1,5 @@
 import { makeStyles, createStyles } from "@material-ui/core";
-import ExtendTheme from "../../theme/extendTheme";
+import ExtendTheme from "../../../theme/extendTheme";
 
 const linkHeight = 60;
 const linkMargin = 5;

@@ -1,6 +1,6 @@
 import React from "react";
 import Dashboard from "@material-ui/icons/Dashboard";
-import { TabType } from "../../view/component/tabbar/tabbar";
+import { TabType } from "../../view/component/navigation/tabbar/tabbar";
 
 const tabs: TabType[] = [
   {

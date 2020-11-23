@@ -11,16 +11,17 @@ function defaultProps<T>() {
 }
 //const defaultProps: { culumns: Row; data: Data } = { culumns: [], data: [] };
 
-export type CulumnDefine<T> = {
+export type CulumnDefine<Culumns> = {
   text: string;
-  field: keyof T;
+  field: keyof Culumns;
   align?: "left" | "right" | "inherit" | "center" | "justify";
   dataAlign?: "left" | "right" | "inherit" | "center" | "justify";
 };
-type Row<T> = { [key in keyof T]: string };
-type DataTableProps<T> = {
-  culumns: CulumnDefine<T>[];
-  data: Row<T>[];
+type Row<Culumns> = { [key in keyof Culumns]: string };
+type DataTableProps<Culumns> = {
+  culumns: CulumnDefine<Culumns>[];
+  displayCulumns: (keyof Culumns)[];
+  data: Row<Culumns>[];
 };
 
 export default function DataTable<T>(props: DataTableProps<T>) {
@@ -31,10 +32,16 @@ export default function DataTable<T>(props: DataTableProps<T>) {
         <Table stickyHeader className={classes.table}>
           <TableHead>
             <TableRow>
-              {props.culumns.map((cell: CulumnDefine<T>) => {
+              {props.displayCulumns.map((culumn) => {
+                const displayCulumn = props.culumns.find(
+                  (value) => value.field === culumn
+                );
                 return (
-                  <TableCell align={cell.align} className={classes.head}>
-                    {cell.text}
+                  <TableCell
+                    align={displayCulumn?.align}
+                    className={classes.head}
+                  >
+                    {displayCulumn?.text}
                   </TableCell>
                 );
               })}
@@ -44,10 +51,15 @@ export default function DataTable<T>(props: DataTableProps<T>) {
             {props.data.map((row: Row<T>) => {
               return (
                 <TableRow>
-                  {props.culumns.map((culumn: CulumnDefine<T>) => {
+                  {props.displayCulumns.map((culumn) => {
+                    const displayCulumn = props.culumns.find(
+                      (value) => value.field === culumn
+                    );
                     return (
-                      <TableCell align={culumn.dataAlign}>
-                        {row[culumn.field]}
+                      <TableCell
+                        align={displayCulumn?.dataAlign}
+                      >
+                        {row[culumn]}
                       </TableCell>
                     );
                   })}

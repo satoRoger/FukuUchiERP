@@ -1,9 +1,9 @@
 import React from "react";
-import ApplicationPageContainer from "../../component/applicationPageContainer/applicationPageContainer";
-import Navbar from "../../component/navbar/navbar";
+import ApplicationPageContainer from "../../atom/applicationPageContainer/applicationPageContainer";
+import Navbar from "../../component/navigation/navbar/navbar";
 import useStyles from "./applicationFrame.css";
-import { LinkParameter } from "../../component/sidebar/sidebarLink";
-import Sidebar from "../../component/sidebar/sidebar";
+import { LinkParameter } from "../../component/navigation/sidebar/sidebarLink";
+import Sidebar from "../../component/navigation/sidebar/sidebar";
 export const applicationFrameProps: {
   username: string;
   sidebarState: "permanent" | "open" | "close";

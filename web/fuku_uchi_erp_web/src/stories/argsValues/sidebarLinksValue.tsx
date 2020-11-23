@@ -1,5 +1,5 @@
 import Dashboard from "@material-ui/icons/Dashboard";
-import { LinkParameter } from "../../view/component/sidebar/sidebarLink";
+import { LinkParameter } from "../../view/component/navigation/sidebar/sidebarLink";
 
 const sidebarLinks: LinkParameter[] = [
   {

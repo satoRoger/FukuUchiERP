@@ -3,14 +3,16 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import ApplicationFrame from "../../view/template/applicationFrame/applicationFrame";
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
-import Tabbar from "../../view/component/tabbar/tabbar";
+import Tabbar from "../../view/component/navigation/tabbar/tabbar";
 import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import { TabType } from "../../view/component/tabbar/tabbar";
-import TimecardSimpleTable from "../../view/component/dataTable/timecardSimpleTable";
+import { TabType } from "../../view/component/navigation/tabbar/tabbar";
+import TimecardTable from "../../view/component/dataDisplay/dataTable/timecardTable";
 import { DateTime } from "luxon";
-import TimecardGadget from "../../view/component/timecardGadget/timecardGadget";
+import TimecardGadget from "../../view/organism/timecardGadget/timecardGadget";
 import actions from "../argsValues/timecardActionValue";
+import timecardTableData from "../argsValues/timecardTableValue";
+import { TimecardTableCulumns } from "../../view/component/dataDisplay/dataTable/timecardTable";
 
 export default {
   title: "WIP/template/applicationPage/timecard",
@@ -23,42 +25,10 @@ export default {
   },
 };
 
-const data = [
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
-  {
-    date: DateTime.local(),
-    inTime: DateTime.local(),
-    outTime: DateTime.local(),
-  },
+const displayCulumns: (keyof TimecardTableCulumns)[] = [
+  "date",
+  "intime",
+  "outtime",
 ];
 
 const timecardTab: TabType[] = [
@@ -78,7 +48,10 @@ const timecardTab: TabType[] = [
     icon: AccountTreeIcon,
     component: (
       <div>
-        <TimecardSimpleTable data={data} />
+        <TimecardTable
+          data={timecardTableData}
+          displayCulumns={displayCulumns}
+        />
       </div>
     ),
   },

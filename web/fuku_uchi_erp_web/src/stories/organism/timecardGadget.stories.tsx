@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import defaultTheme from "../../view/theme/applicationTheme";
-import TabPanel from "../../view/component/tabbar/tabPanel";
+import TabPanel from "../../view/component/navigation/tabbar/tabPanel";
 import tabs from "../argsValues/tabsValue";
-import Tabbar, { TabType } from "../../view/component/tabbar/tabbar";
+import TabbarComponent from "../../view/component/navigation/tabbar/tabbar";
+import TimecardGadget from "../../view/organism/timecardGadget/timecardGadget";
+import { TimecardAction } from "../../view/organism/timecardGadget/timecardGadget";
+import actions from "../argsValues/timecardActionValue";
 
 export default {
-  title: "WIP/component/tabbar",
+  title: "WIP/component/timecardGadget",
   argTypes: {
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },
@@ -17,18 +20,19 @@ export default {
 const template = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
   defaultTheme.palette.secondary.main = args.secondaryColor;
+
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <Tabbar tabs={args.tabs} />
+        <TimecardGadget actions={actions}></TimecardGadget>
       </ThemeProvider>
     </>
   );
 };
 
-export const basicTabbar = template.bind({});
+export const draft = template.bind({});
 
-basicTabbar.args = {
+draft.args = {
   primaryColor: defaultTheme.palette.primary.main,
   secondaryColor: defaultTheme.palette.secondary.main,
   tabs: tabs,

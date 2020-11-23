@@ -9,7 +9,7 @@ import EmojiFoodBeverageIcon from "@material-ui/icons/EmojiFoodBeverage";
 
 import { useTheme } from '@material-ui/core/styles';
 
-import { TimecardAction } from "../../view/component/timecardGadget/timecardGadget";
+import { TimecardAction } from "../../view/organism/timecardGadget/timecardGadget";
 // const theme = useTheme();
 
 const actions: TimecardAction[] = [

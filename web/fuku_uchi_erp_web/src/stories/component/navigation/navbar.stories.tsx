@@ -1,7 +1,7 @@
 import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Navbar from "../../view/component/navbar/navbar";
-import defaultTheme from "../../view/theme/applicationTheme";
+import Navbar from "../../../view/component/navigation/navbar/navbar";
+import defaultTheme from "../../../view/theme/applicationTheme";
 
 export default {
   title: "WIP/component/navbar",

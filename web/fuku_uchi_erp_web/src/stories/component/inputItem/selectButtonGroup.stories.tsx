@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Navbar from "../../view/component/navbar/navbar";
-import defaultTheme from "../../view/theme/applicationTheme";
-import SelectButtonGroup from "../../view/component/selectButtonGroup/selectButtonGroup";
-import SelectButton from "../../view/atom/selectButton/selectButton";
+import Navbar from "../../../view/component/navigation/navbar/navbar";
+import defaultTheme from "../../../view/theme/applicationTheme";
+import SelectButtonGroup from "../../../view/component/inputItem/selectButtonGroup/selectButtonGroup";
+import SelectButton from "../../../view/atom/selectButton/selectButton";
 
 export default {
   title: "WIP/component/selectButtonGroup",

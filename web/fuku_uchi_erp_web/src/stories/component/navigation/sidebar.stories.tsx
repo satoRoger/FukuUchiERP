@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import sidebarLinks from "../argsValues/sidebarLinksValue";
-import defaultTheme from "../../view/theme/applicationTheme";
-import { LinkParameter } from "../../view/component/sidebar/sidebarLink";
-import Sidebar from "../../view/component/sidebar/sidebar";
+import sidebarLinks from "../../argsValues/sidebarLinksValue";
+import defaultTheme from "../../../view/theme/applicationTheme";
+import { LinkParameter } from "../../../view/component/navigation/sidebar/sidebarLink";
+import Sidebar from "../../../view/component/navigation/sidebar/sidebar";
 export default {
   title: "WIP/component/sidebar",
   argTypes: {
