@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
-import './calendar.css'
+import useStyles from './calendar.css';
 
 interface DemoAppState {
   weekendsVisible: boolean
@@ -18,48 +18,12 @@ const defaultProps: {
 
 type Props = typeof defaultProps;
 
-const sidebarProps:{
-	
-}={};
-type SidebarProps = typeof sidebarProps;
-
-function CalendarSidebar(props:any){
-	
-    return (
-      <div className='demo-app-sidebar'>
-        <div className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={props.weekendsVisible}
-              onChange={props.handleWeekendsToggle}
-            ></input>
-            toggle weekends
-          </label>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <h2>All Events ({props.events.length})</h2>
-          <ul>
-            {props.events.map(renderSidebarEvent)}
-          </ul>
-        </div>
-      </div>
-    )
-}
-
 Calendar.defaultProps = defaultProps;
 
 export default function Calendar(props: Props){
 	const [events,setEvents] = useState(props.events);
 	const [weekendsVisible,setWeekendsVisible] = useState(props.weekendsVisible)
+	const classes = useStyles();
 	
 	const handleWeekendsToggle = () => {
 		setWeekendsVisible(!weekendsVisible);
@@ -91,15 +55,14 @@ export default function Calendar(props: Props){
     setEvents(newEvents);
   }
 	 return (
-      <div className='demo-app'>
-	  <CalendarSidebar weekendsVisible={weekendsVisible} handleWeekendsToggle={handleWeekendsToggle} events={events}/>
-        <div className='demo-app-main'>
+     
+        <div className={classes.calendar}>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
-              left: 'prev,next today',
+              left: 'prev',
               center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              right: 'next today'
             }}
             initialView='dayGridMonth'
             editable={true}
@@ -121,115 +84,6 @@ export default function Calendar(props: Props){
         </div>
       </div>
     )
-}
-
-export class Calendar2 extends React.Component<{}, DemoAppState> {
-
-  state: DemoAppState = {
-    weekendsVisible: true,
-    currentEvents: []
-  }
-
-  render() {
-    return (
-      <div className='demo-app'>
-        {this.renderSidebar()}
-        <div className='demo-app-main'>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            }}
-            initialView='dayGridMonth'
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
-          />
-        </div>
-      </div>
-    )
-  }
-
-  renderSidebar() {
-    return (
-      <div className='demo-app-sidebar'>
-        <div className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            toggle weekends
-          </label>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
-        </div>
-      </div>
-    )
-  }
-
-  handleWeekendsToggle = () => {
-    this.setState({
-      weekendsVisible: !this.state.weekendsVisible
-    })
-  }
-
-  handleDateSelect = (selectInfo: DateSelectArg) => {
-    let title = prompt('Please enter a new title for your event')
-    let calendarApi = selectInfo.view.calendar
-
-    calendarApi.unselect() // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
-    }
-  }
-
-  handleEventClick = (clickInfo: EventClickArg) => {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
-    }
-  }
-
-  handleEvents = (events: EventApi[]) => {
-    this.setState({
-      currentEvents: events
-    })
-  }
-
 }
 
 function renderEventContent(eventContent: EventContentArg) {
