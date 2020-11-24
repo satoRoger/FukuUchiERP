@@ -10,6 +10,7 @@ export default {
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },
     value: { control: "number" },
+    editable: { control: "boolean" },
   },
 };
 
@@ -22,7 +23,11 @@ const template = (args: any) => {
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
         <Grid container spacing={3}>
           <Grid item>
-            <GridData data={gridDataValue.base} gridName="基本情報" />
+            <GridData
+              data={gridDataValue.base}
+              gridName="基本情報"
+              editable={args.editable}
+            />
           </Grid>
           <Grid item>
             <GridData data={gridDataValue.work} gridName="勤務情報" />

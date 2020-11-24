@@ -11,18 +11,15 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
     attribute: {
       backgroundColor: theme.palette.primary.dark,
       color: theme.palette.common.white,
-      outline: "solid 1px black",
-      width: "150px;",
+      width: "150px",
     },
     value: {
-      outline: `solid 2px ${theme.palette.grey[700]}`,
-      outlineOffset: "-1px",
     },
     textBox: {
       outline: `solid 1px ${theme.palette.grey[700]}`,
     },
     text: {
-      margin: "5px 8px",
+      margin:"5px",
       letterSpacing: "1px",
     },
     attributeText: {
