@@ -4,13 +4,16 @@ import ExtendTheme from "../../../theme/extendTheme";
 
 const useStyle = makeStyles((theme: ExtendTheme) =>
   createStyles({
-	calendar:{
-  display: "flex";
-  minHeight: "100%";
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
-  margin: 0 auto;
-	},
+    flexBox: {
+      display: "flex",
+      minHeight: "100%",
+      fontFamily: " Arial, Helvetica Neue, Helvetica, sans-serif",
+      fontSize: "14px",
+    },
+    calendar: {
+      flexGrow: 1,
+      margin: "0 auto",
+    },
   })
 );
 export default useStyle;
