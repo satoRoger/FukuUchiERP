@@ -4,6 +4,7 @@ import {
   Paper,
   TextField,
   Typography,
+  Input,
 } from "@material-ui/core";
 import clsx from "clsx";
 import React from "react";
@@ -42,37 +43,31 @@ export default function GridData(props: Props) {
             {props.data.map((data) => {
               return (
                 <Grid container item>
-                  <Grid item>
-                    <Paper
-                      variant="outlined"
-                      square
-                      className={classes.attribute}
-                    >
+                  <Grid item 
+                      className={classes.attribute}>
                       <Typography
                         align="right"
-                        className={clsx(classes.text, classes.attributeText)}
+                        className={classes.text}
                       >
                         {data.attribute}
                       </Typography>
-                    </Paper>
                   </Grid>
                   <Grid item xs>
-                    <Paper variant="outlined" square>
-                      <div className={classes.value}>
-                        {props.editable ? (
-                          <InputBase
-                            className={clsx(classes.text, classes.valueText)}
-                            defaultValue={data.value}
-                          />
-                        ) : (
+                    <div>
+                      {props.editable ? (
+                        <TextField
+                          defaultValue={data.value}
+                          fullWidth
+						  variant="outlined"
+                        />
+                      ) : (
                           <Typography
-                            className={clsx(classes.text, classes.valueText)}
+                            className={classes.text}
                           >
                             {data.value}
                           </Typography>
                         )}
-                      </div>
-                    </Paper>
+                    </div>
                   </Grid>
                 </Grid>
               );

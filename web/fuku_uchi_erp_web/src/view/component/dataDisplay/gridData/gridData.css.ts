@@ -9,23 +9,21 @@ const useStyle = makeStyles((theme: ExtendTheme) =>
       width: `calc(100%-${theme.spacing(2)}px)`,
     },
     attribute: {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.main,
       color: theme.palette.common.white,
       width: "150px",
-    },
-    value: {
+	  outline:"solid 1px black"
     },
     textBox: {
       outline: `solid 1px ${theme.palette.grey[700]}`,
     },
     text: {
-      margin:"5px",
+		diplay:"inline-block",
+		height:"24px",
+      margin:"auto 5px",
+	  padding:"16px 0",
       letterSpacing: "1px",
-    },
-    attributeText: {
-      flexWrap: "nowrap",
-    },
-    valueText: {},
+    }
   })
 );
 export default useStyle;
