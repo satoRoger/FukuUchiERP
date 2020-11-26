@@ -6,6 +6,7 @@ import {
   Typography,
   Input,
 } from "@material-ui/core";
+import withStyles from "@material-ui/core/styles/withStyles";
 import clsx from "clsx";
 import React from "react";
 import useStyles from "./gridData.css";
@@ -23,7 +24,22 @@ const defaultProps: {
   data: [],
   editable: false,
 };
-
+const ValidationTextField = withStyles({
+  root: {
+    '& input:valid + fieldset': {
+      borderColor: 'green',
+      borderWidth: 2,
+    },
+    '& input:invalid + fieldset': {
+      borderColor: 'red',
+      borderWidth: 2,
+    },
+    '& input:valid:focus + fieldset': {
+      borderLeftWidth: 6,
+      padding: '4px !important', // override inline-style
+    },
+  },
+})(TextField);
 type Props = typeof defaultProps;
 
 export default function GridData(props: Props) {
@@ -43,30 +59,29 @@ export default function GridData(props: Props) {
             {props.data.map((data) => {
               return (
                 <Grid container item>
-                  <Grid item 
-                      className={classes.attribute}>
-                      <Typography
-                        align="right"
-                        className={classes.text}
-                      >
-                        {data.attribute}
-                      </Typography>
+                  <Grid item className={classes.attribute}>
+                    <Typography className={classes.attributeText}>{data.attribute}</Typography>
                   </Grid>
                   <Grid item xs>
                     <div>
                       {props.editable ? (
                         <TextField
+                          className={classes.editableText}
                           defaultValue={data.value}
                           fullWidth
-						  variant="outlined"
+                          variant="outlined"
                         />
                       ) : (
-                          <Typography
-                            className={classes.text}
-                          >
-                            {data.value}
-                          </Typography>
-                        )}
+                        <TextField
+                          defaultValue={data.value}
+                          fullWidth
+                          variant="outlined"
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          className={classes.noHover}
+                        />
+                      )}
                     </div>
                   </Grid>
                 </Grid>

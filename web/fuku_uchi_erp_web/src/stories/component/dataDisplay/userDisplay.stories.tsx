@@ -18,7 +18,7 @@ const template = (args: any) => {
   return (
     <>
       <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-        <UserDisplay></UserDisplay>
+        <UserDisplay familiyName="佐藤" givenName="伸明"></UserDisplay>
       </ThemeProvider>
     </>
   );
