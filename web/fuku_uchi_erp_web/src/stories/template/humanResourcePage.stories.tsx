@@ -13,49 +13,22 @@ import TimecardGadget from "../../view/organism/timecardGadget/timecardGadget";
 import actions from "../argsValues/timecardActionValue";
 import timecardTableData from "../argsValues/timecardTableValue";
 import { TimecardTableCulumns } from "../../view/component/dataDisplay/dataTable/timecardTable";
+import UserDisplay from "../../view/component/dataDisplay/userDisplay/userDisplay";
+import GridData from "../../view/component/dataDisplay/gridData/gridData";
+import gridDataValue from "../argsValues/gridDataValue";
+import Grid from "@material-ui/core/Grid";
 
 export default {
-title: "WIP/template/applicationPage/timecard",
+  title: "WIP/template/applicationPage/humanResource",
   argTypes: {
     sidebarState: {
       control: { type: "select", options: ["permanent", "open", "close"] },
-},
+    },
     primaryColor: { control: "color" },
     secondaryColor: { control: "color" },
   },
 };
 
-const displayCulumns: (keyof TimecardTableCulumns)[] = [
-  "date",
-  "intime",
-  "outtime",
-];
-
-const timecardTab: TabType[] = [
-  {
-    id: 1,
-    label: "出退勤",
-    icon: AddToHomeScreenIcon,
-    component: (
-      <div>
-        <TimecardGadget actions={actions} />
-      </div>
-    ),
-  },
-  {
-    id: 2,
-    label: "出退勤履歴",
-    icon: AccountTreeIcon,
-    component: (
-      <div>
-        <TimecardTable
-          data={timecardTableData}
-          displayCulumns={displayCulumns}
-        />
-      </div>
-    ),
-  },
-];
 
 const template = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
@@ -70,7 +43,21 @@ const template = (args: any) => {
           links={args.links}
           sidebarState={args.sidebarState}
         >
-          <Tabbar tabs={args.tabs} />
+          <UserDisplay familiyName="佐藤" givenName="伸明" /><Grid container spacing={3}>
+            <Grid item>
+              <GridData
+                data={gridDataValue.base}
+                gridName="基本情報"
+                editable={args.editable}
+              />
+            </Grid>
+            <Grid item>
+              <GridData data={gridDataValue.work} gridName="勤務情報" />
+            </Grid>
+            <Grid item>
+              <GridData data={gridDataValue.welware} gridName="福利厚生" />
+            </Grid>
+          </Grid>
         </ApplicationFrame>
       </ThemeProvider>
     </>
@@ -85,5 +72,4 @@ draft.args = {
   sidebarWidth: defaultTheme.layout.sidebar.width,
   links: sidebarLinks,
   sidebarState: "permanent",
-  tabs: timecardTab,
 };

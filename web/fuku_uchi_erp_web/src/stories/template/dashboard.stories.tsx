@@ -4,15 +4,6 @@ import ApplicationFrame from "../../view/template/applicationFrame/applicationFr
 import sidebarLinks from "../argsValues/sidebarLinksValue";
 import defaultTheme from "../../view/theme/applicationTheme";
 import Tabbar from "../../view/component/navigation/tabbar/tabbar";
-import AddToHomeScreenIcon from "@material-ui/icons/AddToHomeScreen";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import { TabType } from "../../view/component/navigation/tabbar/tabbar";
-import TimecardTable from "../../view/component/dataDisplay/dataTable/timecardTable";
-import { DateTime } from "luxon";
-import TimecardGadget from "../../view/organism/timecardGadget/timecardGadget";
-import actions from "../argsValues/timecardActionValue";
-import timecardTableData from "../argsValues/timecardTableValue";
-import { TimecardTableCulumns } from "../../view/component/dataDisplay/dataTable/timecardTable";
 
 export default {
 title: "WIP/template/applicationPage/timecard",
@@ -24,38 +15,6 @@ title: "WIP/template/applicationPage/timecard",
     secondaryColor: { control: "color" },
   },
 };
-
-const displayCulumns: (keyof TimecardTableCulumns)[] = [
-  "date",
-  "intime",
-  "outtime",
-];
-
-const timecardTab: TabType[] = [
-  {
-    id: 1,
-    label: "出退勤",
-    icon: AddToHomeScreenIcon,
-    component: (
-      <div>
-        <TimecardGadget actions={actions} />
-      </div>
-    ),
-  },
-  {
-    id: 2,
-    label: "出退勤履歴",
-    icon: AccountTreeIcon,
-    component: (
-      <div>
-        <TimecardTable
-          data={timecardTableData}
-          displayCulumns={displayCulumns}
-        />
-      </div>
-    ),
-  },
-];
 
 const template = (args: any) => {
   defaultTheme.palette.primary.main = args.primaryColor;
@@ -85,5 +44,4 @@ draft.args = {
   sidebarWidth: defaultTheme.layout.sidebar.width,
   links: sidebarLinks,
   sidebarState: "permanent",
-  tabs: timecardTab,
 };
