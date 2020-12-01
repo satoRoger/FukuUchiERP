@@ -1,0 +1,161 @@
+Using base image: gcr.io/endpoints-release/endpoints-runtime-serverless:2
+Determining fully-qualified ESP version for tag: 2
+Building image for ESP version: 2.20.0
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 14506    0 14506    0     0  15032      0 --:--:-- --:--:-- --:--:-- 15016
++ cat
++ NEW_IMAGE=gcr.io/fukuuchierp/endpoints-runtime-serverless:2.20.0-fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app-2020-12-01r20
++ gcloud builds submit --tag gcr.io/fukuuchierp/endpoints-runtime-serverless:2.20.0-fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app-2020-12-01r20 . --project=fukuuchierp
+Creating temporary tarball archive of 2 file(s) totalling 14.5 KiB before compression.
+Uploading tarball of [.] to [gs://fukuuchierp_cloudbuild/source/1606805679.65-1d4699bb387c4e48ad4fbbf0aa6e3f15.tgz]
+Created [https://cloudbuild.googleapis.com/v1/projects/fukuuchierp/builds/89ba3d61-7343-4af9-943c-bad795b0b8e9].
+Logs are available at [https://console.cloud.google.com/cloud-build/builds/89ba3d61-7343-4af9-943c-bad795b0b8e9?project=1023466230161].
+--------------------------------------------------------------------------- REMOTE BUILD OUTPUT ----------------------------------------------------------------------------
+starting build "89ba3d61-7343-4af9-943c-bad795b0b8e9"
+
+FETCHSOURCE
+Fetching storage object: gs://fukuuchierp_cloudbuild/source/1606805679.65-1d4699bb387c4e48ad4fbbf0aa6e3f15.tgz#1606805681220407
+Copying gs://fukuuchierp_cloudbuild/source/1606805679.65-1d4699bb387c4e48ad4fbbf0aa6e3f15.tgz#1606805681220407...
+/ [0 files][    0.0 B/  2.4 KiB]                                                / [1 files][  2.4 KiB/  2.4 KiB]                                                
+Operation completed over 1 objects/2.4 KiB.                                      
+BUILD
+Already have image (with digest): gcr.io/cloud-builders/docker
+Sending build context to Docker daemon  17.41kB
+Step 1/7 : FROM gcr.io/endpoints-release/endpoints-runtime-serverless:2
+2: Pulling from endpoints-release/endpoints-runtime-serverless
+e4c3d3e4f7b0: Already exists
+101c41d0463b: Already exists
+8275efcd805f: Already exists
+751620502a7a: Already exists
+0a5e725150a2: Already exists
+9ab4bf1101f3: Pulling fs layer
+9ba108bf0aed: Pulling fs layer
+eac75d8e87c4: Pulling fs layer
+b7d6e626c70b: Pulling fs layer
+110f9107d83a: Pulling fs layer
+4d55d5168c75: Pulling fs layer
+f23df1b54d22: Pulling fs layer
+2fffbd372eb9: Pulling fs layer
+d9456be86bf8: Pulling fs layer
+7e30af0e0409: Pulling fs layer
+b7d6e626c70b: Waiting
+110f9107d83a: Waiting
+4d55d5168c75: Waiting
+f23df1b54d22: Waiting
+2fffbd372eb9: Waiting
+d9456be86bf8: Waiting
+7e30af0e0409: Waiting
+eac75d8e87c4: Verifying Checksum
+eac75d8e87c4: Download complete
+b7d6e626c70b: Verifying Checksum
+b7d6e626c70b: Download complete
+9ab4bf1101f3: Verifying Checksum
+9ab4bf1101f3: Download complete
+4d55d5168c75: Verifying Checksum
+4d55d5168c75: Download complete
+9ba108bf0aed: Verifying Checksum
+9ba108bf0aed: Download complete
+f23df1b54d22: Verifying Checksum
+f23df1b54d22: Download complete
+110f9107d83a: Verifying Checksum
+110f9107d83a: Download complete
+d9456be86bf8: Verifying Checksum
+d9456be86bf8: Download complete
+7e30af0e0409: Verifying Checksum
+7e30af0e0409: Download complete
+9ab4bf1101f3: Pull complete
+2fffbd372eb9: Verifying Checksum
+2fffbd372eb9: Download complete
+9ba108bf0aed: Pull complete
+eac75d8e87c4: Pull complete
+b7d6e626c70b: Pull complete
+110f9107d83a: Pull complete
+4d55d5168c75: Pull complete
+f23df1b54d22: Pull complete
+2fffbd372eb9: Pull complete
+d9456be86bf8: Pull complete
+7e30af0e0409: Pull complete
+Digest: sha256:0264033fd5877658aded7a4f4f059da4dc57984e94bc0b4f234244d6e289ff4a
+Status: Downloaded newer image for gcr.io/endpoints-release/endpoints-runtime-serverless:2
+ ---> ceedfd327a2d
+Step 2/7 : USER root
+ ---> Running in e92db5bf4fe5
+Removing intermediate container e92db5bf4fe5
+ ---> 1e0549c3562d
+Step 3/7 : ENV ENDPOINTS_SERVICE_PATH /etc/endpoints/service.json
+ ---> Running in e19d7da85bb6
+Removing intermediate container e19d7da85bb6
+ ---> b23077860112
+Step 4/7 : COPY service.json ${ENDPOINTS_SERVICE_PATH}
+ ---> 90ef5ca0e8e5
+Step 5/7 : RUN chown -R envoy:envoy ${ENDPOINTS_SERVICE_PATH} && chmod -R 755 ${ENDPOINTS_SERVICE_PATH}
+ ---> Running in 576d588d687f
+Removing intermediate container 576d588d687f
+ ---> 5e6f863ea546
+Step 6/7 : USER envoy
+ ---> Running in f9d4e5331fb0
+Removing intermediate container f9d4e5331fb0
+ ---> 5d381c24076a
+Step 7/7 : ENTRYPOINT ["/env_start_proxy.py"]
+ ---> Running in 5133433170e6
+Removing intermediate container 5133433170e6
+ ---> 1356508e625e
+Successfully built 1356508e625e
+Successfully tagged gcr.io/fukuuchierp/endpoints-runtime-serverless:2.20.0-fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app-2020-12-01r20
+PUSH
+Pushing gcr.io/fukuuchierp/endpoints-runtime-serverless:2.20.0-fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app-2020-12-01r20
+The push refers to repository [gcr.io/fukuuchierp/endpoints-runtime-serverless]
+68f95714c8f1: Preparing
+1278533bac3b: Preparing
+cc0711ff3fa2: Preparing
+70a765c35b9a: Preparing
+195c6b0dfb37: Preparing
+f97e042a9d9e: Preparing
+be71e4c92289: Preparing
+1f22e3d756ca: Preparing
+00b1a6ab6acd: Preparing
+28c41b4dd660: Preparing
+36957997ca7a: Preparing
+5c4d527d6b3a: Preparing
+a933681cf349: Preparing
+f49d20b92dc8: Preparing
+fe342cfe5c83: Preparing
+630e4f1da707: Preparing
+9780f6d83e45: Preparing
+f97e042a9d9e: Waiting
+be71e4c92289: Waiting
+1f22e3d756ca: Waiting
+00b1a6ab6acd: Waiting
+28c41b4dd660: Waiting
+36957997ca7a: Waiting
+5c4d527d6b3a: Waiting
+a933681cf349: Waiting
+f49d20b92dc8: Waiting
+fe342cfe5c83: Waiting
+630e4f1da707: Waiting
+9780f6d83e45: Waiting
+cc0711ff3fa2: Layer already exists
+70a765c35b9a: Layer already exists
+195c6b0dfb37: Layer already exists
+f97e042a9d9e: Layer already exists
+be71e4c92289: Layer already exists
+1f22e3d756ca: Layer already exists
+00b1a6ab6acd: Layer already exists
+28c41b4dd660: Layer already exists
+36957997ca7a: Layer already exists
+5c4d527d6b3a: Layer already exists
+a933681cf349: Layer already exists
+f49d20b92dc8: Layer already exists
+630e4f1da707: Layer already exists
+fe342cfe5c83: Layer already exists
+9780f6d83e45: Layer already exists
+1278533bac3b: Pushed
+68f95714c8f1: Pushed
+2.20.0-fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app-2020-12-01r20: digest: sha256:4eba27bfcd2d48086e4880da52b48fb581eae390c324a1edae061259fe1b34ba size: 3894
+DONE
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ID                                    CREATE_TIME                DURATION  SOURCE                                                                                 IMAGES                                                                                                      STATUS
+89ba3d61-7343-4af9-943c-bad795b0b8e9  2020-12-01T06:54:41+00:00  23S       gs://fukuuchierp_cloudbuild/source/1606805679.65-1d4699bb387c4e48ad4fbbf0aa6e3f15.tgz  gcr.io/fukuuchierp/endpoints-runtime-serverless:2.20.0-fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app-2020-12-01r20  SUCCESS
+rm: cannot remove '/tmp/docker.FSII': Device or resource busy

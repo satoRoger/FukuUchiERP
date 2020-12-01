@@ -1,0 +1,4 @@
+CLOUD_RUN_SERVICE_NAME=fuku-uchi-erp
+CLOUD_RUN_HOSTNAME=fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app
+ESP_PROJECT_ID=fukuuchierp
+REGION=us-central1

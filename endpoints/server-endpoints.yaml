@@ -1,0 +1,23 @@
+swagger: "2.0"
+info:
+  title: FukuUchiERP GCF Endpoints
+  description: Google Functionsをバックエンドとするエンドポイント
+  version: 1.0.0
+host: fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /timecards:
+    get:
+      summary: 全ユーザのタイムカードを取得
+      operationId: getTimecards
+      x-google-backend:
+        address: https://us-central1-fukuuchierp.cloudfunctions.net/helloGET
+        protocol: h2
+      responses:
+        "200":
+          description: A successful response
+          schema:
+            type: string
