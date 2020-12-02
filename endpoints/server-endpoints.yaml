@@ -4,6 +4,15 @@ info:
   description: Google Functionsをバックエンドとするエンドポイント
   version: 1.0.0
 host: fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app
+tags:
+  - name: "timecards"
+    description: "タイムカードに関するAPI"
+  - name: "workflow"
+    description: "申請に関するAPI"
+  - name: "schedule"
+    description: "スケジュールに関するAPI"
+  - name: "resource"
+    description: "人材・施設に関するAPI"
 schemes:
   - https
 produces:
@@ -11,13 +20,75 @@ produces:
 paths:
   /timecards:
     get:
+      tags:
+        - "timecards"
       summary: 全ユーザのタイムカードを取得
       operationId: getTimecards
       x-google-backend:
-        address: https://us-central1-fukuuchierp.cloudfunctions.net/helloGET
+        address: https://us-central1-fukuuchierp.cloudfunctions.net/
+        path_translation: "APPEND_PATH_TO_ADDRESS"
         protocol: h2
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Timecards"
       responses:
         "200":
           description: A successful response
           schema:
-            type: string
+            $ref: "#/definitions/TimecardsResponse"
+  /timecards/{id}:
+    get:
+      tags:
+        - "timecards"
+      summary: 特定のタイムカードを取得
+      operationId: getOneTimecard
+      x-google-backend:
+        address: https://us-central1-fukuuchierp.cloudfunctions.net/
+        path_translation: "APPEND_PATH_TO_ADDRESS"
+        protocol: h2
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: A successful response
+          schema:
+            $ref: "#/definitions/TimecardsResponse"
+
+definitions:
+  Timecards:
+    type: "object"
+    properties:
+      since:
+        type: "string"
+        example: "1993-03-03 12:12:12"
+      until:
+        type: "string"
+        example: "1993-03-04 12:12:12"
+
+  TimecardsResponse:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 1
+        attendType:
+          type: "string"
+          example: "attend"
+        date:
+          type: "string"
+          example: "1993-07-24 12:12:12"
+        longtitude:
+          type: "number"
+          example: 0.0
+        latitude:
+          type: "number"
+          example: 0.0
