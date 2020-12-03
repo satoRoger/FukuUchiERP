@@ -1,1 +1,3 @@
-//export function timecardList(request:) {}
+const timecards = 3;
+
+export default timecards
