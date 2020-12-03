@@ -3,7 +3,7 @@ import Timecard from "../../entity/timecard/Timecard";
 import PunchAction from "./punchAction";
 import TimecardRepository from "../../repository/timecard/timecardRepository";
 import { inject } from "inversify";
-import Types from "../../../../../di/types";
+import Types from "../../../../../util/di/types";
 import Coordinate from "../../valueObject/coordinate";
 import EntityFactory from "../../entity/entityFactory";
 import PunchSpecification from "../specification/punchSpecification";

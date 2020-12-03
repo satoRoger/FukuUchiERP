@@ -1,4 +1,4 @@
-functions/node_modules/*
+**/node_modules/**
 functions/dist/*
 functions/log/*
 functions/coverage/*

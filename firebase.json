@@ -1,7 +1,21 @@
 {
   "functions": {
-    "runtime":"nodejs10",
-    "predeploy": [
+    "runtime": "nodejs12",
+    "predeploy": [],
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "./web/fuku_uchi_erp/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }

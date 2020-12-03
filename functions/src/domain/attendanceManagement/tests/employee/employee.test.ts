@@ -7,8 +7,8 @@ import EntityEquivalent from "../../src/service/entityEquivalent";
 import Coordinate from "../../src/valueObject/coordinate";
 import EmployeeId from "../../src/valueObject/employeeId";
 import TimecardRepository from "../../src/repository/timecard/timecardRepository";
-import container from "@/di/inversify.config";
-import Types from "@/di/types";
+import container from "@/util/di/inversify.config";
+import Types from "@/util/di/types";
 import { DateTime } from "luxon";
 import Timecard from "../../src/entity/timecard/Timecard";
 

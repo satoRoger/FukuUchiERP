@@ -3,7 +3,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import React from "react";
 import useStyles from "./sidebar.css";
-import Link from "next/link";
 import clsx from "clsx";
 import { Typography } from "@material-ui/core";
 

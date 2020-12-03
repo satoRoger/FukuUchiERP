@@ -3,7 +3,7 @@ import PunchSpecification from "./punchSpecification";
 import Employee from "../../entity/employee/employee";
 import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
-import Types from "@/di/types";
+import Types from "@/util/di/types";
 import { DateTime, Duration } from "luxon";
 import { errorMessageList } from "@/domain/attendanceManagement/src/common/message";
 import { dayStart, isString } from "../../common/utility";
