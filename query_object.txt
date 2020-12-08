@@ -1,5 +1,5 @@
 
-
+＜controller＞
 //front routing
 timecards.get("/", (req: express.Request, res: express.Response) => {
   const timecardsQuery = mapToTimecardsQueryFromRequest(req);
@@ -24,3 +24,22 @@ function getTimecards:TimecardsResponse(query:TimecardQuery){
 	return iterator.getTimecards(query);
 }
 
+</controller>
+
+<iterator>
+[logic]
+function getTimecards:TimecardsResponse(query:TimecardQuery){
+	return 
+}
+
+[entity mapping]
+function mapToTimecardFromTimecardRequest(request:TimecardsRequest){
+	return Timecard;
+}
+
+function mapToTimecardResponseFromTimecardsList(timecardsList:Timecard[]){
+	return timecards;
+}
+
+
+</iterator>
