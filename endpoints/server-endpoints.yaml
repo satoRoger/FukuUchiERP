@@ -59,6 +59,8 @@ paths:
           description: A successful response
           schema:
             $ref: "#/definitions/TimecardsResponse"
+  /users/timecards:
+    get:
 
 definitions:
   Timecards:
@@ -80,7 +82,7 @@ definitions:
           type: "integer"
           format: "int64"
           example: 1
-        attendType:
+        cardType:
           type: "string"
           example: "attend"
         date:
@@ -92,3 +94,6 @@ definitions:
         latitude:
           type: "number"
           example: 0.0
+        user_id:
+          type:"string"
+          example:"taro"
