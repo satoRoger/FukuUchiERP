@@ -1,0 +1,18 @@
+export default interface TimecardQuery{
+	user_id:string,
+	login_id:string,
+	since:DateTime,
+	until:DateTime
+}
+
+type TimecardObject={
+	id:number,
+	cardType:CardType,
+	date:DateTime,
+	longitude:number,
+	latitude:number
+}
+
+export defalt interface TimecardResponce{
+	data:TimecardObject[]
+}

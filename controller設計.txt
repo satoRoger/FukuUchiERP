@@ -1,0 +1,11 @@
+<view>-><end points>->[front route]->[object mapping]->[validate]->[back route]-><iterator>
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                          <controller>
+                                          
+
+[controller]と[iterator]間のやり取りオブジェクトを[parameter object]と呼ぶ
+
+[iterator]と[domain]間のやり取りを[entity]で行う
+
+
+
