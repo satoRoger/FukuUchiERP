@@ -1,9 +1,10 @@
 /timecards?since=date&until=date
 /timecards/{id}
+/timecards/date/today
 /timecards/date/{2020-11-11}
+/timecards/type/attend?since=date&until=date
 
-/users/timecards?since=date&until=date
-/users/{id}
+/users/{id}/timecards?since=date&until=date
 /users/{id}/address
 /users/vacations
 
@@ -20,3 +21,6 @@
 /workflows/wait?current-approver=id
 /workflows/vacations?drafter=id&since=date&until=date
 /workflows/vacations/wait
+
+/announce
+/announce/{group}
