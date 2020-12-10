@@ -59,7 +59,7 @@ paths:
           description: A successful response
           schema:
             $ref: "#/definitions/TimecardsResponse"
-  /users/timecards:
+  /users/{id}/timecards:
     get:
 
 definitions:

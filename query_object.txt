@@ -41,5 +41,4 @@ function mapToTimecardResponseFromTimecardsList(timecardsList:Timecard[]){
 	return timecards;
 }
 
-
 </iterator>
