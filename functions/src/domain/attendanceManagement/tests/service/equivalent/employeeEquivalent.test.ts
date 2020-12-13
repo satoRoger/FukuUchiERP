@@ -1,6 +1,6 @@
-import EmployeeId from 'src/domain/attendanceManagement/src/valueObject/employeeId';
 import Employee from '../../../src/entity/employee/employee';
 import EmployeeEquivalent from '../../../src/service/equivalent/employeeEquivalent';
+import EmployeeId from '../../../src/valueObject/employeeId';
 describe('従業員等価比較ロジック', () => {
   let employeeA: Employee;
   let employeeB: Employee;

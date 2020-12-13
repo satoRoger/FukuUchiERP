@@ -8,8 +8,8 @@ import Coordinate from "../../valueObject/coordinate";
 import EntityFactory from "../../entity/entityFactory";
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
-import logger from "src/util/logger/logger";
 import AttendanceSpecification from '../specification/attendanceSpecification';
+import logger from "../../../../../util/logger/logger";
 
 export default class PunchAttendanceAction implements PunchAction {
   constructor(

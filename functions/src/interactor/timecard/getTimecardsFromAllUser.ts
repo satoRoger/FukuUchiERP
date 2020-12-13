@@ -1,8 +1,8 @@
 import TimecardsQuery from "../InteractorObject/timecardsQuery";
 import TimecardsResponseInterface from "../InteractorObject/timecardsResponse";
 import { DateTime } from "luxon";
-import container from "src/util/di/inversify.config";
-import Types from "src/util/di/types";
+import container from "../../util/di/inversify.config";
+import Types from "../../util/di/types";
 
 function GetTimecarsFromAllUsers(
   query: TimecardsQuery

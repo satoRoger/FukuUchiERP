@@ -6,7 +6,7 @@ import { DateTime } from "luxon";
 import PunchLeaveworkAction from "./action/punchLeaveworkAction";
 import PunchTakebreakAction from './action/punchTakebreakAction';
 import PunchEndbreakAction from './action/punchEndbreakAction';
-import logger from "src/util/logger/logger";
+import logger from "../../../../util/logger/logger";
 
 export default class PunchActionFactory {
   @logger.debug.traceMethodCall

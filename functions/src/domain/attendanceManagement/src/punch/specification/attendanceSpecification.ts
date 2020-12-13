@@ -3,11 +3,11 @@ import PunchSpecification from "./punchSpecification";
 import Employee from "../../entity/employee/employee";
 import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
-import Types from "src/util/di/types";
 import { DateTime } from "luxon";
 import logger from "../../../../../util/logger/logger";
 import { dayStart, isString } from "../../common/utility";
 import { errorMessageList } from "../../common/message";
+import Types from "../../../../../util/di/types";
 
 export default class AttendanceSpecification implements PunchSpecification {
   constructor(

@@ -3,11 +3,11 @@ import PunchSpecification from "./punchSpecification";
 import Employee from "../../entity/employee/employee";
 import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
-import Types from "src/util/di/types";
 import { DateTime, Duration } from "luxon";
-import { errorMessageList } from "src/domain/attendanceManagement/src/common/message";
 import { dayStart, isString } from "../../common/utility";
 import logger from "../../../../../util/logger/logger";
+import Types from "../../../../../util/di/types";
+import { errorMessageList } from "../../common/message";
 
 export default class TakebreakSpecification implements PunchSpecification {
   constructor(

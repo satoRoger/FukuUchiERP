@@ -1,9 +1,9 @@
-import Timecard from "src/domain/attendanceManagement/src/entity/timecard/Timecard";
-import Coordinate from "src/domain/attendanceManagement/src/valueObject/coordinate";
 import EntityFactory from "../../../src/entity/entityFactory";
 import CardType from "../../../src/valueObject/cardtype";
 import TimecardEquivalent from "../../../src/service/equivalent/timecardEquivalent";
 import { DateTime } from 'luxon';
+import Timecard from "../../../src/entity/timecard/Timecard";
+import Coordinate from "../../../src/valueObject/coordinate";
 describe("タイムカード等価比較ロジック", () => {
   let timecardA: Timecard;
   let timecardB: Timecard;
