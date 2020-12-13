@@ -1,0 +1,28 @@
+[debug] [2020-12-13T19:07:16.199Z] ----------------------------------------------------------------------
+[debug] [2020-12-13T19:07:16.203Z] Command:       W:\nodejs\node.exe C:\Users\pyomt\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2020-12-13T19:07:16.204Z] CLI Version:   8.17.0
+[debug] [2020-12-13T19:07:16.204Z] Platform:      win32
+[debug] [2020-12-13T19:07:16.204Z] Node Version:  v12.16.1
+[debug] [2020-12-13T19:07:16.206Z] Time:          Mon Dec 14 2020 04:07:16 GMT+0900 (GMT+09:00)
+[debug] [2020-12-13T19:07:16.206Z] ----------------------------------------------------------------------
+[debug] [2020-12-13T19:07:16.206Z] 
+[debug] [2020-12-13T19:07:16.218Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-13T19:07:16.219Z] > authorizing via signed-in user
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2020-12-13T19:07:18.243Z] [hub] writing locator at C:\Users\pyomt\AppData\Local\Temp\hub-fukuuchierp.json
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub\u001b[22m"}}
+[info] +  functions: Using node@12 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@12 from host."}}
+[debug] [2020-12-13T19:07:20.302Z] defaultcredentials: writing to file C:\Users\pyomt\AppData\Roaming\firebase\satounbd_gmail_com_application_default_credentials.json
+[debug] [2020-12-13T19:07:20.306Z] Setting GAC to C:\Users\pyomt\AppData\Roaming\firebase\satounbd_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\pyomt\\AppData\\Roaming\\firebase\\satounbd_gmail_com_application_default_credentials.json"}}
+[debug] [2020-12-13T19:07:24.325Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2020-12-13T19:07:24.325Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2020-12-13T19:07:24.325Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\pyomt\\.cache\\firebase\\emulators\\ui-v1.3.0\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\pyomt\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.3.0\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2020-12-13T19:07:24.456Z] Web / API server started at http://localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at http://localhost:4000\n"}}
+[info] i  functions: Watching "C:\Users\pyomt\Desktop\FukuUchi_ERP\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\pyomt\\Desktop\\FukuUchi_ERP\\functions\" for Cloud Functions..."}}
+[debug] [2020-12-13T19:07:24.851Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2020-12-13T19:07:24.851Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2020-12-13T19:07:24.851Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2020-12-13T19:07:24.852Z] [worker-~diagnostic~-632c9f73-dce7-4819-9414-480fd413973b]: Assigning socketPath: \\?\pipe\C:\Users\pyomt\Desktop\FukuUchi_ERP\functions\5360 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-632c9f73-dce7-4819-9414-480fd413973b]: Assigning socketPath: \\\\?\\pipe\\C:\\Users\\pyomt\\Desktop\\FukuUchi_ERP\\functions\\5360"}}
+[debug] [2020-12-13T19:07:24.852Z] [worker-~diagnostic~-632c9f73-dce7-4819-9414-480fd413973b]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-632c9f73-dce7-4819-9414-480fd413973b]: BUSY"}}

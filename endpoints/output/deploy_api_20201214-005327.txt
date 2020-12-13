@@ -1,0 +1,11 @@
+Waiting for async operation operations/serviceConfigs.fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app:5e645afa-6c4e-4000-8938-0c307383c7a5 to complete...
+Operation finished successfully. The following command can describe the Operation details:
+ gcloud endpoints operations describe operations/serviceConfigs.fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app:5e645afa-6c4e-4000-8938-0c307383c7a5
+
+Waiting for async operation operations/rollouts.fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app:3639768e-f70e-47d1-a663-e93a56669498 to complete...
+Operation finished successfully. The following command can describe the Operation details:
+ gcloud endpoints operations describe operations/rollouts.fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app:3639768e-f70e-47d1-a663-e93a56669498
+
+Service Configuration [2020-12-13r11] uploaded for service [fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app]
+
+To manage your API, go to: https://console.cloud.google.com/endpoints/api/fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app/overview?project=fukuuchierp

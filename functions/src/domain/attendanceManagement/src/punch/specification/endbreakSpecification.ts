@@ -3,9 +3,9 @@ import PunchSpecification from "./punchSpecification";
 import Employee from "../../entity/employee/employee";
 import Coordinate from "../../valueObject/coordinate";
 import { inject } from "inversify";
-import Types from "@/util/di/types";
+import Types from "src/util/di/types";
 import { DateTime, Duration } from "luxon";
-import { errorMessageList } from "@/domain/attendanceManagement/src/common/message";
+import { errorMessageList } from "src/domain/attendanceManagement/src/common/message";
 import { dayStart, isString } from "../../common/utility";
 import logger from "../../../../../util/logger/logger";
 

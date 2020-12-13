@@ -1,13 +1,11 @@
 import "reflect-metadata";
 //import RepositoryOnMemory from "@/adapter/src/repository/repositoryOnMemory/repositoryOnMemory";
-import TimecardRepository from "@/domain/attendanceManagement/src/repository/timecard/timecardRepository";
+import TimecardRepository from "src/domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import { Container } from "inversify";
 import DevelopTypes from "./developTypes";
+import TimecardsResponseInterface from '../../interactor/InteractorObject/timecardsResponse';
+import TimecardsResponse from '../../controller/contollerObject/timecardResponse';
 
 const dcontainer = new Container();
-/*
-dcontainer
-  .bind<TimecardRepository>(DevelopTypes.TimecardRepository)
-  .to(RepositoryOnMemory);
-*/
+dcontainer.bind<TimecardsResponseInterface>(DevelopTypes.TimecardsResponse).to(TimecardsResponse);
 export default dcontainer;

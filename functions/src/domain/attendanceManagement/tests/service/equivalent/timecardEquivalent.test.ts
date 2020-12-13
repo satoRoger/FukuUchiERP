@@ -1,5 +1,5 @@
-import Timecard from "@/domain/attendanceManagement/src/entity/timecard/Timecard";
-import Coordinate from "@/domain/attendanceManagement/src/valueObject/coordinate";
+import Timecard from "src/domain/attendanceManagement/src/entity/timecard/Timecard";
+import Coordinate from "src/domain/attendanceManagement/src/valueObject/coordinate";
 import EntityFactory from "../../../src/entity/entityFactory";
 import CardType from "../../../src/valueObject/cardtype";
 import TimecardEquivalent from "../../../src/service/equivalent/timecardEquivalent";

@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "FukuUchiERP GCF Endpoints",
     "description": " Google Functionsをバックエンドとするエンドポイント",
-    "version": "1.0.0",
-    "title": "FukuUchiERP GCF Endpoints"
+    "version": "1.0.0"
   },
   "host": "fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app",
   "basePath": "/v1",
@@ -37,7 +37,7 @@
         "summary": "全ユーザのタイムカードを取得",
         "operationId": "getTimecards",
         "x-google-backend": {
-          "address": " https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
           "protocol": "h2"
         },
@@ -45,14 +45,12 @@
           {
             "in": "query",
             "name": "since",
-            "required": true,
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
             "name": "until",
-            "required": true,
             "type": "string",
             "format": "date-time"
           }
@@ -72,6 +70,11 @@
         "tags": ["timecards"],
         "summary": "特定のタイムカードを取得",
         "operationId": "getOneTimecard",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
         "parameters": [
           {
             "in": "path",
@@ -79,6 +82,45 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#definitions/TimecardsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/timecards": {
+      "get": {
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "operationId": "getUserTimecards",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "name": "since",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "until",
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {

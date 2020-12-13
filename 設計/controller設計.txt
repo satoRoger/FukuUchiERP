@@ -3,9 +3,9 @@
                                           <controller>
                                           
 
-[controller]��[iterator]�Ԃ̂����I�u�W�F�N�g��[parameter object]�ƌĂ�
+[controller]と[iterator]間のやり取りオブジェクトを[parameter object]と呼ぶ
 
-[iterator]��[domain]�Ԃ̂�����[entity]�ōs��
+[iterator]と[domain]間のやり取りを[entity]で行う
 
 
 

@@ -31,16 +31,12 @@ paths:
       parameters:
         - in: query
           name: "since"
-          required: true
-          schema:
-            type: "string"
-            format: "date-time"
+          type: "string"
+          format: "date-time"
         - in: query
           name: "until"
-          required: true
-          schema:
-            type: "string"
-            format: "date-time"
+          type: "string"
+          format: "date-time"
 
       responses:
         "200":

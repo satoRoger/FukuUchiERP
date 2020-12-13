@@ -8,7 +8,7 @@ import Coordinate from "../../valueObject/coordinate";
 import EntityFactory from "../../entity/entityFactory";
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
-import logger from "@/util/logger/logger";
+import logger from "src/util/logger/logger";
 import TakebreakSpecification from '../specification/takebreakSpecification';
 
 export default class PunchTakebreakAction implements PunchAction {

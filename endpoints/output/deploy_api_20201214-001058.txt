@@ -1,0 +1,14 @@
+ERROR: (gcloud.endpoints.services.deploy) INVALID_ARGUMENT: Cannot convert to service config.
+'location: "server-endpoints.json: Operation \'get\' in path \'/timecards\'"
+message: "Operation does not require an API key; callers may invoke the method without specifying an associated API-consuming project. To enable API key all the SecurityRequirement Objects (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#security-requirement-object) inside security definition must reference at least one SecurityDefinition of type : \'apiKey\'."
+
+ location: "server-endpoints.json: Operation \'get\' in path \'/timecards/{timecardId}\'"
+message: "Operation does not require an API key; callers may invoke the method without specifying an associated API-consuming project. To enable API key all the SecurityRequirement Objects (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#security-requirement-object) inside security definition must reference at least one SecurityDefinition of type : \'apiKey\'."
+
+ location: "server-endpoints.json: Operation \'get\' in path \'/users/{userId}/timecards\'"
+message: "Operation does not require an API key; callers may invoke the method without specifying an associated API-consuming project. To enable API key all the SecurityRequirement Objects (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#security-requirement-object) inside security definition must reference at least one SecurityDefinition of type : \'apiKey\'."
+
+ location: "unknown location"
+kind: ERROR
+message: "http: undefined field \'userId\' on message \'GetUserTimecardsRequest\'."
+'
