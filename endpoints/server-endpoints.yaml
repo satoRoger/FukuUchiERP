@@ -11,8 +11,8 @@ tags:
     description: "申請に関するAPI"
   - name: "schedule"
     description: "スケジュールに関するAPI"
-  - name: "resource"
-    description: "人材・施設に関するAPI"
+  - name: "user"
+    description: "人に関するAPI"
 schemes:
   - https
 produces:
@@ -29,11 +29,19 @@ paths:
         path_translation: "APPEND_PATH_TO_ADDRESS"
         protocol: h2
       parameters:
-        - in: "body"
-          name: "body"
+        - in: query
+          name: "since"
           required: true
           schema:
-            $ref: "#/definitions/Timecards"
+            type: "string"
+            format: "date-time"
+        - in: query
+          name: "until"
+          required: true
+          schema:
+            type: "string"
+            format: "date-time"
+
       responses:
         "200":
           description: A successful response
@@ -59,8 +67,6 @@ paths:
           description: A successful response
           schema:
             $ref: "#/definitions/TimecardsResponse"
-  /users/{id}/timecards:
-    get:
 
 definitions:
   Timecards:
@@ -95,5 +101,5 @@ definitions:
           type: "number"
           example: 0.0
         user_id:
-          type:"string"
-          example:"taro"
+          type: "string"
+          example: "taro"

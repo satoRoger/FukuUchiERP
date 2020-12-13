@@ -27,8 +27,8 @@ if [ $DATE = ""]; then
     echo "DATE is empty"
     exit
 fi
-gcloud endpoints services deploy server-endpoints.yaml --project $ESP_PROJECT_ID > "./output/deploy_yaml_${DATE}.txt" 2>&1
-CONFIG_ID=$(cat .\/output\/deploy_yaml_${DATE}.txt | egrep -o -m 1 "202[0-9]-[0-9][0-9]-[0-9][0-9]r[0-9]+")
+gcloud endpoints services deploy server-endpoints.json --project $ESP_PROJECT_ID > "./output/deploy_api_${DATE}.txt" 2>&1
+CONFIG_ID=$(cat .\/output\/deploy_api_${DATE}.txt | egrep -o -m 1 "202[0-9]-[0-9][0-9]-[0-9][0-9]r[0-9]+")
 if [ $CONFIG_ID = ""]; then
     echo "CONFIG_ID is empty"
     exit
