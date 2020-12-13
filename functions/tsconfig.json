@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+ //   "baseUrl": "./",
     "target": "es5",
     "lib": ["es6", "dom"],
     "types": ["reflect-metadata", "jest", "node"],

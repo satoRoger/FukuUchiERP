@@ -4,7 +4,7 @@ import AttendanceSpecification from "./specification/attendanceSpecification";
 import LeaveworkSpecification from "./specification/leaveworkSpecification";
 import EndbreakSpecification from './specification/endbreakSpecification';
 import TakebreakSpecification from "./specification/takebreakSpecification";
-import logger from "src/util/logger/logger";
+import logger from "../../../../util/logger/logger";
 
 export default class PunchSpecificationFactory {
   @logger.debug.traceMethodCall
