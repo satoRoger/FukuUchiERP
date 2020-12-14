@@ -1,5 +1,8 @@
 import { DateTime } from "luxon";
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import User from "./user";
+
+type CardType = "workin" | "workout" | "breakin" | "breakout";
 
 @Entity()
 export default class Timecard {
@@ -10,7 +13,7 @@ export default class Timecard {
   public date: DateTime;
 
   @Column({ type: "varchar" })
-  public cardType:  ;
+  public cardType: CardType;
 
   @OneToOne(type => User, user => user.id)
   public userId: number
