@@ -9,7 +9,7 @@ export default class TimecardModel {
   public date: DateTime;
 
   @Column({ type: "varchar" })
-  public cardType: string ;
+  public cardType:  ;
   
   @OneToOne(type => User,user => user.id)
   public userId:number
