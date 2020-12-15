@@ -8,6 +8,6 @@ const dbConfig: PostgresConnectionOptions = {
   database: "postgres",
   synchronize: true,
   logging: false,
-  entities: ["entities/*.ts"],
+  entities: ["../entities/*.ts"],
 };
 export default dbConfig;

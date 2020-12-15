@@ -3,15 +3,19 @@ import Timecard from "../../entity/timecard/Timecard";
 import TimecardCollection from "../../entity/timecard/timecardCollection";
 import { DateTime } from "luxon";
 
-export default interface TimecardRepository {
+export default class TimecardRepositoryGDB implements TimecardRepository  {
   save: (timecard: Timecard) => Promise<Timecard>;
-  searchByEmployee: (
+  searchByEmployee (
     employee: Employee,
     from: DateTime,
     to: DateTime
-  ) => Promise<TimecardCollection>;
+  ):Promise<TimecardCollection>{
+	  
+  } ;
+  
   search:(
     employee: Employee,
     from: DateTime,
     to: DateTime)=>Promise<TimecardCollection>
+}
 }

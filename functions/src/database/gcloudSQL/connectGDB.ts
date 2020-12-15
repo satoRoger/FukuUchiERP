@@ -1,7 +1,7 @@
 import { createConnection, getRepository } from 'typeorm';
 
 import dbConfig from './db-config';
-import TimecardModel from '../model/timecard';
+import Timecard from '../model/timecard';
 
 createConnection(dbConfig).then(async (connection) => {
   console.log('Postgres Connected');
