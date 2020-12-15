@@ -12,6 +12,6 @@ export default class IsEmployeePunchTimecard {
   }
 
   isPunch(): boolean {
-    return this.employee.id.equal(this.timecard.punchEmployeeId());
+    return this.employee.id.equal(this.timecard.punchEmployeeId);
   }
 }

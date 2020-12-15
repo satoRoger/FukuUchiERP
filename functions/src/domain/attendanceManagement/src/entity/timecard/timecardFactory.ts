@@ -2,7 +2,8 @@ import Timecard from "./Timecard";
 import Coordinate from "../../valueObject/coordinate";
 import Employee from "../employee/employee";
 import CardType from "../../valueObject/cardtype";
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
+import EmployeeId from "../../valueObject/employeeId";
 
 export default class TimecardFactory {
   createAttendance: (
@@ -33,6 +34,26 @@ export default class TimecardFactory {
   ) => Timecard = (employee, punchDate, coordinate) => {
     return this.create(employee, CardType.Endbreak, punchDate, coordinate);
   };
+  createTimecard(
+    employeeId: EmployeeId,
+    cardType: CardType,
+    punchDate: DateTime,
+    latitude?: number,
+    longitude?: number
+  ): Timecard {
+    let coordinate = undefined;
+
+    if (latitude && longitude) {
+      coordinate = new Coordinate(latitude, longitude);
+    }
+
+    return new Timecard(
+      new Employee(employeeId),
+      cardType,
+      punchDate,
+      coordinate
+    );
+  }
 
   private create: (
     employee: Employee,

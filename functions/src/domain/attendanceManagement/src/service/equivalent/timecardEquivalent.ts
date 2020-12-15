@@ -7,7 +7,7 @@ export default class TimecardEquivalent {
 
   equal(): boolean {
     let same: boolean = true;
-    same &&= this.a.hasCoordinate() === this.b.hasCoordinate();
+    same &&= this.a.hasCoordinate === this.b.hasCoordinate;
 
     const aCoordinate = this.a.coordinate;
     const bCoordinate = this.b.coordinate;
@@ -15,12 +15,12 @@ export default class TimecardEquivalent {
       same &&= aCoordinate.equal(bCoordinate);
     }
 
-    same &&= this.a.getPunchDate().equals(this.b.getPunchDate());
-    same &&= this.a.punchEmployeeId().equal(this.b.punchEmployeeId());
-    same &&= this.a.isAttendance() === this.b.isAttendance();
-    same &&= this.a.isLeavework() === this.b.isLeavework();
-    same &&= this.a.isTakebreak() === this.b.isTakebreak();
-    same &&= this.a.isEndbreak() === this.b.isEndbreak();
+    same &&= this.a.punchDate.equals(this.b.punchDate);
+    same &&= this.a.punchEmployeeId.equal(this.b.punchEmployeeId);
+    same &&= this.a.attendance === this.b.attendance;
+    same &&= this.a.leavework === this.b.leavework;
+    same &&= this.a.takebreak === this.b.takebreak;
+    same &&= this.a.endbreak === this.b.endbreak;
     return same;
   }
 }

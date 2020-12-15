@@ -1,8 +1,13 @@
 import { DateTime } from "luxon";
-import { Column, Entity, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  OneToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import CardType from "../../domain/attendanceManagement/src/valueObject/cardtype";
 import User from "./user";
-
-type CardType = "workin" | "workout" | "breakin" | "breakout";
 
 @Entity()
 export default class Timecard {
@@ -10,13 +15,13 @@ export default class Timecard {
   public id?: number;
 
   @Column({ type: "timestamp" })
-  public date: DateTime;
+  public date: string;
 
   @Column({ type: "varchar" })
   public cardType: CardType;
 
-  @OneToOne(type => User, user => user.id)
-  public userId: number
+  @OneToOne((type) => User, (user) => user.id)
+  public userId: string;
 
   @Column({ type: "double precision" })
   public longitude?: number;
@@ -24,12 +29,17 @@ export default class Timecard {
   @Column({ type: "double precision" })
   public latitude?: number;
 
-
-  constructor(date: DateTime, cardType: string, userId: number, longitude?: number, latitude?: number) {
+  constructor(
+    date: string,
+    cardType: CardType,
+    userId: string,
+    longitude?: number,
+    latitude?: number
+  ) {
     this.date = date;
     this.cardType = cardType;
-    this.userId = userID;
+    this.userId = userId;
     this.longitude = longitude;
-    this.laittude = latitude
+    this.latitude = latitude;
   }
 }

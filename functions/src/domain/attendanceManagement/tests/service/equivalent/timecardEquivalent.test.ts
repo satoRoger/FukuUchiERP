@@ -1,9 +1,9 @@
-import EntityFactory from "../../../src/entity/entityFactory";
 import CardType from "../../../src/valueObject/cardtype";
 import TimecardEquivalent from "../../../src/service/equivalent/timecardEquivalent";
 import { DateTime } from 'luxon';
 import Timecard from "../../../src/entity/timecard/Timecard";
 import Coordinate from "../../../src/valueObject/coordinate";
+import EmployeeFactory from "../../../src/entity/employee/employeeFactory";
 describe("タイムカード等価比較ロジック", () => {
   let timecardA: Timecard;
   let timecardB: Timecard;
@@ -17,8 +17,8 @@ describe("タイムカード等価比較ロジック", () => {
   let timecardDNoC: Timecard;
 
   beforeAll(() => {
-    const employeeA = new EntityFactory().employee().createByRowId("test01");
-    const employeeB = new EntityFactory().employee().createByRowId("test02");
+    const employeeA = new EmployeeFactory().createByRowId("test01");
+    const employeeB = new EmployeeFactory().createByRowId("test02");
     const coordinateA = new Coordinate(20, 20);
     const coordinateB = new Coordinate(10, 10);
     const cardtypeA = CardType.Attendance;

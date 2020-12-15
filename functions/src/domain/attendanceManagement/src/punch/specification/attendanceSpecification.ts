@@ -20,7 +20,7 @@ export default class AttendanceSpecification implements PunchSpecification {
     punchDate: DateTime,
     coordinate?: Coordinate
   ): Promise<boolean> {
-    const timecardCollection = await this.repository.searchByEmployee(
+    const timecardCollection = await this.repository.search(
       employee,
       dayStart(punchDate),
       punchDate
@@ -28,7 +28,7 @@ export default class AttendanceSpecification implements PunchSpecification {
 
     let error: string | undefined = undefined;
     if (
-      0 < timecardCollection.filter((timecard) => timecard.isEndbreak()).size()
+      0 < timecardCollection.filter((timecard) => timecard.endbreak).size()
     ) {
       error = errorMessageList.ProhiviteAttendanceAfterLeavework;
     }

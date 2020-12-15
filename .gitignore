@@ -1,7 +1,0 @@
-**/node_modules/**
-endponts/output
-functions/node_modules
-functions/dist
-functions/log
-functions/coverage
-node_modules

@@ -5,11 +5,12 @@ import TimecardRepository from "../../repository/timecard/timecardRepository";
 import { inject } from "inversify";
 import Types from "../../../../../util/di/types";
 import Coordinate from "../../valueObject/coordinate";
-import EntityFactory from "../../entity/entityFactory";
+
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
 import AttendanceSpecification from '../specification/attendanceSpecification';
 import logger from "../../../../../util/logger/logger";
+import TimecardFactory from '../../entity/timecard/timecardFactory';
 
 export default class PunchAttendanceAction implements PunchAction {
   constructor(
@@ -30,8 +31,7 @@ export default class PunchAttendanceAction implements PunchAction {
         throw error;
       });
 
-    return new EntityFactory()
-      .timecard()
+    return new TimecardFactory()
       .createAttendance(employee, this.punchDate, this.coordinate);
   }
 }

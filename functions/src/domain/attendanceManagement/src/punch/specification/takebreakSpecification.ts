@@ -20,7 +20,7 @@ export default class TakebreakSpecification implements PunchSpecification {
     punchDate: DateTime,
     coordinate?: Coordinate
   ): Promise<boolean> {
-    const timecardCollection = await this.repository.searchByEmployee(
+    const timecardCollection = await this.repository.search(
       employee,
       dayStart(punchDate),
       punchDate
@@ -28,16 +28,15 @@ export default class TakebreakSpecification implements PunchSpecification {
 
     let error: string | undefined = undefined;
     if (
-      timecardCollection.filter((timecard) => timecard.isAttendance()).size() <=
-      0
+      timecardCollection.filter((timecard) => timecard.attendance).size() <= 0
     ) {
       error = errorMessageList.ProhiviteTakebreakBeforeAttend;
     } else if (
-      0 < timecardCollection.filter((timecard) => timecard.isLeavework()).size()
+      0 < timecardCollection.filter((timecard) => timecard.leavework).size()
     ) {
       error = errorMessageList.ProhiviteTakebreakAfterLeavework;
     } else if (
-      0<timecardCollection.filter((timecard) => timecard.isEndbreak()).size()
+      0 < timecardCollection.filter((timecard) => timecard.endbreak).size()
     ) {
       error = errorMessageList.ProhiviteTakebreakAfterEndbreak;
     }

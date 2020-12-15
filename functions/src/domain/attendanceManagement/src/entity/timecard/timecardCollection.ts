@@ -1,7 +1,8 @@
 import Timecard from "./timecard";
-import EntityFactory from "../entityFactory";
 import Employee from "../employee/employee";
 import { DateTime } from "luxon";
+import TimecardFactory from "./timecardFactory";
+import EmployeeFactory from '../employee/employeeFactory';
 
 type filterCallback = { (timecard: Timecard): boolean };
 
@@ -14,12 +15,10 @@ export default class TimecardCollection {
   };
 
   latestTimecard: () => Timecard = () => {
-    return new EntityFactory()
-      .timecard()
-      .createAttendance(
-        new EntityFactory().employee().createByRowId("test01"),
-        DateTime.fromISO("2020-10-10")
-      );
+    return new TimecardFactory().createAttendance(
+      new EmployeeFactory().createByRowId("test01"),
+      DateTime.fromISO("2020-10-10")
+    );
   };
   filter: (callback: (timecard: Timecard) => boolean) => TimecardCollection = (
     callback

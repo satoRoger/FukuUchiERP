@@ -1,12 +1,12 @@
 import { createConnection, getRepository } from 'typeorm';
 
 import dbConfig from './db-config';
-import Timecard from '../model/timecard';
+import Timecard from '../entities/timecard';
 
 createConnection(dbConfig).then(async (connection) => {
   console.log('Postgres Connected');
   try {
-    const customerRepository = getRepository(TimecardModel);
+    const customerRepository = getRepository(Timecard);
     
     const allCustomers = await customerRepository.find();
     console.log('Select : ', allCustomers);

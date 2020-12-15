@@ -7,48 +7,45 @@ import logger from "../../../../../util/logger/logger";
 
 export default class Timecard {
   constructor(
-    private employee: Employee,
-    private cardType: CardType,
-    private punchDate: DateTime,
-    private coordinateValue?: Coordinate
+    private _employee: Employee,
+    private _cardType: CardType,
+    private _punchDate: DateTime,
+    private _coordinateValue?: Coordinate
   ) {}
 
   get coordinate(): Coordinate | undefined {
-    if (this.hasCoordinate()) {
-      return this.coordinateValue as Coordinate;
+    if (this.hasCoordinate) {
+      return this._coordinateValue as Coordinate;
     } else {
       return undefined;
     }
   }
 
-  punchEmployeeId(): EmployeeId {
-    return this.employee.id;
+  get punchEmployeeId(): EmployeeId {
+    return this._employee.id;
   }
 
-  isPunchedAfter(date: DateTime): boolean {
-    return date <= this.punchDate;
+  get hasCoordinate(): boolean {
+    return this._coordinateValue != undefined;
   }
-  isPunchedBefore(date: DateTime): boolean {
-    return this.punchDate <= date;
-  }
-
-  hasCoordinate(): boolean {
-    return this.coordinateValue != undefined;
-  }
-  getPunchDate(): DateTime {
-    return this.punchDate;
+  get punchDate(): DateTime {
+    return this._punchDate;
   }
 
-  isAttendance(): boolean {
-    return this.cardType === CardType.Attendance;
+  get cardtype(): CardType {
+    return this._cardType;
   }
-  isLeavework(): boolean {
-    return this.cardType === CardType.Leavework;
+
+  get attendance(): boolean {
+    return this._cardType === CardType.Attendance;
   }
-  isTakebreak(): boolean {
-    return this.cardType === CardType.Takebreak;
+  get leavework(): boolean {
+    return this._cardType === CardType.Leavework;
   }
-  isEndbreak(): boolean {
-    return this.cardType === CardType.Endbreak;
+  get takebreak(): boolean {
+    return this._cardType === CardType.Takebreak;
+  }
+  get endbreak(): boolean {
+    return this._cardType === CardType.Endbreak;
   }
 }

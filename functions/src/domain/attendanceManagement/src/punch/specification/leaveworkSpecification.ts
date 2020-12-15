@@ -20,7 +20,7 @@ export default class LeaveworkSpecification implements PunchSpecification {
     punchDate: DateTime,
     coordinate?: Coordinate
   ): Promise<boolean> {
-    const timecardCollection = await this.repository.searchByEmployee(
+    const timecardCollection = await this.repository.search(
       employee,
       dayStart(punchDate),
       punchDate
@@ -29,13 +29,13 @@ export default class LeaveworkSpecification implements PunchSpecification {
     let error: string | undefined = undefined;
 
     if (
-      timecardCollection.filter((timecard) => timecard.isAttendance()).size() <=
+      timecardCollection.filter((timecard) => timecard.attendance).size() <=
       0
     ) {
       error = errorMessageList.ProhiviteLeaveworkBeforeAttend;
     } else if (
       timecardCollection
-        .filter((timecard) => timecard.isTakebreak() && !timecard.isEndbreak())
+        .filter((timecard) => timecard.takebreak && !timecard.endbreak)
         .size() <= 0
     ) {
       error = errorMessageList.ProhiviteLeaveworkNeedToEndbreak;

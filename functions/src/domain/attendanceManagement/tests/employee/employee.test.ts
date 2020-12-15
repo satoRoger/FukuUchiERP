@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import Employee from "../../src/entity/employee/employee";
-import EntityFactory from "../../src/entity/entityFactory";
 import PunchActionFactory from "../../src/punch/punchActionFactory";
 import PunchSpecificationFactory from "../../src/punch/punchSpecificationFactory";
 import EntityEquivalent from "../../src/service/entityEquivalent";
@@ -11,6 +10,7 @@ import { DateTime } from "luxon";
 import Timecard from "../../src/entity/timecard/Timecard";
 import Types from "../../../../util/di/types";
 import container from "../../../../util/di/inversify.config";
+import TimecardFactory from "../../src/entity/timecard/timecardFactory";
 
 const repository = container.get<TimecardRepository>(Types.TimecardRepository);
 
@@ -103,9 +103,7 @@ describe("従業員", (): void => {
     expect(
       new EntityEquivalent().equalTimecard(
         timecard,
-        new EntityFactory()
-          .timecard()
-          .createAttendance(employee, punchDate, coordinate)
+        new TimecardFactory().createAttendance(employee, punchDate, coordinate)
       )
     ).toBe(true);
   });
@@ -127,9 +125,11 @@ describe("従業員", (): void => {
       expect(
         new EntityEquivalent().equalTimecard(
           leaveworkTimecard,
-          new EntityFactory()
-            .timecard()
-            .createLeavework(employee, punchDate.plus({ hour: 1 }), coordinate)
+          new TimecardFactory().createLeavework(
+            employee,
+            punchDate.plus({ hour: 1 }),
+            coordinate
+          )
         )
       ).toBe(true);
     } catch (error) {
@@ -154,9 +154,11 @@ describe("従業員", (): void => {
       expect(
         new EntityEquivalent().equalTimecard(
           takebreakTimecard,
-          new EntityFactory()
-            .timecard()
-            .createTakebreak(employee, punchDate.plus({ hour: 1 }), coordinate)
+          new TimecardFactory().createTakebreak(
+            employee,
+            punchDate.plus({ hour: 1 }),
+            coordinate
+          )
         )
       ).toBe(true);
     } catch (error) {
@@ -180,7 +182,7 @@ describe("従業員", (): void => {
       );
 
       await repository.save(takebreakTimecard);
-      
+
       const endbreakTimecard = await EmployeeEndbreak(
         employee,
         punchDate.plus({ hour: 2 }),
@@ -190,9 +192,11 @@ describe("従業員", (): void => {
       expect(
         new EntityEquivalent().equalTimecard(
           endbreakTimecard,
-          new EntityFactory()
-            .timecard()
-            .createEndbreak(employee, punchDate.plus({ hour: 2 }), coordinate)
+          new TimecardFactory().createEndbreak(
+            employee,
+            punchDate.plus({ hour: 2 }),
+            coordinate
+          )
         )
       ).toBe(true);
     } catch (error) {

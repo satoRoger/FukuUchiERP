@@ -20,7 +20,7 @@ export default class EndbreakSpecification implements PunchSpecification {
     punchDate: DateTime,
     coordinate?: Coordinate
   ): Promise<boolean> {
-    const timecardCollection = await this.repository.searchByEmployee(
+    const timecardCollection = await this.repository.search(
       employee,
       dayStart(punchDate),
       punchDate
@@ -28,16 +28,16 @@ export default class EndbreakSpecification implements PunchSpecification {
 
     let error: string | undefined = undefined;
     if (
-      timecardCollection.filter((timecard) => timecard.isAttendance()).size() <=
+      timecardCollection.filter((timecard) => timecard.attendance).size() <=
       0
     ) {
       error = errorMessageList.ProhiviteEndbreakBeforeAttend;
     } else if (
-      0 < timecardCollection.filter((timecard) => timecard.isLeavework()).size()
+      0 < timecardCollection.filter((timecard) => timecard.leavework).size()
     ) {
       error = errorMessageList.ProhiviteEndbreakAfterLeavework;
     } else if (
-      timecardCollection.filter((timecard) => timecard.isTakebreak()).size() <=
+      timecardCollection.filter((timecard) => timecard.takebreak).size() <=
       0
     ) {
       error = errorMessageList.ProhiviteEndbreakBeforeTakebreak;

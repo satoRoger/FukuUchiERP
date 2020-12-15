@@ -1,10 +1,7 @@
 /timecards?since=date&until=date
 /timecards/{id}
-/timecards/date/today
-/timecards/date/{2020-11-11}
-/timecards/type/attend?since=date&until=date
-
 /users/{id}/timecards?since=date&until=date
+
 /users/{id}/address
 /users/vacations
 
