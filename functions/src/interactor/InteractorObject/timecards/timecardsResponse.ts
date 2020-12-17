@@ -1,18 +1,12 @@
 import "reflect-metadata";
 import { DateTime } from "luxon";
 import { injectable } from "inversify";
-
-export type Timecard = {
-  userId: number;
-  type: "workin" | "workout" | "breakin" | "breakout";
-  date: DateTime;
-  longitude?: number;
-  latitude?: number;
-};
+import Timecard from "../../../domain/attendanceManagement/src/entity/timecard/Timecard";
+import TimecardsObject from "./timecardsObject";
 
 @injectable()
 abstract class TimecardsResponseInterface {
-  abstract setResult: (result: Timecard[]) => void;
+  abstract setResult: (result: TimecardsObject[]) => void;
   abstract parse: () => Array<Object>;
 }
 

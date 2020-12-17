@@ -1,11 +1,11 @@
 import express from "express";
 //import timecards from "../commonController";
-import TimecardsQuery from "../../interactor/InteractorObject/timecardsQuery";
+import TimecardsQuery from "../../interactor/InteractorObject/timecards/timecardsQuery";
 import { ValidateTimecardsQuery } from './validate';
 import { GetTimecardsFromAllUserRouter } from './backRouting';
 const timecards = express.Router();
 
-timecards.get("/", (req: express.Request, res: express.Response) => {
+timecards.get("/", async (req: express.Request, res: express.Response) => {
   let since = undefined;
   let until = undefined;
 
@@ -19,8 +19,8 @@ timecards.get("/", (req: express.Request, res: express.Response) => {
   const query = new TimecardsQuery(since, until);
 
   if (ValidateTimecardsQuery(query)) {
-    const response = GetTimecardsFromAllUserRouter(query);
-    res.json(response)
+    const response = await GetTimecardsFromAllUserRouter(query);
+    res.json(response.parse())
   }
 
 });

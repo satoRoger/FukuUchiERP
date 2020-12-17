@@ -1,13 +1,16 @@
-import TimecardsQuery from "../InteractorObject/timecardsQuery";
-import TimecardsResponseInterface from "../InteractorObject/timecardsResponse";
+import TimecardsQuery from "../InteractorObject/timecards/timecardsQuery";
+import TimecardsResponseInterface from "../InteractorObject/timecards/timecardsResponse";
 import { DateTime } from "luxon";
 import container from "../../util/di/inversify.config";
 import Types from "../../util/di/types";
 import TimecardRepository from "../../domain/attendanceManagement/src/repository/timecard/timecardRepository";
+import EmployeeFactory from "../../domain/attendanceManagement/src/entity/employee/employeeFactory";
+import Timecard from "../../domain/attendanceManagement/src/entity/timecard/Timecard";
+import TimecardsObject from "../InteractorObject/timecards/timecardsObject";
 
-function GetTimecarsFromAllUsers(
+async function GetTimecarsFromAllUsers(
   query: TimecardsQuery
-): TimecardsResponseInterface {
+): Promise<TimecardsResponseInterface> {
   const response = container.get<TimecardsResponseInterface>(
     Types.TimecardsResponse
   );
@@ -16,43 +19,25 @@ function GetTimecarsFromAllUsers(
     Types.TimecardRepository
   );
 
-  response.setResult([
-    {
-      userId: 1,
-      date: DateTime.local(),
-      type: "breakin",
-      latitude: 0.0,
-      longitude: 0.0,
-    },
-    {
-      userId: 1,
-      date: DateTime.local(),
-      type: "breakin",
-      latitude: 0.0,
-      longitude: 0.0,
-    },
-    {
-      userId: 1,
-      date: DateTime.local(),
-      type: "breakin",
-      latitude: 0.0,
-      longitude: 0.0,
-    },
-    {
-      userId: 1,
-      date: DateTime.local(),
-      type: "breakin",
-      latitude: 0.0,
-      longitude: 0.0,
-    },
-    {
-      userId: 1,
-      date: DateTime.local(),
-      type: "breakin",
-      latitude: 0.0,
-      longitude: 0.0,
-    },
-  ]);
+  const collection = await repository.search(
+    new EmployeeFactory().createByRowId("tes"),
+    DateTime.local(),
+    DateTime.local()
+  );
+  const result: TimecardsObject[] = [];
+
+  for (let timecard of collection) {
+    result.push(
+      new TimecardsObject(
+        timecard.punchEmployeeId.value,
+        timecard.punchDate,
+        timecard.cardtype
+      )
+    );
+  }
+
+  console.log(result);
+  response.setResult(result);
   return response;
 }
 

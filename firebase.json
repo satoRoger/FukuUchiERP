@@ -3,5 +3,13 @@
     "runtime": "nodejs12",
     "predeploy": [],
     "source": "functions"
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": "10080"
+    }
   }
 }

@@ -1,19 +1,24 @@
 import { injectable } from "inversify";
 import { DateTime } from "luxon";
-import TimecardsResponseInterface, {
-  Timecard,
-} from "../../interactor/InteractorObject/timecardsResponse";
+import TimecardsObject from "../../interactor/InteractorObject/timecards/timecardsObject";
+import TimecardsResponseInterface from "../../interactor/InteractorObject/timecards/timecardsResponse";
 
 @injectable()
 class TimecardsResponse implements TimecardsResponseInterface {
-  private result?: Timecard[];
+  private result?: TimecardsObject[];
 
-  setResult = (result: Timecard[]) => {
+  setResult = (result: TimecardsObject[]) => {
     this.result = result;
   };
   parse = () => {
     if (this.result) {
-      return this.result;
+      return this.result.map((timecard) => {
+        return {
+          userId: timecard.userId,
+          date: timecard.date.toISO(),
+          cardType: timecard.cardType,
+        };
+      });
     } else {
       return [];
     }

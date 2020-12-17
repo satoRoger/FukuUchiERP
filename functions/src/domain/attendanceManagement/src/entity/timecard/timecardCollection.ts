@@ -2,11 +2,11 @@ import Timecard from "./timecard";
 import Employee from "../employee/employee";
 import { DateTime } from "luxon";
 import TimecardFactory from "./timecardFactory";
-import EmployeeFactory from '../employee/employeeFactory';
+import EmployeeFactory from "../employee/employeeFactory";
 
 type filterCallback = { (timecard: Timecard): boolean };
 
-export default class TimecardCollection {
+export default class TimecardCollection implements Iterable<Timecard> {
   constructor(private timecardCollection: Timecard[] = new Array<Timecard>()) {}
 
   add: (timecard: Timecard) => this = (timecard) => {
@@ -29,4 +29,8 @@ export default class TimecardCollection {
   size: () => number = () => {
     return this.timecardCollection.length;
   };
+
+  [Symbol.iterator](): Iterator<Timecard> {
+    return this.timecardCollection[Symbol.iterator]();
+  }
 }

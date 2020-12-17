@@ -42,27 +42,27 @@ export default {
     },
     categories: {
       default: {
-        appenders: ["access", "console", "stdout"],
+        appenders: ["console"],
         level: "INFO",
       },
       access: {
-        appenders: ["access", "console", "stdout"],
+        appenders: ["console"],
         level: "INFO",
       },
       system: {
-        appenders: ["system", "console", "stdout"],
+        appenders: ["console"],
         level: "INFO",
       },
       error: {
-        appenders: ["error", "console", "stdout"],
+        appenders: ["console"],
         level: "WARN",
       },
       debug: {
-        appenders: ["console", "stdout", "debug"],
+        appenders: ["console"],
         level: "debug",
       },
       trace: {
-        appenders: ["console", "stdout", "debug"],
+        appenders: ["console"],
         level: "trace",
       },
     },

@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
   //  "paths": { "@/*": ["src/*"] },
     "strict": true,
     "esModuleInterop": true
