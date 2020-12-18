@@ -3,9 +3,9 @@ import { DateTime } from "luxon";
 class TimecardsQuery {
   readonly since?: DateTime;
   readonly until?: DateTime;
-  readonly userId?: number;
+  readonly userId?: string;
 
-  constructor(since?: string, until?: string, userId?: number) {
+  constructor(since?: string, until?: string, userId?: string) {
     if (since) {
       this.since = DateTime.fromISO(since);
     }

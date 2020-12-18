@@ -6,8 +6,8 @@ import { DateTime } from "luxon";
 export default interface TimecardRepository {
   save(timecard: Timecard): Promise<Timecard>;
   search(
-    employee: Employee,
-    from: DateTime,
-    to: DateTime
+    employee?: Employee,
+    from?: DateTime,
+    to?: DateTime
   ): Promise<TimecardCollection>;
 }

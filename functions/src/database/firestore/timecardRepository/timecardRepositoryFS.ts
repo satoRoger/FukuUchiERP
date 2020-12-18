@@ -30,53 +30,46 @@ export default class TimecardRepositoryFS implements TimecardRepository {
     return timecard;
   }
   async search(
-    employee: Employee,
-    from: DateTime,
-    to: DateTime
+    employee?: Employee,
+    from?: DateTime,
+    to?: DateTime
   ): Promise<TimecardCollection> {
-    const collection = new TimecardCollection();
-    /*
-    this.repository
-      .where("userId", "==", "/users/" + employee.id.value)
-      .where("punchDate", ">=", from.toISO())
-      .where("punchDate", "<=", to.toISO())
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          collection.add(
-            new TimecardFactory().createTimecard(
-              doc.data().userId.id,
-              doc.data().cardType,
-              doc.data().punchDate
-            )
-          );
-        });
-      });
-    return collection;
-    */
-    console.log(57);
-    const snapshot = await this.repository.get();
-    console.log(59);
+    let queryRepository:
+      | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
+      | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
+      .repository;
+
+    if (employee) {
+      const userRef = this.database.collection("users").doc(employee.id.value);
+      queryRepository = queryRepository.where("userId", "==", userRef);
+    }
+    if (from) {
+      queryRepository = queryRepository.where(
+        "punchDate",
+        ">=",
+        from.toJSDate()
+      );
+    }
+    if (to) {
+      queryRepository = queryRepository.where("punchDate", "<=", to.toJSDate());
+    }
+    const snapshot = await queryRepository.get();
+
     const result = snapshot.docs.map(async (doc) => {
-      console.log(61);
       const userDoc = await doc.data().userId.get();
-      console.log(63);
       return new TimecardFactory().createTimecard(
         new EmployeeId(userDoc.id),
         doc.data().cardType,
         DateTime.fromJSDate(doc.data().punchDate.toDate())
       );
     });
-    console.log(70);
-    Promise.all(result).then((timecards) => {
-      console.log(72);
+    
+    return Promise.all(result).then((timecards) => {
+      const collection = new TimecardCollection();
       for (let timecard of timecards) {
-        console.log(74);
         collection.add(timecard);
       }
-      console.log(77);
+      return collection;
     });
-    console.log(79);
-    return collection;
   }
 }
