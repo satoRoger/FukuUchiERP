@@ -1,13 +1,14 @@
 import { DateTime } from "luxon";
 import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
-import Timecard from "../../../domain/attendanceManagement/src/entity/timecard/timecard";
 
-export default class TimecardsObject {
+class TimecardsPostParam {
   constructor(
     readonly userId: string,
-    readonly date: DateTime,
     readonly cardType: CardType,
+    readonly punchDate: DateTime,
+    readonly latitude?: number,
     readonly longitude?: number,
-    readonly latitude?: number
   ) {}
 }
+
+export default TimecardsPostParam;

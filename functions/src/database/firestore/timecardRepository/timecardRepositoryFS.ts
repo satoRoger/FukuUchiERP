@@ -6,9 +6,7 @@ import TimecardCollection from "../../../domain/attendanceManagement/src/entity/
 import TimecardRepository from "../../../domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import admin from "../../../framework/firebase/adminInitialize";
 import TimecardFactory from "../../../domain/attendanceManagement/src/entity/timecard/timecardFactory";
-import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
 import EmployeeId from "../../../domain/attendanceManagement/src/valueObject/employeeId";
-import { resolve } from "path";
 
 @injectable()
 export default class TimecardRepositoryFS implements TimecardRepository {
@@ -20,12 +18,24 @@ export default class TimecardRepositoryFS implements TimecardRepository {
   }
 
   async save(timecard: Timecard): Promise<Timecard> {
+    const latitude = timecard.coordinate
+      ? timecard.coordinate.latitude()
+      : null;
+
+    const longitude = timecard.coordinate
+      ? timecard.coordinate.longitude()
+      : null;
+
+    const userRef = this.database
+      .collection("users")
+      .doc(timecard.punchEmployeeId.value);
+
     await this.repository.add({
       cardtype: timecard.cardtype,
-      latitude: timecard.coordinate?.latitude(),
-      longitude: timecard.coordinate?.longitude(),
-      punchDate: timecard.punchDate.toISO(),
-      userId: `/users/${timecard.punchEmployeeId.value}`,
+      latitude: latitude,
+      longitude: longitude,
+      punchDate: timecard.punchDate.toJSDate(),
+      userId: userRef,
     });
     return timecard;
   }
@@ -63,7 +73,7 @@ export default class TimecardRepositoryFS implements TimecardRepository {
         DateTime.fromJSDate(doc.data().punchDate.toDate())
       );
     });
-    
+
     return Promise.all(result).then((timecards) => {
       const collection = new TimecardCollection();
       for (let timecard of timecards) {

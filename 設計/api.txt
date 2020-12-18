@@ -2,7 +2,8 @@
 /timecards/{id}
 /users/{id}/timecards?since=date&until=date
 
-/users/{id}/address
+/users
+/users/{id}
 /users/vacations
 
 /facilities/{id}/members
