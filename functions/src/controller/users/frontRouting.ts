@@ -1,12 +1,20 @@
 import express from "express";
-//import users from "../commonController";
+import PostTimecards from "../../interactor/timecard/postTimecards";
+import GetUsers from "../../interactor/users/getUsers";
+import GetTimecardsIdQuery from "../timecards/frontRouting/getTimecardsIdQuery";
+import PutTimecardsIdQuery from "../timecards/frontRouting/putTimecardsIdQuery";
+import DeleteTimecardsIdQuery from "./frontRouting/deleteUsersIdQuery";
+
 const users = express.Router();
 
-users.get(
-  "/:userId/timecards",
-  (req: express.Request, res: express.Response) => {
-    res.send("Hello Express!");
-  }
-);
+users.get("/", GetUsers);
+
+users.get("/:usersId", GetTimecardsIdQuery);
+
+users.post("/", PostTimecards);
+
+users.put("/:usersId", PutTimecardsIdQuery);
+
+users.delete("/:usersId", DeleteTimecardsIdQuery);
 
 export default users;

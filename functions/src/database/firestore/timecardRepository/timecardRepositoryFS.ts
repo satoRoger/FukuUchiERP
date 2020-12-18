@@ -31,7 +31,7 @@ export default class TimecardRepositoryFS implements TimecardRepository {
       .doc(timecard.punchEmployeeId.value);
 
     await this.repository.add({
-      cardtype: timecard.cardtype,
+      cardType: timecard.cardtype,
       latitude: latitude,
       longitude: longitude,
       punchDate: timecard.punchDate.toJSDate(),

@@ -7,7 +7,7 @@ import TimecardRepository from "../../domain/attendanceManagement/src/repository
 import EmployeeFactory from "../../domain/attendanceManagement/src/entity/employee/employeeFactory";
 import TimecardsObject from "../InteractorObject/timecards/timecardsObject";
 
-async function GetTimecarsFromAllUsers(
+export default async function GetUsers(
   query: TimecardsQuery
 ): Promise<TimecardsResponseInterface> {
   const response = container.get<TimecardsResponseInterface>(
@@ -42,5 +42,3 @@ async function GetTimecarsFromAllUsers(
   response.setResult(result);
   return response;
 }
-
-export default GetTimecarsFromAllUsers;
