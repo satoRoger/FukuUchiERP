@@ -14,6 +14,9 @@
 /schedules/date/{2020-11-11}
 
 /workflows/{id}
+/workflows/{id}?action=approve
+/workflows/{id}?action=deny
+
 /workflows/drafters/{id}
 /workflows/wait
 /workflows/wait?current-approver=id

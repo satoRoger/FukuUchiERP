@@ -1,42 +1,21 @@
-import TimecardsQuery from "../InteractorObject/timecards/timecardsQuery";
-import TimecardsResponseInterface from "../InteractorObject/timecards/timecardsResponse";
-import { DateTime } from "luxon";
 import container from "../../util/di/inversify.config";
 import Types from "../../util/di/types";
-import TimecardRepository from "../../domain/attendanceManagement/src/repository/timecard/timecardRepository";
-import EmployeeFactory from "../../domain/attendanceManagement/src/entity/employee/employeeFactory";
-import TimecardsObject from "../InteractorObject/timecards/timecardsObject";
+import UsersResponseInterface from "../InteractorObject/users/usersResponse";
+import UsersObject from "../InteractorObject/users/usersObject";
+import PersonRepository from "../../domain/resourceManager/src/repository/personRepostitory";
 
 export default async function GetUsers(
-  query: TimecardsQuery
-): Promise<TimecardsResponseInterface> {
-  const response = container.get<TimecardsResponseInterface>(
-    Types.TimecardsResponse
+): Promise<UsersResponseInterface> {
+  const response = container.get<UsersResponseInterface>(
+    Types.UsersResponse
   );
 
-  const repository = container.get<TimecardRepository>(
-    Types.TimecardRepository
-  );
+  const repository = container.get<PersonRepository>(Types.PersonRepository);
 
-  const queryEmployee = query.userId
-    ? new EmployeeFactory().createByRowId(query.userId)
-    : undefined;
-
-  const collection = await repository.search(
-    queryEmployee,
-    query.since,
-    query.until
-  );
-  console.log(collection);
-  const result: TimecardsObject[] = [];
-  for (let timecard of collection) {
-    result.push(
-      new TimecardsObject(
-        timecard.punchEmployeeId.value,
-        timecard.punchDate,
-        timecard.cardtype
-      )
-    );
+  const collection = await repository.search();
+  const result: UsersObject[] = [];
+  for (let {} of collection) {
+    result.push(new UsersObject());
   }
 
   response.setResult(result);

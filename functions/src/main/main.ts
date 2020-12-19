@@ -12,11 +12,3 @@ v1.use("/users", users);
 v1.use("/timecards", timecards);
 
 exports.v1 = functions.https.onRequest(v1);
-
-//exports.timecards = functions.https.onRequest(timecards);
-//exports.users = functions.https.onRequest(users);
-/*
-functions.https.onRequest((request: functions.https.Request, response: any) => {
-  response.send(timecards);
-});
-*/
