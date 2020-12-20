@@ -159,7 +159,39 @@
           }
         }
       }
-    }
+    },
+	"/workflows":{
+	  "get":{
+		"tags":["workflows"],
+		"operationId":"getWorkflows",
+		"x-google-backend":{},
+		"parameters":[],
+		"responses":{}
+	  },
+	  "post":{
+		"tags":["workflows"],
+		"operationId":"postWorkflows",
+		"x-google-backend":{},
+		"parameters":[],
+		"responses":{}
+	  },
+	},
+	"/workflows/{workflowId}":{
+	   "get":{
+		"tags":["workflows"],
+		"operationId":"getWorkflowsWithId",
+		"x-google-backend":{},
+		"parameters":[],
+		"responses":{}
+	   },
+	   "put":{
+		"tags":["workflows"],
+		"operationId":"putWorkflowsWithId",
+		"x-google-backend":{},
+		"parameters":[],
+		"responses":{}
+	   }
+	},
   },
   "definitions": {
     "TimecardsPostParameter": {
