@@ -13,6 +13,13 @@
 /schedules/{id}
 /schedules/date/{2020-11-11}
 
+/workflows
+{
+type:"vacation",
+vacationDate:DateTime,
+}
+
+
 /workflows/{id}
 /workflows/{id}?action=approve
 /workflows/{id}?action=deny
