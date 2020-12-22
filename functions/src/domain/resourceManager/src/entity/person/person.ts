@@ -18,14 +18,13 @@ export default class Person {
   constructor(
     private _id: PersonId,
     private _roll: Roll,
-    private _familyName: Name | undefined,
-    private _givenName: Name | undefined,
+    private _fullname: Fullname | undefined,
     private _mail: Mail,
     private _birthdate?: Birthdate,
     private _address?: Address,
     private _phoneNumber?: PhoneNumber | undefined,
     private _emergencyPhoneNumber?: PhoneNumber | undefined,
-    private _dependent?: Fullname | undefined,
+    private _dependent?: Fullname[] | undefined,
     private _facility?: Facility | undefined,
     private _staffCode?: StaffCode | undefined,
     private _workStyle?: WorkStyle | undefined,
@@ -34,7 +33,7 @@ export default class Person {
     private _socialInsurance?: SocialInsurance | undefined,
     private _hireDate?: DateTime,
     private _leaveDate?: DateTime
-  ) {}
+  ) { }
 
   public get id(): PersonId {
     return this._id;
@@ -48,17 +47,11 @@ export default class Person {
   public set roll(value: Roll) {
     this._roll = value;
   }
-  public get givenName(): Name | undefined {
-    return this._givenName;
+  public get fullname(): Fullname | undefined {
+    return this._fullname;
   }
-  public set givenName(value: Name | undefined) {
-    this._givenName = value;
-  }
-  public get familyName(): Name | undefined {
-    return this._familyName;
-  }
-  public set familyName(value: Name | undefined) {
-    this._familyName = value;
+  public set fullname(value: Fullname | undefined) {
+    this._fullname = value;
   }
   public get birthday(): Birthdate | undefined {
     return this._birthdate;
@@ -90,10 +83,10 @@ export default class Person {
   public set mail(value: Mail) {
     this._mail = value;
   }
-  public get dependent(): Fullname | undefined {
+  public get dependent(): Fullname[] | undefined {
     return this._dependent;
   }
-  public set dependent(value: Fullname | undefined) {
+  public set dependent(value: Fullname[] | undefined) {
     this._dependent = value;
   }
   public get facility(): Facility | undefined {

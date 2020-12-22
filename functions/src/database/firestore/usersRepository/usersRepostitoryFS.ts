@@ -28,6 +28,16 @@ export default class UsersRepositoryFS implements PersonRepository {
         .collection("facilities")
         .doc(person.facility.id.value);
     }
+	let workStyleRef _ null;
+	if(person.workStyle){
+		workStyleRef = this.database.collection("workStyles").doc(person.workStyle.id.value);
+	
+	
+	let socialInsuranceRef = null;
+	if(person.socialInsurance){
+		socialInsuranceRef = this.database.collection("socialInsurances").doc(person.socialInsurance.id.value);
+	}
+	
     //personにfullnameを追加させる
     await this.repository.add({
       roll: person.roll.value,
@@ -41,7 +51,10 @@ export default class UsersRepositoryFS implements PersonRepository {
       dependent: replaceNull(person.dependent?.value),
       facility: facilityRef,
       staffCode: replaceNull(person.staffCode?.value),
-      workStyle:
+      workStyle:workStyleRef,
+	  socialInsuranceId:socialInsuranceRef,
+	  hireDate:replaceNull(person.hireDate?.value.toJSDate()),
+	  leaveDate:replaceNull(person.leaveDate?.value.toJSDate())
     });
     return person;
   }
