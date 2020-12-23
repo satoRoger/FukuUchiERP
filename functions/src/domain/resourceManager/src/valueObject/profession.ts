@@ -9,8 +9,8 @@ const ProfessionValue = {
 type ProfessionValue = typeof ProfessionValue[keyof typeof ProfessionValue];
 
 export default class Profession {
-  constructor(private profession: ProfessionValue) {}
-  public get value() {
-    return this.profession;
+  constructor(private _id: ProfessionId) {}
+  public get id() {
+    return this._id;
   }
 }

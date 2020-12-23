@@ -22,6 +22,11 @@ export default class UsersRepositoryFS implements PersonRepository {
       else return value;
     };
 
+	let rollRef = null;
+	
+	rollRef = this.database.collection("rolls").doc(person.roll.id.value)
+	
+
     let facilityRef = null;
     if (person.facility) {
       facilityRef = this.database
@@ -40,7 +45,7 @@ export default class UsersRepositoryFS implements PersonRepository {
 	
     //personにfullnameを追加させる
     await this.repository.add({
-      roll: person.roll.value,
+      rollId: person.roll.value,
       familyName: replaceNull(person.familyName?.value),
       givenName: replaceNull(person.givenName?.value),
       mail: person.mail.value,

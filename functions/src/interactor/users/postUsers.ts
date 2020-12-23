@@ -11,17 +11,17 @@ import TimecardFactory from "../../domain/attendanceManagement/src/entity/timeca
 import EmployeeId from "../../domain/attendanceManagement/src/valueObject/employeeId";
 
 export default async function PostUsers(
-  param: TimecardsPostParam
-): Promise<TimecardsResponseInterface> {
-  const response = container.get<TimecardsResponseInterface>(
-    Types.TimecardsResponse
+  param: UsersPostParam
+): Promise<UsersResponseInterface> {
+  const response = container.get<UsersResponseInterface>(
+    Types.UsersResponse
   );
 
-  const repository = container.get<TimecardRepository>(
-    Types.TimecardRepository
+  const repository = container.get<UsersRepository>(
+    Types.UsersRepository
   );
 
-  const timecard = new TimecardFactory().createTimecard(
+  const person = new PersonFactory().create(
     new EmployeeId(param.userId),
     param.cardType,
     param.punchDate,
