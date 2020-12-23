@@ -16,8 +16,8 @@ export default class UsersPostParam {
     readonly facilityId?: string,
     readonly staffCode?: string ,
     readonly workStyleId?: string,
-    readonly professionId?: Profession ,
-    readonly workTime?: WorkTime ,
+    readonly professionId?: string ,
+    readonly workTimeId?: string ,
     readonly socialInsurance?: SocialInsurance ,
     readonly hireDate?: DateTime,
     readonly leaveDate?: DateTime
