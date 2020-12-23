@@ -37,4 +37,46 @@ dcontainer
   .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
   .to(WorkflowsResponse);
 
+dcontainer
+  .bind<EventRepository>(DevelopTypes.EventsRepository)
+  .to(EventsRepositoryFS);
+dcontainer
+  .bind<EventsResponseInterface>(DevelopTypes.EventsResponse)
+  .to(EventsResponse);
+
+dcontainer
+  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
+  .to(WorkflowsRepositoryFS);
+dcontainer
+  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
+  .to(WorkflowsResponse);
+
+dcontainer
+  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
+  .to(WorkflowsRepositoryFS);
+dcontainer
+  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
+  .to(WorkflowsResponse);
+
+dcontainer
+  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
+  .to(WorkflowsRepositoryFS);
+dcontainer
+  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
+  .to(WorkflowsResponse);
+
+dcontainer
+  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
+  .to(WorkflowsRepositoryFS);
+dcontainer
+  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
+  .to(WorkflowsResponse);
+
+dcontainer
+  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
+  .to(WorkflowsRepositoryFS);
+dcontainer
+  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
+  .to(WorkflowsResponse);
+
 export default dcontainer;
