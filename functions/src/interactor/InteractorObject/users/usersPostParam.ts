@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import SocialInsurance from "../../../domain/resourceManager/src/valueObject/socialInsurance";
 export default class UsersPostParam {
   constructor(
     readonly rollId: string,

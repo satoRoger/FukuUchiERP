@@ -17,7 +17,9 @@ export default class ValidateUsersPostParam {
     readonly staffCode?: string,
     readonly workStyleId?: string,
     readonly professionId?: string,
-    readonly socialInsuranceId?: string,
+    readonly workTimeId?: string,
+    readonly socialInsuranceCode?: string,
+    readonly socialInsuranceNumber?: string,
     readonly hireDate?: DateTime,
     readonly leaveDate?: DateTime
   ) {}
@@ -38,6 +40,9 @@ export default class ValidateUsersPostParam {
         this.staffCode,
         this.workStyleId,
         this.professionId,
+        this.workTimeId,
+        this.socialInsuranceCode,
+        this.socialInsuranceNumber,
         this.hireDate,
         this.leaveDate
       );

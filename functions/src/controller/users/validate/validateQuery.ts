@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import UsersQuery from "../../../interactor/InteractorObject/users/usersQuery";
 
 export default class ValidateTimecardsQuery {

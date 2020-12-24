@@ -4,7 +4,7 @@ import GetUsers from "../../interactor/users/getUsers";
 import PostUsers from "../../interactor/users/postUsers";
 
 export function GetUsersRouter(query: UsersQuery) {
-  return GetUsers(query);
+  return GetUsers();
 }
 
 export function PostUsersRouter(param: UsersPostParam) {

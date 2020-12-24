@@ -5,7 +5,7 @@ import { PostUsersRouter } from "../backRouting";
 import ValidateUsersPostParam from "../validate/validatePostParam";
 import ValidateTimecardsPostParam from "../validate/validatePostParam";
 import ValidateTimecardsQuery from "../validate/validateQuery";
-import ProfessionId from '../../../domain/resourceManager/src/valueObject/professionId';
+import ProfessionId from "../../../domain/resourceManager/src/valueObject/professionId";
 
 export default async function FrontRoutingPostUsers(
   req: express.Request,
@@ -24,7 +24,9 @@ export default async function FrontRoutingPostUsers(
   let staffCode: string | undefined;
   let workStyleId: string | undefined;
   let professionId: string | undefined;
-  let socialInsuranceId: string | undefined;
+  let workTimeId: string | undefined;
+  let socialInsuranceCode: string | undefined;
+  let socialInsuranceNumber: string | undefined;
   let hireDate: DateTime | undefined;
   let leaveDate: DateTime | undefined;
 
@@ -59,12 +61,18 @@ export default async function FrontRoutingPostUsers(
   }
   if (typeof request.workStyleId === "string") {
     workStyleId = request.workStyleId;
-
-    if (typeof request.professionId === "string") {
-      professionId = request.professionId;
   }
-  if (typeof request.socialInsuranceId === "string") {
-    socialInsuranceId = request.socialInsuranceId;
+  if (typeof request.professionId === "string") {
+    professionId = request.professionId;
+  }
+  if (typeof request.workTimeId === "string") {
+    workTimeId = request.workTimeId;
+  }
+  if (typeof request.socialInsuranceCode === "string") {
+    socialInsuranceCode = request.socialInsuranceCode;
+  }
+  if (typeof request.socialInsuranceNumber === "string") {
+    socialInsuranceNumber = request.socialInsuranceNumber;
   }
   if (typeof request.birthdate === "string") {
     birthdate = DateTime.fromISO(request.birthdate);
@@ -98,7 +106,9 @@ export default async function FrontRoutingPostUsers(
     staffCode,
     workStyleId,
     professionId,
-    socialInsuranceId,
+    workTimeId,
+    socialInsuranceCode,
+    socialInsuranceNumber,
     hireDate,
     leaveDate
   ).createWithValid();
