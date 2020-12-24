@@ -1,7 +1,6 @@
 import { DateTime } from "luxon";
 import Address from "../../valueObject/address";
 import Birthdate from "../../valueObject/birthday";
-import Name from "../../valueObject/name";
 import Mail from "../../valueObject/mail";
 import PhoneNumber from "../../valueObject/phoneNumber";
 import Profession from "../../valueObject/profession";
@@ -18,22 +17,22 @@ export default class Person {
   constructor(
     private _id: PersonId,
     private _roll: Roll,
-    private _fullname: Fullname  ,
     private _mail: Mail,
     private _birthdate?: Birthdate,
+    private _phoneNumber?: PhoneNumber,
+    private _emergencyPhoneNumber?: PhoneNumber,
     private _address?: Address,
-    private _phoneNumber?: PhoneNumber ,
-    private _emergencyPhoneNumber?: PhoneNumber ,
-    private _dependent?: Fullname[] ,
-    private _facility?: Facility ,
-    private _staffCode?: StaffCode ,
-    private _workStyle?: WorkStyle ,
-    private _profession?: Profession ,
-    private _workTime?: WorkTime ,
-    private _socialInsurance?: SocialInsurance ,
+    private _fullname?: Fullname,
+    private _dependent?: Fullname[],
+    private _facility?: Facility,
+    private _staffCode?: StaffCode,
+    private _workStyle?: WorkStyle,
+    private _profession?: Profession,
+    private _workTime?: WorkTime,
+    private _socialInsurance?: SocialInsurance,
     private _hireDate?: DateTime,
     private _leaveDate?: DateTime
-  ) { }
+  ) {}
 
   public get id(): PersonId {
     return this._id;
