@@ -9,9 +9,9 @@
 /facilities/{id}/members
 /facilities
 
-/schecules?since=date&until=date
-/schedules/{id}
-/schedules/date/{2020-11-11}
+/events?since=date&until=date
+/events/{id}
+/events/date/{2020-11-11}
 
 /workflows
 {
@@ -30,5 +30,5 @@ vacationDate:DateTime,
 /workflows/vacations?drafter=id&since=date&until=date
 /workflows/vacations/wait
 
-/announce
-/announce/{group}
+/announces
+/announces/{group}
