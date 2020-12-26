@@ -5,6 +5,7 @@ import PersonRepository from "../../../domain/resourceManager/src/repository/per
 import Workflow from "../../../domain/workflow/src/entity/workflow/workflow";
 import admin from "../../../framework/firebase/adminInitialize";
 import WorkflowCollection from "../../../domain/workflow/src/entity/workflow/workflowCollection";
+import WorkflowRepository from '../../../domain/workflow/src/repository/workflow/workflowRespository';
 
 @injectable()
 export default class WorkflowsRepositoryFS implements WorkflowRepository {
@@ -19,7 +20,7 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
     const saveWorkflow = workflow;
     for (let [i, v] of Object.entries(workflow)) {
       if (typeof v === "undefined") {
-        saveWorkflow[i] = null;
+        //saveWorkflow[i] = null;
       }
     }
     await this.repository.add({});

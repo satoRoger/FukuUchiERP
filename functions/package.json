@@ -10,8 +10,8 @@
     "deploy": "cross-env NODE_ENV=$npm_package_config_dev_mode && npm run build && firebase deploy --only functions",
     "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest --silent",
     "clean": "rm -rf node_modules/ && npm install",
-    "downloadFromGS": "gsutil cp -r gs://fukuuchierp.appspot.com/firestore-data/ .",
-    "exportFirestore": "gcloud firestore export gs://fukuuchierp.appspot.com/firestore-data"
+    "downloadFromGS": "rm -rf ./firestore-data/ && gsutil cp -r gs://fukuuchierp.appspot.com/%date%/firestore-data/ .",
+    "exportFirestore": "gcloud firestore export gs://fukuuchierp.appspot.com/%date%/firestore-data"
   },
   "engines": {
     "node": "12"

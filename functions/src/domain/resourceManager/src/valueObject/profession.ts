@@ -1,3 +1,5 @@
+import ProfessionId from "./professionId";
+
 const ProfessionValue = {
   doctor: "doctor",
   hygienist: "hygienist",

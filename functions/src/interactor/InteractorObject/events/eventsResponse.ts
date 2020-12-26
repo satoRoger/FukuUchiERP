@@ -1,13 +1,9 @@
 import "reflect-metadata";
-import { DateTime } from "luxon";
 import { injectable } from "inversify";
-import Timecard from "../../../domain/attendanceManagement/src/entity/timecard/Timecard";
-import TimecardsObject from "./workflowsObject";
-import WorkflowsObject from "./workflowsObject";
+import EventsObject from "./eventsObject";
 
 @injectable()
-export default abstract class WorkflowsResponseInterface {
+export default abstract class EventsResponseInterface {
   abstract setResult: (result: EventsObject[]) => void;
   abstract parse: () => Array<Object>;
 }
-

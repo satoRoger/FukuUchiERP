@@ -30,6 +30,16 @@ export default class TimecardRepositoryFS implements TimecardRepository {
       .collection("users")
       .doc(timecard.punchEmployeeId.value);
 
+    console.log(
+      `add Timecard:${{
+        cardType: timecard.cardtype,
+        latitude: latitude,
+        longitude: longitude,
+        punchDate: timecard.punchDate.toJSDate(),
+        userId: userRef,
+      }}`
+    );
+
     await this.repository.add({
       cardType: timecard.cardtype,
       latitude: latitude,
@@ -39,6 +49,7 @@ export default class TimecardRepositoryFS implements TimecardRepository {
     });
     return timecard;
   }
+
   async search(
     employee?: Employee,
     from?: DateTime,

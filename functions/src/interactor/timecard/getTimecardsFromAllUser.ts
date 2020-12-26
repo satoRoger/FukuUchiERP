@@ -27,7 +27,6 @@ async function GetTimecarsFromAllUsers(
     query.since,
     query.until
   );
-  console.log(collection);
   const result: TimecardsObject[] = [];
   for (let timecard of collection) {
     result.push(

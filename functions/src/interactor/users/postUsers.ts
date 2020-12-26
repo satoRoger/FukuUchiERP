@@ -9,37 +9,25 @@ import TimecardsObject from "../InteractorObject/timecards/timecardsObject";
 import TimecardsPostParam from "../InteractorObject/timecards/timecardsPostParam";
 import TimecardFactory from "../../domain/attendanceManagement/src/entity/timecard/timecardFactory";
 import EmployeeId from "../../domain/attendanceManagement/src/valueObject/employeeId";
+import UsersPostParam from "../InteractorObject/users/usersPostParam";
+import UsersResponseInterface from "../InteractorObject/users/usersResponse";
+import timecard from "../../domain/attendanceManagement/src/entity/timecard/timecard";
+import PersonFactory from "../../domain/resourceManager/src/entity/person/personFactory";
+import PersonRepository from "../../domain/resourceManager/src/repository/personRepostitory";
+import UsersObject from "../InteractorObject/users/usersObject";
 
 export default async function PostUsers(
   param: UsersPostParam
 ): Promise<UsersResponseInterface> {
-  const response = container.get<UsersResponseInterface>(
-    Types.UsersResponse
-  );
+  const response = container.get<UsersResponseInterface>(Types.UsersResponse);
 
-  const repository = container.get<UsersRepository>(
-    Types.UsersRepository
-  );
+  const repository = container.get<PersonRepository>(Types.PersonRepository);
 
-  const person = new PersonFactory().create(
-    new EmployeeId(param.userId),
-    param.cardType,
-    param.punchDate,
-    param.latitude,
-    param.longitude
-  );
+  const person = new PersonFactory().create();
 
-  repository.save(timecard);
+  repository.save(person);
 
-  const result: TimecardsObject[] = [
-    new TimecardsObject(
-      timecard.punchEmployeeId.value,
-      timecard.punchDate,
-      timecard.cardtype,
-      timecard.coordinate?.longitude(),
-      timecard.coordinate?.latitude()
-    ),
-  ];
+  const result: UsersObject[] = [];
 
   response.setResult(result);
   return response;

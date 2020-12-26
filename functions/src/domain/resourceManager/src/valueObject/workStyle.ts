@@ -1,3 +1,5 @@
+import WorkStyleId from "./workStyleId";
+
 export default class WorkStyle{
   constructor(private _id:WorkStyleId){}
   

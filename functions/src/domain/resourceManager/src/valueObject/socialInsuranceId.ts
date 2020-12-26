@@ -1,4 +1,4 @@
-export default class SocialInsuranceId(){
+export default class SocialInsuranceId{
 	constructor(private id:string){}
 	
 	public get value(){

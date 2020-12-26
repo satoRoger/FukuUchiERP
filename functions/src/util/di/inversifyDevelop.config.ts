@@ -14,6 +14,10 @@ import WorkflowRepository from "../../domain/workflow/src/repository/workflow/wo
 import WorkflowsRepositoryFS from "../../database/firestore/workflowsRepository/workflowsRepository";
 import WorkflowsResponseInterface from "../../interactor/InteractorObject/workflows/workflowsResponse";
 import WorkflowsResponse from "../../controller/contollerObject/workflowsResponse";
+import EventsResponseInterface from '../../interactor/InteractorObject/events/eventsResponse';
+import EventRepository from '../../domain/eventManager/src/repository/event/eventRepository';
+import EventsResponse from "../../controller/contollerObject/eventsResponse";
+import EventRepositoryFS from '../../database/firestore/eventsRepository/eventsRepository';
 
 const dcontainer = new Container();
 dcontainer
@@ -31,52 +35,18 @@ dcontainer
   .to(UsersRepositoryFS);
 
 dcontainer
-  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
+  .bind<WorkflowRepository>(DevelopTypes.WorkflowRepository)
   .to(WorkflowsRepositoryFS);
 dcontainer
   .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
   .to(WorkflowsResponse);
 
 dcontainer
-  .bind<EventRepository>(DevelopTypes.EventsRepository)
-  .to(EventsRepositoryFS);
+  .bind<EventRepository>(DevelopTypes.EventRepository)
+  .to(EventRepositoryFS);
 dcontainer
   .bind<EventsResponseInterface>(DevelopTypes.EventsResponse)
   .to(EventsResponse);
 
-dcontainer
-  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
-  .to(WorkflowsRepositoryFS);
-dcontainer
-  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
-  .to(WorkflowsResponse);
-
-dcontainer
-  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
-  .to(WorkflowsRepositoryFS);
-dcontainer
-  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
-  .to(WorkflowsResponse);
-
-dcontainer
-  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
-  .to(WorkflowsRepositoryFS);
-dcontainer
-  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
-  .to(WorkflowsResponse);
-
-dcontainer
-  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
-  .to(WorkflowsRepositoryFS);
-dcontainer
-  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
-  .to(WorkflowsResponse);
-
-dcontainer
-  .bind<WorkflowRepository>(DevelopTypes.WorkflowsRepository)
-  .to(WorkflowsRepositoryFS);
-dcontainer
-  .bind<WorkflowsResponseInterface>(DevelopTypes.WorkflowsResponse)
-  .to(WorkflowsResponse);
 
 export default dcontainer;

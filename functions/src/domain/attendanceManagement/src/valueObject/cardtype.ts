@@ -1,8 +1,8 @@
 const CardType = {
   Attendance: "attendance",
-  Leavework: "leaveWork",
-  Takebreak: "takeBreak",
-  Endbreak: "endBreak",
+  Leavework: "leavework",
+  Takebreak: "takebreak",
+  Endbreak: "endbreak",
 } as const;
 type CardType = typeof CardType[keyof typeof CardType];
 

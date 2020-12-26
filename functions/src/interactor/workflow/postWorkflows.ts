@@ -12,7 +12,7 @@ export default async function PostWorkflows(
   );
 
   const repository = container.get<WorkflowRepository>(
-    Types.WorkflowsRepository
+    Types.WorkflowRepository
   );
 
   return response;

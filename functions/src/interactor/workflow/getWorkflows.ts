@@ -10,7 +10,7 @@ export default async function GetWorkflows(
   );
 
   const repository = container.get<WorkflowRepository>(
-    Types.WorkflowsRepository
+    Types.WorkflowRepository
   );
 
   return response;

@@ -16,12 +16,6 @@ export default async function PostTimecards(
   let longitude: number | undefined;
 
   const request = JSON.parse(req.body);
-  console.log(request.userId);
-  console.log(request.date);
-  console.log(request.cardType);
-  console.log(request.latitude);
-  console.log(request.longitude);
-
   if (typeof request.userId === "string") {
     userId = request.userId;
   }

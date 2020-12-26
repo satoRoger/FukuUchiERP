@@ -1,4 +1,4 @@
-import Timecard from "./Timecard";
+import Timecard from "./timecard";
 import Coordinate from "../../valueObject/coordinate";
 import Employee from "../employee/employee";
 import CardType from "../../valueObject/cardtype";
