@@ -6,14 +6,12 @@ import Types from "../../util/di/types";
 import TimecardRepository from "../../domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import EmployeeFactory from "../../domain/attendanceManagement/src/entity/employee/employeeFactory";
 import TimecardsObject from "../InteractorObject/timecards/timecardsObject";
+import TimecardAPIInterface from "../APIInterface/timecard/timecard";
+import CoordinateAPIInterface from "../APIInterface/timecard/coordinate";
 
-async function GetTimecarsFromAllUsers(
+export default async function GetTimecars(
   query: TimecardsQuery
-): Promise<TimecardsResponseInterface> {
-  const response = container.get<TimecardsResponseInterface>(
-    Types.TimecardsResponse
-  );
-
+): Promise<TimecardAPIInterface[]> {
   const repository = container.get<TimecardRepository>(
     Types.TimecardRepository
   );
@@ -27,19 +25,24 @@ async function GetTimecarsFromAllUsers(
     query.since,
     query.until
   );
-  const result: TimecardsObject[] = [];
+
+  const result: TimecardAPIInterface[] = [];
   for (let timecard of collection) {
-    result.push(
-      new TimecardsObject(
-        timecard.punchEmployeeId.value,
-        timecard.punchDate,
-        timecard.cardtype
-      )
-    );
+    const coordinate: CoordinateAPIInterface | undefined = timecard.coordinate
+      ? {
+          latitude: timecard.coordinate.latitude(),
+          longitude: timecard.coordinate.longitude(),
+        }
+      : undefined;
+
+    result.push({
+      id: timecard.id.value,
+      cardType: timecard.cardtype,
+      date: timecard.punchDate.toISO({includeOffset:false}),
+      userId: timecard.punchEmployeeId.value,
+      coordinate: coordinate,
+    });
   }
 
-  response.setResult(result);
-  return response;
+  return result;
 }
-
-export default GetTimecarsFromAllUsers;

@@ -8,9 +8,11 @@ import Coordinate from "../../valueObject/coordinate";
 
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
-import AttendanceSpecification from '../specification/attendanceSpecification';
+import AttendanceSpecification from "../specification/attendanceSpecification";
 import logger from "../../../../../util/logger/logger";
-import TimecardFactory from '../../entity/timecard/timecardFactory';
+import TimecardFactory from "../../entity/timecard/timecardFactory";
+import TimecardId from "../../valueObject/timecardId";
+import CardType from "../../valueObject/cardtype";
 
 export default class PunchAttendanceAction implements PunchAction {
   constructor(
@@ -19,8 +21,9 @@ export default class PunchAttendanceAction implements PunchAction {
     private coordinate?: Coordinate
   ) {
     if (!(specification instanceof AttendanceSpecification)) {
-    logger.system.warn(`specificationが想定したものと異なります。`)
-  }}
+      logger.system.warn(`specificationが想定したものと異なります。`);
+    }
+  }
 
   @logger.debug.traceMethodCall
   async punched(employee: Employee): Promise<Timecard> {
@@ -31,7 +34,13 @@ export default class PunchAttendanceAction implements PunchAction {
         throw error;
       });
 
-    return new TimecardFactory()
-      .createAttendance(employee, this.punchDate, this.coordinate);
+    return new TimecardFactory().createTimecard(
+      new TimecardId("empty"),
+      employee.id,
+      CardType.Attendance,
+      this.punchDate,
+      this.coordinate?.latitude(),
+      this.coordinate?.longitude()
+    );
   }
 }

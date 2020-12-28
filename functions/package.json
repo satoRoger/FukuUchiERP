@@ -76,14 +76,13 @@
     "@types/config": "0.0.36",
     "@types/log4js": "^2.3.5",
     "@types/luxon": "^1.25.0",
-    "cross-env": "^7.0.2",
     "axios": "^0.20.0",
     "config": "^3.3.2",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "firebase-admin": "^9.4.2",
     "firebase-functions": "^3.13.0",
-    "typescript": "^4.0.3",
     "inversify": "4.13.x",
     "log4js": "^6.3.0",
     "luxon": "^1.25.0",
@@ -91,6 +90,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-node": "^9.0.0",
     "typeorm": "^0.2.29",
+    "typescript": "^4.0.3",
     "yarn": "^1.22.10"
   }
 }

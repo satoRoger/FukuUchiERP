@@ -8,18 +8,22 @@ import Coordinate from "../../valueObject/coordinate";
 
 import PunchSpecification from "../specification/punchSpecification";
 import { DateTime } from "luxon";
-import TakebreakSpecification from '../specification/takebreakSpecification';
+import TakebreakSpecification from "../specification/takebreakSpecification";
 import logger from "../../../../../util/logger/logger";
 import TimecardFactory from "../../entity/timecard/timecardFactory";
+import TimecardId from "../../valueObject/timecardId";
+import CardType from "../../valueObject/cardtype";
 
 export default class PunchTakebreakAction implements PunchAction {
   constructor(
     private specification: PunchSpecification,
     private punchDate: DateTime,
     private coordinate?: Coordinate
-  ) {if (!(specification instanceof TakebreakSpecification)) {
-    logger.system.warn(`specificationが想定したものと異なります。`)
-  }}
+  ) {
+    if (!(specification instanceof TakebreakSpecification)) {
+      logger.system.warn(`specificationが想定したものと異なります。`);
+    }
+  }
 
   @logger.debug.traceMethodCall
   async punched(employee: Employee): Promise<Timecard> {
@@ -30,7 +34,13 @@ export default class PunchTakebreakAction implements PunchAction {
         throw error;
       });
 
-    return new TimecardFactory()
-      .createTakebreak(employee, this.punchDate, this.coordinate);
+    return new TimecardFactory().createTimecard(
+      new TimecardId("empty"),
+      employee.id,
+      CardType.Takebreak,
+      this.punchDate,
+      this.coordinate?.latitude(),
+      this.coordinate?.latitude()
+    );
   }
 }

@@ -11,6 +11,8 @@ import { DateTime } from "luxon";
 import EndbreakSpecification from "../specification/endbreakSpecification";
 import logger from "../../../../../util/logger/logger";
 import TimecardFactory from "../../entity/timecard/timecardFactory";
+import TimecardId from "../../valueObject/timecardId";
+import CardType from '../../valueObject/cardtype';
 
 export default class PunchEndbreakAction implements PunchAction {
   constructor(
@@ -32,10 +34,13 @@ export default class PunchEndbreakAction implements PunchAction {
         throw error;
       });
 
-    return new TimecardFactory().createEndbreak(
-      employee,
+    return new TimecardFactory().createTimecard(
+      new TimecardId("empty"),
+      employee.id,
+      CardType.Endbreak,
       this.punchDate,
-      this.coordinate
+      this.coordinate?.latitude(),
+      this.coordinate?.longitude()
     );
   }
 }

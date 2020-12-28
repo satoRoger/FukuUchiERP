@@ -1,7 +1,7 @@
 import express from "express";
 import { DateTime } from "luxon";
 import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
-import { GetTimecardsFromAllUserRouter, PostTimecardRouter } from "../backRouting";
+import { GetTimecardsRouter, PostTimecardRouter } from "../backRouting";
 import ValidateTimecardsPostParam from "../validate/validatePostParam";
 import ValidateTimecardsQuery from "../validate/validateQuery";
 
@@ -15,7 +15,9 @@ export default async function PostTimecards(
   let latitude: number | undefined;
   let longitude: number | undefined;
 
-  const request = JSON.parse(req.body);
+  console.log(req.body);
+  const request = req.body;
+  console.log(req);
   if (typeof request.userId === "string") {
     userId = request.userId;
   }
@@ -47,6 +49,7 @@ export default async function PostTimecards(
 
   if (postParam) {
     const response = await PostTimecardRouter(postParam);
-    res.json(response.parse());
+    console.log(response)
+    res.json(response);
   }
 }

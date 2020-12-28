@@ -1,6 +1,6 @@
 import express from "express";
 import { DateTime } from "luxon";
-import { GetTimecardsFromAllUserRouter } from "../backRouting";
+import { GetTimecardsRouter } from "../backRouting";
 import ValidateTimecardsQuery from "../validate/validateQuery";
 
 export default async function DeleteTimecardsIdQuery(

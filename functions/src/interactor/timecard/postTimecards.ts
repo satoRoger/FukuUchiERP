@@ -9,19 +9,18 @@ import TimecardsObject from "../InteractorObject/timecards/timecardsObject";
 import TimecardsPostParam from "../InteractorObject/timecards/timecardsPostParam";
 import TimecardFactory from "../../domain/attendanceManagement/src/entity/timecard/timecardFactory";
 import EmployeeId from "../../domain/attendanceManagement/src/valueObject/employeeId";
+import TimecardId from "../../domain/attendanceManagement/src/valueObject/timecardId";
+import TimecardAPIInterface from "../APIInterface/timecard/timecard";
 
 async function PostTimecards(
   param: TimecardsPostParam
-): Promise<TimecardsResponseInterface> {
-  const response = container.get<TimecardsResponseInterface>(
-    Types.TimecardsResponse
-  );
-
+): Promise<TimecardAPIInterface[]> {
   const repository = container.get<TimecardRepository>(
     Types.TimecardRepository
   );
 
   const timecard = new TimecardFactory().createTimecard(
+    new TimecardId("empty"),
     new EmployeeId(param.userId),
     param.cardType,
     param.punchDate,
@@ -29,20 +28,28 @@ async function PostTimecards(
     param.longitude
   );
 
-  repository.save(timecard);
+  const newTimecard = await repository.save(timecard);
 
-  const result: TimecardsObject[] = [
-    new TimecardsObject(
-      timecard.punchEmployeeId.value,
-      timecard.punchDate,
-      timecard.cardtype,
-      timecard.coordinate?.longitude(),
-      timecard.coordinate?.latitude()
-    ),
+  const coordinate = newTimecard.coordinate
+    ? {
+        longitude: newTimecard.coordinate.longitude(),
+        latitude: newTimecard.coordinate.longitude(),
+      }
+    : undefined;
+  
+  const result: TimecardAPIInterface[] = [
+    {
+      cardType: newTimecard.cardtype,
+      date: newTimecard.punchDate.toISO({ includeOffset: false }),
+      id: newTimecard.id.value,
+      userId: newTimecard.punchEmployeeId.value,
+      coordinate: coordinate,
+    },
   ];
 
-  response.setResult(result);
-  return response;
+  result.push();
+
+  return result;
 }
 
 export default PostTimecards;

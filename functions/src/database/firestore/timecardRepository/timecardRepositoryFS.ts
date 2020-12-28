@@ -7,6 +7,7 @@ import TimecardRepository from "../../../domain/attendanceManagement/src/reposit
 import admin from "../../../framework/firebase/adminInitialize";
 import TimecardFactory from "../../../domain/attendanceManagement/src/entity/timecard/timecardFactory";
 import EmployeeId from "../../../domain/attendanceManagement/src/valueObject/employeeId";
+import TimecardId from "../../../domain/attendanceManagement/src/valueObject/timecardId";
 
 @injectable()
 export default class TimecardRepositoryFS implements TimecardRepository {
@@ -29,16 +30,6 @@ export default class TimecardRepositoryFS implements TimecardRepository {
     const userRef = this.database
       .collection("users")
       .doc(timecard.punchEmployeeId.value);
-
-    console.log(
-      `add Timecard:${{
-        cardType: timecard.cardtype,
-        latitude: latitude,
-        longitude: longitude,
-        punchDate: timecard.punchDate.toJSDate(),
-        userId: userRef,
-      }}`
-    );
 
     await this.repository.add({
       cardType: timecard.cardtype,
@@ -79,6 +70,7 @@ export default class TimecardRepositoryFS implements TimecardRepository {
     const result = snapshot.docs.map(async (doc) => {
       const userDoc = await doc.data().userId.get();
       return new TimecardFactory().createTimecard(
+        new TimecardId(doc.id),
         new EmployeeId(userDoc.id),
         doc.data().cardType,
         DateTime.fromJSDate(doc.data().punchDate.toDate())

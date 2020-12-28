@@ -11,6 +11,8 @@ import { DateTime } from "luxon";
 import LeaveworkSpecification from "../specification/leaveworkSpecification";
 import logger from "../../../../../util/logger/logger";
 import TimecardFactory from "../../entity/timecard/timecardFactory";
+import TimecardId from "../../valueObject/timecardId";
+import CardType from "../../valueObject/cardtype";
 
 export default class PunchLeaveworkAction implements PunchAction {
   constructor(
@@ -31,10 +33,13 @@ export default class PunchLeaveworkAction implements PunchAction {
         logger.app.warn(`${error}`);
         throw error;
       });
-    return new TimecardFactory().createLeavework(
-      employee,
+    return new TimecardFactory().createTimecard(
+      new TimecardId("empty"),
+      employee.id,
+      CardType.Leavework,
       this.punchDate,
-      this.coordinate
+      this.coordinate?.latitude(),
+      this.coordinate?.longitude()
     );
   }
 }

@@ -2,7 +2,7 @@ import TimecardsPostParam from "../../interactor/InteractorObject/timecards/time
 import TimecardsQuery from "../../interactor/InteractorObject/timecards/timecardsQuery";
 import WorkflowsPostParam from "../../interactor/InteractorObject/workflows/workflowsPostParam";
 import WorkflowsQuery from "../../interactor/InteractorObject/workflows/workflowsQuery";
-import GetTimecarsFromAllUsers from "../../interactor/timecard/getTimecardsFromAllUser";
+import GetTimecarsFromAllUsers from "../../interactor/timecard/getTimecards";
 import PostWorkflows from "../../interactor/workflow/postWorkflows";
 
 export function GetWorkflowsRouter(query: WorkflowsQuery) {

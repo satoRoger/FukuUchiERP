@@ -4,9 +4,11 @@ import Coordinate from "../../valueObject/coordinate";
 import EmployeeId from "../../valueObject/employeeId";
 import Employee from "../employee/employee";
 import logger from "../../../../../util/logger/logger";
+import TimecardId from "../../valueObject/timecardId";
 
 export default class Timecard {
   constructor(
+    private _id: TimecardId,
     private _employee: Employee,
     private _cardType: CardType,
     private _punchDate: DateTime,
@@ -19,6 +21,10 @@ export default class Timecard {
     } else {
       return undefined;
     }
+  }
+
+  get id(): TimecardId {
+    return this._id;
   }
 
   get punchEmployeeId(): EmployeeId {

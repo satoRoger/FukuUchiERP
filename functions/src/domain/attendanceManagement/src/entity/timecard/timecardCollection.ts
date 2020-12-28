@@ -14,12 +14,6 @@ export default class TimecardCollection implements Iterable<Timecard> {
     return this;
   };
 
-  latestTimecard: () => Timecard = () => {
-    return new TimecardFactory().createAttendance(
-      new EmployeeFactory().createByRowId("test01"),
-      DateTime.fromISO("2020-10-10")
-    );
-  };
   filter: (callback: (timecard: Timecard) => boolean) => TimecardCollection = (
     callback
   ) => {

@@ -1,10 +1,10 @@
 import TimecardsQuery from "../../interactor/InteractorObject/timecards/timecardsQuery";
-import GetTimecarsFromAllUsers from "../../interactor/timecard/getTimecardsFromAllUser";
 import TimecardsPostParam from "../../interactor/InteractorObject/timecards/timecardsPostParam";
 import PostTimecards from "../../interactor/timecard/postTimecards";
+import GetTimecars from "../../interactor/timecard/getTimecards";
 
-export function GetTimecardsFromAllUserRouter(query: TimecardsQuery) {
-  return GetTimecarsFromAllUsers(query);
+export function GetTimecardsRouter(query: TimecardsQuery) {
+  return GetTimecars(query);
 }
 
 export function PostTimecardRouter(param: TimecardsPostParam) {

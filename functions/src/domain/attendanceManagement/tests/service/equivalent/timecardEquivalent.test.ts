@@ -27,16 +27,7 @@ describe("タイムカード等価比較ロジック", () => {
     const punchDateA = DateTime.fromISO("2020-10-10T05:05:05");
     const punchDateB = DateTime.fromISO("2020-10-10T05:05:05");
 
-    timecardA = new Timecard(employeeA, cardtypeA, punchDateA, coordinateA);
-    timecardB = new Timecard(employeeA, cardtypeA, punchDateA, coordinateB);
-    timecardC = new Timecard(employeeA, cardtypeA, punchDateB, coordinateA);
-    timecardD = new Timecard(employeeA, cardtypeB, punchDateA, coordinateA);
-    timecardE = new Timecard(employeeB, cardtypeA, punchDateA, coordinateA);
 
-    timecardANoC = new Timecard(employeeA, cardtypeA, punchDateA);
-    timecardBNoC = new Timecard(employeeA, cardtypeA, punchDateB);
-    timecardCNoC = new Timecard(employeeA, cardtypeB, punchDateA);
-    timecardDNoC = new Timecard(employeeB, cardtypeA, punchDateA);
   });
 
   test("同じオブジェクトを評価", () => {
