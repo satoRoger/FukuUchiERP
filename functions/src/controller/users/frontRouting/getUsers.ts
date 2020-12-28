@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import ValidateUsersQuery from "../validate/validateQuery";
 import { GetUsersRouter } from "../backRouting";
 
-export default async function FrontRoutingGetUsers(
+export default async function GetUsers(
   req: express.Request,
   res: express.Response
 ) {

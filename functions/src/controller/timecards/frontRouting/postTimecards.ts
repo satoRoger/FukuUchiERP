@@ -15,9 +15,8 @@ export default async function PostTimecards(
   let latitude: number | undefined;
   let longitude: number | undefined;
 
-  console.log(req.body);
   const request = req.body;
-  console.log(req);
+  
   if (typeof request.userId === "string") {
     userId = request.userId;
   }
@@ -49,7 +48,6 @@ export default async function PostTimecards(
 
   if (postParam) {
     const response = await PostTimecardRouter(postParam);
-    console.log(response)
     res.json(response);
   }
 }
