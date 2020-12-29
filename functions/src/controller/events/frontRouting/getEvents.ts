@@ -1,23 +1,28 @@
-import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
-import EventsObject from "../../../interactor/InteractorObject/events/eventsObject";
-import EventsResponseInterface from "../../../interactor/InteractorObject/events/eventsResponse";
-import UsersObject from "../../../interactor/InteractorObject/users/usersObject";
-import WorkflowsResponseInterface from "../../../interactor/InteractorObject/workflows/workflowsResponse";
-import container from "../../../util/di/inversify.config";
-import Types from "../../../util/di/types";
-import EventRepository from "../../../domain/eventManager/src/repository/event/eventRepository";
+import express from "express";
+import { DateTime } from "luxon";
+import ValidateTimecardsQuery from "../validate/validateQuery";
+import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
+import EventAPIInterface from '../../../interactor/src/APIInterface/event/event';
+import { GetEventsRouter } from "../backRouting";
 
-export default async function getEvents(): Promise<EventsResponseInterface> {
-  const response = container.get<EventsResponseInterface>(Types.EventsResponse);
+export default async function GetEvents(
+  req: express.Request,
+  res: express.Response<EventAPIInterface[]>
+) {
+  let since: DateTime | undefined = undefined;
+  let until: DateTime | undefined = undefined;
 
-  const repository = container.get<EventRepository>(Types.EventRepository);
-
-  const collection = await repository.search();
-  const result: EventsObject[] = [];
-  for (let {} of collection) {
-    result.push(new UsersObject());
+  if (typeof req.query.since === "string") {
+    since = DateTime.fromISO(req.query.since);
+  }
+  if (typeof req.query.until === "string") {
+    until = DateTime.fromISO(req.query.until);
   }
 
-  response.setResult(result);
-  return response;
+  const query = new ValidateTimecardsQuery(since, until).createWithValid();
+
+  if (query) {
+    const response = await GetEventsRouter(query);
+    res.json(response);
+  }
 }

@@ -1,6 +1,6 @@
 import express from "express";
 import { DateTime } from "luxon";
-import { GetUserTimecardRouter } from "../backRouting";
+import { GetUserTimecardsRouter } from "../backRouting";
 import ValidateUserTimecard from "../validate/validateUserTimecard";
 
 export default async function GetUserTimecards(
@@ -14,17 +14,15 @@ export default async function GetUserTimecards(
 
   if (typeof req.query.since === "string") {
     since = DateTime.fromISO(req.query.since);
-    console.log(since);
   }
   if (typeof req.query.until === "string") {
     until = DateTime.fromISO(req.query.until);
-    console.log(until);
   }
 
   const query = new ValidateUserTimecard(userId,since, until).createWithValid();
 
   if (query) {
-    const response = await GetUserTimecardRouter(query);
+    const response = await GetUserTimecardsRouter(query);
     res.json(response);
   }
 }

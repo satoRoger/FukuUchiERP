@@ -1,15 +1,15 @@
-import TimecardsQuery from "../../interactor/InteractorObject/timecards/timecardsQuery";
-import UsersPostParam from "../../interactor/InteractorObject/users/usersPostParam";
-import UsersQuery from "../../interactor/InteractorObject/users/usersQuery";
-import GetTimecars from "../../interactor/timecard/getTimecards";
-import GetUsers from "../../interactor/users/getUsers";
-import PostUsers from "../../interactor/users/postUsers";
+import TimecardsQuery from "../../interactor/src/InteractorObject/timecards/timecardsQuery";
+import UsersPostParam from "../../interactor/src/InteractorObject/users/usersPostParam";
+import UsersQuery from "../../interactor/src/InteractorObject/users/usersQuery";
+import GetTimecards from "../../interactor/src/timecard/getTimecards";
+import GetUsers from "../../interactor/src/users/getUsers";
+import PostUsers from "../../interactor/src/users/postUsers";
 
 export function GetUsersRouter(query: UsersQuery) {
   return GetUsers();
 }
-export function GetUserTimecardRouter(query: TimecardsQuery) {
-  return GetTimecars(query);
+export function GetUserTimecardsRouter(query: TimecardsQuery) {
+  return GetTimecards(query);
 }
 
 export function PostUsersRouter(param: UsersPostParam) {

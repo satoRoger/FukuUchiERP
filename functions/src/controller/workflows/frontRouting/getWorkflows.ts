@@ -1,6 +1,6 @@
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
-import UsersObject from "../../../interactor/InteractorObject/users/usersObject";
-import WorkflowsResponseInterface from "../../../interactor/InteractorObject/workflows/workflowsResponse";
+import UsersObject from "../../../interactor/src/InteractorObject/users/usersObject";
+import WorkflowsResponseInterface from "../../../interactor/src/InteractorObject/workflows/workflowsResponse";
 import container from "../../../util/di/inversify.config";
 import Types from "../../../util/di/types";
 

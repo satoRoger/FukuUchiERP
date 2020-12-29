@@ -2,7 +2,7 @@ import express from "express";
 import { DateTime } from "luxon";
 import { GetTimecardsRouter } from "../backRouting";
 import ValidateTimecardsQuery from "../validate/validateQuery";
-import TimecardAPIInterface from "../../../interactor/APIInterface/timecard/timecard";
+import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
 
 export default async function GetTimecards(
   req: express.Request,
@@ -13,11 +13,9 @@ export default async function GetTimecards(
 
   if (typeof req.query.since === "string") {
     since = DateTime.fromISO(req.query.since);
-    console.log(since);
   }
   if (typeof req.query.until === "string") {
     until = DateTime.fromISO(req.query.until);
-    console.log(until);
   }
 
   const query = new ValidateTimecardsQuery(since, until).createWithValid();

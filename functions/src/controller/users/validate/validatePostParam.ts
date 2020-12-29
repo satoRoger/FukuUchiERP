@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
-import UsersPostParam from "../../../interactor/InteractorObject/users/usersPostParam";
+import UsersPostParam from "../../../interactor/src/InteractorObject/users/usersPostParam";
 
 export default class ValidateUsersPostParam {
   constructor(

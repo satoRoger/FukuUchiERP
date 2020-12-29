@@ -1,7 +1,7 @@
-import TimecardsQuery from "../../interactor/InteractorObject/timecards/timecardsQuery";
-import TimecardsPostParam from "../../interactor/InteractorObject/timecards/timecardsPostParam";
-import PostTimecards from "../../interactor/timecard/postTimecards";
-import GetTimecars from "../../interactor/timecard/getTimecards";
+import TimecardsQuery from "../../interactor/src/InteractorObject/timecards/timecardsQuery";
+import TimecardsPostParam from "../../interactor/src/InteractorObject/timecards/timecardsPostParam";
+import PostTimecards from "../../interactor/src/timecard/postTimecards";
+import GetTimecars from "../../interactor/src/timecard/getTimecards";
 
 export function GetTimecardsRouter(query: TimecardsQuery) {
   return GetTimecars(query);

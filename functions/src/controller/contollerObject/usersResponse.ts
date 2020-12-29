@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { DateTime } from "luxon";
-import UsersObject from "../../interactor/InteractorObject/users/usersObject";
-import UsersResponseInterface from '../../interactor/InteractorObject/users/usersResponse';
+import UsersObject from "../../interactor/src/InteractorObject/users/usersObject";
+import UsersResponseInterface from '../../interactor/src/InteractorObject/users/usersResponse';
 
 @injectable()
 export default class UsersResponse implements UsersResponseInterface {

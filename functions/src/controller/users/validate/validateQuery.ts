@@ -1,4 +1,4 @@
-import UsersQuery from "../../../interactor/InteractorObject/users/usersQuery";
+import UsersQuery from "../../../interactor/src/InteractorObject/users/usersQuery";
 
 export default class ValidateTimecardsQuery {
   constructor() {}

@@ -4,9 +4,10 @@
 
 /users
 /users/{id}
-/users/vacations
+/users/{id}/events
 
 /facilities/{id}/members
+/facilities/{id}/events
 /facilities
 
 /events?since=date&until=date

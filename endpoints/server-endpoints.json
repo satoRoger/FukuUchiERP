@@ -31,6 +31,66 @@
   ],
   "schemes": ["https"],
   "paths": {
+    "/users/{userId}/timecards": {
+      "get": {
+        "tags": ["timecards", "user"],
+        "operationId": "getUserTimecards",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "since",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "until",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": ["timecards", "user"],
+        "operationId": "getUser",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/timecards": {
       "get": {
         "tags": ["timecards"],

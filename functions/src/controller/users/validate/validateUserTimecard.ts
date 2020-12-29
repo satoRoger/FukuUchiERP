@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import TimecardsQuery from "../../../interactor/InteractorObject/timecards/timecardsQuery";
+import TimecardsQuery from "../../../interactor/src/InteractorObject/timecards/timecardsQuery";
 
 export default class ValidateUserTimecard {
   constructor(

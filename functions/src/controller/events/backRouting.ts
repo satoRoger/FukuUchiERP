@@ -1,12 +1,10 @@
-import PostEvents from "../../interactor/events/postEvents";
-import EventsPostParam from "../../interactor/InteractorObject/events/eventsPostParam";
-import WorkflowsPostParam from "../../interactor/InteractorObject/workflows/workflowsPostParam";
-import WorkflowsQuery from "../../interactor/InteractorObject/workflows/workflowsQuery";
-import GetTimecarsFromAllUsers from "../../interactor/timecard/getTimecards";
-import PostWorkflows from "../../interactor/workflow/postWorkflows";
+import GetEvents from "../../interactor/src/events/getEvents";
+import PostEvents from "../../interactor/src/events/postEvents";
+import EventsPostParam from "../../interactor/src/InteractorObject/events/eventsPostParam";
+import EventsQuery from "../../interactor/src/InteractorObject/events/eventsQuery";
 
-export function GetEventsRouter(query: WorkflowsQuery) {
-  return GetTimecarsFromAllUsers(query);
+export function GetEventsRouter(query: EventsQuery) {
+  return GetEvents(query);
 }
 
 export function PostEventsRouter(param: EventsPostParam) {

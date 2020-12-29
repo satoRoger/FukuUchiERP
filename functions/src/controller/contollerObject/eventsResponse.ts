@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
-import EventsObject from "../../interactor/InteractorObject/events/eventsObject";
-import EventsResponseInterface from "../../interactor/InteractorObject/events/eventsResponse";
+import EventsObject from "../../interactor/src/InteractorObject/events/eventsObject";
+import EventsResponseInterface from "../../interactor/src/InteractorObject/events/eventsResponse";
 
 @injectable()
 export default class EventsResponse implements EventsResponseInterface {
