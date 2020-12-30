@@ -1,4 +1,4 @@
-export default class RollId {
+export default class EmployeeId {
   constructor(private id: string) {}
 
   public get value() {

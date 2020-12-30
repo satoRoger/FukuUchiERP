@@ -1,9 +1,7 @@
-import WorkStyleId from "./workStyleId";
+const WorkStyle = {
+  fulltime: "fulltime",
+  parttime: "parttime"
+} as const;
+type WorkStyle = typeof WorkStyle[keyof typeof WorkStyle];
 
-export default class WorkStyle{
-  constructor(private _id:WorkStyleId){}
-  
-  public get id(){
-	  return this._id;
-  }
-}
+export default WorkStyle;

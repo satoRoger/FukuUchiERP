@@ -11,6 +11,6 @@ export default async function GetUsers(
 
   if (query) {
     const response = await GetUsersRouter(query);
-    res.json(response.parse());
+    res.json(response);
   }
 }

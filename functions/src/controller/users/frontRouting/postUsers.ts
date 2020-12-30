@@ -6,12 +6,16 @@ import ValidateUsersPostParam from "../validate/validatePostParam";
 import ValidateTimecardsPostParam from "../validate/validatePostParam";
 import ValidateTimecardsQuery from "../validate/validateQuery";
 import ProfessionId from "../../../domain/resourceManager/src/valueObject/professionId";
+import RollType from "../../../domain/resourceManager/src/valueObject/rollType";
+import WorkStyle from "../../../domain/resourceManager/src/valueObject/workStyle";
+import ProfessionType from "../../../domain/resourceManager/src/valueObject/professionType";
+import WorkTime from "../../../domain/resourceManager/src/valueObject/worktime";
 
 export default async function FrontRoutingPostUsers(
   req: express.Request,
   res: express.Response
 ) {
-  let rollId: string | undefined;
+  let rollType: RollType | undefined;
   let familyName: string | undefined;
   let givenName: string | undefined;
   let mail: string | undefined;
@@ -22,9 +26,9 @@ export default async function FrontRoutingPostUsers(
   let dependent: { familyName: string; givenName: string }[] | undefined;
   let facilityId: string | undefined;
   let staffCode: string | undefined;
-  let workStyleId: string | undefined;
-  let professionId: string | undefined;
-  let workTimeId: string | undefined;
+  let workStyle: WorkStyle | undefined;
+  let professionType: ProfessionType | undefined;
+  let workTime: WorkTime | string | undefined;
   let socialInsuranceCode: string | undefined;
   let socialInsuranceNumber: string | undefined;
   let hireDate: DateTime | undefined;
@@ -32,8 +36,11 @@ export default async function FrontRoutingPostUsers(
 
   const request = JSON.parse(req.body);
 
-  if (typeof request.rollId === "string") {
-    rollId = request.rollId;
+  if (
+    request.rollType === RollType.manager ||
+    request.rollType === RollType.user
+  ) {
+    rollType = request.rollType;
   }
   if (typeof request.familyName === "string") {
     familyName = request.familyName;
@@ -59,14 +66,28 @@ export default async function FrontRoutingPostUsers(
   if (typeof request.staffCode === "string") {
     staffCode = request.staffCode;
   }
-  if (typeof request.workStyleId === "string") {
-    workStyleId = request.workStyleId;
+  if (
+    request.workStyle == WorkStyle.fulltime ||
+    request.workStyle == WorkStyle.parttime
+  ) {
+    workStyle = request.workStyle;
   }
-  if (typeof request.professionId === "string") {
-    professionId = request.professionId;
+  if (
+    request.professionType == ProfessionType.assistance ||
+    request.professionType == ProfessionType.clerk ||
+    request.professionType == ProfessionType.doctor ||
+    request.professionType == ProfessionType.hygienist ||
+    request.professionType == ProfessionType.reception
+  ) {
+    professionType = request.professionType;
   }
-  if (typeof request.workTimeId === "string") {
-    workTimeId = request.workTimeId;
+  if (
+    typeof request.workTime === "string" ||
+    request.workTime == WorkTime[14451930] ||
+    request.workTime == WorkTime[8451330] ||
+    request.workTime == WorkTime[8451745]
+  ) {
+    workTime = request.workTime;
   }
   if (typeof request.socialInsuranceCode === "string") {
     socialInsuranceCode = request.socialInsuranceCode;
@@ -93,7 +114,7 @@ export default async function FrontRoutingPostUsers(
   }
 
   const postParam = new ValidateUsersPostParam(
-    rollId,
+    rollType,
     mail,
     familyName,
     givenName,
@@ -104,9 +125,9 @@ export default async function FrontRoutingPostUsers(
     dependent,
     facilityId,
     staffCode,
-    workStyleId,
-    professionId,
-    workTimeId,
+    workStyle,
+    professionType,
+    workTime,
     socialInsuranceCode,
     socialInsuranceNumber,
     hireDate,
@@ -115,6 +136,6 @@ export default async function FrontRoutingPostUsers(
 
   if (postParam) {
     const response = await PostUsersRouter(postParam);
-    res.json(response.parse());
+    res.json(response);
   }
 }

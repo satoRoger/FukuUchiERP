@@ -3,8 +3,8 @@ import Address from "../../valueObject/address";
 import Birthdate from "../../valueObject/birthday";
 import Mail from "../../valueObject/mail";
 import PhoneNumber from "../../valueObject/phoneNumber";
-import Profession from "../../valueObject/profession";
-import Roll from "../../valueObject/roll";
+import ProfessionType from "../../valueObject/professionType";
+import RollType from "../../valueObject/rollType";
 import SocialInsurance from "../../valueObject/socialInsurance";
 import StaffCode from "../../valueObject/staffCode";
 import WorkStyle from "../../valueObject/workStyle";
@@ -16,7 +16,7 @@ import PersonId from "../../valueObject/personId";
 export default class Person {
   constructor(
     private _id: PersonId,
-    private _roll: Roll,
+    private _roll: RollType,
     private _mail: Mail,
     private _birthdate?: Birthdate,
     private _phoneNumber?: PhoneNumber,
@@ -26,9 +26,9 @@ export default class Person {
     private _dependent?: Fullname[],
     private _facility?: Facility,
     private _staffCode?: StaffCode,
-    private _workStyle?: WorkStyle,
-    private _profession?: Profession,
-    private _workTime?: WorkTime,
+    private _workStyle?: WorkStyle ,
+    private _profession?: ProfessionType,
+    private _workTime?: WorkTime| string,
     private _socialInsurance?: SocialInsurance,
     private _hireDate?: DateTime,
     private _leaveDate?: DateTime
@@ -40,10 +40,10 @@ export default class Person {
   public set id(value: PersonId) {
     this._id = value;
   }
-  public get roll(): Roll {
+  public get roll(): RollType {
     return this._roll;
   }
-  public set roll(value: Roll) {
+  public set roll(value: RollType) {
     this._roll = value;
   }
   public get fullname(): Fullname | undefined {
@@ -52,10 +52,10 @@ export default class Person {
   public set fullname(value: Fullname | undefined) {
     this._fullname = value;
   }
-  public get birthday(): Birthdate | undefined {
+  public get birthdate(): Birthdate | undefined {
     return this._birthdate;
   }
-  public set birthday(value: Birthdate | undefined) {
+  public set birthdate(value: Birthdate | undefined) {
     this._birthdate = value;
   }
   public get address(): Address | undefined {
@@ -106,16 +106,16 @@ export default class Person {
   public set workStyle(value: WorkStyle | undefined) {
     this._workStyle = value;
   }
-  public get profession(): Profession | undefined {
+  public get profession(): ProfessionType | undefined {
     return this._profession;
   }
-  public set profession(value: Profession | undefined) {
+  public set profession(value: ProfessionType | undefined) {
     this._profession = value;
   }
-  public get workTime(): WorkTime | undefined {
+  public get workTime(): WorkTime | string | undefined {
     return this._workTime;
   }
-  public set workTime(value: WorkTime | undefined) {
+  public set workTime(value: WorkTime | string | undefined) {
     this._workTime = value;
   }
   public get socialInsurance(): SocialInsurance | undefined {

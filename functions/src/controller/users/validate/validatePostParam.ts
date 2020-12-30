@@ -1,10 +1,14 @@
 import { DateTime } from "luxon";
 import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
 import UsersPostParam from "../../../interactor/src/InteractorObject/users/usersPostParam";
+import RollType from "../../../domain/resourceManager/src/valueObject/rollType";
+import WorkStyle from "../../../domain/resourceManager/src/valueObject/workStyle";
+import ProfessionType from "../../../domain/resourceManager/src/valueObject/professionType";
+import WorkTime from "../../../domain/resourceManager/src/valueObject/worktime";
 
 export default class ValidateUsersPostParam {
   constructor(
-    readonly rollId?: string,
+    readonly rollType?: RollType,
     readonly mail?: string,
     readonly familyName?: string,
     readonly givenName?: string,
@@ -15,9 +19,9 @@ export default class ValidateUsersPostParam {
     readonly dependent?: { familyName: string; givenName: string }[],
     readonly facilityId?: string,
     readonly staffCode?: string,
-    readonly workStyleId?: string,
-    readonly professionId?: string,
-    readonly workTimeId?: string,
+    readonly workStyle?: WorkStyle,
+    readonly professionType?: ProfessionType,
+    readonly workTime?: WorkTime | string,
     readonly socialInsuranceCode?: string,
     readonly socialInsuranceNumber?: string,
     readonly hireDate?: DateTime,
@@ -25,12 +29,16 @@ export default class ValidateUsersPostParam {
   ) {}
 
   createWithValid(): UsersPostParam | undefined {
-    if (this.rollId && this.mail) {
+    const name =
+      this.familyName && this.givenName
+        ? { familyName: this.familyName, givenName: this.givenName }
+        : undefined;
+    
+    if (this.rollType && this.mail) {
       return new UsersPostParam(
-        this.rollId,
+        this.rollType,
         this.mail,
-        this.familyName,
-        this.givenName,
+        name,
         this.birthdate,
         this.address,
         this.phoneNumber,
@@ -38,9 +46,9 @@ export default class ValidateUsersPostParam {
         this.dependent,
         this.facilityId,
         this.staffCode,
-        this.workStyleId,
-        this.professionId,
-        this.workTimeId,
+        this.workStyle,
+        this.professionType,
+        this.workTime,
         this.socialInsuranceCode,
         this.socialInsuranceNumber,
         this.hireDate,
