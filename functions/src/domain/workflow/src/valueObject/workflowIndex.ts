@@ -1,6 +1,6 @@
 export default class WorkflowIndex {
   constructor(private _index: number) {}
-  public get index() {
+  public get value() {
     return this._index;
   }
 }

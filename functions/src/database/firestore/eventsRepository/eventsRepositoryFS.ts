@@ -1,15 +1,8 @@
 import { injectable } from "inversify";
-import Person from "../../../domain/resourceManager/src/entity/person/person";
-import PersonCollection from "../../../domain/resourceManager/src/entity/person/personCollection";
-import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
-import Workflow from "../../../domain/workflow/src/entity/workflow/workflow";
 import admin from "../../../framework/firebase/adminInitialize";
-import WorkflowCollection from "../../../domain/workflow/src/entity/workflow/workflowCollection";
 import EventRepository from "../../../domain/eventManager/src/repository/event/eventRepository";
 import EventCollection from "../../../domain/eventManager/src/entity/event/eventCollection";
-import event from "../../../domain/eventManager/src/entity/event/event";
 import CalendarEvent from "../../../domain/eventManager/src/entity/event/event";
-import { start } from "repl";
 import { DateTime } from "luxon";
 import employee from "../../../domain/eventManager/src/entity/employee/employee";
 import facility from "../../../domain/eventManager/src/entity/facility";
@@ -23,7 +16,7 @@ export default class EventRepositoryFS implements EventRepository {
     this.database = admin.firestore();
     this.repository = this.database.collection("events");
   }
-  async save(event: CalendarEvent): Promise<event> {
+  async save(event: CalendarEvent): Promise<CalendarEvent> {
     const userRef = event.employeeId
       ? this.database.collection("users").doc(event.employeeId.value)
       : null;
