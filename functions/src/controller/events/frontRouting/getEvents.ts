@@ -1,9 +1,8 @@
 import express from "express";
 import { DateTime } from "luxon";
-import ValidateTimecardsQuery from "../validate/validateQuery";
-import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
 import EventAPIInterface from '../../../interactor/src/APIInterface/event/event';
 import { GetEventsRouter } from "../backRouting";
+import ValidateEventsQuery from "../validate/validateQuery";
 
 export default async function GetEvents(
   req: express.Request,
@@ -19,7 +18,7 @@ export default async function GetEvents(
     until = DateTime.fromISO(req.query.until);
   }
 
-  const query = new ValidateTimecardsQuery(since, until).createWithValid();
+  const query = new ValidateEventsQuery(since, until).createWithValid();
 
   if (query) {
     const response = await GetEventsRouter(query);

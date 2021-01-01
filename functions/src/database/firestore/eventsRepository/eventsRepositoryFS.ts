@@ -57,14 +57,10 @@ export default class EventRepositoryFS implements EventRepository {
       queryRepository = queryRepository.where("facilityId", "==", facilityRef);
     }
     if (from) {
-      queryRepository = queryRepository.where(
-        "punchDate",
-        ">=",
-        from.toJSDate()
-      );
+      queryRepository = queryRepository.where("start", ">=", from.toJSDate());
     }
     if (to) {
-      queryRepository = queryRepository.where("punchDate", "<=", to.toJSDate());
+      queryRepository = queryRepository.where("start", "<=", to.toJSDate());
     }
     const snapshot = await queryRepository.get();
 

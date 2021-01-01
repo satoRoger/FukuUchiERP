@@ -32,8 +32,9 @@ export default async function PostUsers(
     param.socialInsuranceNumber
   );
 
+  console.log(person);
   const user = await repository.save(person);
-
+  console.log(user);
   const dependent = user.dependent
     ? user.dependent?.map((depend) => {
         const response: FullnameAPIInterface = {
@@ -54,7 +55,7 @@ export default async function PostUsers(
   const response: UserAPIInterface = {
     id: user.id.value,
     mail: user.mail.value,
-    rollType: user.roll,
+    rollType: user.rollType,
     address: user.address?.value,
     birthDate: user.birthdate?.value,
     dependent: dependent,
@@ -62,7 +63,7 @@ export default async function PostUsers(
     facilityId: user.facility?.id.value,
     fullname: fullname,
     phoneNumber: user.phoneNumber?.value,
-    profession: user.profession,
+    profession: user.professionType,
     socialInsuranceCode: user.socialInsurance?.code.value,
     socialInsuranceNumber: user.socialInsurance?.number.value,
     staffCode: user.staffCode?.value,

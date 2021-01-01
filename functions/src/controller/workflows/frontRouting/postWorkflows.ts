@@ -14,7 +14,7 @@ export default async function PostWorkflows(
   let petitionDate: DateTime | undefined;
   let vacationDate: DateTime | undefined;
 
-  const request = req.body;
+  const request = JSON.parse(req.body);
 
   if (request.type === WorkflowType.paidVacation) {
     type = request.type;

@@ -1,6 +1,7 @@
 import express from "express";
-import GetEvents from "../../interactor/src/events/getEvents";
-import PostEvents from "../../interactor/src/events/postEvents";
+import GetEvents from "./frontRouting/getEvents";
+import PostEvents from "./frontRouting/postEvents";
+
 
 const events = express.Router();
 

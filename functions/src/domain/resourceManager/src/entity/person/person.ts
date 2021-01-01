@@ -16,7 +16,7 @@ import PersonId from "../../valueObject/personId";
 export default class Person {
   constructor(
     private _id: PersonId,
-    private _roll: RollType,
+    private _rollType: RollType,
     private _mail: Mail,
     private _birthdate?: Birthdate,
     private _phoneNumber?: PhoneNumber,
@@ -27,7 +27,7 @@ export default class Person {
     private _facility?: Facility,
     private _staffCode?: StaffCode,
     private _workStyle?: WorkStyle ,
-    private _profession?: ProfessionType,
+    private _professionType?: ProfessionType,
     private _workTime?: WorkTime| string,
     private _socialInsurance?: SocialInsurance,
     private _hireDate?: DateTime,
@@ -40,11 +40,11 @@ export default class Person {
   public set id(value: PersonId) {
     this._id = value;
   }
-  public get roll(): RollType {
-    return this._roll;
+  public get rollType(): RollType {
+    return this._rollType;
   }
-  public set roll(value: RollType) {
-    this._roll = value;
+  public set rollType(value: RollType) {
+    this._rollType = value;
   }
   public get fullname(): Fullname | undefined {
     return this._fullname;
@@ -106,11 +106,11 @@ export default class Person {
   public set workStyle(value: WorkStyle | undefined) {
     this._workStyle = value;
   }
-  public get profession(): ProfessionType | undefined {
-    return this._profession;
+  public get professionType(): ProfessionType | undefined {
+    return this._professionType;
   }
-  public set profession(value: ProfessionType | undefined) {
-    this._profession = value;
+  public set professionType(value: ProfessionType | undefined) {
+    this._professionType = value;
   }
   public get workTime(): WorkTime | string | undefined {
     return this._workTime;

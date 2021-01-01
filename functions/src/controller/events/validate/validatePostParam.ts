@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
 import { textChangeRangeIsUnchanged } from "typescript";
+import EventType from "../../../domain/eventManager/src/valueObject/eventType";
 import EventsPostParam from "../../../interactor/src/InteractorObject/events/eventsPostParam";
 export default class ValidateEventsPostParam {
   constructor(
-    private type?: string,
+    private type?: EventType,
     private start?: DateTime,
     private end?: DateTime,
     private title?: string,

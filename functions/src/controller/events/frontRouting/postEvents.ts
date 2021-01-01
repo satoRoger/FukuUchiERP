@@ -1,22 +1,27 @@
 import express from "express";
 import { DateTime } from "luxon";
+import EventType from "../../../domain/eventManager/src/valueObject/eventType";
 import { PostEventsRouter } from "../backRouting";
 import ValidateEventsPostParam from "../validate/validatePostParam";
 
-export default async function PostWorkflows(
+export default async function PostEvents(
   req: express.Request,
   res: express.Response
 ) {
-  let type: string | undefined;
+  let type: EventType | undefined;
   let start: DateTime | undefined;
   let end: DateTime | undefined;
   let title: string | undefined;
   let userId: string | undefined;
   let facilityId: string | undefined;
 
-  const request = req.body;
+  const request = JSON.parse(req.body);
 
-  if (typeof request.type === "string") {
+  console.log(request)
+  if (
+    request.type == EventType.FacilityHoliday ||
+    request.type == EventType.UserVacation
+  ) {
     type = request.type;
   }
   if (typeof request.start === "string") {

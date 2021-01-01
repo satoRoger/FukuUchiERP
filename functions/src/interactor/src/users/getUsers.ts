@@ -1,7 +1,5 @@
 import container from "../../../util/di/inversify.config";
 import Types from "../../../util/di/types";
-import UsersResponseInterface from "../InteractorObject/users/usersResponse";
-import UsersObject from "../InteractorObject/users/usersObject";
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
 import FullnameAPIInterface from "../APIInterface/user/fullname";
@@ -32,7 +30,7 @@ export default async function GetUsers(): Promise<UserAPIInterface[]> {
     const u: UserAPIInterface = {
       id: user.id.value,
       mail: user.mail.value,
-      rollType: user.roll,
+      rollType: user.rollType,
       address: user.address?.value,
       birthDate: user.birthdate?.value,
       dependent: dependent,
@@ -40,7 +38,7 @@ export default async function GetUsers(): Promise<UserAPIInterface[]> {
       facilityId: user.facility?.id.value,
       fullname: fullname,
       phoneNumber: user.phoneNumber?.value,
-      profession: user.profession,
+      profession: user.professionType,
       socialInsuranceCode: user.socialInsurance?.code.value,
       socialInsuranceNumber: user.socialInsurance?.number.value,
       staffCode: user.staffCode?.value,

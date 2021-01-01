@@ -1,11 +1,12 @@
 import express from "express";
 import { DateTime } from "luxon";
+import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
 import { GetUserTimecardsRouter } from "../backRouting";
 import ValidateUserTimecard from "../validate/validateUserTimecard";
 
 export default async function GetUserTimecards(
   req: express.Request,
-  res: express.Response
+  res: express.Response<TimecardAPIInterface[]>
 ) {
   let userId: string = req.params.userId;
 

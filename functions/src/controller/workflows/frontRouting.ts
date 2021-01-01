@@ -1,11 +1,11 @@
 import express from "express";
-import GetWorkflows from "../../interactor/src/workflow/getWorkflows";
-import PostWorkflows from "../events/frontRouting/postEvents";
+import GetWorkflows from "./frontRouting/getWorkflows";
+import PostWorkflows from "./frontRouting/postWorkflows";
 
-const events = express.Router();
+const workflows = express.Router();
 
-events.get("/", GetWorkflows);
+workflows.get("/", GetWorkflows);
 
-events.post("/", PostWorkflows);
+workflows.post("/", PostWorkflows);
 
-export default events;
+export default workflows;

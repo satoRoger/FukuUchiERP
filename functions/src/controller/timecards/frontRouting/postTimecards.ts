@@ -1,13 +1,14 @@
 import express from "express";
 import { DateTime } from "luxon";
 import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
+import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
 import { GetTimecardsRouter, PostTimecardRouter } from "../backRouting";
 import ValidateTimecardsPostParam from "../validate/validatePostParam";
 import ValidateTimecardsQuery from "../validate/validateQuery";
 
 export default async function PostTimecards(
   req: express.Request,
-  res: express.Response
+  res: express.Response<TimecardAPIInterface[]>
 ) {
   let userId: string | undefined;
   let date: DateTime | undefined;

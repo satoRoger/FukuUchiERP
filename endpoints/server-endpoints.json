@@ -31,6 +31,38 @@
   ],
   "schemes": ["https"],
   "paths": {
+    "/users": {
+      "post": {
+        "tags": ["user"],
+        "operationId": "postUser",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": ["user"],
+        "operationId": "getUsers",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users/{userId}/timecards": {
       "get": {
         "tags": ["timecards", "user"],

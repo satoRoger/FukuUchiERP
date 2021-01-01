@@ -1,19 +1,16 @@
 import express from "express";
 import { DateTime } from "luxon";
-import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
 import { PostUsersRouter } from "../backRouting";
 import ValidateUsersPostParam from "../validate/validatePostParam";
-import ValidateTimecardsPostParam from "../validate/validatePostParam";
-import ValidateTimecardsQuery from "../validate/validateQuery";
-import ProfessionId from "../../../domain/resourceManager/src/valueObject/professionId";
-import RollType from "../../../domain/resourceManager/src/valueObject/rollType";
+import RollType from '../../../domain/resourceManager/src/valueObject/rollType';
 import WorkStyle from "../../../domain/resourceManager/src/valueObject/workStyle";
 import ProfessionType from "../../../domain/resourceManager/src/valueObject/professionType";
 import WorkTime from "../../../domain/resourceManager/src/valueObject/worktime";
+import UserAPIInterface from "../../../interactor/src/APIInterface/user/user";
 
-export default async function FrontRoutingPostUsers(
+export default async function PostUsers(
   req: express.Request,
-  res: express.Response
+  res: express.Response<UserAPIInterface[]>
 ) {
   let rollType: RollType | undefined;
   let familyName: string | undefined;
@@ -35,7 +32,6 @@ export default async function FrontRoutingPostUsers(
   let leaveDate: DateTime | undefined;
 
   const request = JSON.parse(req.body);
-
   if (
     request.rollType === RollType.manager ||
     request.rollType === RollType.user
@@ -112,6 +108,9 @@ export default async function FrontRoutingPostUsers(
       }
     );
   }
+
+  console.log(rollType)
+  console.log(mail)
 
   const postParam = new ValidateUsersPostParam(
     rollType,

@@ -17,10 +17,12 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
   }
 
   async save(workflow: Workflow): Promise<Workflow> {
+    const drafterRef = this.database
+      .collection("users")
+      .doc(workflow.dtafter.id.value);
     const approversRef = this.database
       .collection("approvers")
-      .doc(workflow.approvers.id.value);
-
+      .doc(workflow.approversId.value);
 
     const vacationDate = workflow.vacationDate
       ? workflow.vacationDate.toJSDate()
@@ -28,7 +30,7 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
 
     await this.repository.add({
       approversId: approversRef,
-      drafterId: workflow.dtafter.id.value,
+      drafterId: drafterRef,
       index: 0,
       petitionDate: workflow.petitionDate.toJSDate(),
       state: workflow.state,
@@ -62,8 +64,8 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
         : undefined;
 
       return new WorkflowFactory().create(
+        doc.id,
         approverDoc.id,
-        approverDoc.data().approvers,
         drafterDoc.id,
         data.index,
         DateTime.fromJSDate(data.petitionDate),
