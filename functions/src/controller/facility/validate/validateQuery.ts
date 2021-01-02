@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import EventsQuery from "../../../interactor/src/InteractorObject/events/eventsQuery";
 import FacilitiesQuery from "../../../interactor/src/InteractorObject/facilities/facilitiesQuery";
-export default class ValidateEventsQuery {
+export default class ValidateFacilitiesQuery {
   constructor(private since?: DateTime, private until?: DateTime) {}
 
   createWithValid(): FacilitiesQuery | undefined {

@@ -1,8 +1,6 @@
 import express from "express";
-import { DateTime } from "luxon";
-import EventType from "../../../domain/eventManager/src/valueObject/eventType";
-import { PostEventsRouter } from "../backRouting";
-import ValidateEventsPostParam from "../validate/validatePostParam";
+import { PostFacilitiesRouter } from "../backRouting";
+import ValidateFacilitiesPostParam from "../validate/validatePostParam";
 
 export default async function PostFacilities(
   req: express.Request,

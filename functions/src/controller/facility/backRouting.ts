@@ -1,4 +1,5 @@
 import GetFacilities from "../../interactor/src/facilities/getFacilities";
+import PostFacilities from "../../interactor/src/facilities/postFacilities";
 import FacilitiesPostParam from "../../interactor/src/InteractorObject/facilities/facilitiesPostParam";
 import FacilitiesQuery from "../../interactor/src/InteractorObject/facilities/facilitiesQuery";
 
