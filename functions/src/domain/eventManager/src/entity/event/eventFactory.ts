@@ -16,7 +16,7 @@ export default class EventFactory {
     end: DateTime,
     title: string,
     employeeId?: string,
-    facilityId?: string
+    facilityIds?: string[]
   ) {
     return new CalendarEvent(
       new CalendarId(id),
@@ -25,7 +25,11 @@ export default class EventFactory {
       end,
       new Title(title),
       employeeId ? new EmployeeId(employeeId) : undefined,
-      facilityId ? new FacilityId(facilityId) : undefined
+      facilityIds
+        ? facilityIds.map((id) => {
+            return new FacilityId(id);
+          })
+        : undefined
     );
   }
 }

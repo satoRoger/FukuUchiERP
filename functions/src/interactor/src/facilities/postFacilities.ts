@@ -5,10 +5,10 @@ import EventsPostParam from "../InteractorObject/events/eventsPostParam";
 import EventAPIInterface from "../APIInterface/event/event";
 import EventFactory from "../../../domain/eventManager/src/entity/event/eventFactory";
 
-export default async function PostEvents(
-  param: EventsPostParam
-): Promise<EventAPIInterface[]> {
-  const repository = container.get<EventRepository>(Types.EventRepository);
+export default async function PostFacilities(
+  param: FacilitiesPostParam
+): Promise<FacilityAPIInterface[]> {
+  const repository = container.get<FacilityRepository>(Types.FacilitytRepository);
 
   const newData = await repository.save(
     new EventFactory().create(

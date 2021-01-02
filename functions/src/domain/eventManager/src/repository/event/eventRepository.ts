@@ -2,7 +2,7 @@ import Event from "../../entity/event/event";
 import EventCollection from "../../entity/event/eventCollection";
 import { DateTime } from "luxon";
 import Employee from "../../entity/employee/employee";
-import Facility from "../../entity/facility";
+import Facility from "../../entity/facility/facility";
 
 export default interface EventRepository {
   save(event: Event): Promise<Event>;

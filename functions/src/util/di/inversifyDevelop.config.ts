@@ -8,8 +8,10 @@ import PersonRepository from "../../domain/resourceManager/src/repository/person
 import UsersRepositoryFS from "../../database/firestore/usersRepository/usersRepostitoryFS";
 import WorkflowRepository from "../../domain/workflow/src/repository/workflow/workflowRespository";
 import WorkflowsRepositoryFS from "../../database/firestore/workflowsRepository/workflowsRepositoryFS";
-import EventRepository from '../../domain/eventManager/src/repository/event/eventRepository';
-import EventRepositoryFS from '../../database/firestore/eventsRepository/eventsRepositoryFS';
+import EventRepository from "../../domain/eventManager/src/repository/event/eventRepository";
+import EventRepositoryFS from "../../database/firestore/eventsRepository/eventsRepositoryFS";
+import FacilityRepositoryFS from "../../database/firestore/facilityRepository/facilityRepositoryFS";
+import FacilityRepository from "../../domain/resourceManager/src/repository/facilityRepository";
 
 const dcontainer = new Container();
 dcontainer
@@ -28,5 +30,8 @@ dcontainer
   .bind<EventRepository>(DevelopTypes.EventRepository)
   .to(EventRepositoryFS);
 
+dcontainer
+  .bind<FacilityRepository>(DevelopTypes.FacilityRepository)
+  .to(FacilityRepositoryFS);
 
 export default dcontainer;

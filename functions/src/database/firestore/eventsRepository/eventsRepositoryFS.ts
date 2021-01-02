@@ -5,7 +5,7 @@ import EventCollection from "../../../domain/eventManager/src/entity/event/event
 import CalendarEvent from "../../../domain/eventManager/src/entity/event/event";
 import { DateTime } from "luxon";
 import employee from "../../../domain/eventManager/src/entity/employee/employee";
-import facility from "../../../domain/eventManager/src/entity/facility";
+import facility from "../../../domain/eventManager/src/entity/facility/facility";
 import EventFactory from "../../../domain/eventManager/src/entity/event/eventFactory";
 
 @injectable()
@@ -21,8 +21,10 @@ export default class EventRepositoryFS implements EventRepository {
       ? this.database.collection("users").doc(event.employeeId.value)
       : null;
 
-    const facilityRef = event.facilityId
-      ? this.database.collection("facilities").doc(event.facilityId.value)
+    const facilityRef = event.facilityIds
+      ? event.facilityIds.map((id) => {
+          return this.database.collection("facilities").doc(id.value);
+        })
       : null;
 
     await this.repository.add({
@@ -31,7 +33,7 @@ export default class EventRepositoryFS implements EventRepository {
       title: event.title.value,
       type: event.type,
       userId: userRef,
-      facilityId: facilityRef,
+      facilityIds: facilityRef,
     });
     return event;
   }
@@ -54,7 +56,11 @@ export default class EventRepositoryFS implements EventRepository {
       const facilityRef = this.database
         .collection("facilities")
         .doc(facility.id.value);
-      queryRepository = queryRepository.where("facilityId", "==", facilityRef);
+      queryRepository = queryRepository.where(
+        "facilityIds",
+        "array-contains",
+        facilityRef
+      );
     }
     if (from) {
       queryRepository = queryRepository.where("start", ">=", from.toJSDate());

@@ -5,7 +5,7 @@ import EventsQuery from "../InteractorObject/events/eventsQuery";
 import EventAPIInterface from "../APIInterface/event/event";
 import Employee from "../../../domain/eventManager/src/entity/employee/employee";
 import EmployeeId from "../../../domain/eventManager/src/valueObject/employeeId";
-import Facility from "../../../domain/eventManager/src/entity/facility";
+import Facility from "../../../domain/eventManager/src/entity/facility/facility";
 import FacilityId from "../../../domain/eventManager/src/valueObject/facilityId";
 
 export default async function GetEvents(
@@ -35,7 +35,7 @@ export default async function GetEvents(
       end: event.end,
       title: event.title.value,
       type: event.type,
-      facilityId: event.facilityId?.value,
+      facilityIds: event.facilityIds?.map((id) => id.value),
       userId: event.employeeId?.value,
     };
     result.push(e);

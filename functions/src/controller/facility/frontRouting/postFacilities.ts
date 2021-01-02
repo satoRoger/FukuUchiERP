@@ -1,0 +1,30 @@
+import express from "express";
+import { DateTime } from "luxon";
+import EventType from "../../../domain/eventManager/src/valueObject/eventType";
+import { PostEventsRouter } from "../backRouting";
+import ValidateEventsPostParam from "../validate/validatePostParam";
+
+export default async function PostFacilities(
+  req: express.Request,
+  res: express.Response
+) {
+  let id: string | undefined;
+  let name: string | undefined;
+
+  const request = req.body;
+
+  if (typeof request.id === "string") {
+    id = request.id;
+  }
+
+  if (typeof request.name === "string") {
+    name = request.name;
+  }
+
+  const postParam = new ValidateFacilitiesPostParam(id, name).createWithValid();
+
+  if (postParam) {
+    const response = await PostFacilitiesRouter(postParam);
+    res.json(response);
+  }
+}

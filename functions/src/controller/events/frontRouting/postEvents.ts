@@ -13,9 +13,9 @@ export default async function PostEvents(
   let end: DateTime | undefined;
   let title: string | undefined;
   let userId: string | undefined;
-  let facilityId: string | undefined;
+  let facilityIds: string[] | undefined;
 
-  const request = JSON.parse(req.body);
+  const request = req.body;
 
   console.log(request)
   if (
@@ -40,8 +40,8 @@ export default async function PostEvents(
     userId = request.userId;
   }
 
-  if (typeof request.facilityId === "string") {
-    facilityId = request.facilityId;
+  if (typeof request.facilityIds != "undefined") {
+    facilityIds = request.facilityIds;
   }
 
   const postParam = new ValidateEventsPostParam(
@@ -50,7 +50,7 @@ export default async function PostEvents(
     end,
     title,
     userId,
-    facilityId
+    facilityIds
   ).createWithValid();
 
   if (postParam) {

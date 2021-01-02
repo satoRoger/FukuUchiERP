@@ -31,7 +31,7 @@ export default async function PostUsers(
   let hireDate: DateTime | undefined;
   let leaveDate: DateTime | undefined;
 
-  const request = JSON.parse(req.body);
+  const request = req.body;
   if (
     request.rollType === RollType.manager ||
     request.rollType === RollType.user

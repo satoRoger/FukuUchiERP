@@ -6,5 +6,5 @@ export default interface EventAPIInterface {
   title: string;
   type: string;
   userId?: string;
-  facilityId?: string;
+  facilityIds?: string[];
 }

@@ -3,10 +3,11 @@ import { DateTime } from "luxon";
 import { PostWorkflowRouter } from "../backRouting";
 import ValidateWorkflowsPostParam from "../validate/validatePostParam";
 import WorkflowType from "../../../domain/workflow/src/valueObject/workflowType";
+import WorkflowAPIInterface from "../../../interactor/src/APIInterface/workflow/workflow";
 
 export default async function PostWorkflows(
   req: express.Request,
-  res: express.Response
+  res: express.Response<WorkflowAPIInterface[]>
 ) {
   let type: WorkflowType | undefined;
   let drafterId: string | undefined;
@@ -14,7 +15,7 @@ export default async function PostWorkflows(
   let petitionDate: DateTime | undefined;
   let vacationDate: DateTime | undefined;
 
-  const request = JSON.parse(req.body);
+  const request = req.body;
 
   if (request.type === WorkflowType.paidVacation) {
     type = request.type;

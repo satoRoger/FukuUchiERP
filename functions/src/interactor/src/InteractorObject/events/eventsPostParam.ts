@@ -9,6 +9,6 @@ export default class EventsPostParam {
     readonly end: DateTime,
     readonly title: string,
     readonly userId?: string,
-    readonly facilityId?: string
+    readonly facilityIds?: string[]
   ) {}
 }

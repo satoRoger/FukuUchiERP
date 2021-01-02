@@ -9,7 +9,7 @@ export default class ValidateEventsPostParam {
     private end?: DateTime,
     private title?: string,
     private userId?: string,
-    private facilityId?: string
+    private facilityIds?: string[]
   ) {}
 
   createWithValid(): EventsPostParam | undefined {
@@ -20,7 +20,7 @@ export default class ValidateEventsPostParam {
         this.end,
         this.title,
         this.userId,
-        this.facilityId
+        this.facilityIds
       );
     } else {
       return undefined;
