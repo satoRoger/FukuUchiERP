@@ -14,7 +14,7 @@ export default class FacilityRepositoryFS implements FacilityRepository {
     this.repository = this.database.collection("facilities");
   }
   async save(facility: Facility): Promise<Facility> {
-    await this.repository.add({ id: facility.id.value, name: facility.name?.value });
+    await this.repository.add({ name: facility.name?.value });
     return facility;
   }
   async search(): Promise<FacilityCollection> {

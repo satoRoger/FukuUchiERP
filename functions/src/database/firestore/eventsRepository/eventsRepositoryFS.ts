@@ -73,10 +73,10 @@ export default class EventRepositoryFS implements EventRepository {
     const result = snapshot.docs.map(async (doc) => {
       const data = doc.data();
 
-      const userDoc = data.userId ? await data.userId.get() : undefined;
+      const userDocId = data.userId ? await data.userId.get().id : undefined;
 
-      const facilityDoc = data.facilityId
-        ? await data.facilityId.get()
+      const facilityDocId = data.facilityId
+        ? await data.facilityId.get().id
         : undefined;
 
       return new EventFactory().create(
@@ -85,8 +85,8 @@ export default class EventRepositoryFS implements EventRepository {
         DateTime.fromJSDate(data.start.toDate()),
         DateTime.fromJSDate(data.end.toDate()),
         data.title,
-        userDoc.id,
-        facilityDoc.id
+        userDocId,
+        facilityDocId
       );
     });
 

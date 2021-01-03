@@ -29,7 +29,7 @@ export default async function PostEvents(
   }
 
   if (typeof request.end === "string") {
-    end = DateTime.fromISO(request.start);
+    end = DateTime.fromISO(request.end);
   }
 
   if (typeof request.title === "string") {
