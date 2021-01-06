@@ -1,3 +1,5 @@
+import { check } from "express-validator";
+
 const validateEventsPostParam = [
 	check('userId').notEmpty(),
 	check('cardType').notEmpty(),

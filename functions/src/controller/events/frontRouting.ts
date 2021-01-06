@@ -3,6 +3,7 @@ import GetEvents from './frontRouting/getEvents';
 import PostEvents from './frontRouting/postEvents';
 import validateEventQuery from './validate/validateQuery';
 import validateEventsPostParam from './validate/validatePostParam';
+import validateEventsQuery from './validate/validateQuery';
 
 const events = express.Router();
 

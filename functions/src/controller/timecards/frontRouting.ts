@@ -4,6 +4,7 @@ import DeleteTimecardsIdQuery from "./frontRouting/deleteTimecardsIdQuery";
 import GetTimecards from "./frontRouting/getTimecards";
 import PostTimecards from "./frontRouting/postTimecards";
 import PutTimecardsIdQuery from "./frontRouting/putTimecardsIdQuery";
+import validateTimecardsQuery from "./validate/validateQuery";
 const timecards = express.Router();
 
 timecards.get("/", validateTimecardsQuery,GetTimecards);

@@ -4,5 +4,4 @@ admin.initializeApp({
   projectId:"fukuuchierp",
   credential: admin.credential.applicationDefault()
 });
-
 export default admin;
