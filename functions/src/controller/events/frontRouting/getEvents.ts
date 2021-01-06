@@ -8,20 +8,10 @@ export default async function GetEvents(
   req: express.Request,
   res: express.Response<EventAPIInterface[]>
 ) {
-  let since: DateTime | undefined = undefined;
-  let until: DateTime | undefined = undefined;
+  const {since:string|undefined,until:string|undefined,userId:string|undefined,facilityId:string|undefined} = req.query;
+	
+  const query = new EventsQuery(since,until,userId,facilityId);
 
-  if (typeof req.query.since === "string") {
-    since = DateTime.fromISO(req.query.since);
-  }
-  if (typeof req.query.until === "string") {
-    until = DateTime.fromISO(req.query.until);
-  }
-
-  const query = new ValidateEventsQuery(since, until).createWithValid();
-
-  if (query) {
-    const response = await GetEventsRouter(query);
-    res.json(response);
-  }
+  const response = await GetEventsRouter(query);
+  res.json(response);
 }

@@ -81,6 +81,7 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
+    "express-validator": "^6.9.2",
     "firebase-admin": "^9.4.2",
     "firebase-functions": "^3.13.0",
     "inversify": "4.13.x",

@@ -31,6 +31,12 @@
   ],
   "schemes": ["https"],
   "paths": {
+	"/events":{
+	},
+	"/workflows":{
+	},
+	"/facilities":{
+	},
     "/users": {
       "post": {
         "tags": ["user"],

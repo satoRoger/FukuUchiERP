@@ -1,5 +1,6 @@
-import { DateTime } from "luxon";
-import EventsQuery from "../../../interactor/src/InteractorObject/events/eventsQuery";
+import {param} from "express-validator"
+
+
 export default class ValidateEventsQuery {
   constructor(private since?: DateTime, private until?: DateTime) {}
 
