@@ -1,10 +1,8 @@
-import {param} from "express-validator"
+import { check } from 'express-validator';
 
+const validateEventQuery = [
+    check("since").isISO8601(),
+    check("until").isISO8601(),
+    ];
 
-export default class ValidateEventsQuery {
-  constructor(private since?: DateTime, private until?: DateTime) {}
-
-  createWithValid(): EventsQuery | undefined {
-    return new EventsQuery(this.since, this.until);
-  }
-}
+export default validateEventQuery;

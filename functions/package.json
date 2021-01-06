@@ -84,6 +84,7 @@
     "express-validator": "^6.9.2",
     "firebase-admin": "^9.4.2",
     "firebase-functions": "^3.13.0",
+    "fireorm": "^0.17.2",
     "inversify": "4.13.x",
     "log4js": "^6.3.0",
     "luxon": "^1.25.0",

@@ -1,12 +1,13 @@
-import express from "express";
-import GetEvents from "./frontRouting/getEvents";
-import PostEvents from "./frontRouting/postEvents";
-
+import express from 'express';
+import GetEvents from './frontRouting/getEvents';
+import PostEvents from './frontRouting/postEvents';
+import validateEventQuery from './validate/validateQuery';
+import validateEventsPostParam from './validate/validatePostParam';
 
 const events = express.Router();
 
-events.get("/", GetEvents);
+events.get('/', validateEventQuery, GetEvents);
 
-events.post("/", PostEvents);
+events.post('/', validateEventsPostParam, PostEvents);
 
 export default events;
