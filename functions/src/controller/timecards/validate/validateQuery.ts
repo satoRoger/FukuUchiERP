@@ -1,11 +1,8 @@
-import { DateTime } from "luxon";
-import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
-import TimecardsPostParam from "../../../interactor/src/InteractorObject/timecards/timecardsPostParam";
-import TimecardsQuery from "../../../interactor/src/InteractorObject/timecards/timecardsQuery";
-export default class ValidateTimecardsQuery {
-  constructor(private since?: DateTime, private until?: DateTime) {}
+import { check } from 'express-validator';
 
-  createWithValid(): TimecardsQuery | undefined {
-    return new TimecardsQuery(this.since, this.until);
-  }
-}
+const validateTimecardsQuery = [
+    check("since").isISO8601(),
+    check("until").isISO8601(),
+    ];
+
+export default validateTimecardsQuery;

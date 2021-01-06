@@ -1,8 +1,8 @@
 import { check } from 'express-validator';
 
-const validateEventQuery = [
+const validateEventsQuery = [
     check("since").isISO8601(),
     check("until").isISO8601(),
     ];
 
-export default validateEventQuery;
+export default validateEventsQuery;

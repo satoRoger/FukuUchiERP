@@ -6,7 +6,7 @@ import validateEventsPostParam from './validate/validatePostParam';
 
 const events = express.Router();
 
-events.get('/', validateEventQuery, GetEvents);
+events.get('/', validateEventsQuery, GetEvents);
 
 events.post('/', validateEventsPostParam, PostEvents);
 

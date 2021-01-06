@@ -4,8 +4,8 @@ import PostFacilities from "./frontRouting/postFacilities";
 
 const facilities = express.Router();
 
-facilities.get("/", GetFacilities);
+facilities.get("/", validateFaciliesQuery,GetFacilities);
 
-facilities.post("/", PostFacilities);
+facilities.post("/", validateFacilitiesPostParam,PostFacilities);
 
 export default facilities;

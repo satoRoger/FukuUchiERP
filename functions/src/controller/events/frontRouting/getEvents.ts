@@ -11,6 +11,7 @@ export default async function GetEvents(
 ) {
 	const { since, until, userId, facilityId } = req.query;
 	const { userToken } = req.body;
+	
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
