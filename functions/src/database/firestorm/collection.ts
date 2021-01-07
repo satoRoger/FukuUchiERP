@@ -1,6 +1,7 @@
 export default class Collection{
 	
-	constructor(collection:CollectionList){
+	constructor(FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
+      | FirebaseFirestore.Query<FirebaseFirestore.DocumentData>){
 		
 	}
 	
