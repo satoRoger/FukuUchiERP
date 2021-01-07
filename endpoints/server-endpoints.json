@@ -1,248 +1,290 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "FukuUchiERP GCF Endpoints",
-    "description": " Google Functionsをバックエンドとするエンドポイント",
-    "version": "1.0.0"
-  },
-  "host": "fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app",
-  "basePath": "/v1",
-  "tags": [
-    {
-      "name": "timecards",
-      "description": "タイムカードに関するAPI"
-    },
-    {
-      "name": "workflow",
-      "description": "申請に関するAPI"
-    },
-    {
-      "name": "schedule",
-      "description": "Operations about user"
-    },
-    {
-      "name": "user",
-      "description": "人に関するAPI"
-    },
-    {
-      "name": "facility",
-      "description": "施設に関するAPI"
-    }
-  ],
-  "schemes": ["https"],
-  "paths": {
-	"/events":{
+	"swagger": "2.0",
+	"info": {
+		"title": "FukuUchiERP GCF Endpoints",
+		"description": " Google Functionsをバックエンドとするエンドポイント",
+		"version": "1.0.0"
 	},
-	"/workflows":{
-	},
-	"/facilities":{
-	},
-    "/users": {
-      "post": {
-        "tags": ["user"],
-        "operationId": "postUser",
-        "x-google-backend": {
-          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
-          "path_translation": "APPEND_PATH_TO_ADDRESS",
-          "protocol": "h2"
+	"host": "fuku-uchi-erp-xt7xfbzpoq-uc.a.run.app",
+	"basePath": "/v1",
+	"tags": [
+		{
+			"name": "timecards",
+			"description": "タイムカードに関するAPI"
+		},
+		{
+			"name": "workflow",
+			"description": "申請に関するAPI"
+		},
+		{
+			"name": "schedule",
+			"description": "Operations about user"
+		},
+		{
+			"name": "user",
+			"description": "人に関するAPI"
+		},
+		{
+			"name": "facility",
+			"description": "施設に関するAPI"
+		}
+	],
+	"schemes": ["https"],
+	"paths": {
+		"/events": {
+			"get": {
+				"operationId": "getEvents",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/workflows": {
+			"get": {
+				"operationId": "getWorkflows",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
         },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
+        "parameters":[],
+        "responses":{
+          "200":{
+            "description":"OK"
           }
         }
-      },
-      "get": {
-        "tags": ["user"],
-        "operationId": "getUsers",
-        "x-google-backend": {
-          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
-          "path_translation": "APPEND_PATH_TO_ADDRESS",
-          "protocol": "h2"
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/{userId}/timecards": {
-      "get": {
-        "tags": ["timecards", "user"],
-        "operationId": "getUserTimecards",
-        "x-google-backend": {
-          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
-          "path_translation": "APPEND_PATH_TO_ADDRESS",
-          "protocol": "h2"
-        },
-        "parameters": [
-          {
-            "in": "query",
-            "name": "since",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "until",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "path",
-            "name": "userId",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/users/{userId}": {
-      "get": {
-        "tags": ["timecards", "user"],
-        "operationId": "getUser",
-        "x-google-backend": {
-          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
-          "path_translation": "APPEND_PATH_TO_ADDRESS",
-          "protocol": "h2"
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/timecards": {
-      "get": {
-        "tags": ["timecards"],
-        "summary": "全ユーザのタイムカードを取得",
-        "operationId": "getTimecards",
-        "x-google-backend": {
-          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
-          "path_translation": "APPEND_PATH_TO_ADDRESS",
-          "protocol": "h2"
-        },
-        "parameters": [
-          {
-            "in": "query",
-            "name": "since",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "until",
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/TimecardsResponse"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["timecards"],
-        "operationId": "postTimecards",
-        "x-google-backend": {
-          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
-          "path_translation": "APPEND_PATH_TO_ADDRESS",
-          "protocol": "h2"
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/TimecardsPostParameter"
-            }
-          }
-        ],
+			}
+		},
+		"/facilities": {
+			"get": {
+				"operationId": "getFacilities",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/users": {
+			"post": {
+				"tags": ["user"],
+				"operationId": "postUser",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			},
+			"get": {
+				"tags": ["user"],
+				"operationId": "getUsers",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/users/{userId}/timecards": {
+			"get": {
+				"tags": ["timecards", "user"],
+				"operationId": "getUserTimecards",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [
+					{
+						"in": "query",
+						"name": "since",
+						"type": "string",
+						"format": "date-time"
+					},
+					{
+						"in": "query",
+						"name": "until",
+						"type": "string",
+						"format": "date-time"
+					},
+					{
+						"in": "path",
+						"name": "userId",
+						"type": "string",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/users/{userId}": {
+			"get": {
+				"tags": ["timecards", "user"],
+				"operationId": "getUser",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"type": "string",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/timecards": {
+			"get": {
+				"tags": ["timecards"],
+				"summary": "全ユーザのタイムカードを取得",
+				"operationId": "getTimecards",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [
+					{
+						"in": "query",
+						"name": "since",
+						"type": "string",
+						"format": "date-time"
+					},
+					{
+						"in": "query",
+						"name": "until",
+						"type": "string",
+						"format": "date-time"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/TimecardsResponse"
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["timecards"],
+				"operationId": "postTimecards",
+				"x-google-backend": {
+					"address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+					"path_translation": "APPEND_PATH_TO_ADDRESS",
+					"protocol": "h2"
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"schema": {
+							"$ref": "#/definitions/TimecardsPostParameter"
+						}
+					}
+				],
 
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/TimecardsResponse"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "TimecardsPostParameter": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string"
-        },
-        "date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "cardType": {
-          "type": "string"
-        },
-        "latitude": {
-          "type": "number"
-        },
-        "longitude": {
-          "type": "number"
-        }
-      }
-    },
-    "TimecardsResponse": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 1
-          },
-          "cardType": {
-            "type": "string",
-            "example": "attend"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2017-07-21T17:32:28Z"
-          },
-          "longtitude": {
-            "type": "number",
-            "example": 0.0
-          },
-          "latitude": {
-            "type": "number",
-            "example": 0.0
-          },
-          "userId": { "type": "string", "example": "taro" }
-        }
-      }
-    }
-  }
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/TimecardsResponse"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"TimecardsPostParameter": {
+			"type": "object",
+			"properties": {
+				"userId": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"cardType": {
+					"type": "string"
+				},
+				"latitude": {
+					"type": "number"
+				},
+				"longitude": {
+					"type": "number"
+				}
+			}
+		},
+		"TimecardsResponse": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64",
+						"example": 1
+					},
+					"cardType": {
+						"type": "string",
+						"example": "attend"
+					},
+					"date": {
+						"type": "string",
+						"format": "date-time",
+						"example": "2017-07-21T17:32:28Z"
+					},
+					"longtitude": {
+						"type": "number",
+						"example": 0.0
+					},
+					"latitude": {
+						"type": "number",
+						"example": 0.0
+					},
+					"userId": { "type": "string", "example": "taro" }
+				}
+			}
+		}
+	}
 }
