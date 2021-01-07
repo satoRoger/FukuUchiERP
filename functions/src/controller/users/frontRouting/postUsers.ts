@@ -12,24 +12,9 @@ export default async function PostUsers(
   req: express.Request,
   res: express.Response<UserAPIInterface[]>
 ) {
-  let rollType: RollType | undefined;
-  let familyName: string | undefined;
-  let givenName: string | undefined;
-  let mail: string | undefined;
-  let birthdate: DateTime | undefined;
-  let address: string | undefined;
-  let phoneNumber: string | undefined;
-  let emergencyPhoneNumber: string | undefined;
-  let dependent: { familyName: string; givenName: string }[] | undefined;
-  let facilityId: string | undefined;
-  let staffCode: string | undefined;
-  let workStyle: WorkStyle | undefined;
-  let professionType: ProfessionType | undefined;
-  let workTime: WorkTime | string | undefined;
-  let socialInsuranceCode: string | undefined;
-  let socialInsuranceNumber: string | undefined;
-  let hireDate: DateTime | undefined;
-  let leaveDate: DateTime | undefined;
+const {rollType,familyName,	givenName,mail,birthdate,address,phoneNumber,emergencyPhoneNumber,
+dependent,facilityId,staffCode,workStyle,professionType,workTime,socialInsuranceCode,socialInsuranceNumber,
+hireDate,leaveDate} = req.body;
 
   const request = req.body;
   if (
@@ -109,10 +94,7 @@ export default async function PostUsers(
     );
   }
 
-  console.log(rollType)
-  console.log(mail)
-
-  const postParam = new ValidateUsersPostParam(
+  const postParam = new UsersPostParam(
     rollType,
     mail,
     familyName,
@@ -131,7 +113,7 @@ export default async function PostUsers(
     socialInsuranceNumber,
     hireDate,
     leaveDate
-  ).createWithValid();
+  );
 
   if (postParam) {
     const response = await PostUsersRouter(postParam);

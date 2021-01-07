@@ -9,16 +9,12 @@ import PostUsers from "./frontRouting/postUsers";
 
 const users = express.Router();
 
-users.get("/", GetUsers);
+users.get("/",validateUsersQuery, GetUsers);
 
-users.get("/:usersId", GetUserById);
+users.get("/:usersId", validateUsersQuery,GetUsers);
 
-users.get("/:userId/timecards", GetUserTimecards);
+users.get("/:userId/timecards", validateTimecardsQuery,GetTimecards);
 
-users.post("/", PostUsers);
-
-users.put("/:usersId", PutTimecardsIdQuery);
-
-users.delete("/:usersId", DeleteTimecardsIdQuery);
+users.post("/",validateUsersPostParam, PostUsers);
 
 export default users;

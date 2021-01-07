@@ -1,8 +1,9 @@
-export default class Collection{
+export default class Collection<T>{
 	
-	constructor(FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
+	constructor(private collection:FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
       | FirebaseFirestore.Query<FirebaseFirestore.DocumentData>){
-		
 	}
+	
+	getDocs
 	
 }

@@ -8,10 +8,6 @@ import PostUsers from "../../interactor/src/users/postUsers";
 export function GetUsersRouter(query: UsersQuery) {
   return GetUsers();
 }
-export function GetUserTimecardsRouter(query: TimecardsQuery) {
-  return GetTimecards(query);
-}
-
 export function PostUsersRouter(param: UsersPostParam) {
   return PostUsers(param);
 }

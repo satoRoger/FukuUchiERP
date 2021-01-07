@@ -1,9 +1,6 @@
-import UsersQuery from "../../../interactor/src/InteractorObject/users/usersQuery";
+import { check } from 'express-validator';
 
-export default class ValidateUsersQuery {
-  constructor() {}
+const validateUsersQuery = [
+ ];
 
-  createWithValid(): UsersQuery | undefined {
-    return new UsersQuery();
-  }
-}
+export default validateUsersQuery;
