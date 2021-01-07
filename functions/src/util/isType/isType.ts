@@ -20,3 +20,22 @@ export function isEventType(val: any): val is EventType {
 	return val === EventType.FacilityHoliday || val === EventType.UserVacation;
 }
 
+export function isRollType(val:any):val is RollType{
+	return val == 
+}
+
+export function isFullname(val:any):val is FullnameAPIInterface{
+	
+}
+
+export function isFullnameArray(val:any):val is FullnameAPIInterface[]{
+	
+}
+
+export function isWorkStyle(val:any):val is WorkStyle{
+	
+}
+
+export function isProfession(val:any):val is ProfessionType{
+	
+}

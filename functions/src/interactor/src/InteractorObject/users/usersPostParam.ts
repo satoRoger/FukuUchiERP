@@ -6,7 +6,6 @@ import ProfessionType from "../../../../domain/resourceManager/src/valueObject/p
 import WorkTime from "../../../../domain/resourceManager/src/valueObject/worktime";
 import FullnameAPIInterface from "../../APIInterface/user/fullname";
 export default class UsersPostParam {
-  constructor(
     readonly rollType: RollType,
     readonly mail: string,
     readonly fullname?: FullnameAPIInterface,
@@ -24,5 +23,13 @@ export default class UsersPostParam {
     readonly socialInsuranceNumber?: string,
     readonly hireDate?: DateTime,
     readonly leaveDate?: DateTime
-  ) {}
+  constructor(rollType:any,mail:any,fullname?:any,birthdate?:any,address?:any,
+  phoneNumber?:any,emergencyPhoneNumber?:any,dependent?:any,facilityId?:any,
+  staffCode?:any,workStyle?:any,workStyle?:any,profession?:any,workTime?:any,
+  socialInsuranceCode?:any,socialInsuranceNumber?:any,hireDate?:any,leaveDate?:any
+  ) {
+  if(isRollType(rollType)){
+  this.rollType = rollType;
+  }
+  }
 }
