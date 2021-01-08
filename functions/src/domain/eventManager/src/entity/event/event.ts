@@ -13,7 +13,7 @@ export default class CalendarEvent {
     private _end: DateTime,
     private _title: Title,
     private _employeeId?: EmployeeId,
-    private _facilityIds?: FacilityId[]
+    private _facilityId?: FacilityId
   ) {}
   public get id() {
     return this._id;
@@ -33,7 +33,7 @@ export default class CalendarEvent {
   public get employeeId() {
     return this._employeeId;
   }
-  public get facilityIds() {
-    return this._facilityIds;
+  public get facilityId() {
+    return this._facilityId;
   }
 }

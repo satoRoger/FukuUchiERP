@@ -1,45 +1,20 @@
-import container from "../../../util/di/inversify.config";
-import Types from "../../../util/di/types";
-import EventRepository from "../../../domain/eventManager/src/repository/event/eventRepository";
-import EventsQuery from "../InteractorObject/events/eventsQuery";
-import EventAPIInterface from "../APIInterface/event/event";
-import Employee from "../../../domain/eventManager/src/entity/employee/employee";
-import EmployeeId from "../../../domain/eventManager/src/valueObject/employeeId";
-import Facility from "../../../domain/eventManager/src/entity/facility/facility";
-import FacilityId from "../../../domain/eventManager/src/valueObject/facilityId";
+import container from '../../../util/di/inversify.config';
+import Types from '../../../util/di/types';
+import EventRepository from '../../../domain/eventManager/src/repository/event/eventRepository';
+import EventsQuery from '../InteractorObject/events/eventsQuery';
+import EventAPIInterface from '../APIInterface/event/event';
+import EmployeeFactory from '../../../domain/eventManager/src/entity/employee/employeeFactory';
+import FacilityFactory from '../../../domain/eventManager/src/entity/facility/facilityFactory';
 
-export default async function GetEvents(
-  query: EventsQuery
-): Promise<EventAPIInterface[]> {
-  const repository = container.get<EventRepository>(Types.EventRepository);
-  const employee: Employee | undefined = query.userId
-    ? new Employee(new EmployeeId(query.userId))
-    : undefined;
-  const facility: Facility | undefined = query.facilityId
-    ? new Facility(new FacilityId(query.facilityId))
-    : undefined;
+export default async function GetEvents(query: EventsQuery): Promise<EventAPIInterface[]> {
+	const repository = container.get<EventRepository>(Types.EventRepository);
 
-  const collection = await repository.search(
-    query.since,
-    query.until,
-    employee,
-    facility
-  );
+	const employee = query.userId ? new EmployeeFactory().create(query.userId) : undefined;
+	const facility = query.facilityId ? new FacilityFactory().create(query.facilityId) : undefined;
 
-  const result: EventAPIInterface[] = [];
+	const collection = await repository.search(query.since, query.until, employee, facility);
 
-  for (let event of collection) {
-    const e: EventAPIInterface = {
-      id: event.id.value,
-      start: event.start,
-      end: event.end,
-      title: event.title.value,
-      type: event.type,
-      facilityIds: event.facilityIds?.map((id) => id.value),
-      userId: event.employeeId?.value,
-    };
-    result.push(e);
-  }
+	const result: EventAPIInterface[] = [];
 
-  return result;
+	return collection.getData().map((event) => EventAPIInterface.fromDomainEvent(event));
 }

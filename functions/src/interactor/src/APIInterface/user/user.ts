@@ -1,10 +1,9 @@
-import FullnameAPIInterface from "./fullname";
-import Fullname from "./fullname";
 import RollType from "../../../../domain/resourceManager/src/valueObject/rollType";
 import { DateTime } from "luxon";
 import WorkStyle from "../../../../domain/resourceManager/src/valueObject/workStyle";
 import ProfessionType from "../../../../domain/resourceManager/src/valueObject/professionType";
 import WorkTime from "../../../../domain/resourceManager/src/valueObject/worktime";
+import Fullname from '../../../../domain/resourceManager/src/valueObject/fullname';
 
 export default interface UserAPIInterface {
   id: string;
@@ -14,8 +13,8 @@ export default interface UserAPIInterface {
   phoneNumber?: string;
   emergencyPhoneNumber?: string;
   address?: string;
-  fullname?: FullnameAPIInterface;
-  dependent?: FullnameAPIInterface[];
+  fullname?: Fullname;
+  dependent?: Fullname[];
   facilityId?: string;
   staffCode?: string;
   workStyle?: WorkStyle;

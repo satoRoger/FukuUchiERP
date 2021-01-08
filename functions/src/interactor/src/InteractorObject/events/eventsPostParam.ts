@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon';
-import CardType from '../../../../domain/attendanceManagement/src/valueObject/cardtype';
 import EventType from '../../../../domain/eventManager/src/valueObject/eventType';
 import { isEventType, isISOString, isString } from '../../../../util/isType/isType';
 
@@ -9,8 +8,8 @@ export default class EventsPostParam {
 	readonly end: DateTime;
 	readonly title: string;
 	readonly userId?: string;
-	readonly facilityIds?: string[];
-	constructor(type: any, start: any, end: any, title: any, userId?: any, facilityIds?: any) {
+	readonly facilityId?: string;
+	constructor(type: any, start: any, end: any, title: any, userId?: any, facilityId?: any) {
 		if (isEventType(type)) {
 			this.type = type;
 		} else {
@@ -35,8 +34,8 @@ export default class EventsPostParam {
 		if (isString(userId)) {
 			this.userId = userId;
 		}
-		if (Array.isArray(facilityIds)) {
-			this.facilityIds = facilityIds;
+		if (isString(facilityId)) {
+			this.facilityId = facilityId;
 		}
 	}
 }
