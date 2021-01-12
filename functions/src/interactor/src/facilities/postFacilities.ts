@@ -18,7 +18,7 @@ export default async function PostFacilities(
 
   const response: FacilityAPIInterface = {
     id: newData.id.value,
-    name: newData.name?.value,
+    name: newData.name.value,
   };
   const result: FacilityAPIInterface[] = [response];
   return result;

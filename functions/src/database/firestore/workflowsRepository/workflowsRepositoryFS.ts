@@ -3,9 +3,10 @@ import Workflow from "../../../domain/workflow/src/entity/workflow/workflow";
 import admin from "../../../framework/firebase/adminInitialize";
 import WorkflowCollection from "../../../domain/workflow/src/entity/workflow/workflowCollection";
 import WorkflowRepository from "../../../domain/workflow/src/repository/workflow/workflowRespository";
-import Employee from "../../../domain/workflow/src/entity/employee/employee";
 import WorkflowFactory from "../../../domain/workflow/src/entity/workflow/workflowFactory";
 import { DateTime } from "luxon";
+import Drafter from "../../../domain/workflow/src/entity/drafter/drafter";
+import Approver from "../../../domain/workflow/src/entity/approver/approver";
 
 @injectable()
 export default class WorkflowsRepositoryFS implements WorkflowRepository {
@@ -19,17 +20,17 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
   async save(workflow: Workflow): Promise<Workflow> {
     const drafterRef = this.database
       .collection("users")
-      .doc(workflow.dtafter.id.value);
-    const approversRef = this.database
-      .collection("approvers")
-      .doc(workflow.approversId.value);
+      .doc(workflow.dtafterId.value);
+    const approverListRef = this.database
+      .collection("approverList")
+      .doc(workflow.approverListId.value);
 
     const vacationDate = workflow.vacationDate
       ? workflow.vacationDate.toJSDate()
       : null;
 
     await this.repository.add({
-      approversId: approversRef,
+      approverListId: approverListRef,
       drafterId: drafterRef,
       index: 0,
       petitionDate: workflow.petitionDate.toJSDate(),
@@ -39,7 +40,11 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
     });
     return workflow;
   }
-  async search(drafter?: Employee): Promise<WorkflowCollection> {
+
+  async search(
+    drafter?: Drafter,
+    approver?: Approver
+  ): Promise<WorkflowCollection> {
     let queryRepository:
       | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
       | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
@@ -57,7 +62,7 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
     const result = snapshot.docs.map(async (doc) => {
       const data = doc.data();
       const drafterDoc = await data.drafterId.get();
-      const approverDoc = await data.approversId.get();
+      const approverListDoc = await data.approverListId.get();
 
       const vacationDate = data.vacationDate
         ? DateTime.fromJSDate(data.vacationDate)
@@ -65,7 +70,7 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
 
       return new WorkflowFactory().create(
         doc.id,
-        approverDoc.id,
+        approverListDoc.id,
         drafterDoc.id,
         data.index,
         DateTime.fromJSDate(data.petitionDate),
@@ -75,11 +80,22 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       );
     });
 
-    return Promise.all(result).then((workflows) => {
+    return Promise.all(result).then(async (workflows) => {
       const collection = new WorkflowCollection();
       for (let workflow of workflows) {
-        collection.add(workflow);
+        if (approver) {
+          const approverListDoc = this.database
+            .collection("approverList")
+            .doc(workflow.approverListId.value);
+          const data = await approverListDoc.get();
+          if (data.data()?.approvers.includes(approver.id.value)) {
+            collection.add(workflow);
+          }
+        } else {
+          collection.add(workflow);
+        }
       }
+      console.log(collection.getData());
       return collection;
     });
   }

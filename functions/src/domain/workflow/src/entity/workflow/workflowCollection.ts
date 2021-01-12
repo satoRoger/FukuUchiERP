@@ -12,6 +12,10 @@ export default class WorkflowCollection {
     return this.collection.length;
   };
 
+  getData() {
+    return this.collection;
+  }
+
   [Symbol.iterator](): Iterator<Workflow> {
     return this.collection[Symbol.iterator]();
   }

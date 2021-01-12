@@ -1,27 +1,16 @@
 import express from "express";
-import { DateTime } from "luxon";
 import { GetTimecardsRouter } from "../backRouting";
-import ValidateTimecardsQuery from "../validate/validateQuery";
 import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
+import TimecardsQuery from "../../../interactor/src/InteractorObject/timecards/timecardsQuery";
 
 export default async function GetTimecards(
   req: express.Request,
   res: express.Response<TimecardAPIInterface[]>
 ) {
-  let since: DateTime | undefined = undefined;
-  let until: DateTime | undefined = undefined;
+  const { since, until, userId } = req.query;
 
-  if (typeof req.query.since === "string") {
-    since = DateTime.fromISO(req.query.since);
-  }
-  if (typeof req.query.until === "string") {
-    until = DateTime.fromISO(req.query.until);
-  }
+  const query = new TimecardsQuery(since, until, userId);
 
-  const query = new ValidateTimecardsQuery(since, until).createWithValid();
-
-  if (query) {
-    const response = await GetTimecardsRouter(query);
-    res.json(response);
-  }
+  const response = await GetTimecardsRouter(query);
+  res.json(response);
 }

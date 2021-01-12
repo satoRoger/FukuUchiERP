@@ -1,6 +1,5 @@
-import { check } from 'express-validator';
+import { check, ValidationChain } from "express-validator";
 
-const validateUsersQuery = [
- ];
+const validateUsersQuery: ValidationChain[] = [];
 
 export default validateUsersQuery;

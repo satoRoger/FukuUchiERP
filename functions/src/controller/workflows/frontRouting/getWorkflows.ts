@@ -2,15 +2,22 @@ import express from "express";
 import WorkflowAPIInterface from "../../../interactor/src/APIInterface/workflow/workflow";
 import ValidateWorkflowsQuery from "../validate/validateQuery";
 import { GetWorkflowsRouter } from "../backRouting";
+import WorkflowsQuery from "../../../interactor/src/InteractorObject/workflows/workflowsQuery";
+import { ValidationError, validationResult } from "express-validator";
 
 export default async function GetWorkflows(
   req: express.Request,
-  res: express.Response<WorkflowAPIInterface[]>
+  res: express.Response<WorkflowAPIInterface[] | { errors: ValidationError[] }>
 ) {
-  const query = new ValidateWorkflowsQuery().createWithValid();
+  const { drafterId, approverId } = req.query;
 
-  if (query) {
-    const response = await GetWorkflowsRouter(query);
-    res.json(response);
+  const query = new WorkflowsQuery(drafterId, approverId);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const response = await GetWorkflowsRouter(query);
+  console.log(response);
+  res.json(response);
 }

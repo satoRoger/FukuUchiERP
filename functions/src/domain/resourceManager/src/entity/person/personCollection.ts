@@ -13,6 +13,9 @@ export default class PersonCollection implements Iterable<Person> {
   size: () => number = () => {
     return this.collection.length;
   };
+  getData() {
+    return this.collection;
+  }
 
   [Symbol.iterator](): Iterator<Person> {
     return this.collection[Symbol.iterator]();

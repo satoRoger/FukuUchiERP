@@ -25,24 +25,9 @@ async function PostTimecards(
 
   const newTimecard = await repository.save(timecard);
 
-  const coordinate = newTimecard.coordinate
-    ? {
-        longitude: newTimecard.coordinate.longitude(),
-        latitude: newTimecard.coordinate.longitude(),
-      }
-    : undefined;
-  
   const result: TimecardAPIInterface[] = [
-    {
-      cardType: newTimecard.cardtype,
-      date: newTimecard.punchDate.toISO({ includeOffset: false }),
-      id: newTimecard.id.value,
-      userId: newTimecard.punchEmployeeId.value,
-      coordinate: coordinate,
-    },
+    TimecardAPIInterface.fromDomainTimecard(newTimecard),
   ];
-
-  result.push();
 
   return result;
 }

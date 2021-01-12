@@ -5,7 +5,7 @@ import PersonRepository from "../../../domain/resourceManager/src/repository/per
 import PersonId from "../../../domain/resourceManager/src/valueObject/personId";
 import admin from "../../../framework/firebase/adminInitialize";
 import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
-import FullnameAPIInterface from "../../../interactor/src/APIInterface/user/fullname";
+import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
 
 @injectable()
 export default class UsersRepositoryFS implements PersonRepository {
@@ -25,14 +25,12 @@ export default class UsersRepositoryFS implements PersonRepository {
           if (!data) {
             return new PersonCollection([]);
           }
-          const dependent = data.dependent.map(
-            (fullname: FullnameAPIInterface) => {
-              return {
-                falilyName: fullname.familyName,
-                givenName: fullname.givenName,
-              };
-            }
-          );
+          const dependent = data.dependent.map((fullname: Fullname) => {
+            return {
+              falilyName: fullname.familyName,
+              givenName: fullname.givenName,
+            };
+          });
           const facility = await data.facilityId.get();
           return new PersonCollection([
             new PersonFactory().create(
@@ -43,7 +41,7 @@ export default class UsersRepositoryFS implements PersonRepository {
               data.phoneNumber,
               data.emergencyPhoneNumber,
               data.address,
-              { familyName: data.familyName, givenName: data.givenName },
+              new Fullname(data.familyName, data.givenName),
               dependent,
               facility.id,
               data.staffCode,
@@ -64,7 +62,7 @@ export default class UsersRepositoryFS implements PersonRepository {
     const result = snapshot.docs.map(async (doc) => {
       const data = doc.data();
       const facility = await data.facilityId.get();
-      const dependent = data.dependent.map((fullname: FullnameAPIInterface) => {
+      const dependent = data.dependent.map((fullname: Fullname) => {
         return {
           falilyName: fullname.familyName,
           givenName: fullname.givenName,
@@ -78,7 +76,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         data.phoneNumber,
         data.emergencyPhoneNumber,
         data.address,
-        { familyName: data.familyName, givenName: data.givenName },
+        new Fullname(data.familyName, data.givenName),
         dependent,
         facility.id,
         data.staffCode,
@@ -105,10 +103,10 @@ export default class UsersRepositoryFS implements PersonRepository {
     };
 
     let facilityRef = null;
-    if (person.facility) {
+    if (person.facilityId) {
       facilityRef = this.database
         .collection("facilities")
-        .doc(person.facility.id.value);
+        .doc(person.facilityId.value);
     }
 
     //personにfullnameを追加させる

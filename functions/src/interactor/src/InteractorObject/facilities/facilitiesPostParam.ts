@@ -3,5 +3,5 @@ import CardType from "../../../../domain/attendanceManagement/src/valueObject/ca
 import EventType from "../../../../domain/eventManager/src/valueObject/eventType";
 
 export default class FacilitiesPostParam {
-  constructor(readonly id: string, readonly name?: string) {}
+  constructor(readonly id: string, readonly name: string) {}
 }

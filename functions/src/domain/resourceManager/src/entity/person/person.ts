@@ -9,9 +9,9 @@ import SocialInsurance from "../../valueObject/socialInsurance";
 import StaffCode from "../../valueObject/staffCode";
 import WorkStyle from "../../valueObject/workStyle";
 import WorkTime from "../../valueObject/worktime";
-import Facility from "../facility/facility";
 import Fullname from "../../valueObject/fullname";
 import PersonId from "../../valueObject/personId";
+import FacilityId from "../../valueObject/facilityId";
 
 export default class Person {
   constructor(
@@ -24,11 +24,11 @@ export default class Person {
     private _address?: Address,
     private _fullname?: Fullname,
     private _dependent?: Fullname[],
-    private _facility?: Facility,
+    private _facilityId?: FacilityId,
     private _staffCode?: StaffCode,
-    private _workStyle?: WorkStyle ,
+    private _workStyle?: WorkStyle,
     private _professionType?: ProfessionType,
-    private _workTime?: WorkTime| string,
+    private _workTime?: WorkTime | string,
     private _socialInsurance?: SocialInsurance,
     private _hireDate?: DateTime,
     private _leaveDate?: DateTime
@@ -88,11 +88,11 @@ export default class Person {
   public set dependent(value: Fullname[] | undefined) {
     this._dependent = value;
   }
-  public get facility(): Facility | undefined {
-    return this._facility;
+  public get facilityId(): FacilityId | undefined {
+    return this._facilityId;
   }
-  public set facility(value: Facility | undefined) {
-    this._facility = value;
+  public set facilityId(value: FacilityId | undefined) {
+    this._facilityId = value;
   }
   public get staffCode(): StaffCode | undefined {
     return this._staffCode;

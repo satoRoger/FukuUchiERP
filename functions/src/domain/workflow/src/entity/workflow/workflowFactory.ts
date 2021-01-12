@@ -2,13 +2,10 @@ import Workflow from "./workflow";
 import { DateTime } from "luxon";
 import WorkflowState from "../../valueObject/workflowState";
 import WorkflowType from "../../valueObject/workflowType";
-import EmployeeCollection from "../employee/employeeCollection";
-import Employee from "../employee/employee";
-import EmployeeId from "../../valueObject/employeeId";
 import WorkflowIndex from "../../valueObject/workflowIndex";
-import EmployeeCollectionId from "../../valueObject/employeeCollectionId";
 import WorkflowId from "../../valueObject/workflowId";
-import ApproversId from "../../valueObject/approversId";
+import DrafterId from "../../valueObject/drafterId";
+import ApproverListId from "../../valueObject/approverListId";
 
 export default class WorkflowFactory {
   public create(
@@ -23,8 +20,8 @@ export default class WorkflowFactory {
   ): Workflow {
     return new Workflow(
       new WorkflowId(id),
-      new ApproversId(approversId),
-      new Employee(new EmployeeId(drafterId)),
+      new ApproverListId(approversId),
+      new DrafterId(drafterId),
       new WorkflowIndex(index),
       petitionDate,
       state,

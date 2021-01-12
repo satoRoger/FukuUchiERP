@@ -7,7 +7,7 @@ import PutTimecardsIdQuery from "./frontRouting/putTimecardsIdQuery";
 import validateTimecardsQuery from "./validate/validateQuery";
 const timecards = express.Router();
 
-timecards.get("/", validateTimecardsQuery,GetTimecards);
+timecards.get("/", validateTimecardsQuery, GetTimecards);
 
 timecards.post("/", PostTimecards);
 

@@ -3,7 +3,6 @@ import PersonId from "../../valueObject/personId";
 import Person from "./person";
 import Mail from "../../valueObject/mail";
 import RollType from "../../valueObject/rollType";
-import FullnameAPIInterface from "../../../../../interactor/src/APIInterface/user/fullname";
 import ProfessionType from "../../valueObject/professionType";
 import WorkStyle from "../../valueObject/workStyle";
 import WorkTime from "../../valueObject/worktime";
@@ -29,8 +28,8 @@ export default class PersonFactory {
     phoneNumber?: string,
     emergencyPhoneNumber?: string,
     address?: string,
-    fullname?: FullnameAPIInterface,
-    dependent?: FullnameAPIInterface[],
+    fullname?: Fullname,
+    dependent?: Fullname[],
     facilityId?: string,
     staffCode?: string,
     workStyle?: WorkStyle,
@@ -51,22 +50,11 @@ export default class PersonFactory {
 
     const addr = address ? new Address(address) : undefined;
 
-    const name = fullname
-      ? new Fullname(
-          new Name(fullname.familyName),
-          new Name(fullname.givenName)
-        )
-      : undefined;
+    const name = fullname;
 
-    const depend = dependent
-      ? dependent.map((d) => {
-          return new Fullname(new Name(d.familyName), new Name(d.givenName));
-        })
-      : undefined;
+    const depend = dependent;
 
-    const facility = facilityId
-      ? new Facility(new FacilityId(facilityId))
-      : undefined;
+    const facility = facilityId ? new FacilityId(facilityId) : undefined;
 
     const staff = staffCode ? new StaffCode(staffCode) : undefined;
 

@@ -1,6 +1,5 @@
-import WorkflowsQuery from "../../../interactor/src/InteractorObject/workflows/workflowsQuery";
-export default class ValidateWorkflowsQuery {
-  createWithValid(): WorkflowsQuery | undefined {
-    return new WorkflowsQuery();
-  }
-}
+import { check, ValidationChain } from "express-validator";
+
+const validateWorkflowsQuery: ValidationChain[] = [];
+
+export default validateWorkflowsQuery;

@@ -1,54 +1,33 @@
 import express from "express";
-import { DateTime } from "luxon";
-import CardType from "../../../domain/attendanceManagement/src/valueObject/cardtype";
+import { ValidationError } from "express-validator";
+import { validationResult } from "express-validator/src/validation-result";
 import TimecardAPIInterface from "../../../interactor/src/APIInterface/timecard/timecard";
-import { GetTimecardsRouter, PostTimecardRouter } from "../backRouting";
-import ValidateTimecardsPostParam from "../validate/validatePostParam";
-import ValidateTimecardsQuery from "../validate/validateQuery";
+import TimecardsPostParam from "../../../interactor/src/InteractorObject/timecards/timecardsPostParam";
+import { PostTimecardRouter } from "../backRouting";
 
 export default async function PostTimecards(
   req: express.Request,
-  res: express.Response<TimecardAPIInterface[]>
+  res: express.Response<TimecardAPIInterface[] | { errors: ValidationError[] }>
 ) {
-  let userId: string | undefined;
-  let date: DateTime | undefined;
-  let cardType: CardType | undefined;
-  let latitude: number | undefined;
-  let longitude: number | undefined;
+  try {
+    const { userId, date, cardType, latitude, longitude } = req.body;
 
-  const request = req.body;
-  
-  if (typeof request.userId === "string") {
-    userId = request.userId;
-  }
-  if (typeof request.date === "string") {
-    date = DateTime.fromISO(request.date);
-  }
-  if (
-    request.cardType === CardType.Attendance ||
-    request.cardType === CardType.Leavework ||
-    request.cardType === CardType.Takebreak ||
-    request.cardType === CardType.Endbreak
-  ) {
-    cardType = request.cardType;
-  }
-  if (typeof request.latitude === "number") {
-    latitude = request.latitude;
-  }
-  if (typeof request.longitude === "number") {
-    longitude = request.longitude;
-  }
+    const postParam = new TimecardsPostParam(
+      userId,
+      cardType,
+      date,
+      latitude,
+      longitude
+    );
 
-  const postParam = new ValidateTimecardsPostParam(
-    userId,
-    cardType,
-    date,
-    latitude,
-    longitude
-  ).createWithValid();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-  if (postParam) {
     const response = await PostTimecardRouter(postParam);
     res.json(response);
+  } catch (e) {
+    return res.status(400).json({ errors: e });
   }
 }
