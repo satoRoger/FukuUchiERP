@@ -19,9 +19,7 @@ export function isNumber(val: any): val is number {
 }
 
 export function isISOString(val: any): val is string {
-  console.log(val);
-  const result = isString(val) && DateTime.fromISO(val).isValid;
-  return result;
+  return isString(val) && Date.parse(val) != NaN;
 }
 export function isDateTime(val: any): val is DateTime {
   return val instanceof DateTime;

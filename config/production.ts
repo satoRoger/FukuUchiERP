@@ -29,7 +29,7 @@ export default {
       debug: {
         type: "file",
         filename: path.join(root, "./log/debug/debug.log"),
-        maxLogSize: 10000000,
+        maxLogSize: 5000000,
         backups: 6,
         compress: true,
       },
@@ -42,43 +42,27 @@ export default {
     },
     categories: {
       default: {
-        appenders: ["stdout"],
-        level: "info",
+        appenders: ["console"],
+        level: "INFO",
       },
-      accessConsole: {
-        appenders: ["console", "stdout"],
-        level: "warn",
+      access: {
+        appenders: ["console"],
+        level: "INFO",
       },
-      appConsole: {
-        appenders: ["console", "stdout"],
-        level: "warn",
-      },
-      systemConsole: {
-        appenders: ["console", "stdout"],
-        level: "warn",
-      },
-      accessFile: {
-        appenders: ["access", "system"],
-        level: "info",
-      },
-      appFile: {
-        appenders: ["system"],
-        level: "info",
-      },
-      systemFile: {
-        appenders: ["system"],
-        level: "info",
+      system: {
+        appenders: ["console"],
+        level: "INFO",
       },
       error: {
-        appenders: ["error", "system", "console", "stdout"],
-        level: "warn",
+        appenders: ["console"],
+        level: "WARN",
       },
       debug: {
-        appenders: ["stdout", "debug"],
+        appenders: ["console"],
         level: "debug",
       },
-      traceFile: {
-        appenders: ["debug"],
+      trace: {
+        appenders: ["console"],
         level: "trace",
       },
     },

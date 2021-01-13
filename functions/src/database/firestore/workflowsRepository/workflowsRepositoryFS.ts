@@ -50,11 +50,41 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
       .repository;
 
+    console.log({ drafter });
+    console.log({ approver });
+
     if (drafter) {
       const drafterRef = this.database
         .collection("users")
         .doc(drafter.id.value);
       queryRepository = queryRepository.where("drafterId", "==", drafterRef);
+    }
+    if (approver) {
+      const approverRef = this.database
+        .collection("users")
+        .doc(approver.id.value);
+      console.log({ approverRef });
+
+      const approverRepository = this.database
+        .collection("approverList")
+        .where("list", "array-contains", approverRef);
+      console.log({ approverRepository });
+
+      const approverSnapshot = await approverRepository.get();
+      const approverList = approverSnapshot.docs.map((doc) =>
+        this.database.collection("approverList").doc(doc.id)
+      );
+      console.log({ approverList });
+      if (approverList.length > 0) {
+        queryRepository = queryRepository.where(
+          "approverListId",
+          "in",
+          approverList
+        );
+      } else {
+        //必ず一致しないようにする
+        queryRepository = queryRepository.where("index", "==", -1);
+      }
     }
 
     const snapshot = await queryRepository.get();
@@ -65,7 +95,7 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       const approverListDoc = await data.approverListId.get();
 
       const vacationDate = data.vacationDate
-        ? DateTime.fromJSDate(data.vacationDate)
+        ? DateTime.fromJSDate(data.vacationDate.toDate())
         : undefined;
 
       return new WorkflowFactory().create(
@@ -73,7 +103,7 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
         approverListDoc.id,
         drafterDoc.id,
         data.index,
-        DateTime.fromJSDate(data.petitionDate),
+        DateTime.fromJSDate(data.petitionDate.toDate()),
         data.state,
         data.type,
         vacationDate
@@ -83,19 +113,8 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
     return Promise.all(result).then(async (workflows) => {
       const collection = new WorkflowCollection();
       for (let workflow of workflows) {
-        if (approver) {
-          const approverListDoc = this.database
-            .collection("approverList")
-            .doc(workflow.approverListId.value);
-          const data = await approverListDoc.get();
-          if (data.data()?.approvers.includes(approver.id.value)) {
-            collection.add(workflow);
-          }
-        } else {
-          collection.add(workflow);
-        }
+        collection.add(workflow);
       }
-      console.log(collection.getData());
       return collection;
     });
   }

@@ -16,7 +16,7 @@ import {
 export default class WorkflowAPIInterface {
   readonly id: string;
   readonly drafterId: string;
-  readonly approversId: string;
+  readonly approverListId: string;
   readonly index: number;
   readonly petitionDate: string;
   readonly state: WorkflowState;
@@ -24,7 +24,6 @@ export default class WorkflowAPIInterface {
   readonly vacationDate?: string;
 
   static fromDomainWorkflow(workflow: Workflow) {
-    console.log(workflow);
     return new WorkflowAPIInterface(
       workflow.id.value,
       workflow.dtafterId.value,
@@ -35,6 +34,19 @@ export default class WorkflowAPIInterface {
       workflow.type,
       workflow.vacationDate
     );
+  }
+
+  getObjectValue() {
+    return {
+      id: this.id,
+      drafterId: this.drafterId,
+      approverListId: this.approverListId,
+      index: this.index,
+      petitionDate: this.petitionDate,
+      state: this.state,
+      type: this.type,
+      vacationDate: this.vacationDate,
+    };
   }
 
   constructor(
@@ -59,7 +71,7 @@ export default class WorkflowAPIInterface {
     }
 
     if (isString(approverListId)) {
-      this.approversId = approverListId;
+      this.approverListId = approverListId;
     } else {
       throw "";
     }
@@ -71,7 +83,6 @@ export default class WorkflowAPIInterface {
     if (isISOString(petitionDate)) {
       this.petitionDate = petitionDate;
     } else if (isDateTime(petitionDate)) {
-      console.log(petitionDate);
       this.petitionDate = petitionDate.toISO();
     } else {
       throw "";
@@ -92,7 +103,6 @@ export default class WorkflowAPIInterface {
     } else if (isDateTime(petitionDate)) {
       this.petitionDate = petitionDate.toISO();
     } else {
-      console.log("dadas");
     }
     if (isISOString(vacationDate)) {
       this.vacationDate = vacationDate;

@@ -10,7 +10,7 @@ import ApproverListId from "../../valueObject/approverListId";
 export default class WorkflowFactory {
   public create(
     id: string,
-    approversId: string,
+    approverListId: string,
     drafterId: string,
     index: number,
     petitionDate: DateTime,
@@ -20,7 +20,7 @@ export default class WorkflowFactory {
   ): Workflow {
     return new Workflow(
       new WorkflowId(id),
-      new ApproverListId(approversId),
+      new ApproverListId(approverListId),
       new DrafterId(drafterId),
       new WorkflowIndex(index),
       petitionDate,

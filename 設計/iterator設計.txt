@@ -1,3 +1,0 @@
-<controller> -> [logic] -> [entity mapping] -> <domain>
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                            <iterator>

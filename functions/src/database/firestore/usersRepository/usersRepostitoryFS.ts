@@ -54,7 +54,6 @@ export default class UsersRepositoryFS implements PersonRepository {
           ]);
         })
         .catch((err) => {
-          console.log(err);
           return new PersonCollection([]);
         });
     }

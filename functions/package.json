@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "cross-env NODE_ENV=$npm_package_config_dev_mode && npm run build && firebase emulators:start  --import=./firestore-data --only functions,firestore",
     "deploy": "cross-env NODE_ENV=$npm_package_config_dev_mode && npm run build && firebase deploy --only functions",
-    "test": "cross-env NODE_ENV=$npm_package_config_test_mode &&  jest --silent",
+    "test": " jest --silent",
     "clean": "rm -rf node_modules/ && npm install",
     "downloadFromGS": "rm -rf ./firestore-data/ && gsutil cp -r gs://fukuuchierp.appspot.com/%date%/firestore-data/ .",
     "exportFirestore": "gcloud firestore export gs://fukuuchierp.appspot.com/%date%/firestore-data"

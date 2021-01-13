@@ -18,6 +18,5 @@ export default async function GetWorkflows(
   }
 
   const response = await GetWorkflowsRouter(query);
-  console.log(response);
   res.json(response);
 }

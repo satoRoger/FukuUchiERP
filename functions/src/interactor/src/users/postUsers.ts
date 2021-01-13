@@ -29,7 +29,6 @@ export default async function PostUsers(
     param.socialInsuranceNumber
   );
 
-  console.log(person);
   const user = await repository.save(person);
 
   const response: UserAPIInterface = UserAPIInterface.fromDomainUser(user);
