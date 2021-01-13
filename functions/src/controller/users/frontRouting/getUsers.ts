@@ -19,7 +19,6 @@ export default async function GetUsers(
   }
 
   const query = new UsersQuery(userId, facilityId);
-
   const response = await GetUsersRouter(query);
   res.json(response);
 }

@@ -6,6 +6,8 @@ import PersonId from "../../../domain/resourceManager/src/valueObject/personId";
 import admin from "../../../framework/firebase/adminInitialize";
 import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
 import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
+import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
+import Name from "../../../domain/resourceManager/src/valueObject/name";
 
 @injectable()
 export default class UsersRepositoryFS implements PersonRepository {
@@ -15,7 +17,10 @@ export default class UsersRepositoryFS implements PersonRepository {
     this.database = admin.firestore();
     this.repository = this.database.collection("users");
   }
-  async search(personId?: PersonId): Promise<PersonCollection> {
+  async search(
+    personId?: PersonId,
+    facilityId?: FacilityId
+  ): Promise<PersonCollection> {
     if (personId) {
       return this.repository
         .doc(personId.value)
@@ -57,16 +62,31 @@ export default class UsersRepositoryFS implements PersonRepository {
           return new PersonCollection([]);
         });
     }
-    const snapshot = await this.repository.get();
+
+    let queryRepository:
+      | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
+      | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
+      .repository;
+
+    if (facilityId) {
+      const facilityRef = this.database
+        .collection("facilities")
+        .doc(facilityId.value);
+      queryRepository = queryRepository.where("facilityId", "==", facilityRef);
+    }
+
+    const snapshot = await queryRepository.get();
     const result = snapshot.docs.map(async (doc) => {
       const data = doc.data();
       const facility = await data.facilityId.get();
-      const dependent = data.dependent.map((fullname: Fullname) => {
-        return {
-          falilyName: fullname.familyName,
-          givenName: fullname.givenName,
-        };
-      });
+      const dependent: Fullname[] = data.dependent.map(
+        (fullname: { familyName: string; givenName: string }) => {
+          return new Fullname(
+            new Name(fullname.familyName),
+            new Name(fullname.givenName)
+          );
+        }
+      );
       return new PersonFactory().create(
         doc.id,
         data.rollType,
@@ -75,7 +95,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         data.phoneNumber,
         data.emergencyPhoneNumber,
         data.address,
-        new Fullname(data.familyName, data.givenName),
+        new Fullname(new Name(data.familyName), new Name(data.givenName)),
         dependent,
         facility.id,
         data.staffCode,

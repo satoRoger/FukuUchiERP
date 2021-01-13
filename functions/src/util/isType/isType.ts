@@ -30,11 +30,11 @@ export function isBoolean(val: any): val is boolean {
 }
 
 export function isEventType(val: any): val is EventType {
-  return val in EventType;
+  return true;
 }
 
 export function isRollType(val: any): val is RollType {
-  return val in RollType;
+  return true;
 }
 
 export function isWorkStyle(val: any): val is WorkStyle {

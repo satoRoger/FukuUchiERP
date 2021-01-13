@@ -50,9 +50,6 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
       .repository;
 
-    console.log({ drafter });
-    console.log({ approver });
-
     if (drafter) {
       const drafterRef = this.database
         .collection("users")
@@ -63,18 +60,15 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       const approverRef = this.database
         .collection("users")
         .doc(approver.id.value);
-      console.log({ approverRef });
 
       const approverRepository = this.database
         .collection("approverList")
         .where("list", "array-contains", approverRef);
-      console.log({ approverRepository });
 
       const approverSnapshot = await approverRepository.get();
       const approverList = approverSnapshot.docs.map((doc) =>
         this.database.collection("approverList").doc(doc.id)
       );
-      console.log({ approverList });
       if (approverList.length > 0) {
         queryRepository = queryRepository.where(
           "approverListId",

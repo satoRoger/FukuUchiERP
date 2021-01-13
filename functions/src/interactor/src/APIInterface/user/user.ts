@@ -5,6 +5,7 @@ import ProfessionType from "../../../../domain/resourceManager/src/valueObject/p
 import WorkTime from "../../../../domain/resourceManager/src/valueObject/worktime";
 import Fullname from "../../../../domain/resourceManager/src/valueObject/fullname";
 import Person from "../../../../domain/resourceManager/src/entity/person/person";
+import TypeValidateError from "../../../../controller/error/typeValidateError";
 import {
   isWorkStyle,
   isProfession,
@@ -41,21 +42,21 @@ export default class UserAPIInterface {
   static fromDomainUser(user: Person) {
     return new UserAPIInterface(
       user.id.value,
-      user.mail.value,
       user.rollType,
-      user.address?.value,
+      user.mail.value,
       user.birthdate?.value,
-      user.dependent,
-      user.emergencyPhoneNumber?.value,
-      user.facilityId?.value,
-      user.fullname,
       user.phoneNumber?.value,
-      user.professionType,
-      user.socialInsurance?.code.value,
-      user.socialInsurance?.number.value,
+      user.emergencyPhoneNumber?.value,
+      user.address?.value,
+      user.fullname,
+      user.dependent,
+      user.facilityId?.value,
       user.staffCode?.value,
       user.workStyle,
+      user.professionType,
       user.workTime,
+      user.socialInsurance?.code.value,
+      user.socialInsurance?.number.value,
       user.hireDate,
       user.leaveDate
     );
@@ -84,16 +85,21 @@ export default class UserAPIInterface {
     if (isString(id)) {
       this.id = id;
     } else {
+      console.log(TypeValidateError("id", "string"));
       throw "";
     }
     if (isRollType(rollType)) {
       this.rollType = rollType;
     } else {
+      console.log(TypeValidateError("rolltype", "rolltype"));
       throw "";
     }
     if (isString(mail)) {
       this.mail = mail;
     } else {
+      console.log(typeof mail);
+      console.log(mail);
+      console.log(TypeValidateError("mail", "string"));
       throw "";
     }
     if (isISOString(birthdate)) {
