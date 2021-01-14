@@ -1,12 +1,10 @@
 import { DateTime } from "luxon";
-import SocialInsurance from "../../../../domain/resourceManager/src/valueObject/socialInsurance";
 import RollType from "../../../../domain/resourceManager/src/valueObject/rollType";
 import WorkStyle from "../../../../domain/resourceManager/src/valueObject/workStyle";
 import ProfessionType from "../../../../domain/resourceManager/src/valueObject/professionType";
 import WorkTime from "../../../../domain/resourceManager/src/valueObject/worktime";
 import {
   isDateTime,
-  isFullname,
   isISOString,
   isProfession,
   isRollType,
@@ -16,6 +14,8 @@ import {
 } from "../../../../util/isType/isType";
 import Fullname from "../../../../domain/resourceManager/src/valueObject/fullname";
 import Name from "../../../../domain/resourceManager/src/valueObject/name";
+import TypeValidateError from "../../../../controller/error/typeValidateError";
+
 export default class UsersPostParam {
   readonly rollType: RollType;
   readonly mail: string;
@@ -58,12 +58,12 @@ export default class UsersPostParam {
     if (isRollType(rollType)) {
       this.rollType = rollType;
     } else {
-      throw "";
+      throw TypeValidateError("rollType","RollType");
     }
     if (isString(mail)) {
       this.mail = mail;
     } else {
-      throw "";
+      throw TypeValidateError("mail","string");
     }
 
     if (isISOString(birthdate)) {

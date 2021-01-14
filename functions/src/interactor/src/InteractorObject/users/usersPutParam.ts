@@ -1,33 +1,31 @@
+import { DateTime } from "luxon";
 import RollType from "../../../../domain/resourceManager/src/valueObject/rollType";
 import WorkStyle from "../../../../domain/resourceManager/src/valueObject/workStyle";
 import ProfessionType from "../../../../domain/resourceManager/src/valueObject/professionType";
 import WorkTime from "../../../../domain/resourceManager/src/valueObject/worktime";
-import Person from "../../../../domain/resourceManager/src/entity/person/person";
-import TypeValidateError from "../../../../controller/error/typeValidateError";
-import FullnameAPIInterface from "./fullname";
 import {
-  isWorkStyle,
+  isDateTime,
+  isISOString,
   isProfession,
+  isRollType,
+  isString,
+  isWorkStyle,
   isWorkTime,
 } from "../../../../util/isType/isType";
-import {
-  isString,
-  isRollType,
-  isISOString,
-  isDateTime,
-  isFullname,
-} from "../../../../util/isType/isType";
+import Fullname from "../../../../domain/resourceManager/src/valueObject/fullname";
+import Name from "../../../../domain/resourceManager/src/valueObject/name";
+import TypeValidateError from '../../../../controller/error/typeValidateError';
 
-export default class UserAPIInterface {
+export default class UsersPutParam {
   readonly id: string;
   readonly rollType: RollType;
   readonly mail: string;
-  readonly birthdate?: string;
+  readonly fullname?: Fullname;
+  readonly birthdate?: DateTime;
+  readonly address?: string;
   readonly phoneNumber?: string;
   readonly emergencyPhoneNumber?: string;
-  readonly address?: string;
-  readonly fullname?: FullnameAPIInterface;
-  readonly dependent?: FullnameAPIInterface[];
+  readonly dependent?: Fullname[];
   readonly facilityId?: string;
   readonly staffCode?: string;
   readonly workStyle?: WorkStyle;
@@ -35,41 +33,19 @@ export default class UserAPIInterface {
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
   readonly socialInsuranceNumber?: string;
-  readonly hireDate?: string;
-  readonly leaveDate?: string;
-
-  static fromDomainUser(user: Person) {
-    return new UserAPIInterface(
-      user.id.value,
-      user.rollType,
-      user.mail.value,
-      user.birthdate?.value,
-      user.phoneNumber?.value,
-      user.emergencyPhoneNumber?.value,
-      user.address?.value,
-      user.fullname,
-      user.dependent,
-      user.facilityId?.value,
-      user.staffCode?.value,
-      user.workStyle,
-      user.professionType,
-      user.workTime,
-      user.socialInsurance?.code.value,
-      user.socialInsurance?.number.value,
-      user.hireDate,
-      user.leaveDate
-    );
-  }
+  readonly hireDate?: DateTime;
+  readonly leaveDate?: DateTime;
 
   constructor(
     id: any,
     rollType: any,
     mail: any,
+    familyname: any,
+    givenname: any,
     birthdate?: any,
+    address?: any,
     phoneNumber?: any,
     emergencyPhoneNumber?: any,
-    address?: any,
-    fullname?: any,
     dependent?: any,
     facilityId?: any,
     staffCode?: any,
@@ -84,24 +60,24 @@ export default class UserAPIInterface {
     if (isString(id)) {
       this.id = id;
     } else {
-      throw TypeValidateError("id", "string");
+      throw TypeValidateError("id","string");
     }
+
     if (isRollType(rollType)) {
       this.rollType = rollType;
     } else {
-      throw TypeValidateError("rolltype", "rolltype");
+      throw TypeValidateError("rollType","RollType");
     }
     if (isString(mail)) {
       this.mail = mail;
     } else {
-      console.log(typeof mail);
-      console.log(mail);
-      throw TypeValidateError("mail", "string");
+      throw TypeValidateError("mail","string");
     }
+
     if (isISOString(birthdate)) {
-      this.birthdate = birthdate;
+      this.birthdate = DateTime.fromISO(birthdate);
     } else if (isDateTime(birthdate)) {
-      this.birthdate = birthdate.toISO();
+      this.birthdate = birthdate;
     }
     if (isString(phoneNumber)) {
       this.phoneNumber = phoneNumber;
@@ -112,13 +88,11 @@ export default class UserAPIInterface {
     if (isString(address)) {
       this.address = address;
     }
-    if (isFullname(fullname)) {
-      this.fullname = FullnameAPIInterface.fromDomainFullname(fullname);
+    if (isString(familyname) && isString(givenname)) {
+      this.fullname = new Fullname(new Name(familyname), new Name(givenname));
     }
     if (Array.isArray(dependent)) {
-      this.dependent = dependent.map((fullname) =>
-        FullnameAPIInterface.fromDomainFullname(fullname)
-      );
+      this.dependent = dependent;
     }
     if (isString(facilityId)) {
       this.facilityId = facilityId;
@@ -142,14 +116,14 @@ export default class UserAPIInterface {
       this.socialInsuranceNumber = socialInsuranceNumber;
     }
     if (isISOString(hireDate)) {
-      this.hireDate = hireDate;
+      this.hireDate = DateTime.fromISO(hireDate);
     } else if (isDateTime(hireDate)) {
-      this.hireDate = hireDate.toISO();
+      this.hireDate = hireDate;
     }
     if (isISOString(leaveDate)) {
-      this.leaveDate = leaveDate;
+      this.leaveDate = DateTime.fromISO(leaveDate);
     } else if (isDateTime(leaveDate)) {
-      this.leaveDate = leaveDate.toISO();
+      this.leaveDate = leaveDate;
     }
   }
 }

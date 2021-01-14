@@ -4,15 +4,16 @@ import UsersPostParam from "../InteractorObject/users/usersPostParam";
 import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
+import UsersPutParam from "../InteractorObject/users/usersPutParam";
 
-export default async function PostUsers(
-  param: UsersPostParam
+export default async function PutUsers(
+  param: UsersPutParam
 ): Promise<UserAPIInterface[]> {
   const repository = container.get<PersonRepository>(Types.PersonRepository);
 
   console.log({ param });
   const person = new PersonFactory().create(
-    "",
+    param.id,
     param.rollType,
     param.mail,
     param.birthdate,

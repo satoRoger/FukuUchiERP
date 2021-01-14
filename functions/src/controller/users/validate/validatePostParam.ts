@@ -5,9 +5,9 @@ const validateUsersPostParam = [
     check("mail").notEmpty(),
     check("familyName").notEmpty(),
     check("givenName").notEmpty(),
-    check("birthdate").isISO8601(),
-    check("hireDate").isISO8601(),
-    check("leaveDate").isISO8601()
+    check("birthdate").optional().isISO8601(),
+    check("hireDate").optional().isISO8601(),
+    check("leaveDate").optional().isISO8601(),
     ];
 
 export default validateUsersPostParam;

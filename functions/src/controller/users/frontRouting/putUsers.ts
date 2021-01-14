@@ -1,16 +1,10 @@
 import express from "express";
-import { DateTime } from "luxon";
-import { PostUsersRouter } from "../backRouting";
-import ValidateUsersPostParam from "../validate/validatePostParam";
-import RollType from "../../../domain/resourceManager/src/valueObject/rollType";
-import WorkStyle from "../../../domain/resourceManager/src/valueObject/workStyle";
-import ProfessionType from "../../../domain/resourceManager/src/valueObject/professionType";
-import WorkTime from "../../../domain/resourceManager/src/valueObject/worktime";
+import { PostUsersRouter, PutUsersRouter } from "../backRouting";
 import UserAPIInterface from "../../../interactor/src/APIInterface/user/user";
-import UsersPostParam from "../../../interactor/src/InteractorObject/users/usersPostParam";
 import { ValidationError, validationResult } from "express-validator";
+import UsersPutParam from "../../../interactor/src/InteractorObject/users/usersPutParam";
 
-export default async function PostUsers(
+export default async function PutUsers(
   req: express.Request,
   res: express.Response<UserAPIInterface[] | { errors: ValidationError[] }>
 ) {
@@ -27,7 +21,7 @@ export default async function PostUsers(
       facilityId,
       staffCode,
       workStyle,
-      professionType,
+      profession,
       workTime,
       socialInsuranceCode,
       socialInsuranceNumber,
@@ -35,12 +29,15 @@ export default async function PostUsers(
       leaveDate,
     } = req.body;
 
+    const { userId } = req.params;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const postParam = new UsersPostParam(
+    const putParam = new UsersPutParam(
+      userId,
       rollType,
       mail,
       fullname.familyName,
@@ -53,7 +50,7 @@ export default async function PostUsers(
       facilityId,
       staffCode,
       workStyle,
-      professionType,
+      profession,
       workTime,
       socialInsuranceCode,
       socialInsuranceNumber,
@@ -61,7 +58,7 @@ export default async function PostUsers(
       leaveDate
     );
 
-    const response = await PostUsersRouter(postParam);
+    const response = await PutUsersRouter(putParam);
     res.json(response);
   } catch (e) {
     return res.status(400).json({ errors: e });

@@ -100,7 +100,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         facility.id,
         data.staffCode,
         data.workStyle,
-        data.professionType,
+        data.profession,
         data.workTime,
         data.socialInsuranceCode,
         data.socialInsuranceNumber
@@ -128,25 +128,59 @@ export default class UsersRepositoryFS implements PersonRepository {
         .doc(person.facilityId.value);
     }
 
-    //personにfullnameを追加させる
-    await this.repository.add({
-      rollType: person.rollType,
-      familyName: replaceNull(person.fullname?.familyName.value),
-      givenName: replaceNull(person.fullname?.givenName.value),
-      mail: person.mail.value,
-      birthdate: replaceNull(person.birthdate?.value.toJSDate()),
-      address: replaceNull(person.address?.value),
-      phoneNumber: replaceNull(person.phoneNumber?.value),
-      emergencyPhoneNumber: replaceNull(person.emergencyPhoneNumber?.value),
-      dependent: replaceNull(person.dependent),
-      facilityId: facilityRef,
-      staffCode: replaceNull(person.staffCode?.value),
-      workStyle: replaceNull(person.workStyle),
-      socialInsuranceCode: replaceNull(person.socialInsurance?.code),
-      socialInsuranceNumber: replaceNull(person.socialInsurance?.number),
-      hireDate: replaceNull(person.hireDate?.toJSDate()),
-      leaveDate: replaceNull(person.leaveDate?.toJSDate()),
-    });
+    //更新
+    console.log({ person });
+    const social = person.socialInsurance;
+    console.log({ social });
+    if (person.id.value != "") {
+      await this.repository.doc(person.id.value).set({
+        rollType: person.rollType,
+        familyName: replaceNull(person.fullname?.familyName.value),
+        givenName: replaceNull(person.fullname?.givenName.value),
+        mail: person.mail.value,
+        birthdate: replaceNull(person.birthdate?.value.toJSDate()),
+        address: replaceNull(person.address?.value),
+        phoneNumber: replaceNull(person.phoneNumber?.value),
+        emergencyPhoneNumber: replaceNull(person.emergencyPhoneNumber?.value),
+        dependent: replaceNull(person.dependent),
+        facilityId: facilityRef,
+        staffCode: replaceNull(person.staffCode?.value),
+        workStyle: replaceNull(person.workStyle),
+        profession: replaceNull(person.professionType),
+        socialInsuranceCode: replaceNull(person.socialInsurance?.code.value),
+        socialInsuranceNumber: replaceNull(
+          person.socialInsurance?.number.value
+        ),
+        workTime: replaceNull(person.workTime),
+        hireDate: replaceNull(person.hireDate?.toJSDate()),
+        leaveDate: replaceNull(person.leaveDate?.toJSDate()),
+      });
+    }
+    //新規
+    else {
+      const doc = await this.repository.add({
+        rollType: person.rollType,
+        familyName: replaceNull(person.fullname?.familyName.value),
+        givenName: replaceNull(person.fullname?.givenName.value),
+        mail: person.mail.value,
+        birthdate: replaceNull(person.birthdate?.value.toJSDate()),
+        address: replaceNull(person.address?.value),
+        phoneNumber: replaceNull(person.phoneNumber?.value),
+        emergencyPhoneNumber: replaceNull(person.emergencyPhoneNumber?.value),
+        dependent: replaceNull(person.dependent),
+        facilityId: facilityRef,
+        staffCode: replaceNull(person.staffCode?.value),
+        workStyle: replaceNull(person.workStyle),
+        profession: replaceNull(person.professionType),
+        socialInsuranceCode: replaceNull(person.socialInsurance?.code),
+        socialInsuranceNumber: replaceNull(person.socialInsurance?.number),
+        workTime: replaceNull(person.workTime),
+        hireDate: replaceNull(person.hireDate?.toJSDate()),
+        leaveDate: replaceNull(person.leaveDate?.toJSDate()),
+      });
+      person.id = new PersonId(doc.id);
+    }
+
     return person;
   }
 }
