@@ -1,7 +1,6 @@
 import express from 'express';
 import GetEvents from './frontRouting/getEvents';
 import PostEvents from './frontRouting/postEvents';
-import validateEventQuery from './validate/validateQuery';
 import validateEventsPostParam from './validate/validatePostParam';
 import validateEventsQuery from './validate/validateQuery';
 import validateEventsPutParam from './validate/validatePutParam';

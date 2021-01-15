@@ -7,6 +7,7 @@ import WorkflowFactory from "../../../domain/workflow/src/entity/workflow/workfl
 import { DateTime } from "luxon";
 import Drafter from "../../../domain/workflow/src/entity/drafter/drafter";
 import Approver from "../../../domain/workflow/src/entity/approver/approver";
+import WorkflowId from "../../../domain/workflow/src/valueObject/workflowId";
 
 @injectable()
 export default class WorkflowsRepositoryFS implements WorkflowRepository {
@@ -29,19 +30,26 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       ? workflow.vacationDate.toJSDate()
       : null;
 
-    await this.repository.add({
-      approverListId: approverListRef,
-      drafterId: drafterRef,
-      index: 0,
-      petitionDate: workflow.petitionDate.toJSDate(),
-      state: workflow.state,
-      type: workflow.type,
-      vacationDate: vacationDate,
-    });
+    //"更新"
+    if (workflow.id.value != "") {
+    }
+    //"新規"
+    else {
+      await this.repository.add({
+        approverListId: approverListRef,
+        drafterId: drafterRef,
+        index: 0,
+        petitionDate: workflow.petitionDate.toJSDate(),
+        state: workflow.state,
+        type: workflow.type,
+        vacationDate: vacationDate,
+      });
+    }
     return workflow;
   }
 
   async search(
+    workflowId?: WorkflowId,
     drafter?: Drafter,
     approver?: Approver
   ): Promise<WorkflowCollection> {
@@ -49,6 +57,35 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
       | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
       .repository;
+
+    if (workflowId) {
+      const doc = await this.repository.doc(workflowId.value).get();
+      const data = doc.data();
+      let collection = new WorkflowCollection();
+      if (!data) {
+        return collection;
+      }
+
+      const drafterDoc = await data.drafterId.get();
+      const approverListDoc = await data.approverListId.get();
+
+      const vacationDate = data.vacationDate
+        ? DateTime.fromJSDate(data.vacationDate.toDate())
+        : undefined;
+
+      const workflow = new WorkflowFactory().create(
+        doc.id,
+        approverListDoc.id,
+        drafterDoc.id,
+        data.index,
+        DateTime.fromJSDate(data.petitionDate.toDate()),
+        data.state,
+        data.type,
+        vacationDate
+      );
+      collection.add(workflow);
+      return collection;
+    }
 
     if (drafter) {
       const drafterRef = this.database
