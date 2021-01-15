@@ -30,12 +30,14 @@ export default class UsersRepositoryFS implements PersonRepository {
           if (!data) {
             return new PersonCollection([]);
           }
-          const dependent = data.dependent.map((fullname: Fullname) => {
-            return {
-              falilyName: fullname.familyName,
-              givenName: fullname.givenName,
-            };
-          });
+          const dependent = data.dependent
+            ? data.dependent.map((fullname: Fullname) => {
+                return {
+                  falilyName: fullname.familyName,
+                  givenName: fullname.givenName,
+                };
+              })
+            : [];
           const facility = await data.facilityId.get();
           return new PersonCollection([
             new PersonFactory().create(
@@ -79,14 +81,16 @@ export default class UsersRepositoryFS implements PersonRepository {
     const result = snapshot.docs.map(async (doc) => {
       const data = doc.data();
       const facility = await data.facilityId.get();
-      const dependent: Fullname[] = data.dependent.map(
-        (fullname: { familyName: string; givenName: string }) => {
-          return new Fullname(
-            new Name(fullname.familyName),
-            new Name(fullname.givenName)
-          );
-        }
-      );
+      const dependent: Fullname[] = data.dependent
+        ? data.dependent.map(
+            (fullname: { familyName: string; givenName: string }) => {
+              return new Fullname(
+                new Name(fullname.familyName),
+                new Name(fullname.givenName)
+              );
+            }
+          )
+        : [];
       return new PersonFactory().create(
         doc.id,
         data.rollType,
@@ -129,10 +133,9 @@ export default class UsersRepositoryFS implements PersonRepository {
     }
 
     //更新
-    console.log({ person });
-    const social = person.socialInsurance;
-    console.log({ social });
     if (person.id.value != "") {
+      console.log("更新");
+      console.log({ person });
       await this.repository.doc(person.id.value).set({
         rollType: person.rollType,
         familyName: replaceNull(person.fullname?.familyName.value),
@@ -158,6 +161,8 @@ export default class UsersRepositoryFS implements PersonRepository {
     }
     //新規
     else {
+      console.log("新規");
+      console.log({ person });
       const doc = await this.repository.add({
         rollType: person.rollType,
         familyName: replaceNull(person.fullname?.familyName.value),
@@ -172,15 +177,22 @@ export default class UsersRepositoryFS implements PersonRepository {
         staffCode: replaceNull(person.staffCode?.value),
         workStyle: replaceNull(person.workStyle),
         profession: replaceNull(person.professionType),
-        socialInsuranceCode: replaceNull(person.socialInsurance?.code),
-        socialInsuranceNumber: replaceNull(person.socialInsurance?.number),
+        socialInsuranceCode: replaceNull(person.socialInsurance?.code.value),
+        socialInsuranceNumber: replaceNull(
+          person.socialInsurance?.number.value
+        ),
         workTime: replaceNull(person.workTime),
         hireDate: replaceNull(person.hireDate?.toJSDate()),
         leaveDate: replaceNull(person.leaveDate?.toJSDate()),
       });
       person.id = new PersonId(doc.id);
+      console.log({ person });
     }
 
     return person;
+  }
+  async remove(personId: PersonId): Promise<PersonId> {
+    await this.repository.doc(personId.value).delete();
+    return personId;
   }
 }

@@ -4,10 +4,10 @@ import {
   isISOString,
   isString,
   isEventType,
-  isStringArray,
   isDateTime,
 } from "../../../../util/isType/isType";
 import CalendarEvent from "../../../../domain/eventManager/src/entity/event/event";
+
 export default class EventAPIInterface {
   readonly id: string;
   readonly start: string;
@@ -20,8 +20,8 @@ export default class EventAPIInterface {
   static fromDomainEvent(event: CalendarEvent) {
     return new EventAPIInterface(
       event.id.value,
-      event.start.toISO({ includeOffset: false }),
-      event.end.toISO({ includeOffset: false }),
+      event.start.toISO(),
+      event.end.toISO(),
       event.title.value,
       event.type,
       event.employeeId?.value,

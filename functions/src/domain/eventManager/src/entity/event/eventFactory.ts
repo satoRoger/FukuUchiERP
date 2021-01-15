@@ -25,7 +25,7 @@ export default class EventFactory {
 			end,
 			new Title(title),
 			employeeId ? new EmployeeId(employeeId) : undefined,
-			facilityId ? new FacilityId(id) : undefined
+			facilityId ? new FacilityId(facilityId) : undefined
 		);
 	}
 }

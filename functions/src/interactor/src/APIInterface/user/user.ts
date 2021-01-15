@@ -94,8 +94,6 @@ export default class UserAPIInterface {
     if (isString(mail)) {
       this.mail = mail;
     } else {
-      console.log(typeof mail);
-      console.log(mail);
       throw TypeValidateError("mail", "string");
     }
     if (isISOString(birthdate)) {

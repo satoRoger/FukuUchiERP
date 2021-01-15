@@ -11,7 +11,6 @@ export default async function PutUsers(
 ): Promise<UserAPIInterface[]> {
   const repository = container.get<PersonRepository>(Types.PersonRepository);
 
-  console.log({ param });
   const person = new PersonFactory().create(
     param.id,
     param.rollType,

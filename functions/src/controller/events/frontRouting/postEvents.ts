@@ -8,14 +8,14 @@ export default async function PostEvents(
 	req: express.Request,
 	res: express.Response<EventAPIInterface[] | { errors: ValidationError[] }>
 ) {
-	const { type, start, end, title, userId, facilityIds } = req.body;
+	const { type, start, end, title, userId, facilityId } = req.body;
 	const { userToken } = req.body;
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
-	const postParam = new EventsPostParam(type, start, end, title, userId, facilityIds);
+	const postParam = new EventsPostParam(type, start, end, title, userId, facilityId);
 
 	const response = await PostEventsRouter(postParam);
 	res.json(response);

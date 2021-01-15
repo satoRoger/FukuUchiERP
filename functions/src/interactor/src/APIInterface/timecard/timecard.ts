@@ -23,8 +23,8 @@ export default class TimecardAPIInterface {
     return new TimecardAPIInterface(
       timecard.id.value,
       timecard.cardtype,
-      timecard.punchDate.toISO({ includeOffset: false }),
       timecard.punchEmployeeId.value,
+      timecard.punchDate.toISO(),
       timecard.coordinate
     );
   }

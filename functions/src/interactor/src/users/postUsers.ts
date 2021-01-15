@@ -10,7 +10,6 @@ export default async function PostUsers(
 ): Promise<UserAPIInterface[]> {
   const repository = container.get<PersonRepository>(Types.PersonRepository);
 
-  console.log({ param });
   const person = new PersonFactory().create(
     "",
     param.rollType,

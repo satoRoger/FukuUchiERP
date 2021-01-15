@@ -6,6 +6,7 @@ import WorkStyle from "../../domain/resourceManager/src/valueObject/workStyle";
 import WorkflowType from "../../domain/workflow/src/valueObject/workflowType";
 import WorkflowState from "../../domain/workflow/src/valueObject/workflowState";
 import Fullname from "../../domain/resourceManager/src/valueObject/fullname";
+import WorkflowAction from "../../domain/workflow/src/valueObject/workflowAction";
 
 export function isString(val: any): val is string {
   return typeof val === "string";
@@ -56,7 +57,9 @@ export function isWorkflowType(val: any): val is WorkflowType {
 export function isWorkflowState(val: any): val is WorkflowState {
   return true;
 }
-
+export function isWorkflowAction(val: any): val is WorkflowAction {
+  return true;
+}
 export function isFullname(val: any): val is Fullname {
   return true;
 }
