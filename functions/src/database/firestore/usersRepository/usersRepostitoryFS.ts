@@ -38,7 +38,7 @@ export default class UsersRepositoryFS implements PersonRepository {
                 };
               })
             : [];
-          const facility = await data.facilityId.get();
+          const facility = await data.facilityId?.get();
           return new PersonCollection([
             new PersonFactory().create(
               personId.value,
@@ -50,7 +50,7 @@ export default class UsersRepositoryFS implements PersonRepository {
               data.address,
               new Fullname(data.familyName, data.givenName),
               dependent,
-              facility.id,
+              facility?.id,
               data.staffCode,
               data.workStyle,
               data.professionType,
@@ -80,7 +80,7 @@ export default class UsersRepositoryFS implements PersonRepository {
     const snapshot = await queryRepository.get();
     const result = snapshot.docs.map(async (doc) => {
       const data = doc.data();
-      const facility = await data.facilityId.get();
+      const facility = await data.facilityId?.get();
       const dependent: Fullname[] = data.dependent
         ? data.dependent.map(
             (fullname: { familyName: string; givenName: string }) => {
@@ -101,7 +101,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         data.address,
         new Fullname(new Name(data.familyName), new Name(data.givenName)),
         dependent,
-        facility.id,
+        facility?.id,
         data.staffCode,
         data.workStyle,
         data.profession,

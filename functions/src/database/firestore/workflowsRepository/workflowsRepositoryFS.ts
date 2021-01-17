@@ -32,6 +32,15 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
 
     //"更新"
     if (workflow.id.value != "") {
+      await this.repository.doc(workflow.id.value).set({
+        approverListId: approverListRef,
+        drafterId: drafterRef,
+        index: 0,
+        petitionDate: workflow.petitionDate.toJSDate(),
+        state: workflow.state,
+        type: workflow.type,
+        vacationDate: vacationDate,
+      });
     }
     //"新規"
     else {

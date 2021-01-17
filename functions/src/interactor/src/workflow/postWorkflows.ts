@@ -14,7 +14,7 @@ export default async function PostWorkflows(
   );
   const workflow = await repository.save(
     new WorkflowFactory().create(
-      "empty",
+      "",
       param.approverListId,
       param.drafterId,
       0,

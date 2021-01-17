@@ -22,7 +22,7 @@ export default async function GetWorkflows(
   const approver = query.approverId
     ? new Approver(new ApproverId(query.approverId))
     : undefined;
-  const collection = await repository.search(drafter, approver);
+  const collection = await repository.search(undefined, drafter, approver);
 
   return collection
     .getData()

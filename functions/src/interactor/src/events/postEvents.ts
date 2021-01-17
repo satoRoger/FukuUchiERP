@@ -9,7 +9,7 @@ export default async function PostEvents(param: EventsPostParam): Promise<EventA
 	const repository = container.get<EventRepository>(Types.EventRepository);
 
 	const saveEvent = new EventFactory().create(
-		'empty',
+		'',
 		param.type,
 		param.start,
 		param.end,

@@ -50,7 +50,7 @@ export default class Workflow {
 
   public approve() {
     //Todo
-    if (this._index.value + 1 === 2) {
+    if (this._index.value + 1 === 1) {
       this._state = WorkflowState.complete;
     } else {
       this._index = new WorkflowIndex(this._index.value + 1);
