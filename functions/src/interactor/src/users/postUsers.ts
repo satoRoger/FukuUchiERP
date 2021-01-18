@@ -4,7 +4,7 @@ import UsersPostParam from "../InteractorObject/users/usersPostParam";
 import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
-import newUserMail from "../../../framework/firebase/authority/newUserMail";
+import AddUserFirebaseAuth from "../../../framework/firebase/authority/addUserFirebaseAuth";
 
 export default async function PostUsers(
   param: UsersPostParam
@@ -34,9 +34,8 @@ export default async function PostUsers(
 
   const user = await repository.save(person);
 
-  const mail = await newUserMail(user);
+  await AddUserFirebaseAuth(user);
 
-  console.log({ mail });
   const response: UserAPIInterface = UserAPIInterface.fromDomainUser(user);
 
   const result: UserAPIInterface[] = [response];

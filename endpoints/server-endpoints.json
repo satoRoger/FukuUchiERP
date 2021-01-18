@@ -30,7 +30,7 @@
     "/events": {
       "get": {
         "tags": ["events"],
-        "operationId": "getEvents",
+        "operationId": "getEvent",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -57,12 +57,110 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": ["events"],
+        "operationId": "putEvent",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["events"],
+        "operationId": "deleteEvent",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/events/{eventId}": {
+      "get": {
+        "tags": ["events"],
+        "operationId": "getEventById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["events"],
+        "operationId": "putEventById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["events"],
+        "operationId": "deleteEventById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/workflows": {
       "get": {
         "tags": ["workflows"],
-        "operationId": "getWorkflows",
+        "operationId": "getWorkflow",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -105,12 +203,109 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": ["workflows"],
+        "operationId": "putWorkflow",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "delete": {
+        "tags": ["workflows"],
+        "operationId": "deleteWorkflow",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
+    "/workflows/{workflowId}": {
+      "put": {
+        "tags": ["workflows"],
+        "operationId": "putWorkflowById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["workflows"],
+        "operationId": "deleteWorkflowById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": ["workflows"],
+        "operationId": "getWorkflowById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
     "/facilities": {
       "get": {
         "tags": ["facilities"],
-        "operationId": "getFacilities",
+        "operationId": "getFacility",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -137,6 +332,104 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": ["facilities"],
+        "operationId": "putFacility",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["facilities"],
+        "operationId": "deleteFacility",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/facilities/{facilityId}": {
+      "put": {
+        "tags": ["facilities"],
+        "operationId": "putFacilityById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "facilityId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": ["facilities"],
+        "operationId": "getFacilityById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "facilityId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["facilities"],
+        "operationId": "deleteFacilityById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "facilityId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/users": {
@@ -157,7 +450,37 @@
       },
       "get": {
         "tags": ["users"],
-        "operationId": "getUsers",
+        "operationId": "getUser",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["users"],
+        "operationId": "putUser",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["users"],
+        "operationId": "deleteUser",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -174,7 +497,51 @@
     "/users/{userId}": {
       "get": {
         "tags": ["users"],
-        "operationId": "getUser",
+        "operationId": "getUserById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["users"],
+        "operationId": "putUserById",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["users"],
+        "operationId": "deleteUserById",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -199,7 +566,7 @@
       "get": {
         "tags": ["timecards"],
         "summary": "全ユーザのタイムカードを取得",
-        "operationId": "getTimecards",
+        "operationId": "getTimecard",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -235,7 +602,7 @@
       },
       "post": {
         "tags": ["timecards"],
-        "operationId": "postTimecards",
+        "operationId": "postTimecard",
         "x-google-backend": {
           "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
           "path_translation": "APPEND_PATH_TO_ADDRESS",
@@ -257,6 +624,36 @@
             "schema": {
               "$ref": "#/definitions/TimecardsResponse"
             }
+          }
+        }
+      },
+      "put": {
+        "tags": ["timecards"],
+        "operationId": "putTimecard",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "300": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["timecards"],
+        "operationId": "deleteTimecard",
+        "x-google-backend": {
+          "address": "https://us-central1-fukuuchierp.cloudfunctions.net/",
+          "path_translation": "APPEND_PATH_TO_ADDRESS",
+          "protocol": "h2"
+        },
+        "parameters": [],
+        "responses": {
+          "300": {
+            "description": "OK"
           }
         }
       }
