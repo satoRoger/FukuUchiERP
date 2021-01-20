@@ -18,7 +18,6 @@ function hasProperty<K extends string>(
 export function isString(val: any): val is string {
   return typeof val === "string";
 }
-type 
 export function isStringArray(val: any): val is string[] {
   return Array.isArray(val)
 }
