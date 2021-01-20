@@ -46,6 +46,10 @@ export default class TimecardRepositoryFS implements TimecardRepository {
     from?: DateTime,
     to?: DateTime
   ): Promise<TimecardCollection> {
+  
+  	console.log(from?.toJSDate());
+  	console.log(to?.toJSDate());
+  	
     let queryRepository:
       | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
       | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
