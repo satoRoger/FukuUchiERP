@@ -8,11 +8,18 @@ import WorkflowState from "../../domain/workflow/src/valueObject/workflowState";
 import Fullname from "../../domain/resourceManager/src/valueObject/fullname";
 import WorkflowAction from "../../domain/workflow/src/valueObject/workflowAction";
 
+function hasProperty<K extends string>(
+  x: unknown,
+  name: K
+): x is { [M in K]: unknown } {
+  return x instanceof Object && name in x;
+}
+
 export function isString(val: any): val is string {
   return typeof val === "string";
 }
 export function isStringArray(val: any): val is string[] {
-  return true;
+  return Array.isArray(val)&&;
 }
 
 export function isNumber(val: any): val is number {
