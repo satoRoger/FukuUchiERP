@@ -5,8 +5,11 @@ export default function UpdateUserFirebaseAuth(
   person: Person,
   password?: string
 ) {
-  return admin.auth().updateUser(person.id.value, {
+  let updateData: admin.auth.UpdateRequest = {
     email: person.mail.value,
-    password: password,
-  });
+  };
+  if (password) {
+    updateData = { ...updateData, password: password };
+  }
+  return admin.auth().updateUser(person.id.value, updateData);
 }

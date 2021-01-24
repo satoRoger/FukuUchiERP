@@ -5,6 +5,7 @@ import PersonFactory from "../../../domain/resourceManager/src/entity/person/per
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
 import UsersPutParam from "../InteractorObject/users/usersPutParam";
+import UpdateUserFirebaseAuth from '../../../framework/firebase/authority/updateUserFirebaseAuth';
 
 export default async function PutUsers(
   param: UsersPutParam
@@ -33,7 +34,7 @@ export default async function PutUsers(
   );
 
   const user = await repository.save(person);
-
+  await UpdateUserFirebaseAuth(person)
   const response: UserAPIInterface = UserAPIInterface.fromDomainUser(user);
 
   const result: UserAPIInterface[] = [response];

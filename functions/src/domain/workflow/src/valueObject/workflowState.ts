@@ -1,6 +1,6 @@
 const WorkflowState = {
   wait: "wait",
-  complete: "comlete",
+  complete: "complete",
   deny: "deny",
 } as const;
 

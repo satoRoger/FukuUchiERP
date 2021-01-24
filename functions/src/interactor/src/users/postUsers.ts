@@ -5,6 +5,7 @@ import PersonFactory from "../../../domain/resourceManager/src/entity/person/per
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
 import AddUserFirebaseAuth from "../../../framework/firebase/authority/addUserFirebaseAuth";
+import * as sendgrid from "@sendgrid/mail";
 
 export default async function PostUsers(
   param: UsersPostParam

@@ -9,10 +9,11 @@ import WorkTime from "../../../domain/resourceManager/src/valueObject/worktime";
 import UserAPIInterface from "../../../interactor/src/APIInterface/user/user";
 import UsersPostParam from "../../../interactor/src/InteractorObject/users/usersPostParam";
 import { ValidationError, validationResult } from "express-validator";
+const sendgrid = require("@sendgrid/mail");
 
 export default async function PostUsers(
   req: express.Request,
-  res: express.Response<UserAPIInterface[] | { errors: ValidationError[] }>
+  res: express.Response<UserAPIInterface[] | {} | { errors: ValidationError[] }>
 ) {
   try {
     const {
@@ -62,7 +63,8 @@ export default async function PostUsers(
     );
 
     const response = await PostUsersRouter(postParam);
-    res.json(response);
+
+    res.json({ ok: "ok" });
   } catch (e) {
     return res.status(400).json({ errors: e });
   }
