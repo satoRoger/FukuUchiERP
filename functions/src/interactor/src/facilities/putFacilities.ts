@@ -4,16 +4,17 @@ import FacilityFactory from "../../../domain/resourceManager/src/entity/facility
 import FacilitiesPostParam from "../InteractorObject/facilities/facilitiesPostParam";
 import FacilityAPIInterface from "../APIInterface/facility/facility";
 import FacilityRepository from "../../../domain/resourceManager/src/repository/facilityRepository";
+import FacilitiesPutParam from "../InteractorObject/facilities/facilitiesPutParam";
 
-export default async function PostFacilities(
-  param: FacilitiesPostParam
+export default async function PutFacilities(
+  param: FacilitiesPutParam
 ): Promise<FacilityAPIInterface[]> {
   const repository = container.get<FacilityRepository>(
     Types.FacilityRepository
   );
 
   const newData = await repository.save(
-    new FacilityFactory().create("", param.name)
+    new FacilityFactory().create(param.id ,param.name)
   );
 
   const response: FacilityAPIInterface = {

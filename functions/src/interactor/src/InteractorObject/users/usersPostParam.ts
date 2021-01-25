@@ -40,30 +40,49 @@ export default class UsersPostParam {
     mail: any,
     familyname: any,
     givenname: any,
-    birthdate?: any,
-    address?: any,
-    phoneNumber?: any,
-    emergencyPhoneNumber?: any,
-    dependent?: any,
-    facilityId?: any,
-    staffCode?: any,
-    workStyle?: any,
-    profession?: any,
-    workTime?: any,
-    socialInsuranceCode?: any,
-    socialInsuranceNumber?: any,
-    hireDate?: any,
-    leaveDate?: any
+    options: {
+      birthdate?: any;
+      address?: any;
+      phoneNumber?: any;
+      emergencyPhoneNumber?: any;
+      dependent?: any;
+      facilityId?: any;
+      staffCode?: any;
+      workStyle?: any;
+      profession?: any;
+      workTime?: any;
+      socialInsuranceCode?: any;
+      socialInsuranceNumber?: any;
+      hireDate?: any;
+      leaveDate?: any;
+    } = {}
   ) {
+    const {
+      birthdate,
+      address,
+      phoneNumber,
+      emergencyPhoneNumber,
+      dependent,
+      facilityId,
+      staffCode,
+      workStyle,
+      profession,
+      workTime,
+      socialInsuranceCode,
+      socialInsuranceNumber,
+      hireDate,
+      leaveDate,
+    } = options;
+
     if (isRollType(rollType)) {
       this.rollType = rollType;
     } else {
-      throw TypeValidateError("rollType","RollType");
+      throw TypeValidateError("rollType", "RollType");
     }
     if (isString(mail)) {
       this.mail = mail;
     } else {
-      throw TypeValidateError("mail","string");
+      throw TypeValidateError("mail", "string");
     }
 
     if (isISOString(birthdate)) {

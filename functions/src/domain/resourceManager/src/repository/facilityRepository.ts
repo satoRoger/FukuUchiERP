@@ -6,4 +6,5 @@ import FacilityId from "../valueObject/facilityId";
 export default interface FacilityRepository {
   save(facility: Facility): Promise<Facility>;
   search(facilityId?: FacilityId): Promise<FacilityCollection>;
+  remove(facilityId: FacilityId): Promise<FacilityId>;
 }

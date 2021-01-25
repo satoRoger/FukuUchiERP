@@ -4,6 +4,7 @@ import FacilityCollection from "../../../domain/resourceManager/src/entity/facil
 import FacilityRepository from "../../../domain/resourceManager/src/repository/facilityRepository";
 import admin from "../../../framework/firebase/adminInitialize";
 import FacilityFactory from "../../../domain/resourceManager/src/entity/facility/facilityFactory";
+import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
 
 @injectable()
 export default class FacilityRepositoryFS implements FacilityRepository {
@@ -14,7 +15,15 @@ export default class FacilityRepositoryFS implements FacilityRepository {
     this.repository = this.database.collection("facilities");
   }
   async save(facility: Facility): Promise<Facility> {
-    await this.repository.add({ name: facility.name?.value });
+    if (facility.id) {
+      //更新
+      await this.repository
+        .doc(facility.id.value)
+        .set({ name: facility.name.value });
+    } else {
+      //新規
+      await this.repository.add({ name: facility.name.value });
+    }
     return facility;
   }
   async search(): Promise<FacilityCollection> {
@@ -33,5 +42,9 @@ export default class FacilityRepositoryFS implements FacilityRepository {
       }
       return collection;
     });
+  }
+  async remove(facilityId: FacilityId): Promise<FacilityId> {
+    await this.repository.doc(facilityId.value).delete();
+    return facilityId;
   }
 }

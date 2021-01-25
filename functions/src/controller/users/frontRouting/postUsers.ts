@@ -46,20 +46,22 @@ export default async function PostUsers(
       mail,
       fullname.familyName,
       fullname.givenName,
-      birthdate,
-      address,
-      phoneNumber,
-      emergencyPhoneNumber,
-      dependent,
-      facilityId,
-      staffCode,
-      workStyle,
-      profession,
-      workTime,
-      socialInsuranceCode,
-      socialInsuranceNumber,
-      hireDate,
-      leaveDate
+      {
+        birthdate: birthdate,
+        address: address,
+        phoneNumber: phoneNumber,
+        emergencyPhoneNumber: emergencyPhoneNumber,
+        dependent: dependent,
+        facilityId: facilityId,
+        staffCode: staffCode,
+        workStyle: workStyle,
+        profession: profession,
+        workTime: workTime,
+        socialInsuranceCode: socialInsuranceCode,
+        socialInsuranceNumber: socialInsuranceNumber,
+        hireDate: hireDate,
+        leaveDate: leaveDate,
+      }
     );
 
     const response = await PostUsersRouter(postParam);

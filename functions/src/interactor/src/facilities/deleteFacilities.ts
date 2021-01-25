@@ -4,22 +4,18 @@ import FacilityFactory from "../../../domain/resourceManager/src/entity/facility
 import FacilitiesPostParam from "../InteractorObject/facilities/facilitiesPostParam";
 import FacilityAPIInterface from "../APIInterface/facility/facility";
 import FacilityRepository from "../../../domain/resourceManager/src/repository/facilityRepository";
+import FacilitiesDeleteParam from "../InteractorObject/facilities/facilitiesDeleteParam";
+import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
 
-export default async function PostFacilities(
-  param: FacilitiesPostParam
-): Promise<FacilityAPIInterface[]> {
+export default async function DeleteFacilities(
+  param: FacilitiesDeleteParam
+): Promise<string> {
   const repository = container.get<FacilityRepository>(
     Types.FacilityRepository
   );
 
-  const newData = await repository.save(
-    new FacilityFactory().create("", param.name)
-  );
+  const facilityId = new FacilityId(param.id);
+  const id = await repository.remove(facilityId);
 
-  const response: FacilityAPIInterface = {
-    id: newData.id.value,
-    name: newData.name.value,
-  };
-  const result: FacilityAPIInterface[] = [response];
-  return result;
+  return id.value;
 }
