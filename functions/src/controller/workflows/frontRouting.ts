@@ -5,6 +5,8 @@ import validateWorkflowsQuery from "./validate/validateQuery";
 import validateWorkflowsPostParam from "./validate/validatePostParam";
 import PutWorkflows from "./frontRouting/putWorkflows";
 import validateWorkflowsPutParam from "./validate/validatePutParam";
+import validateWorkflowsDeleteParam from "./validate/validatDeleteParam";
+import DeleteWorkflows from "../../interactor/src/workflow/deleteWorkflows";
 
 const workflows = express.Router();
 
@@ -12,5 +14,6 @@ workflows.get("/", validateWorkflowsQuery, GetWorkflows);
 
 workflows.post("/", validateWorkflowsPostParam, PostWorkflows);
 workflows.put("/:workflowId", validateWorkflowsPutParam, PutWorkflows);
+workflows.delete("/:workflowId", validateWorkflowsDeleteParam, DeleteWorkflows);
 
 export default workflows;

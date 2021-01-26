@@ -1,13 +1,14 @@
 import { DateTime } from "luxon";
-import CalendarId from "../../valueObject/calendarId";
+import CalendarId from "../../valueObject/eventId";
 import EmployeeId from "../../valueObject/employeeId";
 import EventType from "../../valueObject/eventType";
 import FacilityId from "../../valueObject/facilityId";
 import Title from "../../valueObject/title";
+import EventId from "../../valueObject/eventId";
 
 export default class CalendarEvent {
   constructor(
-    private _id: CalendarId,
+    private _id: EventId,
     private _type: EventType,
     private _start: DateTime,
     private _end: DateTime,

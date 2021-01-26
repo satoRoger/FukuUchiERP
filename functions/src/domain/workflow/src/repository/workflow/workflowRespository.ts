@@ -11,4 +11,5 @@ export default interface WorkflowRepository {
     drafter?: Drafter,
     approver?: Approver
   ): Promise<WorkflowCollection>;
+  remove(workflowId: WorkflowId): Promise<WorkflowId>;
 }

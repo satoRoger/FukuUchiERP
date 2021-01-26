@@ -158,4 +158,8 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
       return collection;
     });
   }
+  async remove(workflowId: WorkflowId): Promise<WorkflowId> {
+    await this.repository.doc(workflowId.value).delete();
+    return workflowId;
+  }
 }

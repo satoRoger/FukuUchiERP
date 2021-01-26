@@ -3,6 +3,8 @@ import EventCollection from "../../entity/event/eventCollection";
 import { DateTime } from "luxon";
 import Employee from "../../entity/employee/employee";
 import Facility from "../../entity/facility/facility";
+import CalendarId from "../../valueObject/eventId";
+import EventId from "../../valueObject/eventId";
 
 export default interface EventRepository {
   save(event: Event): Promise<Event>;
@@ -12,4 +14,5 @@ export default interface EventRepository {
     employee?: Employee,
     facility?: Facility
   ): Promise<EventCollection>;
+  remove(eventId: EventId): Promise<EventId>;
 }

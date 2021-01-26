@@ -7,6 +7,8 @@ import { DateTime } from "luxon";
 import employee from "../../../domain/eventManager/src/entity/employee/employee";
 import facility from "../../../domain/eventManager/src/entity/facility/facility";
 import EventFactory from "../../../domain/eventManager/src/entity/event/eventFactory";
+import PersonId from "../../../domain/resourceManager/src/valueObject/personId";
+import EventId from "../../../domain/eventManager/src/valueObject/eventId";
 
 @injectable()
 export default class EventRepositoryFS implements EventRepository {
@@ -99,5 +101,9 @@ export default class EventRepositoryFS implements EventRepository {
       }
       return collection;
     });
+  }
+  async remove(eventId: EventId): Promise<EventId> {
+    await this.repository.doc(eventId.value).delete();
+    return eventId;
   }
 }

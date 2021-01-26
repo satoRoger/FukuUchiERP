@@ -1,6 +1,6 @@
 import EventType from '../../valueObject/eventType';
 import { DateTime } from 'luxon';
-import CalendarId from '../../valueObject/calendarId';
+import CalendarId from '../../valueObject/eventId';
 import EmployeeId from '../../valueObject/employeeId';
 import FacilityId from '../../valueObject/facilityId';
 import Title from '../../valueObject/title';
