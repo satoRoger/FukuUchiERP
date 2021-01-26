@@ -24,6 +24,7 @@ export default class EventsPutParam {
     userId?: any,
     facilityId?: any
   ) {
+    console.log(id);
     if (isString(id)) {
       this.id = id;
     } else {

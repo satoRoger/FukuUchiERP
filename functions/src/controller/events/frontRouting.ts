@@ -4,9 +4,9 @@ import PostEvents from "./frontRouting/postEvents";
 import validateEventsPostParam from "./validate/validatePostParam";
 import validateEventsQuery from "./validate/validateQuery";
 import validateEventsPutParam from "./validate/validatePutParam";
-import PutEvents from "../workflows/frontRouting/putWorkflows";
 import validateEventsDeleteParam from "./validate/validatDeleteParam";
 import DeleteEvents from "./frontRouting/deleteEvents";
+import PutEvents from "./frontRouting/putEvents";
 
 const events = express.Router();
 

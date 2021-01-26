@@ -7,25 +7,31 @@ import EventsPutParam from "../../../interactor/src/InteractorObject/events/even
 
 export default async function PutEvents(
   req: express.Request,
-  res: express.Response<EventAPIInterface[] | { errors: ValidationError[] }>
+  res: express.Response<
+    EventAPIInterface[] | {} | { errors: ValidationError[] }
+  >
 ) {
-  const { type, start, end, title, userId, facilityId } = req.body;
-  const { eventId } = req.params;
+  try {
+    const { type, start, end, title, userId, facilityId } = req.body;
+    const { eventId } = req.params;
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const putParam = new EventsPutParam(
+      eventId,
+      type,
+      start,
+      end,
+      title,
+      userId,
+      facilityId
+    );
+
+    const response = await PutEventsRouter(putParam);
+    res.json(response);
+  } catch (e) {
+    return res.status(400).json({ errors: e });
   }
-  const putParam = new EventsPutParam(
-    eventId,
-    type,
-    start,
-    end,
-    title,
-    userId,
-    facilityId
-  );
-
-  const response = await PutEventsRouter(putParam);
-  res.json(response);
 }

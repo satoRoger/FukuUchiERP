@@ -28,14 +28,29 @@ export default class EventRepositoryFS implements EventRepository {
       ? this.database.collection("facilities").doc(event.facilityId.value)
       : null;
 
-    await this.repository.add({
-      start: event.start.toJSDate(),
-      end: event.end.toJSDate(),
-      title: event.title.value,
-      type: event.type,
-      userId: userRef,
-      facilityId: facilityRef,
-    });
+    console.log(event.id.value)
+    if (event.id.value == "") {
+      //新規
+      await this.repository.add({
+        start: event.start.toJSDate(),
+        end: event.end.toJSDate(),
+        title: event.title.value,
+        type: event.type,
+        userId: userRef,
+        facilityId: facilityRef,
+      });
+    } else {
+      //更新
+      await this.repository.doc(event.id.value).set({
+        start: event.start.toJSDate(),
+        end: event.end.toJSDate(),
+        title: event.title.value,
+        type: event.type,
+        userId: userRef,
+        facilityId: facilityRef,
+      });
+    }
+
     return event;
   }
   async search(
