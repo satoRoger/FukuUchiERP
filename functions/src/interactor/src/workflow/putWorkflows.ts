@@ -8,6 +8,7 @@ import EventsPostParam from "../InteractorObject/events/eventsPostParam";
 import EventType from "../../../domain/eventManager/src/valueObject/eventType";
 import PostEvents from "../events/postEvents";
 import WorkflowAction from "../../../domain/workflow/src/valueObject/workflowAction";
+import WorkflowType from "../../../domain/workflow/src/valueObject/workflowType";
 
 export default async function PutWorkflows(
   param: WorkflowsPutParam
@@ -28,11 +29,17 @@ export default async function PutWorkflows(
   const newWorkflow = await repository.save(workflow);
 
   if (workflow.complete) {
+    const titleMapping = {
+      [WorkflowType.paidVacation]: "有給",
+      [WorkflowType.paidVacationAM]: "午前給",
+      [WorkflowType.paidVacationPM]: "午後給",
+    };
+    const title = workflow.type;
     const postEvent = new EventsPostParam(
       EventType.UserVacation,
       workflow.vacationDate,
       workflow.vacationDate,
-      "有給",
+      titleMapping[workflow.type],
       workflow.dtafterId.value,
       undefined
     );

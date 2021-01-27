@@ -5,7 +5,7 @@ import PersonFactory from "../../../domain/resourceManager/src/entity/person/per
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
 import AddUserFirebaseAuth from "../../../framework/firebase/authority/addUserFirebaseAuth";
-import * as sendgrid from "@sendgrid/mail";
+import SendValifyMail from "../../../framework/firebase/authority/sendValifyMail";
 
 export default async function PostUsers(
   param: UsersPostParam
@@ -36,6 +36,7 @@ export default async function PostUsers(
   const user = await repository.save(person);
 
   await AddUserFirebaseAuth(user);
+  await SendValifyMail(user);
 
   const response: UserAPIInterface = UserAPIInterface.fromDomainUser(user);
 

@@ -9,6 +9,7 @@ import WorkTime from "../../../domain/resourceManager/src/valueObject/worktime";
 import UserAPIInterface from "../../../interactor/src/APIInterface/user/user";
 import UsersPostParam from "../../../interactor/src/InteractorObject/users/usersPostParam";
 import { ValidationError, validationResult } from "express-validator";
+import sendgridAPIKey from "../../../framework/sendgrid/sendgridAPI";
 const sendgrid = require("@sendgrid/mail");
 
 export default async function PostUsers(

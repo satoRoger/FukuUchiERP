@@ -6,7 +6,7 @@ import validateWorkflowsPostParam from "./validate/validatePostParam";
 import PutWorkflows from "./frontRouting/putWorkflows";
 import validateWorkflowsPutParam from "./validate/validatePutParam";
 import validateWorkflowsDeleteParam from "./validate/validatDeleteParam";
-import DeleteWorkflows from "../../interactor/src/workflow/deleteWorkflows";
+import DeleteWorkflows from "./frontRouting/deleteWorkflows";
 
 const workflows = express.Router();
 
