@@ -15,7 +15,7 @@ import {
 } from "../../../../util/isType/isType";
 import Fullname from "../../../../domain/resourceManager/src/valueObject/fullname";
 import Name from "../../../../domain/resourceManager/src/valueObject/name";
-import TypeValidateError from "../../../../controller/src/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/v1/error/typeValidateError";
 import WorkDate from "../../../../domain/resourceManager/src/valueObject/workdate";
 
 export default class UsersPutParam {

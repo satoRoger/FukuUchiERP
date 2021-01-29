@@ -3,7 +3,7 @@ import WorkStyle from "../../../../domain/resourceManager/src/valueObject/workSt
 import ProfessionType from "../../../../domain/resourceManager/src/valueObject/professionType";
 import WorkTime from "../../../../domain/resourceManager/src/valueObject/worktime";
 import Person from "../../../../domain/resourceManager/src/entity/person/person";
-import TypeValidateError from "../../../../controller/src/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/v1/error/typeValidateError";
 import FullnameAPIInterface from "./fullname";
 import {
   isWorkStyle,

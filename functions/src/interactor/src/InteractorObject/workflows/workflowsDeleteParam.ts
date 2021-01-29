@@ -1,6 +1,6 @@
 import WorkflowAction from "../../../../domain/workflow/src/valueObject/workflowAction";
 import { isString, isWorkflowAction } from "../../../../util/isType/isType";
-import TypeValidateError from "../../../../controller/src/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/v1/error/typeValidateError";
 
 export default class WorkflowsDeleteParam {
   readonly id: string;

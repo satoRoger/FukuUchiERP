@@ -1,7 +1,7 @@
 import { app } from "firebase-admin";
 import { DateTime } from "luxon";
 import WorkflowType from "../../../../domain/workflow/src/valueObject/workflowType";
-import TypeValidateError from "../../../../controller/src/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/v1/error/typeValidateError";
 import {
   isString,
   isISOString,
