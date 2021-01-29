@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import TypeValidateError from "../../../../controller/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/error/typeValidateError";
 import {
   isCardType,
   isCoordinate,

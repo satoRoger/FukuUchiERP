@@ -1,6 +1,6 @@
 import WorkflowAction from "../../../../domain/workflow/src/valueObject/workflowAction";
 import { isString, isWorkflowAction } from "../../../../util/isType/isType";
-import TypeValidateError from "../../../../controller/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/error/typeValidateError";
 
 export default class WorkflowsPutParam {
   readonly id: string;

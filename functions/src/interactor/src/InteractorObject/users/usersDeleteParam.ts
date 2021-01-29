@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { isString } from "../../../../util/isType/isType";
-import TypeValidateError from "../../../../controller/error/typeValidateError";
+import TypeValidateError from "../../../../controller/src/error/typeValidateError";
 
 export default class UsersDeleteParam {
   readonly userId: string;
