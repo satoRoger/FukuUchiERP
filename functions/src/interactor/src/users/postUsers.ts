@@ -25,6 +25,7 @@ export default async function PostUsers(
     param.facilityId,
     param.staffCode,
     param.workStyle,
+    param.workDay,
     param.profession,
     param.workTime,
     param.socialInsuranceCode,

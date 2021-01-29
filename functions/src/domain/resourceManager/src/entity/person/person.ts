@@ -12,6 +12,7 @@ import WorkTime from "../../valueObject/worktime";
 import Fullname from "../../valueObject/fullname";
 import PersonId from "../../valueObject/personId";
 import FacilityId from "../../valueObject/facilityId";
+import WorkDate from "../../valueObject/workdate";
 
 export default class Person {
   constructor(
@@ -27,6 +28,7 @@ export default class Person {
     private _facilityId?: FacilityId,
     private _staffCode?: StaffCode,
     private _workStyle?: WorkStyle,
+    private _workDay?: WorkDate[],
     private _professionType?: ProfessionType,
     private _workTime?: WorkTime | string,
     private _socialInsurance?: SocialInsurance,
@@ -105,6 +107,12 @@ export default class Person {
   }
   public set workStyle(value: WorkStyle | undefined) {
     this._workStyle = value;
+  }
+  public get workDay(): WorkDate[] | undefined {
+    return this._workDay;
+  }
+  public set workDay(value: WorkDate[] | undefined) {
+    this._workDay = value;
   }
   public get professionType(): ProfessionType | undefined {
     return this._professionType;

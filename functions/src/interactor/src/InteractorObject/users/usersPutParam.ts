@@ -9,12 +9,14 @@ import {
   isProfession,
   isRollType,
   isString,
+  isWorkDay,
   isWorkStyle,
   isWorkTime,
 } from "../../../../util/isType/isType";
 import Fullname from "../../../../domain/resourceManager/src/valueObject/fullname";
 import Name from "../../../../domain/resourceManager/src/valueObject/name";
-import TypeValidateError from '../../../../controller/error/typeValidateError';
+import TypeValidateError from "../../../../controller/error/typeValidateError";
+import WorkDate from "../../../../domain/resourceManager/src/valueObject/workdate";
 
 export default class UsersPutParam {
   readonly id: string;
@@ -29,6 +31,7 @@ export default class UsersPutParam {
   readonly facilityId?: string;
   readonly staffCode?: string;
   readonly workStyle?: WorkStyle;
+  readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
@@ -50,6 +53,7 @@ export default class UsersPutParam {
     facilityId?: any,
     staffCode?: any,
     workStyle?: any,
+    workDay?: any,
     profession?: any,
     workTime?: any,
     socialInsuranceCode?: any,
@@ -60,18 +64,18 @@ export default class UsersPutParam {
     if (isString(id)) {
       this.id = id;
     } else {
-      throw TypeValidateError("id","string");
+      throw TypeValidateError("id", "string");
     }
 
     if (isRollType(rollType)) {
       this.rollType = rollType;
     } else {
-      throw TypeValidateError("rollType","RollType");
+      throw TypeValidateError("rollType", "RollType");
     }
     if (isString(mail)) {
       this.mail = mail;
     } else {
-      throw TypeValidateError("mail","string");
+      throw TypeValidateError("mail", "string");
     }
 
     if (isISOString(birthdate)) {
@@ -102,6 +106,9 @@ export default class UsersPutParam {
     }
     if (isWorkStyle(workStyle)) {
       this.workStyle = workStyle;
+    }
+    if (isWorkDay(workDay)) {
+      this.workDay = workDay;
     }
     if (isProfession(profession)) {
       this.profession = profession;

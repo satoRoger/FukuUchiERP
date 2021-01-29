@@ -9,12 +9,14 @@ import {
   isProfession,
   isRollType,
   isString,
+  isWorkDay,
   isWorkStyle,
   isWorkTime,
 } from "../../../../util/isType/isType";
 import Fullname from "../../../../domain/resourceManager/src/valueObject/fullname";
 import Name from "../../../../domain/resourceManager/src/valueObject/name";
 import TypeValidateError from "../../../../controller/error/typeValidateError";
+import WorkDate from "../../../../domain/resourceManager/src/valueObject/workdate";
 
 export default class UsersPostParam {
   readonly rollType: RollType;
@@ -28,6 +30,7 @@ export default class UsersPostParam {
   readonly facilityId?: string;
   readonly staffCode?: string;
   readonly workStyle?: WorkStyle;
+  readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
@@ -49,6 +52,7 @@ export default class UsersPostParam {
       facilityId?: any;
       staffCode?: any;
       workStyle?: any;
+      workDay?: any;
       profession?: any;
       workTime?: any;
       socialInsuranceCode?: any;
@@ -66,6 +70,7 @@ export default class UsersPostParam {
       facilityId,
       staffCode,
       workStyle,
+      workDay,
       profession,
       workTime,
       socialInsuranceCode,
@@ -113,6 +118,9 @@ export default class UsersPostParam {
     }
     if (isWorkStyle(workStyle)) {
       this.workStyle = workStyle;
+    }
+    if (isWorkDay(workDay)) {
+      this.workDay = workDay;
     }
     if (isProfession(profession)) {
       this.profession = profession;

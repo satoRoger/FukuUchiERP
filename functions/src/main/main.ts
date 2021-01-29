@@ -8,7 +8,8 @@ import cors from "cors";
 import events from "../controller/events/frontRouting";
 import workflows from "../controller/workflows/frontRouting";
 import facilities from "../controller/facility/frontRouting";
-
+import { Settings } from "luxon";
+Settings.defaultZoneName = "Asia/Tokyo";
 
 const v1 = express();
 v1.use(cors());

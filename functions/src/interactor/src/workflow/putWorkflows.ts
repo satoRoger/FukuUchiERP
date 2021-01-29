@@ -37,8 +37,8 @@ export default async function PutWorkflows(
     const title = workflow.type;
     const postEvent = new EventsPostParam(
       EventType.UserVacation,
-      workflow.vacationDate,
-      workflow.vacationDate,
+      workflow.vacationDate?.startOf("day"),
+      workflow.vacationDate?.endOf("day"),
       titleMapping[workflow.type],
       workflow.dtafterId.value,
       undefined

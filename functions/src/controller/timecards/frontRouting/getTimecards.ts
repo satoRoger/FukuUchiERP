@@ -8,6 +8,8 @@ export default async function GetTimecards(
   res: express.Response<TimecardAPIInterface[]>
 ) {
   const { since, until, userId } = req.query;
+  console.log({ since });
+  console.log({ until });
 
   const query = new TimecardsQuery(since, until, userId);
 

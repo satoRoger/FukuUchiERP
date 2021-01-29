@@ -7,6 +7,7 @@ import WorkflowType from "../../domain/workflow/src/valueObject/workflowType";
 import WorkflowState from "../../domain/workflow/src/valueObject/workflowState";
 import Fullname from "../../domain/resourceManager/src/valueObject/fullname";
 import WorkflowAction from "../../domain/workflow/src/valueObject/workflowAction";
+import WorkDate from "../../domain/resourceManager/src/valueObject/workdate";
 
 function hasProperty<K extends string>(
   x: unknown,
@@ -19,7 +20,7 @@ export function isString(val: any): val is string {
   return typeof val === "string";
 }
 export function isStringArray(val: any): val is string[] {
-  return Array.isArray(val)
+  return Array.isArray(val);
 }
 
 export function isNumber(val: any): val is number {
@@ -46,6 +47,9 @@ export function isRollType(val: any): val is RollType {
 }
 
 export function isWorkStyle(val: any): val is WorkStyle {
+  return true;
+}
+export function isWorkDay(val: any): val is WorkDate[] {
   return true;
 }
 

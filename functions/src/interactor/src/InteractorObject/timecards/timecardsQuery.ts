@@ -14,6 +14,7 @@ class TimecardsQuery {
       this.since = since;
     } else if (isISOString(since)) {
       this.since = DateTime.fromISO(since);
+      const sinceISO = this.since.toISO();
     }
     if (isDateTime(until)) {
       this.until = until;

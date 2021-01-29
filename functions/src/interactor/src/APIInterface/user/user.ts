@@ -9,6 +9,7 @@ import {
   isWorkStyle,
   isProfession,
   isWorkTime,
+  isWorkDay,
 } from "../../../../util/isType/isType";
 import {
   isString,
@@ -17,6 +18,7 @@ import {
   isDateTime,
   isFullname,
 } from "../../../../util/isType/isType";
+import WorkDate from "../../../../domain/resourceManager/src/valueObject/workdate";
 
 export default class UserAPIInterface {
   readonly id: string;
@@ -31,6 +33,7 @@ export default class UserAPIInterface {
   readonly facilityId?: string;
   readonly staffCode?: string;
   readonly workStyle?: WorkStyle;
+  readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
@@ -52,6 +55,7 @@ export default class UserAPIInterface {
       user.facilityId?.value,
       user.staffCode?.value,
       user.workStyle,
+      user.workDay,
       user.professionType,
       user.workTime,
       user.socialInsurance?.code.value,
@@ -74,6 +78,7 @@ export default class UserAPIInterface {
     facilityId?: any,
     staffCode?: any,
     workStyle?: any,
+    workDay?: any,
     profession?: any,
     workTime?: any,
     socialInsuranceCode?: any,
@@ -126,6 +131,9 @@ export default class UserAPIInterface {
     }
     if (isWorkStyle(workStyle)) {
       this.workStyle = workStyle;
+    }
+    if (isWorkDay(workDay)) {
+      this.workDay = workDay;
     }
     if (isProfession(profession)) {
       this.profession = profession;

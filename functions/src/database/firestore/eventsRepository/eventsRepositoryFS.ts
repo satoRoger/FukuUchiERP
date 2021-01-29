@@ -28,7 +28,6 @@ export default class EventRepositoryFS implements EventRepository {
       ? this.database.collection("facilities").doc(event.facilityId.value)
       : null;
 
-    console.log(event.id.value)
     if (event.id.value == "") {
       //新規
       await this.repository.add({

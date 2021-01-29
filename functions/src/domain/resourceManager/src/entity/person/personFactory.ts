@@ -18,6 +18,7 @@ import SocialInsuranceId from "../../valueObject/socialInsuranceId";
 import SocialInsurance from "../../valueObject/socialInsurance";
 import InsuranceCode from "../../valueObject/insuranceCode";
 import InsuranceNumber from "../../valueObject/insuranceNumber";
+import WorkDate from "../../valueObject/workdate";
 
 export default class PersonFactory {
   create(
@@ -33,6 +34,7 @@ export default class PersonFactory {
     facilityId?: string,
     staffCode?: string,
     workStyle?: WorkStyle,
+    workDay?: WorkDate[],
     professionType?: ProfessionType,
     workTime?: WorkTime | string,
     socialInsuranceCode?: string,
@@ -79,6 +81,7 @@ export default class PersonFactory {
       facility,
       staff,
       workStyle,
+      workDay,
       professionType,
       workTime,
       social,

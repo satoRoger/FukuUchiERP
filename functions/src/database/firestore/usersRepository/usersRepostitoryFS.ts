@@ -53,6 +53,7 @@ export default class UsersRepositoryFS implements PersonRepository {
               facility?.id,
               data.staffCode,
               data.workStyle,
+              data.workDay,
               data.professionType,
               data.workTime,
               data.socialInsuranceCode,
@@ -104,6 +105,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         facility?.id,
         data.staffCode,
         data.workStyle,
+        data.workDay,
         data.profession,
         data.workTime,
         data.socialInsuranceCode,
@@ -149,6 +151,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         facilityId: facilityRef,
         staffCode: replaceNull(person.staffCode?.value),
         workStyle: replaceNull(person.workStyle),
+        workDay: replaceNull(person.workDay),
         profession: replaceNull(person.professionType),
         socialInsuranceCode: replaceNull(person.socialInsurance?.code.value),
         socialInsuranceNumber: replaceNull(
@@ -176,6 +179,7 @@ export default class UsersRepositoryFS implements PersonRepository {
         facilityId: facilityRef,
         staffCode: replaceNull(person.staffCode?.value),
         workStyle: replaceNull(person.workStyle),
+        workDay: replaceNull(person.workDay),
         profession: replaceNull(person.professionType),
         socialInsuranceCode: replaceNull(person.socialInsurance?.code.value),
         socialInsuranceNumber: replaceNull(
