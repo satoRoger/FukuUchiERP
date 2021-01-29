@@ -5,14 +5,21 @@ import GetTimecards from "./frontRouting/getTimecards";
 import PostTimecards from "./frontRouting/postTimecards";
 import PutTimecardsIdQuery from "./frontRouting/putTimecardsIdQuery";
 import validateTimecardsQuery from "./validate/validateQuery";
+import validateTimecardsPostParam from "./validate/validatePostParam";
+import validateTimecardsPutParam from "./validate/validatePutParam";
+import validateTimecardsDeleteParam from "./validate/validatedeleteParam";
 const timecards = express.Router();
 
 timecards.get("/", validateTimecardsQuery, GetTimecards);
 
-timecards.post("/", PostTimecards);
+timecards.post("/", validateTimecardsPostParam, PostTimecards);
 
-timecards.put("/:timecardId", PutTimecardsIdQuery);
+timecards.put("/:timecardId", validateTimecardsPutParam, PutTimecardsIdQuery);
 
-timecards.delete("/:timecardId", DeleteTimecardsIdQuery);
+timecards.delete(
+  "/:timecardId",
+  validateTimecardsDeleteParam,
+  DeleteTimecardsIdQuery
+);
 
 export default timecards;

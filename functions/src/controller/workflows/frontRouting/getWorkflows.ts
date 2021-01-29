@@ -11,7 +11,10 @@ export default async function GetWorkflows(
 ) {
   const { drafterId, approverId } = req.query;
 
-  const query = new WorkflowsQuery(drafterId, approverId);
+  const query = new WorkflowsQuery({
+    drafterId: drafterId,
+    approverId: approverId,
+  });
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

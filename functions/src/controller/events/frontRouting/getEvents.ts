@@ -17,7 +17,12 @@ export default async function GetEvents(
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const query = new EventsQuery(since, until, userId, facilityId);
+  const query = new EventsQuery({
+    since: since,
+    until: until,
+    userId: userId,
+    facilityId: facilityId,
+  });
 
   const response = await GetEventsRouter(query);
   res.json(response);

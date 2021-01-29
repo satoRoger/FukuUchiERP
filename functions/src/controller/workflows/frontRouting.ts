@@ -11,7 +11,6 @@ import DeleteWorkflows from "./frontRouting/deleteWorkflows";
 const workflows = express.Router();
 
 workflows.get("/", validateWorkflowsQuery, GetWorkflows);
-
 workflows.post("/", validateWorkflowsPostParam, PostWorkflows);
 workflows.put("/:workflowId", validateWorkflowsPutParam, PutWorkflows);
 workflows.delete("/:workflowId", validateWorkflowsDeleteParam, DeleteWorkflows);

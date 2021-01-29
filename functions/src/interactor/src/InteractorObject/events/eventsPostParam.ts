@@ -19,8 +19,10 @@ export default class EventsPostParam {
     start: any,
     end: any,
     title: any,
-    userId?: any,
-    facilityId?: any
+    option: {
+      userId?: any;
+      facilityId?: any;
+    }
   ) {
     if (isEventType(type)) {
       this.type = type;
@@ -47,11 +49,11 @@ export default class EventsPostParam {
     } else {
       throw "";
     }
-    if (isString(userId)) {
-      this.userId = userId;
+    if (isString(option.userId)) {
+      this.userId = option.userId;
     }
-    if (isString(facilityId)) {
-      this.facilityId = facilityId;
+    if (isString(option.facilityId)) {
+      this.facilityId = option.facilityId;
     }
   }
 }

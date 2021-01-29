@@ -45,21 +45,23 @@ export default class UsersPutParam {
     mail: any,
     familyname: any,
     givenname: any,
-    birthdate?: any,
-    address?: any,
-    phoneNumber?: any,
-    emergencyPhoneNumber?: any,
-    dependent?: any,
-    facilityId?: any,
-    staffCode?: any,
-    workStyle?: any,
-    workDay?: any,
-    profession?: any,
-    workTime?: any,
-    socialInsuranceCode?: any,
-    socialInsuranceNumber?: any,
-    hireDate?: any,
-    leaveDate?: any
+    option: {
+      birthdate?: any;
+      address?: any;
+      phoneNumber?: any;
+      emergencyPhoneNumber?: any;
+      dependent?: any;
+      facilityId?: any;
+      staffCode?: any;
+      workStyle?: any;
+      workDay?: any;
+      profession?: any;
+      workTime?: any;
+      socialInsuranceCode?: any;
+      socialInsuranceNumber?: any;
+      hireDate?: any;
+      leaveDate?: any;
+    }
   ) {
     if (isString(id)) {
       this.id = id;
@@ -78,59 +80,59 @@ export default class UsersPutParam {
       throw TypeValidateError("mail", "string");
     }
 
-    if (isISOString(birthdate)) {
-      this.birthdate = DateTime.fromISO(birthdate);
-    } else if (isDateTime(birthdate)) {
-      this.birthdate = birthdate;
+    if (isISOString(option.birthdate)) {
+      this.birthdate = DateTime.fromISO(option.birthdate);
+    } else if (isDateTime(option.birthdate)) {
+      this.birthdate = option.birthdate;
     }
-    if (isString(phoneNumber)) {
-      this.phoneNumber = phoneNumber;
+    if (isString(option.phoneNumber)) {
+      this.phoneNumber = option.phoneNumber;
     }
-    if (isString(emergencyPhoneNumber)) {
-      this.emergencyPhoneNumber = emergencyPhoneNumber;
+    if (isString(option.emergencyPhoneNumber)) {
+      this.emergencyPhoneNumber = option.emergencyPhoneNumber;
     }
-    if (isString(address)) {
-      this.address = address;
+    if (isString(option.address)) {
+      this.address = option.address;
     }
     if (isString(familyname) && isString(givenname)) {
       this.fullname = new Fullname(new Name(familyname), new Name(givenname));
     }
-    if (Array.isArray(dependent)) {
-      this.dependent = dependent;
+    if (Array.isArray(option.dependent)) {
+      this.dependent = option.dependent;
     }
-    if (isString(facilityId)) {
-      this.facilityId = facilityId;
+    if (isString(option.facilityId)) {
+      this.facilityId = option.facilityId;
     }
-    if (isString(staffCode)) {
-      this.staffCode = staffCode;
+    if (isString(option.staffCode)) {
+      this.staffCode = option.staffCode;
     }
-    if (isWorkStyle(workStyle)) {
-      this.workStyle = workStyle;
+    if (isWorkStyle(option.workStyle)) {
+      this.workStyle = option.workStyle;
     }
-    if (isWorkDay(workDay)) {
-      this.workDay = workDay;
+    if (isWorkDay(option.workDay)) {
+      this.workDay = option.workDay;
     }
-    if (isProfession(profession)) {
-      this.profession = profession;
+    if (isProfession(option.profession)) {
+      this.profession = option.profession;
     }
-    if (isWorkTime(workTime)) {
-      this.workTime = workTime;
+    if (isWorkTime(option.workTime)) {
+      this.workTime = option.workTime;
     }
-    if (isString(socialInsuranceCode)) {
-      this.socialInsuranceCode = socialInsuranceCode;
+    if (isString(option.socialInsuranceCode)) {
+      this.socialInsuranceCode = option.socialInsuranceCode;
     }
-    if (isString(socialInsuranceNumber)) {
-      this.socialInsuranceNumber = socialInsuranceNumber;
+    if (isString(option.socialInsuranceNumber)) {
+      this.socialInsuranceNumber = option.socialInsuranceNumber;
     }
-    if (isISOString(hireDate)) {
-      this.hireDate = DateTime.fromISO(hireDate);
-    } else if (isDateTime(hireDate)) {
-      this.hireDate = hireDate;
+    if (isISOString(option.hireDate)) {
+      this.hireDate = DateTime.fromISO(option.hireDate);
+    } else if (isDateTime(option.hireDate)) {
+      this.hireDate = option.hireDate;
     }
-    if (isISOString(leaveDate)) {
-      this.leaveDate = DateTime.fromISO(leaveDate);
-    } else if (isDateTime(leaveDate)) {
-      this.leaveDate = leaveDate;
+    if (isISOString(option.leaveDate)) {
+      this.leaveDate = DateTime.fromISO(option.leaveDate);
+    } else if (isDateTime(option.leaveDate)) {
+      this.leaveDate = option.leaveDate;
     }
   }
 }

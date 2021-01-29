@@ -43,21 +43,23 @@ export default async function PutUsers(
       mail,
       fullname.familyName,
       fullname.givenName,
-      birthdate,
-      address,
-      phoneNumber,
-      emergencyPhoneNumber,
-      dependent,
-      facilityId,
-      staffCode,
-      workStyle,
-      workDay,
-      profession,
-      workTime,
-      socialInsuranceCode,
-      socialInsuranceNumber,
-      hireDate,
-      leaveDate
+      {
+        birthdate: birthdate,
+        address: address,
+        phoneNumber: phoneNumber,
+        emergencyPhoneNumber: emergencyPhoneNumber,
+        dependent: dependent,
+        facilityId: facilityId,
+        staffCode: staffCode,
+        workStyle: workStyle,
+        workDay: workDay,
+        profession: profession,
+        workTime: workTime,
+        socialInsuranceCode: socialInsuranceCode,
+        socialInsuranceNumber: socialInsuranceNumber,
+        hireDate: hireDate,
+        leaveDate: leaveDate,
+      }
     );
 
     const response = await PutUsersRouter(putParam);

@@ -4,12 +4,12 @@ import { isString } from "../../../../util/isType/isType";
 export default class WorkflowsQuery {
   readonly drafterId?: string;
   readonly approverId?: string;
-  constructor(drafterId?: any, approverId?: any) {
-    if (isString(drafterId)) {
-      this.drafterId = drafterId;
+  constructor(option: { drafterId?: any; approverId?: any }) {
+    if (isString(option.drafterId)) {
+      this.drafterId = option.drafterId;
     }
-    if (isString(approverId)) {
-      this.approverId = approverId;
+    if (isString(option.approverId)) {
+      this.approverId = option.approverId;
     }
   }
 }

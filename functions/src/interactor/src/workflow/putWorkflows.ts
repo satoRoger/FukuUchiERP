@@ -40,8 +40,9 @@ export default async function PutWorkflows(
       workflow.vacationDate?.startOf("day"),
       workflow.vacationDate?.endOf("day"),
       titleMapping[workflow.type],
-      workflow.dtafterId.value,
-      undefined
+      {
+        userId: workflow.dtafterId.value,
+      }
     );
     await PostEvents(postEvent);
   }

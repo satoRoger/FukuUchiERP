@@ -1,27 +1,32 @@
-import { DateTime } from 'luxon';
-import { isISOString, isString } from '../../../../util/isType/isType';
+import { DateTime } from "luxon";
+import { isISOString, isString } from "../../../../util/isType/isType";
 
 export default class EventsQuery {
-	readonly since?: DateTime;
-	readonly until?: DateTime;
-	readonly userId?: string;
-	readonly facilityId?: string;
+  readonly since?: DateTime;
+  readonly until?: DateTime;
+  readonly userId?: string;
+  readonly facilityId?: string;
 
-	constructor(since?: any, until?: any, userId?: any, facilityId?: any) {
-		if (isISOString(since)) {
-			this.since = DateTime.fromISO(since);
-		}
+  constructor(option: {
+    since?: any;
+    until?: any;
+    userId?: any;
+    facilityId?: any;
+  }) {
+    if (isISOString(option.since)) {
+      this.since = DateTime.fromISO(option.since);
+    }
 
-		if (isISOString(until)) {
-			this.until = DateTime.fromISO(until);
-		}
+    if (isISOString(option.until)) {
+      this.until = DateTime.fromISO(option.until);
+    }
 
-		if (isString(userId)) {
-			this.userId = userId;
-		}
+    if (isString(option.userId)) {
+      this.userId = option.userId;
+    }
 
-		if (isString(facilityId)) {
-			this.facilityId = facilityId
-		}
-	}
+    if (isString(option.facilityId)) {
+      this.facilityId = option.facilityId;
+    }
+  }
 }

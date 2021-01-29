@@ -19,15 +19,10 @@ export default async function PutEvents(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const putParam = new EventsPutParam(
-      eventId,
-      type,
-      start,
-      end,
-      title,
-      userId,
-      facilityId
-    );
+    const putParam = new EventsPutParam(eventId, type, start, end, title, {
+      userId: userId,
+      facilityId: facilityId,
+    });
 
     const response = await PutEventsRouter(putParam);
     res.json(response);

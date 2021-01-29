@@ -13,7 +13,6 @@ export default async function PutWorkflows(
 ) {
   const { action } = req.body;
   const { workflowId } = req.params;
-  const { userToken } = req.body;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

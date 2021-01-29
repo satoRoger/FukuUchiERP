@@ -9,21 +9,21 @@ class TimecardsQuery {
   readonly since?: DateTime;
   readonly until?: DateTime;
   readonly userId?: string;
-  constructor(since: any, until: any, userId: any) {
-    if (isDateTime(since)) {
-      this.since = since;
-    } else if (isISOString(since)) {
-      this.since = DateTime.fromISO(since);
+  constructor(option: { since?: any; until?: any; userId?: any }) {
+    if (isDateTime(option.since)) {
+      this.since = option.since;
+    } else if (isISOString(option.since)) {
+      this.since = DateTime.fromISO(option.since);
       const sinceISO = this.since.toISO();
     }
-    if (isDateTime(until)) {
-      this.until = until;
-    } else if (isISOString(until)) {
-      this.until = DateTime.fromISO(until);
+    if (isDateTime(option.until)) {
+      this.until = option.until;
+    } else if (isISOString(option.until)) {
+      this.until = DateTime.fromISO(option.until);
     }
 
-    if (isString(userId)) {
-      this.userId = userId;
+    if (isString(option.userId)) {
+      this.userId = option.userId;
     }
   }
 }
