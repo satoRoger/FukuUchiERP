@@ -6,9 +6,11 @@ import CalendarEvent from "../../../domain/eventManager/src/entity/event/event";
 import { DateTime } from "luxon";
 import employee from "../../../domain/eventManager/src/entity/employee/employee";
 import facility from "../../../domain/eventManager/src/entity/facility/facility";
-import EventFactory from "../../../domain/eventManager/src/entity/event/eventFactory";
-import PersonId from "../../../domain/resourceManager/src/valueObject/personId";
 import EventId from "../../../domain/eventManager/src/valueObject/eventId";
+import CollectionName from "../common/collectionName";
+import FireEventsModel from "./eventsRepositoryModel/eventsModel";
+import FireEventsSearch from "./eventsSearch";
+import DocToDomainEvent from "./docToDomainEvent";
 
 @injectable()
 export default class EventRepositoryFS implements EventRepository {
@@ -16,99 +18,57 @@ export default class EventRepositoryFS implements EventRepository {
   private repository;
   constructor() {
     this.database = admin.firestore();
-    this.repository = this.database.collection("events");
+    this.repository = this.database.collection(CollectionName.events);
+  }
+  async add(event: CalendarEvent): Promise<CalendarEvent> {
+    const eventModel = new FireEventsModel(
+      this.database,
+      event.start,
+      event.end,
+      event.title.value,
+      event.type,
+      { userId: event.employeeId?.value, facilityId: event.facilityId?.value }
+    );
+    await this.repository.add(eventModel.toFirebaseStoreFormat());
+    return event;
   }
 
   async save(event: CalendarEvent): Promise<CalendarEvent> {
-    const userRef = event.employeeId
-      ? this.database.collection("users").doc(event.employeeId.value)
-      : null;
-
-    const facilityRef = event.facilityId
-      ? this.database.collection("facilities").doc(event.facilityId.value)
-      : null;
-
-    if (event.id.value == "") {
-      //新規
-      await this.repository.add({
-        start: event.start.toJSDate(),
-        end: event.end.toJSDate(),
-        title: event.title.value,
-        type: event.type,
-        userId: userRef,
-        facilityId: facilityRef,
-      });
-    } else {
-      //更新
-      await this.repository.doc(event.id.value).set({
-        start: event.start.toJSDate(),
-        end: event.end.toJSDate(),
-        title: event.title.value,
-        type: event.type,
-        userId: userRef,
-        facilityId: facilityRef,
-      });
-    }
+    const eventModel = new FireEventsModel(
+      this.database,
+      event.start,
+      event.end,
+      event.title.value,
+      event.type,
+      { userId: event.employeeId?.value, facilityId: event.facilityId?.value }
+    );
+    await this.repository
+      .doc(event.id.value)
+      .set(eventModel.toFirebaseStoreFormat());
 
     return event;
   }
+
   async search(
     from?: DateTime,
     to?: DateTime,
     employee?: employee,
     facility?: facility
   ): Promise<EventCollection> {
-    let queryRepository:
-      | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
-      | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
-      .repository;
+    const queryRepository = new FireEventsSearch(this.database, {
+      from: from,
+      to: to,
+      userId: employee?.id.value,
+      facilityId: facility?.id.value,
+    }).searchRepository();
 
-    if (employee) {
-      const userRef = this.database.collection("users").doc(employee.id.value);
-      queryRepository = queryRepository.where("userId", "==", userRef);
-    }
-    if (facility) {
-      const facilityRef = this.database
-        .collection("facilities")
-        .doc(facility.id.value);
-      queryRepository = queryRepository.where(
-        "facilityIds",
-        "array-contains",
-        facilityRef
-      );
-    }
-    if (from) {
-      queryRepository = queryRepository.where("start", ">=", from.toJSDate());
-    }
-    if (to) {
-      queryRepository = queryRepository.where("start", "<=", to.toJSDate());
-    }
-    const snapshot = await queryRepository.get();
+    const documents = (await queryRepository.get()).docs;
 
-    const result = snapshot.docs.map(async (doc) => {
-      const data = doc.data();
+    const events = documents.map((document) =>
+      new DocToDomainEvent(document).toDomain()
+    );
 
-      let userDoc;
-      let facilityDoc;
-      if (data.userId) {
-        userDoc = await data.userId.get();
-      }
-      if (data.facilityId) {
-        facilityDoc = await data.facilityId.get();
-      }
-
-      return new EventFactory().create(
-        doc.id,
-        data.type,
-        DateTime.fromJSDate(data.start.toDate()),
-        DateTime.fromJSDate(data.end.toDate()),
-        data.title,
-        userDoc ? userDoc.id : undefined,
-        facilityDoc ? facilityDoc.id : undefined
-      );
-    });
-
-    return Promise.all(result).then((events) => {
+    return Promise.all(events).then((events) => {
       const collection = new EventCollection();
       for (let event of events) {
         collection.add(event);
@@ -116,6 +76,7 @@ export default class EventRepositoryFS implements EventRepository {
       return collection;
     });
   }
+
   async remove(eventId: EventId): Promise<EventId> {
     await this.repository.doc(eventId.value).delete();
     return eventId;

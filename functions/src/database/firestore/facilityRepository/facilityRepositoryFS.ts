@@ -3,8 +3,11 @@ import Facility from "../../../domain/resourceManager/src/entity/facility/facili
 import FacilityCollection from "../../../domain/resourceManager/src/entity/facility/facilityCollection";
 import FacilityRepository from "../../../domain/resourceManager/src/repository/facilityRepository";
 import admin from "../../../framework/firebase/adminInitialize";
-import FacilityFactory from "../../../domain/resourceManager/src/entity/facility/facilityFactory";
 import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
+import CollectionName from "../common/collectionName";
+import FireFacilitiesModel from "./facilitiesRepositoryModel/facilitiesModel";
+import FireFacilitiesSearch from "./facilitiesSearch";
+import DocToDomainFacility from "./docToDomainFacility";
 
 @injectable()
 export default class FacilityRepositoryFS implements FacilityRepository {
@@ -12,30 +15,42 @@ export default class FacilityRepositoryFS implements FacilityRepository {
   private repository;
   constructor() {
     this.database = admin.firestore();
-    this.repository = this.database.collection("facilities");
+    this.repository = this.database.collection(CollectionName.facilities);
   }
-  async save(facility: Facility): Promise<Facility> {
-    if (facility.id) {
-      //更新
-      await this.repository
-        .doc(facility.id.value)
-        .set({ name: facility.name.value });
-    } else {
-      //新規
-      await this.repository.add({ name: facility.name.value });
-    }
+
+  async add(facility: Facility): Promise<Facility> {
+    const facilityModel = new FireFacilitiesModel(
+      this.database,
+      facility.name.value
+    );
+    await this.repository.add(facilityModel.toFirebaseStoreFormat());
     return facility;
   }
+
+  async save(facility: Facility): Promise<Facility> {
+    const facilityModel = new FireFacilitiesModel(
+      this.database,
+      facility.name.value
+    );
+    await this.repository
+      .doc(facility.id.value)
+      .set(facilityModel.toFirebaseStoreFormat());
+
+    return facility;
+  }
+
   async search(): Promise<FacilityCollection> {
-    const snapshot = await this.repository.get();
+    const queryRepository = new FireFacilitiesSearch(
+      this.database
+    ).searchRepository();
 
-    const result = snapshot.docs.map(async (doc) => {
-      const data = doc.data();
+    const documents = (await this.repository.get()).docs;
 
-      return new FacilityFactory().create(doc.id, data.name);
-    });
+    const facilities = documents.map((document) =>
+      new DocToDomainFacility(document).toDomain()
+    );
 
-    return Promise.all(result).then((facilities) => {
+    return Promise.all(facilities).then((facilities) => {
       const collection = new FacilityCollection();
       for (let facility of facilities) {
         collection.add(facility);
@@ -43,6 +58,7 @@ export default class FacilityRepositoryFS implements FacilityRepository {
       return collection;
     });
   }
+
   async remove(facilityId: FacilityId): Promise<FacilityId> {
     await this.repository.doc(facilityId.value).delete();
     return facilityId;

@@ -15,7 +15,7 @@ async function PostTimecards(
   );
 
   const timecard = new TimecardFactory().createTimecard(
-    new TimecardId("empty"),
+    new TimecardId(""),
     new EmployeeId(param.userId),
     param.cardType,
     param.punchDate,
@@ -23,7 +23,7 @@ async function PostTimecards(
     param.longitude
   );
 
-  const newTimecard = await repository.save(timecard);
+  const newTimecard = await repository.add(timecard);
 
   const result: TimecardAPIInterface[] = [
     TimecardAPIInterface.fromDomainTimecard(newTimecard),

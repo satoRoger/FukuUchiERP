@@ -7,36 +7,6 @@ import EmployeeId from "../../valueObject/employeeId";
 import TimecardId from "../../valueObject/timecardId";
 
 export default class TimecardFactory {
-  /*
-  createAttendance: (
-    employee: Employee,
-    punchDate: DateTime,
-    coordinate?: Coordinate
-  ) => Timecard = (employee, punchDate, coordinate) => {
-    return this.create(employee, CardType.Attendance, punchDate, coordinate);
-  };
-  createLeavework: (
-    employee: Employee,
-    punchDate: DateTime,
-    coordinate?: Coordinate
-  ) => Timecard = (employee, punchDate, coordinate) => {
-    return this.create(employee, CardType.Leavework, punchDate, coordinate);
-  };
-  createTakebreak: (
-    employee: Employee,
-    punchDate: DateTime,
-    coordinate?: Coordinate
-  ) => Timecard = (employee, punchDate, coordinate) => {
-    return this.create(employee, CardType.Takebreak, punchDate, coordinate);
-  };
-  createEndbreak: (
-    employee: Employee,
-    punchDate: DateTime,
-    coordinate?: Coordinate
-  ) => Timecard = (employee, punchDate, coordinate) => {
-    return this.create(employee, CardType.Endbreak, punchDate, coordinate);
-  };
-  */
   createTimecard(
     id: TimecardId,
     employeeId: EmployeeId,

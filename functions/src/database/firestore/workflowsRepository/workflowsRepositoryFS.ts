@@ -8,6 +8,7 @@ import { DateTime } from "luxon";
 import Drafter from "../../../domain/workflow/src/entity/drafter/drafter";
 import Approver from "../../../domain/workflow/src/entity/approver/approver";
 import WorkflowId from "../../../domain/workflow/src/valueObject/workflowId";
+import CollectionName from "../common/collectionName";
 
 @injectable()
 export default class WorkflowsRepositoryFS implements WorkflowRepository {
@@ -15,12 +16,12 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
   private repository;
   constructor() {
     this.database = admin.firestore();
-    this.repository = this.database.collection("workflows");
+    this.repository = this.database.collection(CollectionName.workflows);
   }
 
   async save(workflow: Workflow): Promise<Workflow> {
     const drafterRef = this.database
-      .collection("users")
+      .collection(CollectionName.users)
       .doc(workflow.dtafterId.value);
     const approverListRef = this.database
       .collection("approverList")
@@ -98,13 +99,13 @@ export default class WorkflowsRepositoryFS implements WorkflowRepository {
 
     if (drafter) {
       const drafterRef = this.database
-        .collection("users")
+        .collection(CollectionName.users)
         .doc(drafter.id.value);
       queryRepository = queryRepository.where("drafterId", "==", drafterRef);
     }
     if (approver) {
       const approverRef = this.database
-        .collection("users")
+        .collection(CollectionName.users)
         .doc(approver.id.value);
 
       const approverRepository = this.database

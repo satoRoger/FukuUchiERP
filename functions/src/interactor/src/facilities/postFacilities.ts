@@ -12,7 +12,7 @@ export default async function PostFacilities(
     Types.FacilityRepository
   );
 
-  const newData = await repository.save(
+  const newData = await repository.add(
     new FacilityFactory().create("", param.name)
   );
 

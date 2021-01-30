@@ -8,6 +8,7 @@ import PersonFactory from "../../../domain/resourceManager/src/entity/person/per
 import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
 import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
 import Name from "../../../domain/resourceManager/src/valueObject/name";
+import CollectionName from "../common/collectionName";
 
 @injectable()
 export default class UsersRepositoryFS implements PersonRepository {
@@ -15,7 +16,7 @@ export default class UsersRepositoryFS implements PersonRepository {
   private repository;
   constructor() {
     this.database = admin.firestore();
-    this.repository = this.database.collection("users");
+    this.repository = this.database.collection(CollectionName.users);
   }
   async search(
     personId?: PersonId,
@@ -73,7 +74,7 @@ export default class UsersRepositoryFS implements PersonRepository {
 
     if (facilityId) {
       const facilityRef = this.database
-        .collection("facilities")
+        .collection(CollectionName.facilities)
         .doc(facilityId.value);
       queryRepository = queryRepository.where("facilityId", "==", facilityRef);
     }
@@ -130,7 +131,7 @@ export default class UsersRepositoryFS implements PersonRepository {
     let facilityRef = null;
     if (person.facilityId) {
       facilityRef = this.database
-        .collection("facilities")
+        .collection(CollectionName.facilities)
         .doc(person.facilityId.value);
     }
 

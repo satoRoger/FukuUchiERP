@@ -5,9 +5,10 @@ import Timecard from "../../../domain/attendanceManagement/src/entity/timecard/T
 import TimecardCollection from "../../../domain/attendanceManagement/src/entity/timecard/timecardCollection";
 import TimecardRepository from "../../../domain/attendanceManagement/src/repository/timecard/timecardRepository";
 import admin from "../../../framework/firebase/adminInitialize";
-import TimecardFactory from "../../../domain/attendanceManagement/src/entity/timecard/timecardFactory";
-import EmployeeId from "../../../domain/attendanceManagement/src/valueObject/employeeId";
-import TimecardId from "../../../domain/attendanceManagement/src/valueObject/timecardId";
+import CollectionName from "../common/collectionName";
+import FireTimecardsModel from "./timecardsRepositoryModel/timecardsModel";
+import FireTimecardsSearch from "./timecardsSearch";
+import DocToDomainTimecard from "./docToDomainTimecard";
 
 @injectable()
 export default class TimecardRepositoryFS implements TimecardRepository {
@@ -15,29 +16,37 @@ export default class TimecardRepositoryFS implements TimecardRepository {
   private repository;
   constructor() {
     this.database = admin.firestore();
-    this.repository = this.database.collection("timecards");
+    this.repository = this.database.collection(CollectionName.timecards);
+  }
+  async add(timecard: Timecard): Promise<Timecard> {
+    const timecardModel = new FireTimecardsModel(
+      this.database,
+      timecard.punchDate,
+      timecard.cardtype,
+      timecard.punchEmployeeId.value,
+      {
+        latitude: timecard.coordinate?.latitude(),
+        longitude: timecard.coordinate?.longitude(),
+      }
+    );
+    await this.repository.add(timecardModel.toFirebaseStoreFormat());
+    return timecard;
   }
 
   async save(timecard: Timecard): Promise<Timecard> {
-    const latitude = timecard.coordinate
-      ? timecard.coordinate.latitude()
-      : null;
-
-    const longitude = timecard.coordinate
-      ? timecard.coordinate.longitude()
-      : null;
-
-    const userRef = this.database
-      .collection("users")
-      .doc(timecard.punchEmployeeId.value);
-
-    await this.repository.add({
-      cardType: timecard.cardtype,
-      latitude: latitude,
-      longitude: longitude,
-      punchDate: timecard.punchDate.toJSDate(),
-      userId: userRef,
-    });
+    const timecardModel = new FireTimecardsModel(
+      this.database,
+      timecard.punchDate,
+      timecard.cardtype,
+      timecard.punchEmployeeId.value,
+      {
+        latitude: timecard.coordinate?.latitude(),
+        longitude: timecard.coordinate?.longitude(),
+      }
+    );
+    await this.repository
+      .doc(timecard.id.value)
+      .set(timecardModel.toFirebaseStoreFormat());
     return timecard;
   }
 
@@ -46,46 +55,19 @@ export default class TimecardRepositoryFS implements TimecardRepository {
     from?: DateTime,
     to?: DateTime
   ): Promise<TimecardCollection> {
-    console.log(from?.toJSDate());
+    const queryRepository = new FireTimecardsSearch(this.database, {
+      from: from,
+      to: to,
+      userId: employee?.id.value,
+    }).searchRepository();
 
-    const fromISO = from?.toISO();
-    console.log({ fromISO });
-    console.log(to?.toJSDate());
+    const documents = (await queryRepository.get()).docs;
 
-    const toISO = to?.toISO();
-    console.log({ toISO });
-    let queryRepository:
-      | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
-      | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
-      .repository;
+    const timecards = documents.map(async (document) =>
+      new DocToDomainTimecard(document).toDomain()
+    );
 
-    if (employee) {
-      const userRef = this.database.collection("users").doc(employee.id.value);
-      queryRepository = queryRepository.where("userId", "==", userRef);
-    }
-    if (from) {
-      queryRepository = queryRepository.where(
-        "punchDate",
-        ">=",
-        from.toJSDate()
-      );
-    }
-    if (to) {
-      queryRepository = queryRepository.where("punchDate", "<=", to.toJSDate());
-    }
-    const snapshot = await queryRepository.get();
-
-    const result = snapshot.docs.map(async (doc) => {
-      const userDoc = await doc.data().userId.get();
-      return new TimecardFactory().createTimecard(
-        new TimecardId(doc.id),
-        new EmployeeId(userDoc.id),
-        doc.data().cardType,
-        DateTime.fromJSDate(doc.data().punchDate.toDate()).setZone("Asia/Tokyo")
-      );
-    });
-
-    return Promise.all(result).then((timecards) => {
+    return Promise.all(timecards).then((timecards) => {
       const collection = new TimecardCollection();
       for (let timecard of timecards) {
         collection.add(timecard);

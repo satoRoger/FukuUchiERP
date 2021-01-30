@@ -7,6 +7,7 @@ import CalendarId from "../../valueObject/eventId";
 import EventId from "../../valueObject/eventId";
 
 export default interface EventRepository {
+  add(event: Event): Promise<Event>;
   save(event: Event): Promise<Event>;
   search(
     from?: DateTime,
