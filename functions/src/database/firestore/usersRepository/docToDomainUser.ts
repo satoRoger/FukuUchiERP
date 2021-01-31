@@ -39,10 +39,11 @@ export default class DocToDomainUser {
     const workStyle = this.document.get( UsersProperty["workStyle"]),
     const workTime = this.document.get( UsersProperty["workTime"]),
 
-    let facilityDoc:any;
+    let userDoc;
     if (facilityId) {
-      facilityDoc = await facilityId.get();
+      userDoc = await facilityId.get();
     }
+
     const dependents = dependent
     ? dependent.map((fullname: Fullname) => {
         return {
@@ -68,7 +69,9 @@ return new PersonFactory().create(
   professionType,
   workTime,
   socialInsuranceCode,
-  socialInsuranceNumber
+  socialInsuranceNumber,
+  hireDate,
+  leaveDate
 ),
   }
 }
