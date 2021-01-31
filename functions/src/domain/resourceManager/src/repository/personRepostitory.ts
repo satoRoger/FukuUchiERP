@@ -10,5 +10,5 @@ export default interface PersonRepository {
     personId?: PersonId,
     facilityId?: FacilityId
   ): Promise<PersonCollection>;
-  remove(personId: PersonId):Promise<PersonId>;
+  remove(personId: PersonId): Promise<PersonId>;
 }

@@ -13,7 +13,7 @@ export default async function SendValifyMail(person: Person) {
         to: person.mail.value,
         from: "satounbd@gmail.com",
         subject: "パスワードを設定してください",
-        text: `${person.fullname?.familyName} ${person.fullname?.givenName}様
+        text: `${person.fullname?.familyName.value} ${person.fullname?.givenName.value}様
       こちらのリンクからパスワードを設定してください
       ${link}`,
       };
