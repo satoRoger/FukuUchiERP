@@ -7,31 +7,68 @@ import TimecardFactory from "../../../domain/attendanceManagement/src/entity/tim
 import TimecardsProperty from "./usersRepositoryModel/usersProperty";
 import TimecardId from "../../../domain/attendanceManagement/src/valueObject/timecardId";
 import EmployeeId from "../../../domain/attendanceManagement/src/valueObject/employeeId";
-export default class DocToDomainTimecard {
+import Person from '../../../domain/resourceManager/src/entity/person/person';
+import UsersProperty from './usersRepositoryModel/usersProperty';
+import PersonFactory from '../../../domain/resourceManager/src/entity/person/personFactory';
+import RollType from "../../../domain/resourceManager/src/valueObject/rollType";
+import Fullname from '../../../domain/resourceManager/src/valueObject/fullname';
+export default class DocToDomainUser {
   constructor(
     private document: FirebaseFirestore.QueryDocumentSnapshot<FirebaseFirestore.DocumentData>
   ) {}
 
-  async toDomain(): Promise<Timecard> {
+  async toDomain(): Promise<Person> {
     const id = this.document.id;
-    const cardType = this.document.get(TimecardsProperty.cardType);
-    const punchDate = this.document.get(TimecardsProperty.punchDate);
-    const userRef = this.document.get(EventsProperty.userId);
-    const latitude = this.document.get(TimecardsProperty.latitude);
-    const longitude = this.document.get(TimecardsProperty.longitude);
+    const familyName = this.document.get( UsersProperty["familyName"]),
+    const givenName = this.document.get( UsersProperty["givenName"]),
+    const mail = this.document.get( UsersProperty["mail"]),
+    const address = this.document.get( UsersProperty["address"]),
+    const birthdate = this.document.get( UsersProperty["birthdate"]),
+    const dependent= this.document.get( UsersProperty["dependent"]),
+    const emergencyPhoneNumber = this.document.get( UsersProperty["emergencyPhoneNumber"]),
+    const facilityId = this.document.get( UsersProperty["facilityId"]),
+    const hireDate = this.document.get( UsersProperty["hireDate"]),
+    const leaveDate = this.document.get( UsersProperty["leaveDate"]),
+    const phoneNumber = this.document.get( UsersProperty["phoneNumber"]),
+    const professionType = this.document.get( UsersProperty["professionType"]),
+    const rollType = this.document.get( UsersProperty["rollType"]),
+    const socialInsuranceCode = this.document.get( UsersProperty["socialInsuranceCode"]),
+    const socialInsuranceNumber = this.document.get( UsersProperty["socialInsuranceNumber"]),
+    const staffCode = this.document.get( UsersProperty["staffCode"]),
+    const workDay = this.document.get( UsersProperty["workDay"]),
+    const workStyle = this.document.get( UsersProperty["workStyle"]),
+    const workTime = this.document.get( UsersProperty["workTime"]),
 
-    let userDoc;
-    if (userRef) {
-      userDoc = await userRef.get();
+    let facilityDoc:any;
+    if (facilityId) {
+      facilityDoc = await facilityId.get();
     }
-
-    return new TimecardFactory().createTimecard(
-      new TimecardId(id),
-      new EmployeeId(userDoc.id),
-      cardType,
-      DateTime.fromJSDate(punchDate.toDate()),
-      latitude,
-      longitude
-    );
+    const dependents = dependent
+    ? dependent.map((fullname: Fullname) => {
+        return {
+          falilyName: fullname.familyName,
+          givenName: fullname.givenName,
+        };
+      })
+    : [];
+return new PersonFactory().create(
+  id,
+  rollType,
+  mail,
+  birthdate,
+  phoneNumber,
+  emergencyPhoneNumber,
+  address,
+  new Fullname(familyName, givenName),
+  dependents,
+  facilityDoc ? facilityDoc.id : undefined,
+  staffCode,
+  workStyle,
+  workDay,
+  professionType,
+  workTime,
+  socialInsuranceCode,
+  socialInsuranceNumber
+),
   }
 }
