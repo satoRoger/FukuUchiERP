@@ -9,6 +9,7 @@ import CollectionName from "../common/collectionName";
 import FireTimecardsModel from "./timecardsRepositoryModel/timecardsModel";
 import FireTimecardsSearch from "./timecardsSearch";
 import DocToDomainTimecard from "./docToDomainTimecard";
+import TimecardId from "../../../domain/attendanceManagement/src/valueObject/timecardId";
 
 @injectable()
 export default class TimecardRepositoryFS implements TimecardRepository {
@@ -29,7 +30,11 @@ export default class TimecardRepositoryFS implements TimecardRepository {
         longitude: timecard.coordinate?.longitude(),
       }
     );
-    await this.repository.add(timecardModel.toFirebaseStoreFormat());
+    const newTimecard = await this.repository.add(
+      timecardModel.toFirebaseStoreFormat()
+    );
+
+    timecard.id = new TimecardId(newTimecard.id);
     return timecard;
   }
 

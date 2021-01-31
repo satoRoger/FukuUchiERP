@@ -2,9 +2,10 @@ import { errorMessageList } from "../common/message";
 
 export default class TimecardId {
   constructor(private id: string) {
+    /*
     if (id.length === 0) {
       throw new Error(errorMessageList.LengthZeroIdIsProhivited);
-    }
+    }*/
     this.id = id;
   }
 

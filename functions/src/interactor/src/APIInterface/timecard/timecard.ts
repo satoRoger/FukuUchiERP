@@ -11,6 +11,8 @@ import {
 } from "../../../../util/isType/isType";
 import Coordinate from "../../../../domain/attendanceManagement/src/valueObject/coordinate";
 import Timecard from "../../../../domain/attendanceManagement/src/entity/timecard/Timecard";
+import TypeValidateError from "../../../../controller/src/v1/error/typeValidateError";
+import { typeConstraint } from "inversify";
 
 export default class TimecardAPIInterface {
   readonly id: string;
@@ -39,19 +41,19 @@ export default class TimecardAPIInterface {
     if (isString(id)) {
       this.id = id;
     } else {
-      throw "";
+      throw TypeValidateError("id", "string");
     }
 
     if (isCardType(cardType)) {
       this.cardType = cardType;
     } else {
-      throw "";
+      throw TypeValidateError("cartType", "cardType");
     }
 
     if (isString(userId)) {
       this.userId = userId;
     } else {
-      throw "";
+      throw TypeValidateError("userId", "string");
     }
 
     if (isISOString(date)) {
@@ -59,7 +61,7 @@ export default class TimecardAPIInterface {
     } else if (isDateTime(date)) {
       this.date = date.toISO();
     } else {
-      throw "";
+      throw TypeValidateError("date", "dateTime");
     }
 
     if (isCoordinate(coordinate)) {

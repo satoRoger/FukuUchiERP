@@ -27,6 +27,10 @@ export default class Timecard {
     return this._id;
   }
 
+  set id(id: TimecardId) {
+    this._id = id;
+  }
+
   get punchEmployeeId(): EmployeeId {
     return this._employee.id;
   }
