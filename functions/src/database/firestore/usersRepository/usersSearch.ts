@@ -3,34 +3,25 @@ import FireUserRefference from "../common/firestoreType/fireUserRefference";
 import { DateTime } from "luxon";
 import CollectionName from "../common/collectionName";
 import TimecardsProperty from "./usersRepositoryModel/usersProperty";
+import FireFacilityRefference from "../common/firestoreType/fireFacilityRefference";
+import UsersProperty from "./usersRepositoryModel/usersProperty";
+import FireString from "../common/firestoreType/fireString";
 
 type QueryRepository =
   | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
   | FirebaseFirestore.Query<FirebaseFirestore.DocumentData>;
 
 export default class FireUsersSearch {
-  private from?: FireTimestamp;
-  private to?: FireTimestamp;
-  private userId?: FireUserRefference;
+  private facilityId?: FireFacilityRefference;
 
   constructor(
     private connectionDB: FirebaseFirestore.Firestore,
     option: {
-      from?: DateTime;
-      to?: DateTime;
-      userId?: string;
+      facilityId?: string;
     }
   ) {
-    this.from = option.from
-      ? new FireTimestamp(connectionDB, option.from)
-      : undefined;
-
-    this.to = option.to
-      ? new FireTimestamp(connectionDB, option.to)
-      : undefined;
-
-    this.userId = option.userId
-      ? new FireUserRefference(connectionDB, option.userId)
+    this.facilityId = option.facilityId
+      ? new FireFacilityRefference(connectionDB, option.facilityId)
       : undefined;
   }
   searchRepository(): QueryRepository {
@@ -38,25 +29,11 @@ export default class FireUsersSearch {
       CollectionName.timecards
     );
 
-    if (this.userId) {
+    if (this.facilityId) {
       queryRepository = queryRepository.where(
-        TimecardsProperty.userId,
+        UsersProperty.facilityId,
         "==",
-        this.userId.toFireStore()
-      );
-    }
-    if (this.from) {
-      queryRepository = queryRepository.where(
-        TimecardsProperty.punchDate,
-        ">=",
-        this.from.toFireStore()
-      );
-    }
-    if (this.to) {
-      queryRepository = queryRepository.where(
-        TimecardsProperty.punchDate,
-        "<=",
-        this.to.toFireStore()
+        this.facilityId.toFireStore()
       );
     }
 

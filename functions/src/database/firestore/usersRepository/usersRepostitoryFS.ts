@@ -9,6 +9,8 @@ import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
 import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
 import Name from "../../../domain/resourceManager/src/valueObject/name";
 import CollectionName from "../common/collectionName";
+import FireUsersSearch from "./usersSearch";
+import DocToDomainUser from "./docToDomainUser";
 
 @injectable()
 export default class UsersRepositoryFS implements PersonRepository {
@@ -23,100 +25,27 @@ export default class UsersRepositoryFS implements PersonRepository {
     facilityId?: FacilityId
   ): Promise<PersonCollection> {
     if (personId) {
-      return this.repository
-        .doc(personId.value)
-        .get()
-        .then(async (doc) => {
-          const data = doc.data();
-          if (!data) {
-            return new PersonCollection([]);
-          }
-          const dependent = data.dependent
-            ? data.dependent.map((fullname: Fullname) => {
-                return {
-                  falilyName: fullname.familyName,
-                  givenName: fullname.givenName,
-                };
-              })
-            : [];
-          const facility = await data.facilityId?.get();
-          return new PersonCollection([
-            new PersonFactory().create(
-              personId.value,
-              data.rollType,
-              data.mail,
-              data.birthdate,
-              data.phoneNumber,
-              data.emergencyPhoneNumber,
-              data.address,
-              new Fullname(data.familyName, data.givenName),
-              dependent,
-              facility?.id,
-              data.staffCode,
-              data.workStyle,
-              data.workDay,
-              data.professionType,
-              data.workTime,
-              data.socialInsuranceCode,
-              data.socialInsuranceNumber
-            ),
-          ]);
-        })
-        .catch((err) => {
-          return new PersonCollection([]);
-        });
+      const document = await this.repository.doc(personId.value).get();
+      if (!document.data) {
+        return new PersonCollection([]);
+      }
+      
     }
 
-    let queryRepository:
-      | FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
-      | FirebaseFirestore.Query<FirebaseFirestore.DocumentData> = this
-      .repository;
+    const queryRepository = new FireUsersSearch(this.database, {
+      facilityId: facilityId?.value,
+    }).searchRepository();
 
-    if (facilityId) {
-      const facilityRef = this.database
-        .collection(CollectionName.facilities)
-        .doc(facilityId.value);
-      queryRepository = queryRepository.where("facilityId", "==", facilityRef);
-    }
+    const documents = (await queryRepository.get()).docs;
 
-    const snapshot = await queryRepository.get();
-    const result = snapshot.docs.map(async (doc) => {
-      const data = doc.data();
-      const facility = await data.facilityId?.get();
-      const dependent: Fullname[] = data.dependent
-        ? data.dependent.map(
-            (fullname: { familyName: string; givenName: string }) => {
-              return new Fullname(
-                new Name(fullname.familyName),
-                new Name(fullname.givenName)
-              );
-            }
-          )
-        : [];
-      return new PersonFactory().create(
-        doc.id,
-        data.rollType,
-        data.mail,
-        data.birthdate,
-        data.phoneNumber,
-        data.emergencyPhoneNumber,
-        data.address,
-        new Fullname(new Name(data.familyName), new Name(data.givenName)),
-        dependent,
-        facility?.id,
-        data.staffCode,
-        data.workStyle,
-        data.workDay,
-        data.profession,
-        data.workTime,
-        data.socialInsuranceCode,
-        data.socialInsuranceNumber
-      );
-    });
-    return Promise.all(result).then((people) => {
+    const users = documents.map(async (document) =>
+      new DocToDomainUser(document).toDomain()
+    );
+
+    return Promise.all(users).then((users) => {
       const collection = new PersonCollection();
-      for (let person of people) {
-        collection.add(person);
+      for (let user of users) {
+        collection.add(user);
       }
       return collection;
     });
