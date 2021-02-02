@@ -4,6 +4,7 @@ const CollectionName = {
   facilities: "facilities",
   timecards: "timecards",
   workflows: "workflows",
+  approverList:"approverList"
 } as const;
 
 type CollectionName = typeof CollectionName[keyof typeof CollectionName];
