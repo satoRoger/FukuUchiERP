@@ -11,7 +11,6 @@ import PutEvents from "./frontRouting/putEvents";
 const events = express.Router();
 
 events.get("/", validateEventsQuery, GetEvents);
-
 events.post("/", validateEventsPostParam, PostEvents);
 events.put("/:eventId", validateEventsPutParam, PutEvents);
 events.delete("/:eventId", validateEventsDeleteParam, DeleteEvents);

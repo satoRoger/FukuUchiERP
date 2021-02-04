@@ -30,6 +30,8 @@ export default class Person {
     private _workStyle?: WorkStyle,
     private _workDay?: WorkDate[],
     private _professionType?: ProfessionType,
+    private _workStartTime?:DateTime,
+    private _workEndTime?:DateTime,
     private _workTime?: WorkTime | string,
     private _socialInsurance?: SocialInsurance,
     private _hireDate?: DateTime,

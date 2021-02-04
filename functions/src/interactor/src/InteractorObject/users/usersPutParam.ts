@@ -33,6 +33,8 @@ export default class UsersPutParam {
   readonly workStyle?: WorkStyle;
   readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
+  readonly workStartTime?:DateTime;
+  readonly workEndTime?:DateTime;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
   readonly socialInsuranceNumber?: string;
@@ -56,6 +58,8 @@ export default class UsersPutParam {
       workStyle?: any;
       workDay?: any;
       profession?: any;
+      workStartTime?:any;
+      workEndTime?:any;
       workTime?: any;
       socialInsuranceCode?: any;
       socialInsuranceNumber?: any;
@@ -114,6 +118,16 @@ export default class UsersPutParam {
     }
     if (isProfession(option.profession)) {
       this.profession = option.profession;
+    }
+      if (isISOString(option.workStartTime)) {
+      this.workStartTime = DateTime.fromISO(option.workStartTime);
+    } else if (isDateTime(option.workStartTime)) {
+      this.workStartTime = option.workStartTime;
+    }
+      if (isISOString(option.workEndTime)) {
+      this.workEndTime = DateTime.fromISO(option.workEndTime);
+    } else if (isDateTime(option.workEndTime)) {
+      this.workEndTime = option.workEndTime;
     }
     if (isWorkTime(option.workTime)) {
       this.workTime = option.workTime;

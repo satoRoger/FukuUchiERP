@@ -32,6 +32,8 @@ export default class UsersPostParam {
   readonly workStyle?: WorkStyle;
   readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
+  readonly workStartTime?:DateTime;
+  readonly workEndTime?:DateTime;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
   readonly socialInsuranceNumber?: string;
@@ -54,6 +56,8 @@ export default class UsersPostParam {
       workStyle?: any;
       workDay?: any;
       profession?: any;
+      workStartTime?:any;
+      workEndTime?:any;
       workTime?: any;
       socialInsuranceCode?: any;
       socialInsuranceNumber?: any;
@@ -72,6 +76,8 @@ export default class UsersPostParam {
       workStyle,
       workDay,
       profession,
+      workStartTime,
+      workEndTime,
       workTime,
       socialInsuranceCode,
       socialInsuranceNumber,
@@ -124,6 +130,17 @@ export default class UsersPostParam {
     }
     if (isProfession(profession)) {
       this.profession = profession;
+    }
+    
+      if (isISOString(option.workStartTime)) {
+      this.workStartTime = DateTime.fromISO(option.workStartTime);
+    } else if (isDateTime(option.workStartTime)) {
+      this.workStartTime = option.workStartTime;
+    }
+      if (isISOString(option.workEndTime)) {
+      this.workEndTime = DateTime.fromISO(option.workEndTime);
+    } else if (isDateTime(option.workEndTime)) {
+      this.workEndTime = option.workEndTime;
     }
     if (isWorkTime(workTime)) {
       this.workTime = workTime;

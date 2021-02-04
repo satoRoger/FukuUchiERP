@@ -26,6 +26,8 @@ export default async function PutUsers(
     param.workStyle,
     param.workDay,
     param.profession,
+    param.workStartTime,
+    param.workEndTime,
     param.workTime,
     param.socialInsuranceCode,
     param.socialInsuranceNumber,

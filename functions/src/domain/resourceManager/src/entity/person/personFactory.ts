@@ -36,6 +36,8 @@ export default class PersonFactory {
     workStyle?: WorkStyle,
     workDay?: WorkDate[],
     professionType?: ProfessionType,
+    workStartTime?:DateTime,
+    workEndTime?:DateTime,
     workTime?: WorkTime | string,
     socialInsuranceCode?: string,
     socialInsuranceNumber?: string,
