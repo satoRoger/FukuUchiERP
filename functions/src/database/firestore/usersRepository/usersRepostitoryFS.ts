@@ -29,8 +29,10 @@ export default class UsersRepositoryFS implements PersonRepository {
       if (!document.data) {
         return new PersonCollection([]);
       }
-	  
-      return new PersonCollection([new DocToDomainUser(document).toDomain()]);
+
+      const person = await new DocToDomainUser(document).toDomain();
+      console.log(person);
+      return new PersonCollection([person]);
     }
 
     const queryRepository = new FireUsersSearch(this.database, {
