@@ -16,11 +16,11 @@ export default async function PostUsers(
     "",
     param.rollType,
     param.mail,
+    param.fullname,
     param.birthdate,
     param.phoneNumber,
     param.emergencyPhoneNumber,
     param.address,
-    param.fullname,
     param.dependent,
     param.facilityId,
     param.staffCode,
@@ -36,7 +36,7 @@ export default async function PostUsers(
     param.leaveDate
   );
 
-  const user = await repository.save(person);
+  const user = await repository.add(person);
 
   await AddUserFirebaseAuth(user);
   await SendValifyMail(user);

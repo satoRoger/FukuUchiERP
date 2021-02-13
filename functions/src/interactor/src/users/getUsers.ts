@@ -3,7 +3,6 @@ import Types from "../../../util/di/types";
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import UserAPIInterface from "../APIInterface/user/user";
 import UsersQuery from "../InteractorObject/users/usersQuery";
-import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
 import PersonId from "../../../domain/resourceManager/src/valueObject/personId";
 import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
 

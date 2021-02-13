@@ -17,6 +17,8 @@ const UsersProperty = {
   staffCode: "staffCode",
   workDay: "workDay",
   workStyle: "workStyle",
+  workStatTime: "workStartTime",
+  workEndTime: "workEndTime",
   workTime: "workTime",
 } as const;
 

@@ -4,13 +4,11 @@ import PersonCollection from "../../../domain/resourceManager/src/entity/person/
 import PersonRepository from "../../../domain/resourceManager/src/repository/personRepostitory";
 import PersonId from "../../../domain/resourceManager/src/valueObject/personId";
 import admin from "../../../framework/firebase/adminInitialize";
-import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
-import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
 import FacilityId from "../../../domain/resourceManager/src/valueObject/facilityId";
-import Name from "../../../domain/resourceManager/src/valueObject/name";
 import CollectionName from "../common/collectionName";
 import FireUsersSearch from "./usersSearch";
 import DocToDomainUser from "./docToDomainUser";
+import FireUsersModel from "./usersRepositoryModel/usersModel";
 
 @injectable()
 export default class UsersRepositoryFS implements PersonRepository {
@@ -31,7 +29,6 @@ export default class UsersRepositoryFS implements PersonRepository {
       }
 
       const person = await new DocToDomainUser(document).toDomain();
-      console.log(person);
       return new PersonCollection([person]);
     }
 
@@ -48,86 +45,90 @@ export default class UsersRepositoryFS implements PersonRepository {
     return Promise.all(users).then((users) => {
       const collection = new PersonCollection();
       for (let user of users) {
+        console.log(user)
         collection.add(user);
       }
       return collection;
     });
   }
 
-  async save(person: Person): Promise<Person> {
-    const replaceNull = (value: any) => {
-      if (typeof value === "undefined") return null;
-      else return value;
-    };
+  async add(person: Person): Promise<Person> {
+    const userModel = new FireUsersModel(
+      this.database,
+      person.fullname?.familyName.value,
+      person.fullname?.givenName.value,
+      person.mail.value,
+      person.rollType,
+      {
+        workStyle: person.workStyle,
+        address: person.address?.value,
+        birthdate: person.birthdate?.value,
+        dependent: person.dependent?.map((name) => {
+          return {
+            familyName: name.familyName.value,
+            givenName: name.givenName.value,
+          };
+        }),
+        emergencyPhoneNumber: person.emergencyPhoneNumber?.value,
+        facilityId: person.facilityId?.value,
+        hireDate: person.hireDate,
+        leaveDate: person.leaveDate,
+        phoneNumber: person.phoneNumber?.value,
+        professionType: person.professionType,
+        socialInsuranceCode: person.socialInsurance?.code.value,
+        socialInsuranceNumber: person.socialInsurance?.number.value,
+        staffCode: person.staffCode?.value,
+        workDay: person.workDay,
+        workStartTime: person.workStartTime,
+        workEndTime: person.workEndTime,
+      }
+    );
 
-    let facilityRef = null;
-    if (person.facilityId) {
-      facilityRef = this.database
-        .collection(CollectionName.facilities)
-        .doc(person.facilityId.value);
-    }
-
-    //更新
-    if (person.id.value != "") {
-      console.log("更新");
-      console.log({ person });
-      await this.repository.doc(person.id.value).set({
-        rollType: person.rollType,
-        familyName: replaceNull(person.fullname?.familyName.value),
-        givenName: replaceNull(person.fullname?.givenName.value),
-        mail: person.mail.value,
-        birthdate: replaceNull(person.birthdate?.value.toJSDate()),
-        address: replaceNull(person.address?.value),
-        phoneNumber: replaceNull(person.phoneNumber?.value),
-        emergencyPhoneNumber: replaceNull(person.emergencyPhoneNumber?.value),
-        dependent: replaceNull(person.dependent),
-        facilityId: facilityRef,
-        staffCode: replaceNull(person.staffCode?.value),
-        workStyle: replaceNull(person.workStyle),
-        workDay: replaceNull(person.workDay),
-        profession: replaceNull(person.professionType),
-        socialInsuranceCode: replaceNull(person.socialInsurance?.code.value),
-        socialInsuranceNumber: replaceNull(
-          person.socialInsurance?.number.value
-        ),
-        workTime: replaceNull(person.workTime),
-        hireDate: replaceNull(person.hireDate?.toJSDate()),
-        leaveDate: replaceNull(person.leaveDate?.toJSDate()),
-      });
-    }
-    //新規
-    else {
-      console.log("新規");
-      console.log({ person });
-      const doc = await this.repository.add({
-        rollType: person.rollType,
-        familyName: replaceNull(person.fullname?.familyName.value),
-        givenName: replaceNull(person.fullname?.givenName.value),
-        mail: person.mail.value,
-        birthdate: replaceNull(person.birthdate?.value.toJSDate()),
-        address: replaceNull(person.address?.value),
-        phoneNumber: replaceNull(person.phoneNumber?.value),
-        emergencyPhoneNumber: replaceNull(person.emergencyPhoneNumber?.value),
-        dependent: replaceNull(person.dependent),
-        facilityId: facilityRef,
-        staffCode: replaceNull(person.staffCode?.value),
-        workStyle: replaceNull(person.workStyle),
-        workDay: replaceNull(person.workDay),
-        profession: replaceNull(person.professionType),
-        socialInsuranceCode: replaceNull(person.socialInsurance?.code.value),
-        socialInsuranceNumber: replaceNull(
-          person.socialInsurance?.number.value
-        ),
-        workTime: replaceNull(person.workTime),
-        hireDate: replaceNull(person.hireDate?.toJSDate()),
-        leaveDate: replaceNull(person.leaveDate?.toJSDate()),
-      });
-      person.id = new PersonId(doc.id);
-      console.log({ person });
-    }
-
+    const newUser = await this.repository.add(
+      userModel.toFirebaseStoreFormat()
+    );
+    person.id = new PersonId(newUser.id);
     return person;
   }
+
+  async save(person: Person): Promise<Person> {
+    const userModel = new FireUsersModel(
+      this.database,
+      person.fullname?.familyName.value,
+      person.fullname?.givenName.value,
+      person.mail.value,
+      person.rollType,
+      {
+        workStyle: person.workStyle,
+        address: person.address?.value,
+        birthdate: person.birthdate?.value,
+        dependent: person.dependent?.map((name) => {
+          return {
+            familyName: name.familyName.value,
+            givenName: name.givenName.value,
+          };
+        }),
+        emergencyPhoneNumber: person.emergencyPhoneNumber?.value,
+        facilityId: person.facilityId?.value,
+        hireDate: person.hireDate,
+        leaveDate: person.leaveDate,
+        phoneNumber: person.phoneNumber?.value,
+        professionType: person.professionType,
+        socialInsuranceCode: person.socialInsurance?.code.value,
+        socialInsuranceNumber: person.socialInsurance?.number.value,
+        staffCode: person.staffCode?.value,
+        workDay: person.workDay,
+        workStartTime: person.workStartTime,
+        workEndTime: person.workEndTime,
+      }
+    );
+
+    await this.repository
+      .doc(person.id.value)
+      .set(userModel.toFirebaseStoreFormat());
+    return person;
+  }
+
   async remove(personId: PersonId): Promise<PersonId> {
     await this.repository.doc(personId.value).delete();
     return personId;

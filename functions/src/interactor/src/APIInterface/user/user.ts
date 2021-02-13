@@ -46,11 +46,11 @@ export default class UserAPIInterface {
       user.id.value,
       user.rollType,
       user.mail.value,
+      user.fullname,
       user.birthdate?.value,
       user.phoneNumber?.value,
       user.emergencyPhoneNumber?.value,
       user.address?.value,
-      user.fullname,
       user.dependent,
       user.facilityId?.value,
       user.staffCode?.value,
@@ -69,11 +69,11 @@ export default class UserAPIInterface {
     id: any,
     rollType: any,
     mail: any,
+    fullname: any,
     birthdate?: any,
     phoneNumber?: any,
     emergencyPhoneNumber?: any,
     address?: any,
-    fullname?: any,
     dependent?: any,
     facilityId?: any,
     staffCode?: any,
@@ -101,6 +101,15 @@ export default class UserAPIInterface {
     } else {
       throw TypeValidateError("mail", "string");
     }
+
+    if (isFullname(fullname)) {
+      console.log(fullname)
+      console.log(FullnameAPIInterface.fromDomainFullname(fullname))
+      this.fullname = FullnameAPIInterface.fromDomainFullname(fullname);
+    } else {
+      throw TypeValidateError("fullname", "string");
+    }
+
     if (isISOString(birthdate)) {
       this.birthdate = birthdate;
     } else if (isDateTime(birthdate)) {
@@ -114,9 +123,6 @@ export default class UserAPIInterface {
     }
     if (isString(address)) {
       this.address = address;
-    }
-    if (isFullname(fullname)) {
-      this.fullname = FullnameAPIInterface.fromDomainFullname(fullname);
     }
     if (Array.isArray(dependent)) {
       this.dependent = dependent.map((fullname) =>

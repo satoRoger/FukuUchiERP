@@ -26,7 +26,7 @@ export default class FireUsersSearch {
   }
   searchRepository(): QueryRepository {
     let queryRepository: QueryRepository = this.connectionDB.collection(
-      CollectionName.timecards
+      CollectionName.users
     );
 
     if (this.facilityId) {

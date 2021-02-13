@@ -5,6 +5,7 @@ import FacilityId from "../valueObject/facilityId";
 import PersonId from "../valueObject/personId";
 
 export default interface PersonRepository {
+  add(person: Person): Promise<Person>;
   save(person: Person): Promise<Person>;
   search(
     personId?: PersonId,

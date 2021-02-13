@@ -21,7 +21,7 @@ import WorkDate from "../../../../domain/resourceManager/src/valueObject/workdat
 export default class UsersPostParam {
   readonly rollType: RollType;
   readonly mail: string;
-  readonly fullname?: Fullname;
+  readonly fullname: Fullname;
   readonly birthdate?: DateTime;
   readonly address?: string;
   readonly phoneNumber?: string;
@@ -96,6 +96,11 @@ export default class UsersPostParam {
       throw TypeValidateError("mail", "string");
     }
 
+    if (isString(familyname) && isString(givenname)) {
+      this.fullname = new Fullname(new Name(familyname), new Name(givenname));
+    } else {
+      throw TypeValidateError("name", "string");
+    }
     if (isISOString(birthdate)) {
       this.birthdate = DateTime.fromISO(birthdate);
     } else if (isDateTime(birthdate)) {
@@ -109,9 +114,6 @@ export default class UsersPostParam {
     }
     if (isString(address)) {
       this.address = address;
-    }
-    if (isString(familyname) && isString(givenname)) {
-      this.fullname = new Fullname(new Name(familyname), new Name(givenname));
     }
     if (Array.isArray(dependent)) {
       this.dependent = dependent;

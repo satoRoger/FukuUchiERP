@@ -32,6 +32,8 @@ export default class FireUsersModel {
   private staffCode: FireString | FireNull;
   private workDay: FireArray | FireNull;
   private workStyle: FireString | FireNull;
+  private workStartTime: FireTimestamp | FireNull;
+  private workEndTime: FireTimestamp | FireNull;
   private workTime: FireString | FireNull;
 
   constructor(
@@ -54,7 +56,9 @@ export default class FireUsersModel {
       socialInsuranceNumber?: string;
       staffCode?: string;
       workDay?: WorkDate[];
-      workStyle: WorkStyle;
+      workStyle?: WorkStyle;
+      workStartTime?: DateTime;
+      workEndTime?: DateTime;
       workTime?: WorkTime;
     }
   ) {
@@ -107,6 +111,12 @@ export default class FireUsersModel {
     this.workTime = option.workTime
       ? new FireString(connectionDB, option.workTime)
       : new FireNull();
+    this.workStartTime = option.workStartTime
+      ? new FireTimestamp(connectionDB, option.workStartTime)
+      : new FireNull();
+    this.workEndTime = option.workEndTime
+      ? new FireTimestamp(connectionDB, option.workEndTime)
+      : new FireNull();
   }
   toFirebaseStoreFormat(): FirebaseFirestore.DocumentData {
     return {
@@ -128,6 +138,8 @@ export default class FireUsersModel {
       [UsersProperty.staffCode]: this.staffCode.toFireStore(),
       [UsersProperty.workDay]: this.workDay.toFireStore(),
       [UsersProperty.workStyle]: this.workStyle.toFireStore(),
+      [UsersProperty.workStatTime]: this.workStartTime.toFireStore(),
+      [UsersProperty.workEndTime]: this.workEndTime.toFireStore(),
       [UsersProperty.workTime]: this.workTime.toFireStore(),
     };
   }

@@ -19,19 +19,19 @@ export default class Person {
     private _id: PersonId,
     private _rollType: RollType,
     private _mail: Mail,
+    private _fullname: Fullname,
     private _birthdate?: Birthdate,
     private _phoneNumber?: PhoneNumber,
     private _emergencyPhoneNumber?: PhoneNumber,
     private _address?: Address,
-    private _fullname?: Fullname,
     private _dependent?: Fullname[],
     private _facilityId?: FacilityId,
     private _staffCode?: StaffCode,
     private _workStyle?: WorkStyle,
     private _workDay?: WorkDate[],
     private _professionType?: ProfessionType,
-    private _workStartTime?:DateTime,
-    private _workEndTime?:DateTime,
+    private _workStartTime?: DateTime,
+    private _workEndTime?: DateTime,
     private _workTime?: WorkTime | string,
     private _socialInsurance?: SocialInsurance,
     private _hireDate?: DateTime,
@@ -50,10 +50,10 @@ export default class Person {
   public set rollType(value: RollType) {
     this._rollType = value;
   }
-  public get fullname(): Fullname | undefined {
+  public get fullname(): Fullname {
     return this._fullname;
   }
-  public set fullname(value: Fullname | undefined) {
+  public set fullname(value: Fullname) {
     this._fullname = value;
   }
   public get birthdate(): Birthdate | undefined {
@@ -127,6 +127,18 @@ export default class Person {
   }
   public set workTime(value: WorkTime | string | undefined) {
     this._workTime = value;
+  }
+  public get workStartTime(): DateTime | undefined {
+    return this._workStartTime;
+  }
+  public set workStartTime(value: DateTime | undefined) {
+    this._workStartTime = value;
+  }
+  public get workEndTime(): DateTime | undefined {
+    return this._workEndTime;
+  }
+  public set workEndTime(value: DateTime | undefined) {
+    this._workEndTime = value;
   }
   public get socialInsurance(): SocialInsurance | undefined {
     return this._socialInsurance;

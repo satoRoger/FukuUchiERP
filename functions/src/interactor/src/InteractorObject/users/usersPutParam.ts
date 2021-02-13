@@ -22,7 +22,7 @@ export default class UsersPutParam {
   readonly id: string;
   readonly rollType: RollType;
   readonly mail: string;
-  readonly fullname?: Fullname;
+  readonly fullname: Fullname;
   readonly birthdate?: DateTime;
   readonly address?: string;
   readonly phoneNumber?: string;
@@ -83,6 +83,11 @@ export default class UsersPutParam {
     } else {
       throw TypeValidateError("mail", "string");
     }
+    if (isString(familyname) && isString(givenname)) {
+      this.fullname = new Fullname(new Name(familyname), new Name(givenname));
+    } else {
+      throw TypeValidateError("name", "string");
+    }
 
     if (isISOString(option.birthdate)) {
       this.birthdate = DateTime.fromISO(option.birthdate);
@@ -97,9 +102,6 @@ export default class UsersPutParam {
     }
     if (isString(option.address)) {
       this.address = option.address;
-    }
-    if (isString(familyname) && isString(givenname)) {
-      this.fullname = new Fullname(new Name(familyname), new Name(givenname));
     }
     if (Array.isArray(option.dependent)) {
       this.dependent = option.dependent;
