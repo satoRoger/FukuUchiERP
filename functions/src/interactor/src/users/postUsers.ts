@@ -38,7 +38,9 @@ export default async function PostUsers(
 
   const user = await repository.add(person);
 
-  await AddUserFirebaseAuth(user);
+  await AddUserFirebaseAuth(user).catch((err) => {
+    console.log(err);
+  });
   await SendValifyMail(user);
 
   const response: UserAPIInterface = UserAPIInterface.fromDomainUser(user);

@@ -6,8 +6,6 @@ export default class FullnameAPIInterface {
   readonly givenName?: string;
 
   static fromDomainFullname(fullname: Fullname): FullnameAPIInterface {
-    console.log(fullname.familyName);
-    console.log(fullname.familyName.value);
     return new FullnameAPIInterface(
       fullname.familyName.value,
       fullname.givenName.value
@@ -15,7 +13,6 @@ export default class FullnameAPIInterface {
   }
 
   constructor(familyName: any, givenName: any) {
-    console.log(typeof familyName);
     if (isString(familyName)) {
       this.familyName = familyName;
     }

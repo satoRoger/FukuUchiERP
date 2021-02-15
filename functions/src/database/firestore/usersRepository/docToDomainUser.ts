@@ -2,6 +2,7 @@ import Person from "../../../domain/resourceManager/src/entity/person/person";
 import UsersProperty from "./usersRepositoryModel/usersProperty";
 import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
 import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
+import Name from "../../../domain/resourceManager/src/valueObject/name";
 export default class DocToDomainUser {
   constructor(
     private document:
@@ -55,7 +56,7 @@ export default class DocToDomainUser {
       id,
       rollType,
       mail,
-      new Fullname(familyName, givenName),
+      new Fullname(new Name(familyName), new Name(givenName)),
       birthdate,
       phoneNumber,
       emergencyPhoneNumber,

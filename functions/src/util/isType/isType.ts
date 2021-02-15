@@ -8,6 +8,7 @@ import WorkflowState from "../../domain/workflow/src/valueObject/workflowState";
 import Fullname from "../../domain/resourceManager/src/valueObject/fullname";
 import WorkflowAction from "../../domain/workflow/src/valueObject/workflowAction";
 import WorkDate from "../../domain/resourceManager/src/valueObject/workdate";
+import Name from "../../domain/resourceManager/src/valueObject/name";
 
 function hasProperty<K extends string>(
   x: unknown,
@@ -39,18 +40,18 @@ export function isBoolean(val: any): val is boolean {
 }
 
 export function isEventType(val: any): val is EventType {
-  return true;
+  return val === EventType.FacilityHoliday || val === EventType.UserVacation;
 }
 
 export function isRollType(val: any): val is RollType {
-  return true;
+  return val === RollType.manager || val === RollType.user;
 }
 
 export function isWorkStyle(val: any): val is WorkStyle {
-  return true;
+  return val === WorkStyle.fulltime || val === WorkStyle.parttime;
 }
 export function isWorkDay(val: any): val is WorkDate[] {
-  return true;
+  return Array.isArray(val);
 }
 
 export function isWorkTime(val: any): val is WorkStyle {
@@ -58,19 +59,33 @@ export function isWorkTime(val: any): val is WorkStyle {
 }
 
 export function isProfession(val: any): val is ProfessionType {
-  return true;
+  return (
+    val === ProfessionType.assistance ||
+    val === ProfessionType.clerk ||
+    val === ProfessionType.doctor ||
+    val === ProfessionType.hygienist ||
+    val === ProfessionType.reception
+  );
 }
 
 export function isWorkflowType(val: any): val is WorkflowType {
-  return true;
+  return (
+    val === WorkflowType.paidVacation ||
+    val === WorkflowType.paidVacationAM ||
+    val === WorkflowType.paidVacationPM
+  );
 }
 
 export function isWorkflowState(val: any): val is WorkflowState {
-  return true;
+  return (
+    val === WorkflowState.complete ||
+    val === WorkflowState.deny ||
+    val === WorkflowState.wait
+  );
 }
 export function isWorkflowAction(val: any): val is WorkflowAction {
-  return true;
+  return val === WorkflowAction.accept || val === WorkflowAction.deny;
 }
 export function isFullname(val: any): val is Fullname {
-  return true;
+  return val.familyName instanceof Name && val.givenName instanceof Name;
 }

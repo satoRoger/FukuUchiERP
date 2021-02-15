@@ -45,7 +45,6 @@ export default class UsersRepositoryFS implements PersonRepository {
     return Promise.all(users).then((users) => {
       const collection = new PersonCollection();
       for (let user of users) {
-        console.log(user)
         collection.add(user);
       }
       return collection;

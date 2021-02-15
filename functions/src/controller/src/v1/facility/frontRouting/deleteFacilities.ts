@@ -10,15 +10,19 @@ export default async function DeleteFacilities(
   req: express.Request,
   res: express.Response<string | { errors: ValidationError[] }>
 ) {
-  const { facilityId } = req.body;
+  try {
+    const { facilityId } = req.params;
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const postParam = new FacilitiesDeleteParam(facilityId);
+
+    const response = await DeleteFacilitiesRouter(postParam);
+    res.json(response);
+  } catch (e) {
+    return res.status(400).json({ errors: e });
   }
-
-  const postParam = new FacilitiesDeleteParam(facilityId);
-
-  const response = await DeleteFacilitiesRouter(postParam);
-  res.json(response);
 }
