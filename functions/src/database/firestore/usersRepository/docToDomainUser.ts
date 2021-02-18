@@ -3,6 +3,7 @@ import UsersProperty from "./usersRepositoryModel/usersProperty";
 import PersonFactory from "../../../domain/resourceManager/src/entity/person/personFactory";
 import Fullname from "../../../domain/resourceManager/src/valueObject/fullname";
 import Name from "../../../domain/resourceManager/src/valueObject/name";
+import { DateTime } from "luxon";
 export default class DocToDomainUser {
   constructor(
     private document:
@@ -36,6 +37,8 @@ export default class DocToDomainUser {
     const staffCode = this.document.get(UsersProperty["staffCode"]);
     const workDay = this.document.get(UsersProperty["workDay"]);
     const workStyle = this.document.get(UsersProperty["workStyle"]);
+    const workStartTime = this.document.get(UsersProperty["workStartTime"]);
+    const workEndTime = this.document.get(UsersProperty["workEndTime"]);
     const workTime = this.document.get(UsersProperty["workTime"]);
 
     let facilityDoc;
@@ -45,11 +48,8 @@ export default class DocToDomainUser {
     }
 
     const dependents = dependent
-      ? dependent.map((fullname: Fullname) => {
-          return {
-            falilyName: fullname.familyName,
-            givenName: fullname.givenName,
-          };
+      ? dependent.map((fullname: { familyName: string; givenName: string }) => {
+          return new Fullname(new Name(fullname.familyName), new Name(fullname.givenName));
         })
       : [];
     return new PersonFactory().create(
@@ -57,7 +57,7 @@ export default class DocToDomainUser {
       rollType,
       mail,
       new Fullname(new Name(familyName), new Name(givenName)),
-      birthdate,
+      birthdate ? DateTime.fromJSDate(birthdate.toDate()) : undefined,
       phoneNumber,
       emergencyPhoneNumber,
       address,
@@ -67,11 +67,13 @@ export default class DocToDomainUser {
       workStyle,
       workDay,
       professionType,
+      workStartTime ? DateTime.fromJSDate(workStartTime.toDate()) : undefined,
+      workEndTime ? DateTime.fromJSDate(workEndTime.toDate()) : undefined,
       workTime,
       socialInsuranceCode,
       socialInsuranceNumber,
-      hireDate,
-      leaveDate
+      hireDate ? DateTime.fromJSDate(hireDate.toDate()) : undefined,
+      leaveDate ? DateTime.fromJSDate(leaveDate.toDate()) : undefined
     );
   }
 }

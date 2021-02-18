@@ -138,7 +138,7 @@ export default class FireUsersModel {
       [UsersProperty.staffCode]: this.staffCode.toFireStore(),
       [UsersProperty.workDay]: this.workDay.toFireStore(),
       [UsersProperty.workStyle]: this.workStyle.toFireStore(),
-      [UsersProperty.workStatTime]: this.workStartTime.toFireStore(),
+      [UsersProperty.workStartTime]: this.workStartTime.toFireStore(),
       [UsersProperty.workEndTime]: this.workEndTime.toFireStore(),
       [UsersProperty.workTime]: this.workTime.toFireStore(),
     };

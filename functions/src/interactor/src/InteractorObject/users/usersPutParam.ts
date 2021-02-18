@@ -33,8 +33,8 @@ export default class UsersPutParam {
   readonly workStyle?: WorkStyle;
   readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
-  readonly workStartTime?:DateTime;
-  readonly workEndTime?:DateTime;
+  readonly workStartTime?: DateTime;
+  readonly workEndTime?: DateTime;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
   readonly socialInsuranceNumber?: string;
@@ -58,8 +58,8 @@ export default class UsersPutParam {
       workStyle?: any;
       workDay?: any;
       profession?: any;
-      workStartTime?:any;
-      workEndTime?:any;
+      workStartTime?: any;
+      workEndTime?: any;
       workTime?: any;
       socialInsuranceCode?: any;
       socialInsuranceNumber?: any;
@@ -104,7 +104,12 @@ export default class UsersPutParam {
       this.address = option.address;
     }
     if (Array.isArray(option.dependent)) {
-      this.dependent = option.dependent;
+      this.dependent = option.dependent.map((depend) => {
+        return new Fullname(
+          new Name(depend.familyName),
+          new Name(depend.givenName)
+        );
+      });
     }
     if (isString(option.facilityId)) {
       this.facilityId = option.facilityId;
@@ -121,12 +126,12 @@ export default class UsersPutParam {
     if (isProfession(option.profession)) {
       this.profession = option.profession;
     }
-      if (isISOString(option.workStartTime)) {
+    if (isISOString(option.workStartTime)) {
       this.workStartTime = DateTime.fromISO(option.workStartTime);
     } else if (isDateTime(option.workStartTime)) {
       this.workStartTime = option.workStartTime;
     }
-      if (isISOString(option.workEndTime)) {
+    if (isISOString(option.workEndTime)) {
       this.workEndTime = DateTime.fromISO(option.workEndTime);
     } else if (isDateTime(option.workEndTime)) {
       this.workEndTime = option.workEndTime;

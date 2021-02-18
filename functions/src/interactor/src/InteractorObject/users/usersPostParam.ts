@@ -116,7 +116,12 @@ export default class UsersPostParam {
       this.address = address;
     }
     if (Array.isArray(dependent)) {
-      this.dependent = dependent;
+      this.dependent = dependent.map((depend) => {
+        return new Fullname(
+          new Name(depend.familyName),
+          new Name(depend.givenName)
+        );
+      });
     }
     if (isString(facilityId)) {
       this.facilityId = facilityId;

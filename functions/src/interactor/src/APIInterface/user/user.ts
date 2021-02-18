@@ -19,6 +19,7 @@ import {
   isFullname,
 } from "../../../../util/isType/isType";
 import WorkDate from "../../../../domain/resourceManager/src/valueObject/workdate";
+import { DateTime } from "luxon";
 
 export default class UserAPIInterface {
   readonly id: string;
@@ -35,6 +36,8 @@ export default class UserAPIInterface {
   readonly workStyle?: WorkStyle;
   readonly workDay?: WorkDate[];
   readonly profession?: ProfessionType;
+  readonly workStartTime?: string;
+  readonly workEndTime?: string;
   readonly workTime?: WorkTime | string;
   readonly socialInsuranceCode?: string;
   readonly socialInsuranceNumber?: string;
@@ -57,6 +60,8 @@ export default class UserAPIInterface {
       user.workStyle,
       user.workDay,
       user.professionType,
+      user.workStartTime,
+      user.workEndTime,
       user.workTime,
       user.socialInsurance?.code.value,
       user.socialInsurance?.number.value,
@@ -80,6 +85,8 @@ export default class UserAPIInterface {
     workStyle?: any,
     workDay?: any,
     profession?: any,
+    workStartTime?: any,
+    workEndTime?: any,
     workTime?: any,
     socialInsuranceCode?: any,
     socialInsuranceNumber?: any,
@@ -103,8 +110,8 @@ export default class UserAPIInterface {
     }
 
     if (isFullname(fullname)) {
-      console.log(fullname)
-      console.log(FullnameAPIInterface.fromDomainFullname(fullname))
+      console.log(fullname);
+      console.log(FullnameAPIInterface.fromDomainFullname(fullname));
       this.fullname = FullnameAPIInterface.fromDomainFullname(fullname);
     } else {
       throw TypeValidateError("fullname", "string");
@@ -143,6 +150,16 @@ export default class UserAPIInterface {
     }
     if (isProfession(profession)) {
       this.profession = profession;
+    }
+    if (isISOString(workStartTime)) {
+      this.workStartTime = workStartTime;
+    } else if (isDateTime(workStartTime)) {
+      this.workStartTime = workStartTime.toISO();
+    }
+    if (isISOString(workEndTime)) {
+      this.workEndTime = workEndTime;
+    } else if (isDateTime(workEndTime)) {
+      this.workEndTime = workEndTime.toISO();
     }
     if (isWorkTime(workTime)) {
       this.workTime = workTime;
